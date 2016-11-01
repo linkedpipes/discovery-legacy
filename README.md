@@ -8,7 +8,7 @@ GET          /discovery/$id<[^/]+>/pipelines/$pipelineId<[^/]+>
 GET          /discovery/$id<[^/]+>/stop
 ```
 
-## start
+## start: DiscoverySettings => {id: UUID}
 ```
 DiscoverySettings(
   combineExistingDataSources: Boolean = false,
@@ -25,3 +25,20 @@ SparqlEndpoint(
   isLinkset: Boolean = false
 )
 ```
+
+Request example:
+```
+{
+	"sparqlEndpoints": [
+		{"url": "http://linked.opendata.cz/sparql"}
+	]
+}
+```
+
+Response example:
+```
+{
+  "id": "079068ba-e5bf-4e66-bab4-3636245e1500"
+}
+```
+
