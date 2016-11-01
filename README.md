@@ -1,5 +1,7 @@
 # Visualization discovery service
 
+Demo running at: http://demo.visualization.linkedpipes.com:8080
+
 ```
 start:          POST         /discovery/start
 status:         GET          /discovery/$id<[^/]+>
