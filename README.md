@@ -1,12 +1,14 @@
 # Visualization discovery service
 
 ```
-POST         /discovery/start
-GET          /discovery/$id<[^/]+>
-GET          /discovery/$id<[^/]+>/pipelines
-GET          /discovery/$id<[^/]+>/pipelines/$pipelineId<[^/]+>
-GET          /discovery/$id<[^/]+>/stop
+start:          POST         /discovery/start
+status:         GET          /discovery/$id<[^/]+>
+list:      	GET          /discovery/$id<[^/]+>/pipelines
+export:         GET          /discovery/$id<[^/]+>/pipelines/$pipelineId<[^/]+>
+stop:           GET          /discovery/$id<[^/]+>/stop
 ```
+## Expected workflow
+```start -> status -> ... -> status[isFinished = true] –> list -> export```
 
 ## start: DiscoverySettings => {id: UUID}
 ```
