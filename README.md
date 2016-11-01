@@ -3,7 +3,7 @@
 ```
 start:          POST         /discovery/start
 status:         GET          /discovery/$id<[^/]+>
-list:      	GET          /discovery/$id<[^/]+>/pipelines
+list:           GET          /discovery/$id<[^/]+>/pipelines
 export:         GET          /discovery/$id<[^/]+>/pipelines/$pipelineId<[^/]+>
 stop:           GET          /discovery/$id<[^/]+>/stop
 ```
