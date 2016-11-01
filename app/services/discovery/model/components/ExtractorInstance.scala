@@ -1,0 +1,5 @@
+package services.discovery.model.components
+
+trait ExtractorInstance extends AnalyzerInstance
+
+trait SparqlExtractorInstance extends ExtractorInstance with SparqlAnalyzerInstance

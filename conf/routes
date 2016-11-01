@@ -1,0 +1,15 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET        /                                                   controllers.HomeController.index
+
+POST       /discovery/start                                    controllers.DiscoveryController.start
+GET        /discovery/:id                                      controllers.DiscoveryController.status(id: String)
+GET        /discovery/:id/pipelines                            controllers.DiscoveryController.list(id: String)
+GET        /discovery/:id/pipelines/:pipelineId                controllers.DiscoveryController.pipeline(id: String, pipelineId: String)
+GET        /discovery/:id/stop                                 controllers.DiscoveryController.stop(id: String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET        /assets/*file                                       controllers.Assets.versioned(path="/public", file: Asset)
