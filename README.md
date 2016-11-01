@@ -9,8 +9,10 @@ list:           GET          /discovery/$id<[^/]+>/pipelines
 export:         GET          /discovery/$id<[^/]+>/pipelines/$pipelineId<[^/]+>
 stop:           GET          /discovery/$id<[^/]+>/stop
 ```
-## Expected workflow
+## Expected workflows
 ```start -> status -> ... -> status[isFinished = true] –> list -> export```
+
+```start –> list -> export``` (results are published continuously)
 
 ## start: DiscoverySettings => {id: UUID}
 ```
