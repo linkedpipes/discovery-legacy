@@ -17,7 +17,7 @@ class PopulationVisualizer extends VisualizerInstance with DescriptorChecker {
       |PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
       |
       |    ASK {
-      |      ?p rdf:Value ?populationCount ;
+      |      ?p rdf:value ?populationCount ;
       |         s:name ?placeName ;
       |         s:geo [
       |           s:latitude ?lat ;

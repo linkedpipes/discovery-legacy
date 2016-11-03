@@ -4,38 +4,31 @@ import java.util.UUID
 
 import services.discovery.components.common.DescriptorChecker
 import services.discovery.model._
-import services.discovery.model.components._
+import services.discovery.model.components.{AskQuery, SparqlQuery, SparqlTransformerInstance, UpdateQuery}
 
 import scala.concurrent.Future
 
-class FusionTransformer extends SparqlTransformerInstance with DescriptorChecker {
+class DBPediaPopulationTransformer extends SparqlTransformerInstance with DescriptorChecker {
   val portName = "INPUT"
   val port = Port(portName, 0)
   private val query = UpdateQuery(
     """
       | PREFIX owl: <http://www.w3.org/2002/07/owl#>
+      | PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      | PREFIX dbo: <http://dbpedia.org/ontology/>
       |
-      | DELETE { ?entity1 owl:sameAs ?entity2 . }
-      | INSERT {
-      |   ?entity2 ?prop1 ?subj1 .
-      |   ?entity2 ?prop2 ?subj2 .
-      | }
-      | WHERE {
-      |   ?entity1 owl:sameAs ?entity2 ;
-      |      ?prop1 ?subj1 .
-      |   ?entity2 ?prop2 ?subj2 .
-      |   FILTER (?prop1 != owl:sameAs)
-      | }
+      | DELETE { ?place dbo:populationTotal ?pop . }
+      | INSERT { ?place rdf:value ?pop . }
+      | WHERE { ?place dbo:populationTotal ?pop . }
+      |‚
     """.stripMargin)
 
   private val descriptor = AskQuery(
     """
-      |PREFIX owl: <http://www.w3.org/2002/07/owl#>
+      |PREFIX dbo: <http://dbpedia.org/ontology/>
       |
       |ASK {
-      |   ?entity1 owl:sameAs ?entity2 ;
-      |       ?prop1 ?subj1 .
-      |   ?entity2 ?prop2 ?subj2 .
+      |   ?place dbo:populationTotal ?pop .
       |}
     """.stripMargin
   )
