@@ -1,0 +1,106 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dbo:	<http://dbpedia.org/ontology/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	rdf:type	dbo:Earthquake .
+@prefix yago:	<http://dbpedia.org/class/yago/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	rdf:type	yago:WikicatEarthquakesInCalifornia ,
+		yago:PhysicalEntity100001930 ,
+		dbo:Event ,
+		yago:Wikicat1994Earthquakes .
+@prefix schema:	<http://schema.org/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	rdf:type	schema:Event ,
+		yago:WikicatEarthquakesInTheUnitedStates ,
+		yago:Earthquake107428954 ,
+		yago:Process100029677 ,
+		yago:NaturalPhenomenon111408559 ,
+		yago:Phenomenon100034213 ,
+		yago:GeologicalPhenomenon111417672 .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	rdf:type	owl:Thing .
+@prefix wikidata:	<http://www.wikidata.org/entity/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	rdf:type	wikidata:Q1656682 .
+@prefix ns6:	<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	rdf:type	ns6:Event .
+@prefix geo:	<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	rdf:type	geo:SpatialThing ,
+		dbo:NaturalEvent .
+@prefix dbpedia-pt:	<http://pt.dbpedia.org/resource/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	owl:sameAs	dbpedia-pt:Sismo_de_Northridge_de_1994 .
+@prefix dbpedia-wikidata:	<http://wikidata.dbpedia.org/resource/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	owl:sameAs	dbpedia-wikidata:Q1519015 .
+@prefix dbpedia-fr:	<http://fr.dbpedia.org/resource/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	owl:sameAs	dbpedia-fr:Séisme_de_1994_à_Northridge .
+@prefix dbpedia-it:	<http://it.dbpedia.org/resource/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	owl:sameAs	dbpedia-it:Terremoto_di_Northridge_del_1994 .
+@prefix dbpedia-ja:	<http://ja.dbpedia.org/resource/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	owl:sameAs	dbpedia-ja:ノースリッジ地震 ,
+		<http://rdf.freebase.com/ns/m.01nj1j> .
+@prefix dbpedia-de:	<http://de.dbpedia.org/resource/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	owl:sameAs	dbpedia-de:Northridge-Erdbeben_1994 ,
+		<http://yago-knowledge.org/resource/1994_Northridge_earthquake> .
+@prefix dbpedia-es:	<http://es.dbpedia.org/resource/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	owl:sameAs	dbpedia-es:Terremoto_de_Northridge_de_1994 ,
+		wikidata:Q1519015 .
+@prefix dct:	<http://purl.org/dc/terms/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	dct:subject	<http://dbpedia.org/resource/Category:1994_in_California> ,
+		<http://dbpedia.org/resource/Category:1994_earthquakes> ,
+		<http://dbpedia.org/resource/Category:History_of_Los_Angeles,_California> ,
+		<http://dbpedia.org/resource/Category:1994_natural_disasters_in_the_United_States> .
+@prefix dbc:	<http://dbpedia.org/resource/Category:> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	dct:subject	dbc:History_of_the_San_Fernando_Valley ,
+		dbc:Earthquakes_in_California ;
+	dbo:wikiPageID	267024 ;
+	dbo:wikiPageRevisionID	706549165 ;
+	dbo:wikiPageExternalLink	<http://www.usc.edu/dept/civil_eng/Earthquake_eng/North_res/> ,
+		<http://www.williamgbecker.com/1994NorthridgeEarthquake/AllPBMIntroduction.htm> ,
+		<http://www.educatedearth.net/video.php?id=2708> ,
+		<http://www.data.scec.org/significant/northridge1994.html> ,
+		<http://pasadena.wr.usgs.gov/office/hudnut/hudnut/nr_eq.html> ,
+		<http://www.sacsteel.org/> .
+@prefix dbp:	<http://dbpedia.org/property/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	dbp:casualties	57 ,
+		"> 8,700 injured"@en .
+@prefix xsd:	<http://www.w3.org/2001/XMLSchema#> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	dbp:date	"1994-01-17"^^xsd:date .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	rdfs:label	"1994 Northridge earthquake"@en ,
+		"1994\u5E74\u5317\u5CAD\u5730\u9707"@zh ,
+		"Sismo de Northridge de 1994"@pt ,
+		"Northridge-Erdbeben 1994"@de ,
+		"Terremoto di Northridge del 1994"@it ,
+		"\u30CE\u30FC\u30B9\u30EA\u30C3\u30B8\u5730\u9707"@ja ,
+		"S\u00E9isme de 1994 \u00E0 Northridge"@fr ,
+		"Terremoto de Northridge de 1994"@es ;
+	rdfs:comment	"Il terremoto di Northridge \u00E8 stato un evento sismico verificatosi alle 4:31 ora locale (Pacific Standard Time) del 17 gennaio 1994, con epicentro nei pressi di Northridge, cittadina della periferia nordovest di Los Angeles, California.Sebbene il sisma abbia avuto una magnitudo di 6,7 Richter, in tale evento si registr\u00F2 un valore della massima accelerazione del terreno (Peak Ground Acceleration) molto elevato, mai registrato prima nelle zone abitate dell'America Settentrionale."@it ,
+		"The 1994 Northridge earthquake occurred on January 17, at 4:30:55 a.m. PST and had its epicenter in Reseda, a neighborhood in the north-central San Fernando Valley region of Los Angeles, California. It had a duration of approximately 10\u201320 seconds."@en ,
+		"El Terremoto de Northridge de 1994 (Northridge Earthquake), ocurri\u00F3 en el \u00E1rea norte del Valle de San Fernando en la ciudad de Los \u00C1ngeles la madrugada del d\u00EDa lunes 17 de enero de 1994 a las 4:30:55 AM hora local. Caus\u00F3 72 muertos, 12.000 heridos y p\u00E9rdidas por 25 mil millones de d\u00F3lares. El pico registrado lleg\u00F3 a los 6,7 en la escala de Richter, y la aceleraci\u00F3n terrestre fue la mayor jam\u00E1s captada en un \u00E1rea urbana estadounidense."@es ,
+		"1994\u5E74\u5317\u5CAD\u5730\u9707\uFF08\u82F1\u8BED\uFF1A1994 Northridge earthquake\uFF09\u662F\u767C\u751F\u5728\u7F8E\u56FD\u52A0\u5DDE\u6D1B\u6749\u77F6\u5317\u5CAD\u533A\u7684\u5730\u9707\uFF0C\u53D1\u751F\u4E8E1994\u5E741\u670817\u65E5\uFF08UTC-8\uFF09\u3002"@zh ,
+		"\u30CE\u30FC\u30B9\u30EA\u30C3\u30B8\u5730\u9707\uFF08\u30CE\u30FC\u30B9\u30EA\u30C3\u30B8\u3058\u3057\u3093\u3001Northridge earthquake\uFF09\u306F\u30011994\u5E741\u670817\u65E5\u5348\u524D4\u664230\u520655\u79D2\uFF08\u592A\u5E73\u6D0B\u6A19\u6E96\u6642\uFF09\u3001\u30A2\u30E1\u30EA\u30AB\u5408\u8846\u56FD\u30AB\u30EA\u30D5\u30A9\u30EB\u30CB\u30A2\u5DDE\u30ED\u30B5\u30F3\u30BC\u30EB\u30B9\u5E02\u30CE\u30FC\u30B9\u30EA\u30C3\u30B8\u5730\u65B9\u3067\u767A\u751F\u3057\u305F\u5730\u9707\u3067\u3042\u308B\u3002\u30ED\u30B5\u30F3\u30BC\u30EB\u30B9\u5730\u9707\u3068\u3082\u547C\u3070\u308C\u308B\u3002\u30E2\u30FC\u30E1\u30F3\u30C8\u30DE\u30B0\u30CB\u30C1\u30E5\u30FC\u30C9\u306F6.7\u3060\u304C\u3001\u9707\u6E90\u306F14.6\u30AD\u30ED\u3068\u3001\u6975\u3081\u3066\u6D45\u3044\u3002\u88AB\u5BB3\u3092\u53D7\u3051\u305F\u4EBA\u306F\u3001\u6B7B\u800557\u540D\u3001\u8CA0\u50B7\u8005 \u7D045,400\u4EBA\u3001\u5165\u96621,467\u540D\u306B\u306E\u307C\u308B\u3002\u307E\u305F\u3001\u9AD8\u901F\u9053\u8DEF\u304C\u5D29\u58CA\u3059\u308B\u306A\u3069\u306E\u88AB\u5BB3\u3092\u53D7\u3051\u3001\u7C73\u56FD\u53F2\u4E0A\u6700\u3082\u7D4C\u6E08\u7684\u640D\u5BB3\u306E\u5927\u304D\u3044\u5730\u9707\u3068\u306A\u3063\u305F\u3002"@ja ,
+		"Das Northridge-Erdbeben ereignete sich am 17. Januar 1994 um 4:30 Uhr Ortszeit (12:30 UTC) in Reseda in der N\u00E4he der Stadt Los Angeles. Das Erdbeben hatte eine hohe Magnitude von 6,7 Mw und erreichte auf der Mercalliskala die Stufe IX (verw\u00FCstend). Der Spitzenwert der Oberfl\u00E4chenbeschleunigung (Peak ground acceleration) war der h\u00F6chste jemals in einer st\u00E4dtischen Umgebung gemessene Wert in Nordamerika. 57 Menschen starben und mehr als 9.000 wurden verletzt."@de ,
+		"O Sismo de Northridge de 1994 ocorreu na regi\u00E3o da Grande Los Angeles, Calif\u00F3rnia, Estados Unidos no dia 17 de Janeiro de 1994 \u00E0s 04:30 na hora local (12:30 UTC) e teve magnitude de 6.7 na escala de magnitude de momento (Mw). O epicentro est\u00E1 localizado na vizinhan\u00E7a de Reseda, na regi\u00E3o do Vale de S\u00E3o Fernando ao noroeste de Los Angeles. Teve dura\u00E7\u00E3o de 10 a 20 segundos a uma profundidade de 18.3 km (11.4 mi). Causou a morte de 57 pessoas e mais de 8.700 ficaram feridas."@pt ,
+		"Le s\u00E9isme de 1994 \u00E0 Northridge est un tremblement de terre qui s'est produit pr\u00E8s de Los Angeles le 17 janvier 1994 \u00E0 04h31, un an jour pour jour avant le s\u00E9isme de 1995 \u00E0 Kobe.De magnitude 6.7 sur l'\u00E9chelle de Richter, il a tu\u00E9 72 personnes et fait quelque 9 000 bless\u00E9s. Avec des d\u00E9g\u00E2ts estim\u00E9s \u00E0 environ 20 milliards de dollars, il est l'une des catastrophes naturelles les plus co\u00FBteuses de l'histoire des \u00C9tats-Unis."@fr ;
+	geo:lat	"34.213001251220703125"^^xsd:float ;
+	geo:long	"-118.5370025634765625"^^xsd:float .
+@prefix foaf:	<http://xmlns.com/foaf/0.1/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	foaf:depiction	<http://commons.wikimedia.org/wiki/Special:FilePath/FEMA_-_1681_-_Photograph_by_FEMA_News_Photo_taken_on_01-17-1994_in_California.jpg> ;
+	foaf:isPrimaryTopicOf	<http://en.wikipedia.org/wiki/1994_Northridge_earthquake> .
+@prefix virtrdf:	<http://www.openlinksw.com/schemas/virtrdf#> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	geo:geometry	"POINT(-118.53700256348 34.213001251221)"^^virtrdf:Geometry ;
+	dbo:thumbnail	<http://commons.wikimedia.org/wiki/Special:FilePath/FEMA_-_1681_-_Photograph_by_FEMA_News_Photo_taken_on_01-17-1994_in_California.jpg?width=300> .
+@prefix ns22:	<http://dbpedia.org/datatype/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	dbp:duration	"-20.0"^^ns22:second .
+@prefix prov:	<http://www.w3.org/ns/prov#> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	prov:wasDerivedFrom	<http://en.wikipedia.org/wiki/1994_Northridge_earthquake?oldid=706549165> ;
+	dbo:abstract	"Das Northridge-Erdbeben ereignete sich am 17. Januar 1994 um 4:30 Uhr Ortszeit (12:30 UTC) in Reseda in der N\u00E4he der Stadt Los Angeles. Das Erdbeben hatte eine hohe Magnitude von 6,7 Mw und erreichte auf der Mercalliskala die Stufe IX (verw\u00FCstend). Der Spitzenwert der Oberfl\u00E4chenbeschleunigung (Peak ground acceleration) war der h\u00F6chste jemals in einer st\u00E4dtischen Umgebung gemessene Wert in Nordamerika. 57 Menschen starben und mehr als 9.000 wurden verletzt. Der Sachschaden wurde auf 20 Milliarden Dollar gesch\u00E4tzt, es war damit eine der teuersten Naturkatastrophen in den USA. Das Beben betraf fast die gleiche Region wie das San-Fernando-Erdbeben von 1971 (Sylmar-Erdbeben), das eine St\u00E4rke von 6,6 MW erreichte."@de ,
+		"Il terremoto di Northridge \u00E8 stato un evento sismico verificatosi alle 4:31 ora locale (Pacific Standard Time) del 17 gennaio 1994, con epicentro nei pressi di Northridge, cittadina della periferia nordovest di Los Angeles, California.Sebbene il sisma abbia avuto una magnitudo di 6,7 Richter, in tale evento si registr\u00F2 un valore della massima accelerazione del terreno (Peak Ground Acceleration) molto elevato, mai registrato prima nelle zone abitate dell'America Settentrionale. Il terremoto fece registrare 57 vittime e oltre 10000 feriti, con ingenti danni alle infrastrutture e alle abitazioni civili in tutta la contea di Los Angeles e nelle valli circostanti."@it ,
+		"El Terremoto de Northridge de 1994 (Northridge Earthquake), ocurri\u00F3 en el \u00E1rea norte del Valle de San Fernando en la ciudad de Los \u00C1ngeles la madrugada del d\u00EDa lunes 17 de enero de 1994 a las 4:30:55 AM hora local. Caus\u00F3 72 muertos, 12.000 heridos y p\u00E9rdidas por 25 mil millones de d\u00F3lares. El pico registrado lleg\u00F3 a los 6,7 en la escala de Richter, y la aceleraci\u00F3n terrestre fue la mayor jam\u00E1s captada en un \u00E1rea urbana estadounidense."@es ,
+		"The 1994 Northridge earthquake occurred on January 17, at 4:30:55 a.m. PST and had its epicenter in Reseda, a neighborhood in the north-central San Fernando Valley region of Los Angeles, California. It had a duration of approximately 10\u201320 seconds. The blind thrust earthquake had a moment magnitude (Mw) of 6.7, which produced ground acceleration that was the highest ever instrumentally recorded in an urban area in North America, measuring 1.8g (16.7 m/s2) with strong ground motion felt as far away as Las Vegas, Nevada, about 220 miles (360 km) from the epicenter. The peak ground velocity in this earthquake at the Rinaldi Receiving Station was 183 cm/s (4.09 mph or 6.59 km/h), the fastest peak ground velocity ever recorded.  In addition, two 6.0 Mw aftershocks occurred, the first about one minute after the initial event and the second approximately 11 hours later, the strongest of several thousand aftershocks in all.  The death toll was 57, with more than 5,000 injured. In addition, earthquake-caused property damage was estimated to be between $13 and $40 billion, making it one of the costliest natural disasters in U.S. history."@en ,
+		"1994\u5E74\u5317\u5CAD\u5730\u9707\uFF08\u82F1\u8BED\uFF1A1994 Northridge earthquake\uFF09\u662F\u767C\u751F\u5728\u7F8E\u56FD\u52A0\u5DDE\u6D1B\u6749\u77F6\u5317\u5CAD\u533A\u7684\u5730\u9707\uFF0C\u53D1\u751F\u4E8E1994\u5E741\u670817\u65E5\uFF08UTC-8\uFF09\u3002"@zh ,
+		"\u30CE\u30FC\u30B9\u30EA\u30C3\u30B8\u5730\u9707\uFF08\u30CE\u30FC\u30B9\u30EA\u30C3\u30B8\u3058\u3057\u3093\u3001Northridge earthquake\uFF09\u306F\u30011994\u5E741\u670817\u65E5\u5348\u524D4\u664230\u520655\u79D2\uFF08\u592A\u5E73\u6D0B\u6A19\u6E96\u6642\uFF09\u3001\u30A2\u30E1\u30EA\u30AB\u5408\u8846\u56FD\u30AB\u30EA\u30D5\u30A9\u30EB\u30CB\u30A2\u5DDE\u30ED\u30B5\u30F3\u30BC\u30EB\u30B9\u5E02\u30CE\u30FC\u30B9\u30EA\u30C3\u30B8\u5730\u65B9\u3067\u767A\u751F\u3057\u305F\u5730\u9707\u3067\u3042\u308B\u3002\u30ED\u30B5\u30F3\u30BC\u30EB\u30B9\u5730\u9707\u3068\u3082\u547C\u3070\u308C\u308B\u3002\u30E2\u30FC\u30E1\u30F3\u30C8\u30DE\u30B0\u30CB\u30C1\u30E5\u30FC\u30C9\u306F6.7\u3060\u304C\u3001\u9707\u6E90\u306F14.6\u30AD\u30ED\u3068\u3001\u6975\u3081\u3066\u6D45\u3044\u3002\u88AB\u5BB3\u3092\u53D7\u3051\u305F\u4EBA\u306F\u3001\u6B7B\u800557\u540D\u3001\u8CA0\u50B7\u8005 \u7D045,400\u4EBA\u3001\u5165\u96621,467\u540D\u306B\u306E\u307C\u308B\u3002\u307E\u305F\u3001\u9AD8\u901F\u9053\u8DEF\u304C\u5D29\u58CA\u3059\u308B\u306A\u3069\u306E\u88AB\u5BB3\u3092\u53D7\u3051\u3001\u7C73\u56FD\u53F2\u4E0A\u6700\u3082\u7D4C\u6E08\u7684\u640D\u5BB3\u306E\u5927\u304D\u3044\u5730\u9707\u3068\u306A\u3063\u305F\u3002"@ja ,
+		"Le s\u00E9isme de 1994 \u00E0 Northridge est un tremblement de terre qui s'est produit pr\u00E8s de Los Angeles le 17 janvier 1994 \u00E0 04h31, un an jour pour jour avant le s\u00E9isme de 1995 \u00E0 Kobe.De magnitude 6.7 sur l'\u00E9chelle de Richter, il a tu\u00E9 72 personnes et fait quelque 9 000 bless\u00E9s. Avec des d\u00E9g\u00E2ts estim\u00E9s \u00E0 environ 20 milliards de dollars, il est l'une des catastrophes naturelles les plus co\u00FBteuses de l'histoire des \u00C9tats-Unis."@fr ,
+		"O Sismo de Northridge de 1994 ocorreu na regi\u00E3o da Grande Los Angeles, Calif\u00F3rnia, Estados Unidos no dia 17 de Janeiro de 1994 \u00E0s 04:30 na hora local (12:30 UTC) e teve magnitude de 6.7 na escala de magnitude de momento (Mw). O epicentro est\u00E1 localizado na vizinhan\u00E7a de Reseda, na regi\u00E3o do Vale de S\u00E3o Fernando ao noroeste de Los Angeles. Teve dura\u00E7\u00E3o de 10 a 20 segundos a uma profundidade de 18.3 km (11.4 mi). Causou a morte de 57 pessoas e mais de 8.700 ficaram feridas. O preju\u00EDzo total foi de cerca de US$ 20 bilh\u00F5es.O terremoto recebeu o nome de \"Northridge\" pela m\u00EDdia no dia do desastre devido \u00E0 regi\u00E3o onde se pensava ser o epicentro do sismo, por\u00E9m foi descoberto mais tarde que o epicentro est\u00E1 localizado na regi\u00E3o vizinha de Reseda.== Refer\u00EAncias =="@pt ;
+	dbo:casualties	57 ,
+		8700 ;
+	dbo:date	"1994-01-17"^^xsd:date ;
+	dbo:duration	-20.0 .
+@prefix georss:	<http://www.georss.org/georss/> .
+<http://dbpedia.org/resource/1994_Northridge_earthquake>	georss:point	"34.213 -118.537" .

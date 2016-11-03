@@ -1,0 +1,8 @@
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+CONSTRUCT WHERE
+{
+   ?e a dbo:Earthquake ;
+      ?p ?o .
+   FILTER(?e = <http://dbpedia.org/resource/1994_Northridge_earthquake>)  
+}
