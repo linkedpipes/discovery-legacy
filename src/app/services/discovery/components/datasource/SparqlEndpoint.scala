@@ -9,9 +9,9 @@ import services.discovery.model.{ComponentState, DataSample, Port, SparqlEndpoin
 import scala.concurrent.Future
 
 
-case class SparqlEndpoint(url: String, defaultGraphIris: Seq[String] = Seq(), label: String = "", isLarge: Boolean = false, isLinkset: Boolean = false) extends SparqlEndpointInstance {
+case class SparqlEndpoint(url: String, defaultGraphIris: Seq[String] = Seq(), label: String = "", descriptorIri: Option[String] = None, isLarge: Boolean = false, isLinkset: Boolean = false) extends SparqlEndpointInstance {
     override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Future[DataSample] = {
-        Future.successful(SparqlEndpointDataSample(this))
+        Future.successful(DataSample.apply(this))
     }
 }
 

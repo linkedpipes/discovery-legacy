@@ -4,38 +4,36 @@ import java.util.UUID
 
 import services.discovery.components.common.DescriptorChecker
 import services.discovery.model._
-import services.discovery.model.components._
+import services.discovery.model.components.{AskQuery, SparqlQuery, SparqlTransformerInstance, UpdateQuery}
 
 import scala.concurrent.Future
 
-class FusionTransformer extends SparqlTransformerInstance with DescriptorChecker {
+class DbPediaToTimeInstantTransformer extends SparqlTransformerInstance with DescriptorChecker {
   val portName = "INPUT"
   val port = Port(portName, 0)
   private val query = UpdateQuery(
     """
-      | PREFIX owl: <http://www.w3.org/2002/07/owl#>
+      |PREFIX dbo: <http://dbpedia.org/ontology/>
+      |PREFIX time: <http://www.w3.org/2006/time#>
       |
-      | DELETE { ?entity1 owl:sameAs ?entity2 . }
-      | INSERT {
-      |   ?entity2 ?prop1 ?subj1 .
-      |   ?entity2 ?prop2 ?subj2 .
-      | }
-      | WHERE {
-      |   ?entity1 owl:sameAs ?entity2 ;
-      |      ?prop1 ?subj1 .
-      |   ?entity2 ?prop2 ?subj2 .
-      |   FILTER (?prop1 != owl:sameAs)
-      | }
+      |DELETE {
+      |  ?t dbo:date ?d .
+      |}
+      |INSERT {
+      |  ?t time:inXSDDateTime ?d .
+      |}
+      |WHERE {
+      |  ?t dbo:date ?d .
+      |}
     """.stripMargin)
 
   private val descriptor = AskQuery(
     """
-      |PREFIX owl: <http://www.w3.org/2002/07/owl#>
+      |PREFIX dbo: <http://dbpedia.org/ontology/>
+      |PREFIX time: <http://www.w3.org/2006/time#>
       |
       |ASK {
-      |   ?entity1 owl:sameAs ?entity2 ;
-      |       ?prop1 ?subj1 .
-      |   ?entity2 ?prop2 ?subj2 .
+      |  ?t dbo:date ?d .
       |}
     """.stripMargin
   )

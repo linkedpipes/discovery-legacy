@@ -23,7 +23,7 @@ class DiscoveryController @Inject()(service: DiscoveryService) extends Controlle
                 BadRequest(Json.obj("error" -> JsError.toJson(errors)))
             },
             settings => {
-                if (settings.dumpUrls.size + settings.sparqlEndpoints.size == 0) {
+                if (settings.sparqlEndpoints.size == 0) {
                     Logger.debug(s"[${request.id}] Rejected discovery. Neither dumps or SPARQL endpoints were specified.")
                     BadRequest(Json.obj("error" -> "Either dumps or sparql endpoints have to be specified."))
                 } else {

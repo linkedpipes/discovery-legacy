@@ -12,6 +12,7 @@ import services.discovery.model.components._
 
 import scala.collection.JavaConversions._
 import scala.concurrent.Future
+import scala.io.Source
 
 trait DataSample {
 
@@ -31,6 +32,20 @@ trait DataSample {
     }
 }
 
+object DataSample {
+    def apply(endpoint: SparqlEndpoint): DataSample = {
+        endpoint match {
+            case e if e.descriptorIri.isEmpty => SparqlEndpointDataSample(e)
+            case e if e.descriptorIri.isDefined => {
+                val data = Source.fromURL(e.descriptorIri.get)
+                DataSample(data.mkString)
+            }
+        }
+    }
+
+    def apply(rdfData: String) : DataSample = ModelDataSample(JenaUtil.modelFromTtl(rdfData))
+}
+
 case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends DataSample {
     private val discoveryLogger = Logger.of("discovery")
 
@@ -40,6 +55,7 @@ case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends Data
 
     override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = withLogger(descriptor, e => e.execConstruct, discoveryId, iterationNumber)
 
+    // TODO if small, the ODS is everything in the endpoint
     override def getModel: Model = ModelFactory.createDefaultModel()
 
     private def withLogger[T](descriptor: SparqlQuery, execCommand: QueryExecution => T, discoveryId: UUID, iterationNumber: Int) : Future[T] = {
@@ -80,33 +96,4 @@ case class ModelDataSample(model: Model) extends DataSample {
         }
 
     override def getModel: Model = model
-}
-
-case class RdfDataSample(rdfData: String) extends DataSample {
-    private val model = JenaUtil.modelFromTtl(rdfData)
-    private val modelSample = ModelDataSample(model)
-
-    override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean] = {
-        modelSample.executeAsk(descriptor, discoveryId: UUID, iterationNumber: Int)
-    }
-
-    override def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int): Future[ResultSet] = {
-        modelSample.executeSelect(descriptor, discoveryId, iterationNumber)
-    }
-
-    override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = {
-        modelSample.executeConstruct(descriptor, discoveryId, iterationNumber)
-    }
-
-    override def getModel: Model = model
-}
-
-case object EmptyDataSample extends DataSample {
-    override def executeAsk(query: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean] = Future.successful(false)
-
-    override def executeConstruct(query: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = ???
-
-    override def executeSelect(query: SelectQuery, discoveryId: UUID, iterationNumber: Int): Future[ResultSet] = ???
-
-    override def getModel: Model = ???
 }
