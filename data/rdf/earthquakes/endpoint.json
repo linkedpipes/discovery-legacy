@@ -1,0 +1,8 @@
+{
+  "url": "http://dbpedia.org/sparql",
+  "defaultGraphIris": ["http://dbpedia.org"],
+  "label": "DBPedia",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/earthquakes/sample.ttl"
+}

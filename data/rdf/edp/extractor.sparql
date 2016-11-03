@@ -1,0 +1,12 @@
+CONSTRUCT {
+  ?s a dcat:Dataset ; 
+     ?p ?o ;
+     dcat:theme ?theme.
+}
+WHERE {
+  ?s a dcat:Dataset ; 
+     ?p ?o ;
+     dcat:theme ?theme .
+     
+  FILTER(?theme = <http://publications.europa.eu/resource/authority/data-theme/INTR>)
+}
