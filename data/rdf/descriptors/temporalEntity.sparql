@@ -1,0 +1,9 @@
+PREFIX time: <http://www.w3.org/2006/time#>
+
+ASK {
+  [] time:hasBeginning ?b ;
+     time:hasEnd ?e .
+     
+  ?b time:inXSDDateTime ?bd .
+  ?e time:inXSDDateTime ?ed .
+}
