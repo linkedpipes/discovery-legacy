@@ -2,7 +2,6 @@ PREFIX dbo: <http://dbpedia.org/ontology/>
 
 CONSTRUCT WHERE
 {
-?e a dbo:Earthquake ;
-   ?p ?o .
-   
+   ?e a dbo:Earthquake ;
+      ?p ?o .
 }
