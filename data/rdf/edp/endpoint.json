@@ -1,0 +1,7 @@
+{
+  "url": "http://www.europeandataportal.eu/sparql",
+  "label": "European Data Portal",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/edp/sample.ttl"
+}
