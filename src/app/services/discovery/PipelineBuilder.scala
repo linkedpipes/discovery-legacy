@@ -3,6 +3,7 @@ package services.discovery
 import java.util.UUID
 import java.util.concurrent.atomic.AtomicInteger
 
+import org.apache.jena.rdf.model.ModelFactory
 import services.discovery.model._
 import services.discovery.model.components.{ComponentInstance, DataSourceInstance, ProcessorInstance, VisualizerInstance}
 
@@ -53,7 +54,7 @@ class PipelineBuilder(discoveryId: UUID)(implicit executor: ExecutionContext) {
     val dataSamples = portMatches.map { portMatch => portMatch.port -> portMatch.startPipeline.lastOutputDataSample }.toMap
     componentInstance match {
       case c: ProcessorInstance => c.getOutputDataSample(portMatches.last.maybeState, dataSamples, discoveryId, iterationNumber)
-      case v: VisualizerInstance => Future.successful(EmptyDataSample)
+      case v: VisualizerInstance => Future.successful(ModelDataSample(ModelFactory.createDefaultModel()))
     }
   }
 }

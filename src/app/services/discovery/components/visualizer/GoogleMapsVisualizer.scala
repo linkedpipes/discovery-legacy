@@ -1,32 +1,15 @@
 package services.discovery.components.visualizer
 
-import java.util.UUID
+class GoogleMapsVisualizer extends SimpleVisualizer {
 
-import services.discovery.components.common.DescriptorChecker
-import services.discovery.model.components.{AskQuery, VisualizerInstance}
-import services.discovery.model.{ComponentState, DataSample, Port, PortCheckResult}
+    override protected val prefixes: String =
+        """
+          |PREFIX s: <http://schema.org/>""".stripMargin
 
-import scala.concurrent.Future
-
-class GoogleMapsVisualizer extends VisualizerInstance with DescriptorChecker {
-  val portName: String = "INPUT_PORT"
-
-  private val descriptor = AskQuery(
-    """
-      |PREFIX s: <http://schema.org/>
-      |
-      |    ASK {
-      |      ?something s:geo ?g .
-      |      ?g a s:GeoCoordinates ;
-      |        s:latitude ?lat ;
-      |        s:longitude ?lng .
-      |    }
-    """.stripMargin
-  )
-
-  override val getInputPorts: Seq[Port] = Seq(Port(portName, 0))
-
-  override def checkPort(port: Port, state: Option[ComponentState], outputDataSample: DataSample, discoveryId: UUID, iterationNumber: Int): Future[PortCheckResult] = {
-    checkStatelessDescriptors(outputDataSample, discoveryId, iterationNumber, descriptor)
-  }
+    override protected val whereClause: String =
+        """
+          |?something s:geo ?g .
+          |?g a s:GeoCoordinates ;
+          |    s:latitude ?lat ;
+          |    s:longitude ?lng .""".stripMargin
 }

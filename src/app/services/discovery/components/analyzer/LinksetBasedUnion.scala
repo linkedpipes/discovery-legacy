@@ -109,11 +109,11 @@ class LinksetBasedUnion extends UnionInstance {
             s1 <- sample1
             s2 <- sample2
             l <- generateLink(dataSamples, s1, s2, discoveryId, iterationNumber)
-        } yield enrichDataSampleWithLink(l, dataSamples)
+        } yield enrichDataSampleWithLink(l, dataSamples, discoveryId, iterationNumber)
     }
 
-    private def enrichDataSampleWithLink(generatedLink: Model, dataSamples: Map[Port, DataSample]): ModelDataSample = {
-        val result = unionSamples(dataSamples).add(generatedLink)
+    private def enrichDataSampleWithLink(generatedLink: Model, dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): ModelDataSample = {
+        val result = unionSamples(dataSamples, discoveryId, iterationNumber).add(generatedLink)
         ModelDataSample(result)
     }
 
@@ -135,8 +135,8 @@ class LinksetBasedUnion extends UnionInstance {
         )
     }
 
-    private def unionSamples(dataSamples: Map[Port, DataSample]): Model = {
-        val models = dataSamples.values.map(_.getModel)
+    private def unionSamples(dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Model = {
+        val models = dataSamples.values.map(_.getModel(discoveryId, iterationNumber))
         val result = ModelFactory.createDefaultModel()
         models.foreach(result.add)
         result

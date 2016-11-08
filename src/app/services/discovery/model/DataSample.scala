@@ -1,8 +1,9 @@
 package services.discovery.model
 
 import java.util.UUID
+import java.util.concurrent.TimeUnit
 
-import org.apache.jena.query.{QueryExecution, QueryExecutionFactory, QueryFactory, ResultSet}
+import org.apache.jena.query._
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.update.UpdateAction
 import play.Logger
@@ -11,10 +12,13 @@ import services.discovery.components.datasource.SparqlEndpoint
 import services.discovery.model.components._
 
 import scala.collection.JavaConversions._
-import scala.concurrent.Future
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future}
 import scala.io.Source
 
 trait DataSample {
+
+    private val discoveryLogger = Logger.of("discovery")
 
     def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean]
 
@@ -22,17 +26,29 @@ trait DataSample {
 
     def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model]
 
-    def getModel: Model
+    def getModel(discoveryId: UUID, iterationNumber: Int): Model
 
-    def transform(query: UpdateQuery): Model = {
+    def transform(query: UpdateQuery, discoveryId: UUID, iterationNumber: Int): Model = {
         val resultModel = ModelFactory.createDefaultModel()
-        resultModel.add(getModel)
+        resultModel.add(getModel(discoveryId, iterationNumber))
         UpdateAction.parseExecute(query.query, resultModel)
         resultModel
+    }
+
+    protected def createQuery(sparqlQuery: String): Query = {
+        try {
+            QueryFactory.create(sparqlQuery)
+        } catch {
+            case e: Exception => {
+                discoveryLogger.error(e.getMessage)
+                throw e
+            }
+        }
     }
 }
 
 object DataSample {
+
     def apply(endpoint: SparqlEndpoint): DataSample = {
         endpoint match {
             case e if e.descriptorIri.isEmpty => SparqlEndpointDataSample(e)
@@ -43,7 +59,7 @@ object DataSample {
         }
     }
 
-    def apply(rdfData: String) : DataSample = ModelDataSample(JenaUtil.modelFromTtl(rdfData))
+    def apply(rdfData: String): DataSample = ModelDataSample(JenaUtil.modelFromTtl(rdfData))
 }
 
 case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends DataSample {
@@ -55,10 +71,14 @@ case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends Data
 
     override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = withLogger(descriptor, e => e.execConstruct, discoveryId, iterationNumber)
 
-    // TODO if small, the ODS is everything in the endpoint
-    override def getModel: Model = ModelFactory.createDefaultModel()
+    override def getModel(discoveryId: UUID, iterationNumber: Int): Model = {
+        sparqlEndpoint.isLarge match {
+            case true => ModelFactory.createDefaultModel()
+            case false => Await.result(executeConstruct(ConstructQuery("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }"), discoveryId, iterationNumber), Duration(30, TimeUnit.MINUTES))
+        }
+    }
 
-    private def withLogger[T](descriptor: SparqlQuery, execCommand: QueryExecution => T, discoveryId: UUID, iterationNumber: Int) : Future[T] = {
+    private def withLogger[T](descriptor: SparqlQuery, execCommand: QueryExecution => T, discoveryId: UUID, iterationNumber: Int): Future[T] = {
         Future.successful {
             val queryId = UUID.randomUUID()
             discoveryLogger.trace(s"[$discoveryId][$iterationNumber][datasample][$queryId] Querying ${sparqlEndpoint.url}: ${descriptor.query.replaceAll("[\r\n]", "")}.")
@@ -72,28 +92,17 @@ case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends Data
 }
 
 case class ModelDataSample(model: Model) extends DataSample {
-    override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean] = {
+    override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean] = executeQuery(descriptor, qe => qe.execAsk())
+
+    override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = executeQuery(descriptor, qe => qe.execConstruct())
+
+    override def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int): Future[ResultSet] = executeQuery(descriptor, qe => qe.execSelect())
+
+    override def getModel(discoveryId: UUID, iterationNumber: Int): Model = model
+
+    private def executeQuery[R](descriptor: SparqlQuery, executionCommand: QueryExecution => R) : Future[R] = {
         Future.successful {
-            val query = QueryFactory.create(descriptor.query)
-            val execution = QueryExecutionFactory.create(query, model)
-            execution.execAsk()
+            executionCommand(QueryExecutionFactory.create(createQuery(descriptor.query), model))
         }
     }
-
-    override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = {
-        Future.successful {
-            val query = QueryFactory.create(descriptor.query)
-            val execution = QueryExecutionFactory.create(query, model)
-            execution.execConstruct()
-        }
-    }
-
-    override def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int): Future[ResultSet] =
-        Future.successful {
-            val query = QueryFactory.create(descriptor.query)
-            val execution = QueryExecutionFactory.create(query, model)
-            execution.execSelect()
-        }
-
-    override def getModel: Model = model
 }
