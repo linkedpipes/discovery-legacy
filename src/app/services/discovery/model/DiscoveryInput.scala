@@ -2,8 +2,8 @@ package services.discovery.model
 
 import controllers.dto.DiscoverySettings
 import services.discovery.components.analyzer.{LinksetBasedUnion, RuianGeocoderAnalyzer}
-import services.discovery.components.extractor.{EarthquakesExtractor, PopulatedPlacesExtractor, TownsExtractor}
-import services.discovery.components.transformer.{DbpediaPopulationTransformer, DbpediaToTimeInstantTransformer, FusionTransformer, Ruian2SchemaOrgTransformer}
+import services.discovery.components.extractor.{DcatDatasetExtractor, EarthquakesExtractor, PopulatedPlacesExtractor, TownsExtractor}
+import services.discovery.components.transformer._
 import services.discovery.components.visualizer.{GoogleMapsVisualizer, PopulationVisualizer, TimeVisualizer}
 import services.discovery.model.components.{DataSourceInstance, ExtractorInstance, ProcessorInstance, VisualizerInstance}
 
@@ -19,7 +19,8 @@ object DiscoveryInput {
     val extractors = Seq(
         new TownsExtractor,
         new PopulatedPlacesExtractor,
-        new EarthquakesExtractor
+        new EarthquakesExtractor,
+        new DcatDatasetExtractor
     )
 
     var processors = Seq(
@@ -28,7 +29,8 @@ object DiscoveryInput {
         new DbpediaPopulationTransformer,
         new FusionTransformer,
         new Ruian2SchemaOrgTransformer,
-        new DbpediaToTimeInstantTransformer
+        new DbpediaToTimeInstantTransformer,
+        new DctermsIssuedToTimeInstantTransformer
     )
 
     val visualizers = Seq(
