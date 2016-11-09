@@ -13,7 +13,7 @@ class RuianGeocoderAnalyzer extends AnalyzerInstance with DescriptorChecker {
   val geoPortName: String = "PORT_GEO"
 
   override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Future[DataSample] = {
-    Future.successful(RdfDataSample(
+    Future.successful(DataSample.apply(
       """
         | PREFIX s: <http://schema.org/>
         |

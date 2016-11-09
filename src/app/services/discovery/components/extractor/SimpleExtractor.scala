@@ -41,7 +41,7 @@ abstract class SimpleExtractor extends SparqlExtractorInstance with DescriptorCh
     )
 
     override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Future[DataSample] = {
-        dataSamples(port).executeConstruct(query, discoveryId, iterationNumber).map(ModelDataSample)
+        dataSamples(port).executeConstruct(query, discoveryId, iterationNumber).map(m => ModelDataSample(m))
     }
 
     override def checkPort(port: Port, state: Option[ComponentState], outputDataSample: DataSample, discoveryId: UUID, iterationNumber: Int): Future[PortCheckResult] = {
