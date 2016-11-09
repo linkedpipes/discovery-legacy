@@ -100,9 +100,13 @@ case class ModelDataSample(model: Model) extends DataSample {
 
     override def getModel(discoveryId: UUID, iterationNumber: Int): Model = model
 
-    private def executeQuery[R](descriptor: SparqlQuery, executionCommand: QueryExecution => R) : Future[R] = {
+    private def executeQuery[R](descriptor: SparqlQuery, executionCommand: QueryExecution => R): Future[R] = {
         Future.successful {
             executionCommand(QueryExecutionFactory.create(createQuery(descriptor.query), model))
         }
     }
+}
+
+object ModelDataSample {
+    def Empty = ModelDataSample(ModelFactory.createDefaultModel())
 }
