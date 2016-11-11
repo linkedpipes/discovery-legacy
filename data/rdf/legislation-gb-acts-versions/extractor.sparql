@@ -6,17 +6,21 @@ CONSTRUCT {
    dct:title ?title ;
    dct:created ?date ;
    frbr:realization ?expression .
+   
  ?expression a frbr:Expression ;
    dct:hasVersion ?version .
 
- ?version dct:valid ?valid .
+ ?version a frbr:Expression ;
+	dct:valid ?valid .
 } WHERE {
  ?work a frbr:Work ;
    dct:title ?title ;
    dct:created ?date ;
    frbr:realization ?expression .
+   
  ?expression a frbr:Expression ;
    dct:hasVersion ?version .
 
- ?version dct:valid ?valid .
+ ?version a frbr:Expression ;
+   dct:valid ?valid .
 }

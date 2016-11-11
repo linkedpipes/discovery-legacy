@@ -2,19 +2,22 @@ PREFIX frbr: <http://purl.org/vocab/frbr/core#>
 PREFIX dct: <http://purl.org/dc/terms/>
 
 CONSTRUCT {
- <http://www.legislation.gov.uk/id/asp/2010/14> a frbr:Work ;
+ <http://www.legislation.gov.uk/id/asp/2010/11> a frbr:Work ;
    dct:title ?title ;
    dct:created ?date ;
    frbr:realization ?expression .
+   
  ?expression a frbr:Expression ;
    dct:hasVersion ?version .
 
- ?version dct:valid ?valid .
+ ?version a frbr:Expression ;
+   dct:valid ?valid .
 } WHERE {
- <http://www.legislation.gov.uk/id/asp/2010/14>
+ <http://www.legislation.gov.uk/id/asp/2010/11>
    dct:title ?title ;
    dct:created ?date ;
    frbr:realization ?expression .
+   
  ?expression a frbr:Expression ;
    dct:hasVersion ?version .
 

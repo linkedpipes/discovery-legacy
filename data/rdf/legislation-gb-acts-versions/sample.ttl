@@ -1,17 +1,29 @@
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix frbr: <http://purl.org/vocab/frbr/core#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix dc: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ns0: <http://purl.org/vocab/frbr/core#> .
 
-<http://www.legislation.gov.uk/id/asp/2010/14> a frbr:Work ;
-    dcterms:created "2010-08-06"^^xsd:date ;
-    dcterms:title "Crofting Reform (Scotland) Act 2010"@en ;
-    frbr:realization <http://www.legislation.gov.uk/asp/2010/14> .
+<http://www.legislation.gov.uk/id/asp/2010/11>
+  a <http://purl.org/vocab/frbr/core#Work> ;
+  dc:title "Scottish Parliamentary Commissions and Commissioners etc. Act 2010"@en ;
+  dc:created "2010-07-19"^^xsd:date ;
+  ns0:realization <http://www.legislation.gov.uk/asp/2010/11> .
 
-<http://www.legislation.gov.uk/asp/2010/14> a frbr:Expression ;
-    dcterms:hasVersion <http://www.legislation.gov.uk/asp/2010/14/2010-08-07> .
+<http://www.legislation.gov.uk/asp/2010/11>
+  a ns0:Expression ;
+  dct:hasVersion <http://www.legislation.gov.uk/asp/2010/11/2010-10-01>, <http://www.legislation.gov.uk/asp/2010/11/2011-04-01>, <http://www.legislation.gov.uk/asp/2010/11/2010-08-01>, <http://www.legislation.gov.uk/asp/2010/11/2010-07-19> .
 
-<http://www.legislation.gov.uk/asp/2010/14/2010-08-07> dcterms:valid "start=2010-08-07;"^^<http://dublincore.org/documents/dcmi-period/>,
-        "start=2010-08-07;"@en .
+<http://www.legislation.gov.uk/asp/2010/11/2010-10-01>
+  a ns0:Expression ;
+  dct:valid "start=2010-10-01;"@en, "start=2010-10-01;"^^<http://dublincore.org/documents/dcmi-period/> .
+
+<http://www.legislation.gov.uk/asp/2010/11/2011-04-01>
+  a ns0:Expression ;
+  dct:valid "start=2011-04-01;"@en .
+
+<http://www.legislation.gov.uk/asp/2010/11/2010-08-01>
+  a ns0:Expression ;
+  dct:valid "start=2010-08-01;"@en .
+
+<http://www.legislation.gov.uk/asp/2010/11/2010-07-19>
+  a ns0:Expression ;
+  dct:valid "start=2010-07-19;"@en .
