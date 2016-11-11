@@ -1,0 +1,21 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+
+DELETE {
+  ?s dct:created ?dateTime .
+} INSERT {
+  ?s lpviz:hasAbstraction [
+	a time:Instant ;
+    time:inXSDDateTime ?dateTime ;
+	rdfs:label ?abstractionLabel
+  ] .
+} WHERE {
+  ?s dct:created ?dateTime .
+  
+  OPTIONAL {
+	?s dct:title ?title .
+	 BIND(CONCAT("Creation of ", STR(?title)) AS ?abstractionLabel)
+  }
+}
