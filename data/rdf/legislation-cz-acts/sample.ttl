@@ -1,0 +1,9 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix lex:	<http://purl.org/lex#> .
+@prefix dcterms:	<http://purl.org/dc/terms/> .
+@prefix xsd:	<http://www.w3.org/2001/XMLSchema#> .
+
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999>
+	rdf:type	lex:Act ;
+	dcterms:title	"Z\u00E1kon o svobodn\u00E9m p\u0159\u00EDstupu k informac\u00EDm"@cs , "Z\u00E1kon o svobodn\u00E9m p\u0159\u00EDstupu k informac\u00EDm" , "106-1999/1999 Sb." ;
+	dcterms:issued	"1999-06-08+01:00"^^xsd:date .

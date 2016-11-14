@@ -1,0 +1,20 @@
+PREFIX lex: <http://purl.org/lex#>
+PREFIX frbr: <http://purl.org/vocab/frbr/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+CONSTRUCT {
+ <http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> a lex:Act ;
+   dct:title ?title ;
+   dct:issued ?date .
+   
+ ?expression a frbr:Expression ;
+   frbr:realizationOf <http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> ;
+   dct:valid ?valid .
+} WHERE {
+ <http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> a lex:Act ;
+   dct:title ?title ;
+   dct:issued ?date .
+   
+ ?expression frbr:realizationOf <http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> ;
+   dct:valid ?valid .
+}

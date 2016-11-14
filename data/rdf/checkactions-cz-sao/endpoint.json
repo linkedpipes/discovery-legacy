@@ -1,0 +1,8 @@
+{
+  "url": "http://linked.opendata.cz/sparql",
+  "defaultGraphIris": [],
+  "label": "Check Actions - Czech Supreme Audit Office",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/checkactions-cz-sao/sample.ttl"
+}

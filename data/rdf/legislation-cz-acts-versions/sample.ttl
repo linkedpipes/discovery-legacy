@@ -1,0 +1,74 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix frbr:	<http://purl.org/vocab/frbr/core#> .
+@prefix xsd:	<http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms:	<http://purl.org/dc/terms/> .
+@prefix lex:	<http://purl.org/lex#> .
+
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2005/413-2005/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2006-01-01+01:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2007/110-2007/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2007-06-01+02:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2008/254-2008/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2008-09-01+02:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2008/274-2008/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2009-01-01+01:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2009/227-2009/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2009-07-24+02:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2010/123-2010/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2010-04-29+02:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2011/375-2011/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2012-04-01+02:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999>
+	rdf:type	lex:Act ;
+	dcterms:title	"Z\u00E1kon o svobodn\u00E9m p\u0159\u00EDstupu k informac\u00EDm"@cs , "Z\u00E1kon o svobodn\u00E9m p\u0159\u00EDstupu k informac\u00EDm" , "106-1999/1999 Sb." ;
+	dcterms:issued	"1999-06-08+01:00"^^xsd:date .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/1999/106-1999/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2000-01-01+01:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2008/32-2008/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2008-03-01+01:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2001/39-2001/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2001-01-25+01:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2006/61-2006/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2006-03-08+01:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2000/101-2000/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2000-06-01+02:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2000/159-2000/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2000-08-01+02:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2012/167-2012/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2012-07-01+02:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2014/181-2014/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2015-01-01+01:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .
+<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999/expression/cz/act/2015/222-2015/cs>
+	rdf:type	frbr:Expression ;
+	dcterms:valid	"2015-09-10+02:00"^^xsd:date ;
+	frbr:realizationOf	<http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> .

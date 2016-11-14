@@ -1,0 +1,17 @@
+PREFIX s: <http://schema.org/>
+
+CONSTRUCT {
+  <http://data.coi.cz/resource/check-action/101201020952801> a s:CheckAction ;
+    ?ap ?ao ;
+    s:location ?location .
+
+  ?location ?lp ?lo .
+}
+FROM <http://linked.opendata.cz/resource/dataset/coi.cz/kontroly>
+WHERE {
+  <http://data.coi.cz/resource/check-action/101201020952801> a s:CheckAction ;
+    ?ap ?ao ;
+    s:location ?location .
+
+  ?location ?lp ?lo .
+}

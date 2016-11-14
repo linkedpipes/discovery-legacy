@@ -1,0 +1,9 @@
+PREFIX frbr: <http://purl.org/vocab/frbr/core#>
+
+DELETE {
+ ?expression frbr:realizationOf ?work .
+} INSERT {
+  ?work frbr:realization ?expression .
+} WHERE {
+ ?expression frbr:realizationOf ?work .
+}
