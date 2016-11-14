@@ -1,11 +1,11 @@
-@prefix dc: <http://purl.org/dc/terms/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ns0: <http://purl.org/vocab/frbr/core#> .
 
 <http://www.legislation.gov.uk/id/asp/2010/11>
   a <http://purl.org/vocab/frbr/core#Work> ;
-  dc:title "Scottish Parliamentary Commissions and Commissioners etc. Act 2010"@en ;
-  dc:created "2010-07-19"^^xsd:date ;
+  dct:title "Scottish Parliamentary Commissions and Commissioners etc. Act 2010"@en ;
+  dct:created "2010-07-19"^^xsd:date ;
   ns0:realization <http://www.legislation.gov.uk/asp/2010/11> .
 
 <http://www.legislation.gov.uk/asp/2010/11>
