@@ -1,0 +1,12 @@
+PREFIX lex: <http://purl.org/lex#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+CONSTRUCT {
+ ?work a lex:Act ;
+   dct:title ?title ;
+   dct:issued ?date .
+} WHERE {
+ ?work a lex:Act ;
+   dct:title ?title ;
+   dct:issued ?date .
+}

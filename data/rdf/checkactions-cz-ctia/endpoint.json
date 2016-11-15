@@ -1,0 +1,8 @@
+{
+  "url": "http://linked.opendata.cz/sparql",
+  "defaultGraphIris": [],
+  "label": "Check Actions - Czech Trade Inspection Authority",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/checkactions-cz-ctia/sample.ttl"
+}

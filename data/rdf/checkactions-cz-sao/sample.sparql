@@ -1,0 +1,49 @@
+PREFIX s: <http://schema.org/>
+PREFIX nku: <http://data.nku.cz/ontology/>
+PREFIX time: <http://www.w3.org/2006/time#>
+
+CONSTRUCT {
+  <http://data.nku.cz/resource/check-action/2012/33> a s:CheckAction ;
+    ?ap ?ao ;
+    s:result ?result ;
+    nku:leader ?leader ;
+    nku:plannedTimeInterval ?interval .
+
+  ?result ?rp ?ro .
+
+  ?leader ?lp ?lo .
+
+  ?interval a time:Interval ;
+	time:hasBeginning ?beginning;
+	time:hasEnd ?end .
+	
+  ?beginning a time:Instant ;
+    time:inXSDDateTime ?nBeginningValue .
+	
+  ?end a time:Instant ;
+    time:inXSDDateTime ?nEndValue .
+	
+}
+FROM <http://data.nku.cz/resource/dataset/check-actions>
+WHERE {
+  <http://data.nku.cz/resource/check-action/2012/33> a nku:CheckAction ;
+    ?ap ?ao ;
+    s:result ?result ;
+    nku:leader ?leader ;
+    nku:plannedTimeInterval ?interval .
+
+  ?result ?rp ?ro .
+
+  ?leader ?lp ?lo .
+
+  ?interval
+    time:hasStart ?beginning ;
+    time:hasEnd ?end .
+
+  ?beginning skos:prefLabel ?beginningValue .
+  BIND(REPLACE(?beginningValue, "([0-9]{4}-[0-9]{2}-[0-9]{2})", "$1") AS ?nBeginningValue)
+
+  ?end skos:prefLabel ?endValue .
+  BIND(REPLACE(?endValue, "([0-9]{4}-[0-9]{2}-[0-9]{2})", "$1") AS ?nEndValue)
+  
+}

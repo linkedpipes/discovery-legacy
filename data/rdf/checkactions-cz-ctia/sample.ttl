@@ -1,0 +1,22 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix s:	<http://schema.org/> .
+@prefix xsd:	<http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms:	<http://purl.org/dc/terms/> .
+@prefix skos:	<http://www.w3.org/2004/02/skos/core#> .
+@prefix void:	<http://rdfs.org/ns/void#> .
+
+<http://data.coi.cz/resource/check-action/101201020952801/postal-address>
+	rdf:type	s:PostalAddress ;
+	s:addressLocality	"Praha 1" ;
+	s:postalCode	"11000" ;
+	s:streetAddress	"Revolu\u010Dn\u00ED 1082/8" ;
+	s:addressRegion	"Hlavn\u00ED m\u011Bsto Praha" ;
+	s:location	<http://ec.europa.eu/eurostat/ramon/rdfdata/nuts2008/CZ010> , <http://linked.opendata.cz/resource/region/500054> , <http://linked.opendata.cz/resource/region/CZ0101> .
+<http://data.coi.cz/resource/check-action/101201020952801>
+	rdf:type	s:CheckAction ;
+	dcterms:date	"2012-01-02+02:00"^^xsd:date ;
+	skos:notation	"101201020952801" ;
+	void:inDataset	<http://data.coi.cz/resource/dataset/kontroly> ;
+	s:agent	<http://www.coi.cz/> ;
+	s:location	<http://data.coi.cz/resource/check-action/101201020952801/postal-address> ;
+	s:object	<http://linked.opendata.cz/resource/business-entity/CZ24693782> .

@@ -1,0 +1,17 @@
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+
+DELETE {
+  ?s ?p ?interval .
+} INSERT {
+  ?s lpviz:hasAbstraction ?interval .
+} WHERE {
+  ?s ?p ?interval .
+
+  {
+    ?interval time:hasBeginning ?beginning .
+  } UNION {
+	?interval time:hasEnd ?end .
+  }
+  
+}

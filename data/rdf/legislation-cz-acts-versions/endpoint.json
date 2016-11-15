@@ -1,0 +1,8 @@
+{
+  "url": "http://gov.tso.co.uk/legislation/sparql",
+  "defaultGraphIris": [],
+  "label": "Legislation UK - Versions of Acts",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/legislation-cz-acts-versions/sample.ttl"
+}

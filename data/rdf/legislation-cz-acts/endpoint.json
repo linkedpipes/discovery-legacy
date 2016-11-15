@@ -1,0 +1,8 @@
+{
+  "url": "http://linked.opendata.cz/sparql",
+  "defaultGraphIris": [],
+  "label": "Legislation CZ - Acts",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/legislation-cz-acts/sample.ttl"
+}

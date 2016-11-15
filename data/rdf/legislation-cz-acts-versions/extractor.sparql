@@ -1,0 +1,20 @@
+PREFIX lex: <http://purl.org/lex#>
+PREFIX frbr: <http://purl.org/vocab/frbr/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+CONSTRUCT {
+ ?work a lex:Act ;
+   dct:title ?title ;
+   dct:issued ?date .
+   
+ ?expression a frbr:Expression ;
+   frbr:realizationOf ?work ;
+   dct:valid ?valid .
+} WHERE {
+ ?work a lex:Act ;
+   dct:title ?title ;
+   dct:issued ?date .
+   
+ ?expression frbr:realizationOf ?work ;
+   dct:valid ?valid .
+}
