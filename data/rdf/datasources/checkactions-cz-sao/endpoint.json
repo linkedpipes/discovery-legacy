@@ -2,7 +2,7 @@
   "url": "http://linked.opendata.cz/sparql",
   "defaultGraphIris": ["http://data.nku.cz/resource/dataset/check-actions"],
   "label": "Check Actions - Czech Supreme Audit Office",
-  "isLarge": true,
+  "isLarge": false,
   "isLinkset": false,
   "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/checkactions-cz-sao/sample.ttl"
 }
