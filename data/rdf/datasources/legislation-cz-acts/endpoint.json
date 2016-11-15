@@ -4,5 +4,5 @@
   "label": "Legislation CZ - Acts",
   "isLarge": true,
   "isLinkset": false,
-  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/legislation-cz-acts/sample.ttl"
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/legislation-cz-acts/sample.ttl"
 }
