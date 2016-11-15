@@ -1,7 +1,6 @@
 CONSTRUCT {
  ?s ?p ?o .
 }
-FROM <http://linked.opendata.cz/resource/dataset/coi.cz/kontroly>
 WHERE {
  ?s ?p ?o .
 }
