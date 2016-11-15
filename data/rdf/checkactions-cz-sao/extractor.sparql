@@ -1,7 +1,0 @@
-CONSTRUCT {
- ?s ?p ?o .
-}
-FROM <http://data.nku.cz/resource/dataset/check-actions>
-WHERE {
- ?s ?p ?o .
-}

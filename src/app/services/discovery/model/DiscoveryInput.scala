@@ -2,9 +2,9 @@ package services.discovery.model
 
 import controllers.dto.DiscoverySettings
 import services.discovery.components.analyzer.{LinksetBasedUnion, RuianGeocoderAnalyzer}
-import services.discovery.components.extractor.{DcatDatasetExtractor, EarthquakesExtractor, PopulatedPlacesExtractor, TownsExtractor}
+import services.discovery.components.extractor._
 import services.discovery.components.transformer._
-import services.discovery.components.visualizer.{GoogleMapsVisualizer, PopulationVisualizer, TimeVisualizer}
+import services.discovery.components.visualizer._
 import services.discovery.model.components.{DataSourceInstance, ExtractorInstance, ProcessorInstance, VisualizerInstance}
 
 case class DiscoveryInput(
@@ -20,22 +20,36 @@ object DiscoveryInput {
         new TownsExtractor,
         new PopulatedPlacesExtractor,
         new EarthquakesExtractor,
-        new DcatDatasetExtractor
+        new DcatDatasetExtractor,
+        new LegislationCzActsExtractor,
+        new LegislationCzActsVersionsExtractor,
+        new LegislationGbActsExtractor,
+        new LegislationGbActsVersionsExtractor
     )
 
     var processors = Seq(
         new LinksetBasedUnion,
-        new RuianGeocoderAnalyzer,
-        new DbpediaPopulationTransformer,
         new FusionTransformer,
-        new Ruian2SchemaOrgTransformer,
-        new DbpediaToTimeInstantTransformer,
-        new DctermsIssuedToTimeInstantTransformer
+
+        new Dbpedia_PopulationTotal2Rdf_ValueTransformer,
+        new Dbpedia_Time2Time_InstantTransformer,
+        new Dct_Issued2Time_InstantTransformer,
+        new Dct_Created2Time_InstantTransformer,
+        new Dct_Valid2Time_Interval1Transformer,
+        new Dct_Valid2Time_Interval2Transformer,
+        new Dct_Date2Time_InstantTransformer,
+        new Frbr_Realization2Dct_HasVersionTransformer,
+        new Frbr_RealizationOf2Frbr_RealizationTransformer,
+        new Ruian_DefinicniBod2Schema_PlaceTransformer,
+        new RuianGeocoderAnalyzer,
+        new Time_Interval2Time_IntervalTransformer
     )
 
     val visualizers = Seq(
         new GoogleMapsVisualizer,
-        new TimeVisualizer,
+        new TemporalEntityVisualizer,
+        new TemporalEntityTimeIntervalVisualizer,
+        new VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer,
         new PopulationVisualizer
     )
 

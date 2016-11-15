@@ -1,6 +1,6 @@
 package services.discovery.components.transformer
 
-class DbpediaPopulationTransformer extends SparqlUpdateTransformer {
+class Dbpedia_PopulationTotal2Rdf_ValueTransformer extends SparqlUpdateTransformer {
 
     protected override val whereClause = "?place dbo:populationTotal ?pop ."
     protected override val deleteClause = whereClause

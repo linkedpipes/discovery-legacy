@@ -1,6 +1,6 @@
 package services.discovery.components.transformer
 
-class Ruian2SchemaOrgTransformer extends SparqlUpdateTransformer {
+class Ruian_DefinicniBod2Schema_PlaceTransformer extends SparqlUpdateTransformer {
 
     protected override val deleteClause =
         """
