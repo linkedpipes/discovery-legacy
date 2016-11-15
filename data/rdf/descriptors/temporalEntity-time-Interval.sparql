@@ -4,7 +4,9 @@ ASK {
   [] time:hasBeginning ?beginning ;
     time:hasEnd ?end .
   
-  ?beginning time:inXSDDateTime ?dtb .
-  
-  ?end time:inXSDDateTime ?dte .
+  {
+	?beginning time:inXSDDateTime ?dtb .
+  } UNION {
+	?end time:inXSDDateTime ?dte .
+  }
 }

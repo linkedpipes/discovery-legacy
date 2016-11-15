@@ -1,0 +1,10 @@
+PREFIX lex: <http://purl.org/lex#>
+PREFIX frbr: <http://purl.org/vocab/frbr/core#>
+
+DELETE {
+  ?s a lex:Act .
+} INSERT {
+  ?s a frbr:Work .
+} WHERE {
+  ?s a lex:Act .
+}

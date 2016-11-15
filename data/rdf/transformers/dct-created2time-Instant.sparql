@@ -16,6 +16,6 @@ DELETE {
   
   OPTIONAL {
 	?s dct:title ?title .
-	 BIND(CONCAT("Creation of ", STR(?title)) AS ?abstractionLabel)
+	BIND(CONCAT("Creation of ", STR(?title)) AS ?abstractionLabel)
   }
 }
