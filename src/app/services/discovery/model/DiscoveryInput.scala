@@ -26,11 +26,11 @@ object DiscoveryInput {
     var processors = Seq(
         new LinksetBasedUnion,
         new RuianGeocoderAnalyzer,
-        new DbpediaPopulationTransformer,
+        new Dbpedia_PopulationTotal2Rdf_ValueTransformer,
         new FusionTransformer,
-        new Ruian2SchemaOrgTransformer,
-        new DbpediaToTimeInstantTransformer,
-        new DctermsIssuedToTimeInstantTransformer
+        new Ruian_DefinicniBod2Schema_PlaceTransformer,
+        new Dbpedia_Time2Time_InstantTransformer,
+        new Dct_Issued2Time_InstantTransformer
     )
 
     val visualizers = Seq(

@@ -1,6 +1,6 @@
 package services.discovery.components.transformer
 
-class DbpediaToTimeInstantTransformer extends SparqlUpdateTransformer {
+class Dbpedia_Time2Time_InstantTransformer extends SparqlUpdateTransformer {
 
     protected override val whereClause = "?t dbo:date ?d ."
     protected override val deleteClause = whereClause
