@@ -1,6 +1,6 @@
 {
   "url": "http://linked.opendata.cz/sparql",
-  "defaultGraphIris": [],
+  "defaultGraphIris": ["http://data.nku.cz/resource/dataset/check-actions"],
   "label": "Check Actions - Czech Supreme Audit Office",
   "isLarge": true,
   "isLinkset": false,
