@@ -2,7 +2,7 @@ package services.discovery.model
 
 import controllers.dto.DiscoverySettings
 import services.discovery.components.analyzer.{LinksetBasedUnion, RuianGeocoderAnalyzer}
-import services.discovery.components.extractor.{DcatDatasetExtractor, EarthquakesExtractor, PopulatedPlacesExtractor, TownsExtractor}
+import services.discovery.components.extractor._
 import services.discovery.components.transformer._
 import services.discovery.components.visualizer._
 import services.discovery.model.components.{DataSourceInstance, ExtractorInstance, ProcessorInstance, VisualizerInstance}
@@ -20,7 +20,11 @@ object DiscoveryInput {
         new TownsExtractor,
         new PopulatedPlacesExtractor,
         new EarthquakesExtractor,
-        new DcatDatasetExtractor
+        new DcatDatasetExtractor,
+        new LegislationCzActsExtractor,
+        new LegislationCzActsVersionsExtractor,
+        new LegislationGbActsExtractor,
+        new LegislationGbActsVersionsExtractor
     )
 
     var processors = Seq(
