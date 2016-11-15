@@ -4,7 +4,7 @@ import controllers.dto.DiscoverySettings
 import services.discovery.components.analyzer.{LinksetBasedUnion, RuianGeocoderAnalyzer}
 import services.discovery.components.extractor.{DcatDatasetExtractor, EarthquakesExtractor, PopulatedPlacesExtractor, TownsExtractor}
 import services.discovery.components.transformer._
-import services.discovery.components.visualizer.{GoogleMapsVisualizer, PopulationVisualizer, TimeVisualizer}
+import services.discovery.components.visualizer.{GoogleMapsVisualizer, PopulationVisualizer, TemporalEntityVisualizer}
 import services.discovery.model.components.{DataSourceInstance, ExtractorInstance, ProcessorInstance, VisualizerInstance}
 
 case class DiscoveryInput(
@@ -35,7 +35,7 @@ object DiscoveryInput {
 
     val visualizers = Seq(
         new GoogleMapsVisualizer,
-        new TimeVisualizer,
+        new TemporalEntityVisualizer,
         new PopulationVisualizer
     )
 
