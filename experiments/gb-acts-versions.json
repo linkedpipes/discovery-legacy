@@ -1,0 +1,1985 @@
+{
+  "sparqlEndpoints": [
+{
+  "url": "http://gov.tso.co.uk/legislation/sparql",
+  "defaultGraphIris": [],
+  "label": "Legislation UK - Versions of Acts",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/legislation-gb-acts-versions/sample.ttl"
+}
+  ]
+}
+
+{
+  "pipelines": [
+    {
+      "id": "5f28fc0f-99bf-4956-8972-53268be5169b",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "32969a65-0489-4ef9-88d1-20c9dd587e7d",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "b09d20b3-d782-443a-b816-b661428a5cff",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "acb8cca9-0536-4ea3-a25c-09b2b2641ffc",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "c9367e9c-62ce-4df0-947b-e57d3471137b",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "240fbeab-eda7-419c-b00a-7aff7b9585bb",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "60f02cef-fde6-4dc0-b2dd-bb2cd61f214f",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "c32a757d-30b5-4353-8347-7ec356735d4c",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "56e6eb8a-70f6-4d0c-9fe5-041fb4ba5e90",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "a8ceef82-0347-4f05-98b1-0befb04905ff",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "8d150188-cabb-4c2c-9357-68bb5a40712a",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "526b3c2a-19d6-46a4-ac91-43620898a1de",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "a7e2fb4c-3d24-41cf-aa6b-50158cc6c935",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "63c456d7-07d3-4499-ab58-963af8706088",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "e6bb741b-3a3a-4409-8a38-b4c58f53fc80",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "532d88ae-9c9c-4975-a790-a46cd5a2c90c",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "02548cd1-0c03-458f-8959-6587fea53d61",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "d12b6dfa-2483-4dcd-b592-79eedb4695a3",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "3ebe8645-0d24-40cc-b56b-b2974a1d5b9b",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "c9dca693-e6f4-4b64-a99b-02c1fa779866",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "fc6c3409-90fa-4759-a76d-c042740274c2",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "b0a749e3-7746-486c-89e1-f85d89de84f5",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "9a61d26e-3b19-4a5c-a993-7d570f8f81f8",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "d1e90ac1-0f3b-4266-9a23-8567448e0de8",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "06e5ecb0-d482-4648-808c-5e366202750f",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "30f050e9-a03b-496b-9c01-6650a1a00d79",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "74b93528-2c4a-46fe-982e-88548ec29e32",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "65326d4c-76c1-4c7e-bf07-d51c4339f5c6",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "286e4da0-b3b8-4fa5-ae6a-8f71ee0b57b0",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "92670719-cce4-4467-bab2-bf58d72ac4a6",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "ab16cad1-0976-42e7-9dc7-36a137230e9b",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "5bfffd39-1f3a-46c3-a760-ef1569fc4a81",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "6328eb9a-5e74-4a33-853e-ac156e7b4f22",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "298b2c0d-ad6a-46d7-823a-7a5a01c959db",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "bb9482fe-82bc-45e5-a5b0-d4f1f5484844",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "6b2531a6-53c1-4b41-8170-1ad244de5742",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "d0d1d91b-a8ce-4ef2-abb8-d47583c1a7c2",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "3cfc7962-48e9-4e8e-a16f-c36c4c49e08c",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "a34b2a99-fc50-445b-8f92-ee7d128fd784",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "6e1c1f09-7dbb-49d3-b73a-03f304f7bedd",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "a4426436-4cc7-4d30-b8bb-a0f55f1ce24a",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "de936eaf-a62b-4ee5-972b-34257db7da12",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "b02691c7-728b-43ed-a552-8bdde9459126",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "96d14c2d-c065-4f81-9dd4-ea90ad6445e2",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "c7176393-df01-4247-9e09-55d9fa1aba11",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "6cf2e8bd-3794-4fd0-b5e5-41dc6d7133a3",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "da1e21a5-53dc-41fa-92d2-caa187591c84",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "6284bc61-2ad6-42ef-9ccd-90f8b94c6cfd",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "36e877f9-2223-4149-bdcd-97be42db7dc9",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "c45a5217-cdee-456d-9477-e78941365fc0",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "e0de4a75-3a1a-4123-b031-5b6496ef9604",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "b65d6066-729d-487a-ac6c-92b50864dd66",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "87a60ad6-14fd-44dd-a946-8dd55c12e496",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "932a368b-46b7-462b-a34e-797dc2b898a2",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "1c55152c-f205-46f2-919f-3b18ca1bc5e3",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "f71169ca-3148-4f45-ab57-c0ac0404b431",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "640525d2-018b-4ae1-aa50-7e5be93adf8c",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "d4bfa67e-f651-45d5-9f41-38875d28b6b9",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "81e32c10-2a96-43d2-ac17-c55d801bc875",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "98f9a9ec-401e-4604-bc63-210261c19f67",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "cd109625-3cb1-4ad5-a607-14678ca3ffd6",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "49c9c65e-b5b7-47e1-8c19-ecd1d39d9cd8",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "cfa1ecdc-1854-4e5a-b258-3c38fc29ca2f",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "ee119559-ca3c-4991-81ac-962707a09052",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "5ade97bc-1501-44f2-906b-cb44d8cd5725",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "ffe79fea-2587-48a0-9a7e-987dd19411aa",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "5b3f6917-6c7b-4f64-ad92-1c7a341fcd0c",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "3a3e72e9-1bf5-4114-838b-5c8d0adc28b8",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "afccb029-e138-49aa-b341-5db37b57313d",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "2f4d4e51-20a7-4c8b-b8f5-70afc9081e61",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "8d084b72-48c1-4857-ad05-cf0f08fea600",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "e90133e6-7ace-48f9-bceb-ad29eb83ec09",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "7f704589-dbf7-46b9-82a7-26c7b5176bae",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "0d8261be-236f-4ba9-9d0e-68c4955ae46b",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "4462c649-e9fd-41dc-8d13-564f3184f910",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "16840200-c3b0-4b25-a9da-24252b4683ab",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "e7af6f2f-d804-48da-98fb-8e23877b73ea",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "97e9509d-b213-47ec-9327-b9addb9dc8e8",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "f9c917d4-8793-4b3b-9cd1-e321c167240d",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "68785f02-3ea2-4fb3-9987-a298ebc3aacb",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "e6a01431-a085-4c88-9ab6-28314f6293da",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "f4062436-9098-45db-a967-01aeb58fa34c",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "99ec2b97-d75d-4668-be46-9c4053e862e8",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "dc4cc9c8-38d4-4b54-9cb8-514f047ad879",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "9d8c67e6-8981-4ac4-8511-6c2dab8804e2",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "b8505fd0-a96b-427d-b95a-d070b0483d69",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "ad43fa6e-62a9-496f-9c63-8716e829a86e",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "a063041a-e96f-4d9c-8dba-aec6a6d6638c",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "2fde76e6-a7b4-4a5f-90b5-ff21afd8c50f",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "3da20649-3aec-424b-acd0-a72009e31385",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "f0857900-6175-456a-a194-f2427115d62f",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "3a5aa5fb-2f9f-4c23-a215-e08029934fab",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "56b32c40-2fe6-48cc-89c9-735baae6b17e",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "18ac679e-6019-4e74-932e-03777aced014",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "b582c5c6-65c9-4a5c-99a7-532ec861f07e",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "7d6e0f88-98b3-4769-a63e-7219d4f3ba78",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "6a4018ce-e148-465b-8189-d52b14cc52f3",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "cf76f5f1-c9c0-48fd-b31f-691e52c78c84",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "ac54ccc7-8f0f-4a0b-9d51-1b7d6a17bcdf",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "9940b6cb-27a1-47ea-a3d5-0c3b82dbe8c4",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "a1736387-dc77-4cbe-988f-20add028f808",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "4b4f5dfc-312a-49e4-ad19-2f254d5d733a",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "fe05d120-f279-4825-a2db-68463412f1f8",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "54e0bf1c-237e-4325-80e3-c36fa12979ca",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "34fed699-ea24-4b72-84b5-a1ed3a347d6f",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "90ed7595-4a56-40a9-933c-911c6dc494cc",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "21756ffc-bcc4-4c54-b49d-36063683968b",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "b0241798-f781-421a-98cd-d8fc2c778bb3",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "f37b6b24-a8ef-4801-9cad-096606f38e28",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "003a10bf-c7e2-42a7-b09e-37e6c6af8670",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "0637da48-2a56-4f0f-9772-dcbb9ad14319",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "903987c5-455d-4382-9540-7a27b64f7cdb",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "e2c83d3d-1f07-44c4-9bc7-10fe4e3f8137",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "dcd80a5a-4f21-4591-9894-40a74676d667",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "76e377d4-35a0-417e-bb97-aefd3d98f53a",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "ac7c1cac-4139-41ee-abdf-11ab1b144926",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "ac044d52-dc24-445c-8992-f59cfee93a16",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "5eba7e49-508e-4b16-8c35-5a0b68edf7f9",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "eb759d52-0963-44c7-8fc7-8be9c6ce4d04",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "4f998a38-4084-48a6-9857-de4e744e8188",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "d752d7f6-706f-4b48-bc9f-c73cb28302ce",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "bb3478d4-bc89-4cd3-8221-36afa0f17fe5",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "f57ff0be-c729-40e5-a106-d9f71f70da5d",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "82d1b96c-3d15-4cf5-ad37-61e149524f7c",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "52dc9192-4acc-4c06-8309-8de312ed76cf",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "8475f238-b196-4854-8dac-95f4c5c16e12",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "a3caf3cc-55f2-4d48-b587-b3ea3c92dc9c",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "961c9d85-b359-4690-8640-2d22bbab8100",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "94d260c4-9b4e-492a-8eb6-99470ceee9cd",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "6ed2a403-62c8-4beb-9b04-bfaff7fd4f26",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "dd056f34-1e93-464b-af1d-f5bc5bc82d49",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "5687c6a9-8f21-4ce4-9db6-e76746fb2813",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "f3759bcb-afee-4013-bd25-f2672addc220",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "4abe31f7-03e9-48e8-b862-6e73f494811e",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "1c8f8915-3066-47f3-96fb-2e55855b8e69",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "e9c0d414-0a48-4e9c-84f1-027f8dc054dd",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "c92e0b0c-e7cf-4936-8aa5-88bb829de48d",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "ace25fe1-02ed-473c-80e1-7750d87a4427",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "31f10f05-613f-4368-930a-025dc5c6829b",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "d9a0fe8b-3356-421f-86f8-ca3197af5aec",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "c99a038b-8a35-4e6d-86b2-b96ef3db35be",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "e1e65847-1892-43ec-88bb-8673dff2c66e",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "bb78cc47-ce76-47cd-a988-7a28f883f35c",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "c96f4dbb-938f-46ec-ab80-6490a2704ab4",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "667ff735-773e-450f-aeb9-0123ba0897ee",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "1fb4430b-00fd-4e12-ad92-88e7fb75420f",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "77cae1db-b63f-49c7-b080-9843714987e5",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "6904e1c7-4bb7-4e16-9920-acd88736728f",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "63888aa6-60df-48ca-a018-509003fed36d",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "b464e731-2b22-4f00-8399-1c9af6c0fe78",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "c44888f7-424f-4c87-8503-e4c34de85af0",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "9ba77458-58e0-4a36-91e1-bd1055842e4e",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "19a75f6e-e8ae-4ffc-8301-1502afe50ecc",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "14226ca4-1e56-4cf4-9fb7-7c349a8bcf3c",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "2293f078-2d55-4921-b4f9-74b1d78a552f",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "38750720-29f8-487a-b610-722b54312ea5",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "7447d421-7586-4155-864c-48afaaa6aa06",
+      "componentCount": 8,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "c98a6a90-3c69-481c-a253-ffd39814b6a8",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "d4301be6-014c-430a-beb9-3234f2ced70a",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "d4e3b0ca-89e8-4a25-a7b4-369eee861694",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "cd3310f8-ee7c-4e45-adfd-45230d262a96",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer"
+    },
+    {
+      "id": "20767940-bb7d-4292-a69b-519f912642cc",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "3f0b4100-609c-4975-a169-eb5296e0c76e",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "dd7ae06f-ea4a-4a6d-90af-40117f14a092",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation UK - Versions of Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    }
+  ]
+}

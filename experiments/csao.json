@@ -1,0 +1,644 @@
+{
+  "sparqlEndpoints": [
+{
+  "url": "http://linked.opendata.cz/sparql",
+  "defaultGraphIris": ["http://data.nku.cz/resource/dataset/check-actions"],
+  "label": "Check Actions - Czech Supreme Audit Office",
+  "isLarge": false,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/checkactions-cz-sao/sample.ttl"
+}
+
+  ]
+}
+
+
+
+{
+  "pipelines": [
+    {
+      "id": "c0be57cd-5851-4d8c-b4c5-107d26cfd2ad",
+      "componentCount": 3,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "484b51bf-0f2c-4e7f-a578-33464827c89d",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "c0e8d1d1-86d1-4dce-b700-4097544fc547",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "7e36a999-0e70-41ca-8fb9-991414079f9c",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "c84539a7-a5e6-4eff-8e64-5b740be6c091",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "6618f08e-fe33-4bab-a979-7c8faab04c38",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "ca653cd9-a50c-4d65-b666-fa3d1b7f7920",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "90f865ae-2074-4600-a97b-eb731bdaf897",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "fb7d41d0-59e8-40e2-85cf-43adfbc5f134",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "85406dba-dea2-4233-a1e2-35e7ad61067d",
+      "componentCount": 2,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "418e5327-fa06-4060-b33e-5f13e6912094",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "6124069b-6604-411c-a024-9ad4b448a3c1",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "88f843a3-7bad-47e3-a05c-fb762e0b09d8",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "3c809223-2ddc-49e7-82f8-3db13f05905f",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "60e15bdc-91ee-42cf-b467-d4722c2ea3b2",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "88833234-ca7b-4b68-8d1b-41491536bf14",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "372971a3-4a66-48b9-89bd-23e50cf9e8b3",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "4a0f969b-43e3-4eee-9895-a5334d27d2c5",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "4262f35b-8256-4593-b617-cf85ea44ffe5",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "f3a33222-d335-4b03-806a-d1f2fc99d653",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "75468aa2-0b3f-4eb7-9461-96b14b8ddb50",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "74109f2b-c894-4ec0-8655-d07d1f61e6a6",
+      "componentCount": 7,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "1a0e7ba2-68f4-4b58-a57b-0016092672c4",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "a340d6cd-1883-4493-a5aa-28015f8e2fc8",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "d34829c6-cb75-4fc5-aff0-eac12b8ba362",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "3325a0cd-ad79-4c6e-8d75-e19958afadce",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "6fba1b60-b116-4020-8aa8-b08d76982d89",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "343a2e10-9db8-4432-bccf-5e7a462497e8",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "9a4042a8-44f7-4cc5-bbd0-e3c4f0f4d48d",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "bdc9524a-8361-4e79-8c5b-7d229a28df60",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "82419747-9437-41b4-b701-5c6dae5d07be",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "b25a3ff2-0cca-4a44-a9da-5705a4a1f154",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "bae6a5a3-f395-4826-939d-322dbe8b5c50",
+      "componentCount": 3,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "fd163c66-287c-4f53-a155-e14dfbb99ecc",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "e3458d44-b853-48d8-bc05-279396339398",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "52a2a15c-1aac-4c97-b859-e8eb2b145e6b",
+      "componentCount": 3,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "87dfa695-36b3-4f4e-9bbe-577a77f32af7",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "4d9d3c57-7d85-431b-a4a6-8fbc6ba3c2c6",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "3f4b9cce-2426-445f-a74b-7ab0ad33952b",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "3a71a1df-af99-42ca-b46a-eae5c1ab13e5",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "d62d1029-b373-4001-b676-6c392b2cfdfd",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "96007b8b-0e15-40d0-a129-5dcfdc88dc31",
+      "componentCount": 3,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "56d41af7-dc9d-4e62-b5e2-116d016a93c2",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "76149147-add5-4146-bc63-71975929d9e8",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "72a5eb89-c32f-4429-a2ac-05d125db7315",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "f540b137-a926-4f81-a4f9-fb504aa0abf2",
+      "componentCount": 6,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "a8856a18-fb62-4c1f-b483-b317e24c41b2",
+      "componentCount": 2,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "2a6bb88a-a2c4-4b57-917c-d8ac45df2c63",
+      "componentCount": 3,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "12fafd30-7d65-420a-a20b-ab87e85a233c",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    },
+    {
+      "id": "cb8021f3-d1ee-4b02-a0e7-8650a93ef0cb",
+      "componentCount": 3,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "919c5b15-fbfd-436a-90b2-4213648185f5",
+      "componentCount": 5,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    },
+    {
+      "id": "81f912b3-c562-4e5b-b40a-fb170f2c1eca",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Supreme Audit Office"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityTimeIntervalVisualizer"
+    }
+  ]
+}

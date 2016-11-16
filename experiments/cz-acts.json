@@ -1,0 +1,30 @@
+{
+  "sparqlEndpoints": [
+    {
+      "url": "http://linked.opendata.cz/sparql",
+      "defaultGraphIris": [],
+      "label": "Legislation CZ - Acts",
+      "isLarge": true,
+      "isLinkset": false,
+      "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/legislation-cz-acts/sample.ttl"
+    }
+  ]
+}
+
+
+{
+  "pipelines": [
+    {
+      "id": "8b5e1867-64ee-45ae-9ced-9a67008e7a07",
+      "componentCount": 4,
+      "dataSources": [
+        [
+          {
+            "label": "Legislation CZ - Acts"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    }
+  ]
+}

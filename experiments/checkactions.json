@@ -1,0 +1,29 @@
+{
+  "sparqlEndpoints": [
+{
+  "url": "http://linked.opendata.cz/sparql",
+  "defaultGraphIris": ["http://linked.opendata.cz/resource/dataset/coi.cz/kontroly"],
+  "label": "Check Actions - Czech Trade Inspection Authority",
+  "isLarge": false,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/checkactions-cz-ctia/sample.ttl"
+}
+  ]
+}
+
+{
+  "pipelines": [
+    {
+      "id": "f850905c-f15b-4007-b049-c285f445499e",
+      "componentCount": 3,
+      "dataSources": [
+        [
+          {
+            "label": "Check Actions - Czech Trade Inspection Authority"
+          }
+        ]
+      ],
+      "visualizer": "TemporalEntityVisualizer"
+    }
+  ]
+}

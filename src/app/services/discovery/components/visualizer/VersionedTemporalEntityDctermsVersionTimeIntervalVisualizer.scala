@@ -4,9 +4,16 @@ class VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer extends Simple
 
     override protected val prefixes: String =
         """
-          |  [] dct:hasVersion ?version ;
+          |PREFIX time: <http://www.w3.org/2006/time#>
+          |PREFIX dct: <http://purl.org/dc/terms/>
+          |PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+        """.stripMargin
+
+    override protected val whereClause: String =
+        """
+          |  [] dct:hasVersion ?version .
           |
-          |  ?version lpviz:hasAbstraction ?timeAbstraction ;
+          |  ?version lpviz:hasAbstraction ?timeAbstraction .
           |
           |  ?timeAbstraction time:hasBeginning ?beginning ;
           |    time:hasEnd ?end .
@@ -15,6 +22,4 @@ class VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer extends Simple
           |
           |  ?end time:inXSDDateTime ?dte .
         """.stripMargin
-
-    override protected val whereClause: String = "?t time:inXSDDateTime ?d ."
 }

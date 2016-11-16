@@ -37,6 +37,7 @@ trait DataSample {
 
     protected def createQuery(sparqlQuery: String): Query = {
         try {
+            discoveryLogger.debug(s"Creating a query from $sparqlQuery.")
             QueryFactory.create(sparqlQuery)
         } catch {
             case e: Exception => {

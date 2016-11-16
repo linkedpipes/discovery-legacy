@@ -28,9 +28,7 @@ class Dct_Valid2Time_Interval1Transformer extends SparqlUpdateTransformer {
           |  OPTIONAL {
           |    ?s dct:title ?title .
           |    BIND(CONCAT("Validity of ", STR(?title)) AS ?abstractionLabel)
-          |  }
-          |
-          |}""".stripMargin
+          |  }""".stripMargin
     protected override val deleteClause = "?s dct:valid ?valid ."
     protected override val insertClause =
         """
