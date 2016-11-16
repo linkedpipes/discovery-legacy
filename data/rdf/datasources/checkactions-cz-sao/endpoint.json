@@ -4,5 +4,5 @@
   "label": "Check Actions - Czech Supreme Audit Office",
   "isLarge": false,
   "isLinkset": false,
-  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/checkactions-cz-sao/sample.ttl"
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/checkactions-cz-sao/sample.ttl"
 }
