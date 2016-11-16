@@ -5,7 +5,7 @@ PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 ASK {
   [] dct:hasVersion ?version ;
   
-  ?version lpviz:hasAbstraction ?timeAbstraction ;
+  ?version lpviz:hasAbstraction ?timeAbstraction .
 
   ?timeAbstraction time:hasBeginning ?beginning ;
     time:hasEnd ?end .

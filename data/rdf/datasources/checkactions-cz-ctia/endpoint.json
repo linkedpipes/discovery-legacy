@@ -4,5 +4,5 @@
   "label": "Check Actions - Czech Trade Inspection Authority",
   "isLarge": false,
   "isLinkset": false,
-  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/checkactions-cz-ctia/sample.ttl"
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/checkactions-cz-ctia/sample.ttl"
 }
