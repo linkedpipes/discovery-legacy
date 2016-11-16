@@ -4,5 +4,5 @@
   "label": "Legislation UK - Acts",
   "isLarge": true,
   "isLinkset": false,
-  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/legislation-gb-acts/sample.ttl"
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/legislation-gb-acts/sample.ttl"
 }
