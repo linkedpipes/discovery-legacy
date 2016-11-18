@@ -1,0 +1,8 @@
+{
+  "url": "http://data.linkedmdb.org/sparql",
+  "defaultGraphIris": [],
+  "label": "LinkedMDB- Films",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/linkedmdb-films/sample.ttl"
+}
