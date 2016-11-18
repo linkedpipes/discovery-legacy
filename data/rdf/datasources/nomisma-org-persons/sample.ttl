@@ -1,0 +1,152 @@
+<http://nomisma.org/id/marcus_aurelius>
+        a       <http://www.w3.org/2004/02/skos/core#Concept> , <http://xmlns.com/foaf/0.1/Person> ;
+        <http://purl.org/dc/terms/isPartOf>
+                <http://nomisma.org/id/roman_numismatics> ;
+        <http://www.w3.org/2004/02/skos/core#definition>
+                "Roman emperor from 7 March 161 to 17 March 180."@en ;
+        <http://www.w3.org/2004/02/skos/core#exactMatch>
+                <http://dbpedia.org/resource/Marcus_Aurelius> , <http://isni.org/000000011031946X> , <http://d-nb.info/gnd/118577468> , <http://catalogue.bnf.fr/ark:/12148/cb11914476c> , <https://www.freebase.com/m/051x8> , <https://www.wikidata.org/entity/Q1430> , <http://www.eagle-network.eu/voc/dates/lod/45> , <http://www.idref.fr/027008614> , <http://viaf.org/viaf/102895066> , <http://vocab.getty.edu/ulan/500115701> ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Markús Árelíus"@is , "מחבר:מרקוס אורליוס"@he , "Marc Aureliu"@ro , "Marek Aureliusz"@pl , "Marko Aŭrelio"@eo , "მარკუს ავრელიუსი"@ka , "Марк Аврелий"@mn , "Marco Aurelio"@ia , "Марк Аврелий"@ru , "Marco Aurelio"@it , "Marco Aurelio"@es , "Marco Aurelio"@an , "Marco Aurelio"@gl , "Марк Аврелий"@bg , "Mark Aurel"@de , "Марк Аўрэлій"@be , "मार्कस ऑरेलियस"@mr , "Marc Aurèle"@fr , "Marc Aureli"@ca , "จักรพรรดิมาร์กุส เอาเรลิอุส"@th , "Marko Aurelio"@eu , "Marks Aurēlijs"@lv , "Markus Aurelius"@af , "Markus Aurelius"@fy , "Марк Аврелій"@uk , "Markas Aurelijus"@lt , "Marc Aurèli"@oc , "ماركوس أوريليوس"@ar , "Marko Aurelije"@sh , "Marko Aurelije"@hr , "Marko Aurelije"@bs , "Mark Avreli"@az , "Marco Aurélio"@pt , "مارکوس اورلیوس"@fa , "མར་ཁུའུ་སེ་ཨའུ་རེ་ལིའུ་སེ།"@bo , "Marcus Aurelius"@ku , "Marcus Aurelius"@io , "Marcus Aurelius"@mg , "Marcus Aurelius"@nb , "Marcus Aurelius"@yo , "Marcus Aurelius"@tr , "Marcus Aurelius"@tl , "Marcus Aurelius"@sw , "Μάρκος Αυρήλιος"@el , "Marcus Aurelius"@sq , "Marcus Aurelius"@sk , "Marcus Aurelius"@nn , "마르쿠스 아우렐리우스"@ko , "Մարկոս Ավրելիոս"@hy , "Марко Аврелиј"@mk , "Marcus Aurelius"@la , "Marcus Aurelius"@id , "Marcus Aurelius római császár"@hu , "Marcus Aurelius"@sv , "Marcus Aurelius"@en , "Marcus Aurelius"@vi , "Marcus Aurelius"@cs , "Marcus Aurelius"@no , "Marcus Aurelius"@nl , "Marcus Aurelius"@fi , "Marcus Aurelius"@br , "Marcus Aurelius"@cy , "Marcus Aurelius"@da , "Marcus Aurelius"@et , "Marcus Aurelius"@gd , "マルクス・アウレリウス・アントニヌス"@ja , "မားကပ် ဩရီးလီယပ် အန်တိုနိုင်းနပ်"@my , "馬爾庫斯·奧列里烏斯"@zh , "Mark Avrelij"@sl , "Марко Аурелије"@sr ;
+        <http://www.w3.org/ns/org#hasMembership>
+                <http://nomisma.org/id/marcus_aurelius#roman_emperor> .
+				
+<http://nomisma.org/id/marcus_aurelius#roman_emperor>
+        a       <http://www.w3.org/ns/org#Membership> ;
+        <http://www.w3.org/ns/org#role>
+                <http://nomisma.org/id/roman_emperor> .
+				
+<http://numismatics.org/ocre/id/ric.3.m_aur.1207>
+        a       <http://nomisma.org/ontology#TypeSeriesItem> , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://nomisma.org/ontology#hasAuthority>
+                <http://nomisma.org/id/marcus_aurelius> ;
+        <http://nomisma.org/ontology#hasDenomination>
+                <http://nomisma.org/id/sestertius> ;
+        <http://nomisma.org/ontology#hasEndDate>
+                "0177"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://nomisma.org/ontology#hasManufacture>
+                <http://nomisma.org/id/struck> ;
+        <http://nomisma.org/ontology#hasMaterial>
+                <http://nomisma.org/id/ae> ;
+        <http://nomisma.org/ontology#hasMint>
+                <http://nomisma.org/id/rome> ;
+        <http://nomisma.org/ontology#hasObverse>
+                <http://numismatics.org/ocre/id/ric.3.m_aur.1207#obverse> ;
+        <http://nomisma.org/ontology#hasRegion>
+                <http://nomisma.org/id/italy> ;
+        <http://nomisma.org/ontology#hasReverse>
+                <http://numismatics.org/ocre/id/ric.3.m_aur.1207#reverse> ;
+        <http://nomisma.org/ontology#hasStartDate>
+                "0176"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://nomisma.org/ontology#representsObjectType>
+                <http://nomisma.org/id/coin> ;
+        <http://purl.org/dc/terms/source>
+                <http://nomisma.org/id/ric> ;
+        <http://rdfs.org/ns/void#inDataset>
+                <http://numismatics.org/ocre/> ;
+        <http://www.w3.org/2004/02/skos/core#definition>
+                "RIC III Marcus Aurelius 1207"@en ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "RIC III Marcus Aurelius 1207"@en .
+				
+<http://nomisma.org/id/sestertius>
+        a       <http://nomisma.org/ontology#Denomination> , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://purl.org/dc/terms/isPartOf>
+                <http://nomisma.org/id/greek_numismatics> , <http://nomisma.org/id/roman_numismatics> ;
+        <http://www.w3.org/2004/02/skos/core#definition>
+                "An ancient denomination with the value of 1/4 denarius"@en , "1/4 de dénarius"@fr ;
+        <http://www.w3.org/2004/02/skos/core#exactMatch>
+                <http://vocab.getty.edu/aat/300037270> , <https://www.wikidata.org/entity/Q208041> , <http://dbpedia.org/resource/Sestertius> , <https://www.freebase.com/m/01rh6c> ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Sesterce"@fr , "Sesterz"@de , "Sestercija"@lt , "Сестерцій"@uk , "Сестерциј"@sr , "Σηστέρτιος"@el , "Sesterc"@pl , "Sesterc"@sl , "Sesterco"@eo , "ססטרטיוס"@he , "Сестэрцый"@be , "Sestercius"@sk , "Sestercius"@cs , "Sesterzio"@it , "Sestercij"@sh , "Sestercij"@hr , "Sestertius"@en , "Sestertius"@ro , "сестерциј"@mk , "Sestertius"@nl , "Sestertius"@hu , "Sestertius"@tr , "Sestertius"@fi , "Sestertius"@la , "Sestertius"@nb , "Сестерций"@ru , "Сестерций"@kk , "Sestertzio"@eu , "세스테르티우스"@ko , "セステルティウス"@ja , "Sestertie"@sv , "Sesterci"@ca , "Sesterci"@oc , "Sestércio"@pt , "Cестерций"@bg , "Sestercio"@es , "Sestercio"@gl .
+				
+<http://nomisma.org/id/struck>
+        a       <http://nomisma.org/ontology#Manufacture> , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#definition>
+                "Technique of manufacture that involves the hammering together of two dies to impress a blank disk."@en ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Frappé"@fr , "Coniato"@it , "Struck"@en , "отсечен"@bg , "Bătut"@ro , "Чеканка"@ru , "Geprägt"@de , "Geslagen"@nl , "Παιστό"@el .
+				
+<http://nomisma.org/id/ae>
+        a       <http://www.w3.org/2004/02/skos/core#Concept> , <http://nomisma.org/ontology#Material> ;
+        <http://www.w3.org/2004/02/skos/core#definition>
+                "'AE' is the numismatic abbreviation for bronze or any copper alloy."@en ;
+        <http://www.w3.org/2004/02/skos/core#exactMatch>
+                <http://d-nb.info/gnd/4146667-6> , <https://www.freebase.com/m/01brf> , <http://vocab.getty.edu/aat/300010957> , <https://www.wikidata.org/entity/Q34095> , <http://collection.britishmuseum.org/id/thesauri/x10627> , <http://dbpedia.org/resource/Bronze> ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Bronse"@nb , "Bronse"@nn , "ব্রোঞ্জ"@bn , "نحاس"@ar , "청동"@ko , "Tunc"@az , "青铜"@zh , "Bronz"@cs , "Bronz"@sk , "Bronzo"@io , "Aes"@la , "Bronzo"@it , "Bronz"@ro , "Bronz"@lb , "Gangsa"@ms , "bronzo"@eo , "कांसा"@hi , "Tansong pula"@tl , "Brons"@nl , "Brons"@af , "Brons"@sv , "Brons"@is , "בראנדז"@yi , "Қола"@kk , "Bronze"@ca , "bronce"@es , "Bronze"@an , "Bronzi"@sw , "Bronze"@en , "Bronze"@de , "Bronze"@fr , "Bronze"@oc , "Bronze"@pt , "brązy"@pl , "bronze"@da , "бронз"@bg , "चरेस"@ne , "ಕಂಚು"@kn , "مفرغ"@fa , "Բրոնզ"@hy , "ბრინჯაო"@ka , "Cré-umha"@ga , "کانسی"@ur , "สำริด"@th , "Đồng điếu"@vi , "Χαλκός"@el , "Bronce"@gl , "కంచు"@te , "Bronca"@hr , "வெண்கலம்"@ta , "Perunggu"@id , "Umha"@gd , "Perunggu"@su , "Brûns"@fy , "Efydd"@cy , "bronz"@hu , "Tunç"@tr , "വെങ്കലം"@ml , "ናስ"@am , "Bronza"@lt , "Bronza"@sh , "青銅"@ja , "Bronza"@lv , "Bronza"@bs , "कांसे"@mr , "ארד"@he , "Champi"@qu , "Бронза"@mk , "Бронза"@cv , "Бронза"@be , "Бронза"@uk , "Brontze"@eu , "Бронза"@ru , "Prunggu"@jv , "Bron"@sl , "Pronks"@et , "бронза"@sr , "ပန်းတဉ်း"@my , "Ibhulonze"@zu , "pronssi"@fi .
+				
+<http://nomisma.org/id/rome>
+        a       <http://www.w3.org/2004/02/skos/core#Concept> , <http://nomisma.org/ontology#Mint> ;
+        <http://purl.org/dc/terms/isPartOf>
+                <http://nomisma.org/id/roman_numismatics> ;
+        <http://www.w3.org/2003/01/geo/wgs84_pos#location>
+                <http://nomisma.org/id/rome#this> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://nomisma.org/id/latium> ;
+        <http://www.w3.org/2004/02/skos/core#closeMatch>
+                <http://dbpedia.org/resource/Ancient_Rome> , <http://pleiades.stoa.org/places/423025> , <https://www.wikidata.org/entity/Q1747689> , <http://www.geonames.org/3169070> , <http://vocab.getty.edu/tgn/7000874> , <http://geonames.org/3169070> , <http://collection.britishmuseum.org/id/place/x25706> , <http://vocab.getty.edu/tgn/7594740> , <http://viaf.org/viaf/244992873> , <http://d-nb.info/gnd/4076778-4> ;
+        <http://www.w3.org/2004/02/skos/core#definition>
+                "The mint at the ancient site of Rome in Latium."@en ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Roma antiqua"@la , "Rooman"@fi , "Рим"@ru , "Рим"@uk , "Рим"@bg , "Antzinako Erroma"@eu , "Roma antica"@co , "Roman dinéʼiʼ"@nv , "Rooma riik"@et , "Řím"@cs , "Roma Taloha"@mg , "Рими Қадим"@tg , "පුරාතන රෝමය"@si , "ਪ੍ਰਾਚੀਨ ਰੋਮ"@pa , "Важ Рим"@kv , "Antieke Rome"@af , "Rómù Ayéijọ́un"@yo , "Старажытны Рым"@be , "Roma e lashtë"@sq , "Rom kuno"@ms , "Ròma antica"@oc , "Antički Rim"@bs , "Antički Rim"@sh , "стар Рим"@mk , "Antički Rim"@hr , "ទីក្រុងរ៉ូមបុរាណ"@km , "প্রাচীন রোম"@bn , "பண்டைய ரோம்"@ta , "Antiga Roma"@an , "La Mã cổ đại"@vi , "Боронғо Рим"@ba , "Antiqua Roma"@io , "Rom"@de , "Qadimgi Rim"@uz , "An tSean-Róimh"@ga , "โรมโบราณ"@th , "प्राचीन रोम सभ्यता"@hi , "אוראלט רוים"@yi , "Борынгы Рим"@tt , "لرغونی روم"@ps , "Байыркы Рим"@ky , "고대 로마"@ko , "Senā Roma"@lv , "ძველი რომი"@ka , "Rómaveldi"@is , "روم باستان"@fa , "Romawi Kuno"@id , "Romerska"@sv , "Antik Roma"@tr , "Антички Рим"@sr , "古代ローマ"@ja , "Róma"@hu , "Авалхи Рим"@cv , "Antikkens Rom"@da , "Roma"@ro , "Roma"@it , "Roma"@ca , "Roma"@no , "Roma"@es , "Roma"@pt , "Staroveký Rím"@sk , "Qədim Roma"@az , "Roma ya Kale"@sw , "Ρώμη"@el , "古罗马"@zh , "Romio"@eo , "Rhomani"@zu , "Հին Հռոմ"@hy , "పురాతన రోమ్"@te , "Rhufain hynafol"@cy , "Romaya Kevnare"@ku , "Starorimska civilizacija"@sl , "Көне Рим"@kk , "Roma Antiga"@gl , "Rome"@en , "Rome"@fr , "Rome"@nl , "Sinaunang Roma"@tl , "Henroma"@br , "Rzym"@pl , "روما القديمة"@ar , "רומא העתיקה"@he , "Senovės Roma"@lt , "प्राचीन रोम"@mr , "Romerriket"@nb , "Imperi roman"@rm , "Roma antique"@ia .
+				
+<http://nomisma.org/id/rome#this>
+        a       <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> ;
+        <http://purl.org/dc/terms/isPartOf>
+                <http://nomisma.org/id/latium#this> ;
+        <http://www.w3.org/2003/01/geo/wgs84_pos#lat>
+                41.9 ;
+        <http://www.w3.org/2003/01/geo/wgs84_pos#long>
+                12.5 .
+				
+<http://numismatics.org/ocre/id/ric.3.m_aur.1207#obverse>
+        <http://nomisma.org/ontology#hasLegend>
+                "M ANTONINVS AVG GERM SARM TR P XXXI" ;
+        <http://nomisma.org/ontology#hasPortrait>
+                <http://nomisma.org/id/marcus_aurelius> ;
+        <http://purl.org/dc/terms/description>
+                "Head of Marcus Aurelius, laureate, right"@en .
+				
+<http://numismatics.org/ocre/id/ric.3.m_aur.1207#reverse>
+        <http://nomisma.org/ontology#hasLegend>
+                "IMP VIII COS III P P LIBERALITAS AVG VII S C" ;
+        <http://nomisma.org/ontology#hasPortrait>
+                <http://nomisma.org/id/marcus_aurelius> , <http://nomisma.org/id/commodus> ;
+        <http://purl.org/dc/terms/description>
+                "Marcus Aurelius  and Commodus, togate, seated left on curule chair on platform, extending right hands and left arms at sides; before them, Liberalitas, draped, standing left, holding abacus in right hand and cornucopiae in left; below, citizen, togate, standing right on steps of platform, holding out fold of toga"@en .
+				
+<http://nomisma.org/id/italy>
+        a       <http://www.w3.org/2004/02/skos/core#Concept> , <http://nomisma.org/ontology#Region> ;
+        <http://purl.org/dc/terms/isPartOf>
+                <http://nomisma.org/id/greek_numismatics> , <http://nomisma.org/id/europe> ;
+        <http://purl.org/dc/terms/source>
+                <http://nomisma.org/id/head_1911> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://nomisma.org/id/greek_europe> ;
+        <http://www.w3.org/2004/02/skos/core#closeMatch>
+                <http://dbpedia.org/resource/Italian_Peninsula> , <https://www.wikidata.org/entity/Q145694> , <https://www.freebase.com/m/0218mm> ;
+        <http://www.w3.org/2004/02/skos/core#definition>
+                "The region of Italy as defined in Head (1911)"@en ;
+        <http://www.w3.org/2004/02/skos/core#exactMatch>
+                <http://pleiades.stoa.org/places/1052> , <http://www.geonames.org/3175395> ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "اطالیہ"@ur , "Italien"@de , "Italien"@da , "Italien"@lb , "Italien"@sv , "Itåleye"@wa , "Италиа"@ab , "Yn Iddaal"@gv , "සිංහල"@si , "Îtalya"@ku , "Италија"@mk , "Италија"@sr , "ጣልያን"@am , "Xaaliyaanii"@om , "이탈리아"@ko , "Itari"@na , "ইতালি"@bn , "इटाली"@ne , "Italja"@mt , "އިޓަލީވިލާތް"@dv , "Włochy"@pl , "Ubutaliyani"@rw , "Италїꙗ"@cu , "איטליה"@he , "İtaliya"@az , "Ídelii"@nv , "Italùii"@sg , "ประเทศอิตาลี"@th , "ಇಟಲಿ"@kn , "ایتالیا"@fa , "Italio"@eo , "INtaliyane"@ss , "Taliansko"@sk , "Италия"@ba , "Италия"@bg , "Италия"@ru , "Италия"@kk , "Италия"@kv , "Италия"@ky , "Италия"@tt , "意大利"@zh , "İtalya"@tr , "An Iodáil"@ga , "إيطاليا"@ar , "Italy"@iu , "Italy"@bi , "Italy"@en , "Italy"@ee , "Italy"@tw , "Italy"@ve , "Italy"@ak , "Italy"@sn , "איטאליע"@yi , "ఇటలీ"@te , "Ithali"@st , "Itálíà"@yo , "Italia"@ch , "Italia"@ny , "Italie"@fr , "ইটালী"@as , "ᐃᑕᓖ"@cr , "Italia"@co , "Italia"@an , "Italia"@sw , "Italia"@nn , "Itaali"@wo , "Italia"@br , "Italia"@fi , "Italia"@es , "Italia"@nb , "Italia"@it , "Italia"@ro , "Italia"@eu , "Italia"@fo , "Italia"@gl , "Italia"@ia , "Italia"@id , "Italia"@ie , "Italia"@io , "Italia"@jv , "Italia"@kg , "Italia"@ki , "Italia"@kl , "Italia"@la , "Italia"@mg , "Italia"@rm , "Italia"@sm , "Italia"@sq , "Italia"@su , "イタリア"@ja , "Italiya"@ay , "Italiya"@ff , "Italiya"@uz , "Italiya"@ha , "ཨི་ཏ་ལི།"@bo , "Italija"@bs , "Italija"@hr , "Italija"@lt , "Italija"@sh , "An Eadailt"@gd , "Litaliyän"@vo , "Ítalía"@is , "Italija"@sl , "Itali"@ht , "Itali"@kw , "Itali"@ms , "Իտալիա"@hy , "Yr Eidal"@cy , "Yitale"@lg , "اېټاليا"@ps , "Olaszország"@hu , "Итали"@ce , "Итали"@cv , "Итали"@mn , "Итали"@os , "အီတလီနိုင်ငံ"@my , "ઈટલી"@gu , "អ៊ីតាលី"@km , "ʻĪtali"@to , "Ý"@vi , "Itaalje"@fy , "Итолиё"@tg , "Itālija"@lv , "ئىتالىيە"@ug , "Itália"@pt , "Itália"@gn , "Itália"@se , "Італія"@be , "Італія"@uk , "Italiýa"@tk , "ཨྀཊ་ལི་"@dz , "Talyaaniga"@so , "იტალია"@ka , "ଇଟାଲୀ"@or , "Italië"@af , "Italië"@nl , "Italië"@li , "Itálie"@cs , "Itaalia"@et , "Ιταλία"@el , "ഇറ്റലി"@ml , "इटली"@bh , "इटली"@hi , "इटली"@mr , "इटली"@sa , "Itàlia"@ca , "Itàlia"@oc , "Itàlia"@sc , "Itāria"@mi , "Italya"@ln , "Italya"@qu , "Italya"@tl , "Italya"@rn , "’Itāria"@ty , "இத்தாலி"@ta , "ອິຕາລີ"@lo , "ITaliya"@zu , "ਇਟਲੀ"@pa .
+				
+<http://nomisma.org/id/coin>
+        a       <http://www.w3.org/2004/02/skos/core#Concept> , <http://nomisma.org/ontology#ObjectType> ;
+        <http://www.w3.org/2004/02/skos/core#exactMatch>
+                <http://vocab.getty.edu/aat/300037222> , <http://collection.britishmuseum.org/id/thesauri/x6089> ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Munt"@nl , "Monnaie"@fr , "Münze"@de , "Монета"@ru , "монета"@bg , "Coin"@en , "Monedă"@ro , "ﻦﻗﻭﺩ"@ar , "Νόμισμα"@el , "Moneta"@it .
+				
+<http://nomisma.org/id/roman_emperor>
+        a       <http://www.w3.org/ns/org#Role> , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://nomisma.org/id/ruler> ;
+        <http://www.w3.org/2004/02/skos/core#definition>
+                "Individual holding the office of Emperor of Rome. Or the office itself."@en ;
+        <http://www.w3.org/2004/02/skos/core#exactMatch>
+                <http://vocab.getty.edu/aat/300025480> , <http://dbpedia.org/resource/Roman_Emperor> ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Roman Emperor"@en .

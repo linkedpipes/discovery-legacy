@@ -1,0 +1,21 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+
+DELETE {
+  ?m movie:initial_release_date ?dateTime .
+} INSERT {
+  ?m lpviz:hasAbstraction [
+	a time:Instant ;
+    time:inXSDDateTime ?dateTime ;
+	rdfs:label ?abstractionLabel
+  ] .
+} WHERE {
+  ?m movie:initial_release_date ?date .
+  
+  OPTIONAL {
+	?s dct:title ?title .
+	 BIND(CONCAT("Initial release date of ", STR(?title)) AS ?abstractionLabel)
+  }
+}

@@ -1,0 +1,24 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+PREFIX nmo: <http://nomisma.org/ontology#>
+
+PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+
+DELETE {
+  ?s nmo:hasMint ?mint .
+  
+  ?mint geo:location ?location .
+} INSERT {
+  ?s lpviz:hasAbstraction ?location .
+  ?location rdfs:label ?abstractionLabel .
+} WHERE {
+  ?s nmo:hasMint ?mint ;
+	skos:prefLabel ?label .
+  
+  ?mint geo:location ?location .
+  
+  BIND(CONCAT("Location of the mint of ", STR(?label)) AS ?abstractionLabel)
+  
+}

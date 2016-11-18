@@ -1,0 +1,10 @@
+PREFIX org: <http://www.w3.org/ns/org#>
+
+DELETE {
+  ?s org:hasMembership ?o .
+} INSERT {
+  ?o org:member ?s .
+} WHERE {
+  ?s org:hasMembership ?o .
+  
+}

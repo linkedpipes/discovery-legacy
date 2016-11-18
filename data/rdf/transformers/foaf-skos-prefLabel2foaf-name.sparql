@@ -1,0 +1,13 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core>
+
+DELETE {
+  ?agent skos:prefLabel ?prefLabel .
+} INSERT {
+  ?agent foaf:name ?prefLabel .
+  ] .
+} WHERE {
+  VALUES ?type { foaf:Agent foaf:Group foaf:Person foaf:Organization }
+  ?agent a ?type ;
+    skos:prefLabel ?prefLabel .
+}

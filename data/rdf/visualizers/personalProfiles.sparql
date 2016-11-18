@@ -1,0 +1,48 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+
+PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+
+ASK {
+  ?agent foaf:name ?agentName ;
+	foaf:made ?thing .
+	
+  OPTIONAL {
+    ?membership org:member ?agent .
+	
+	OPTIONAL {
+		?membership org:organization ?organization .
+		?organization foaf:name ?organizationName .
+	}
+	
+	OPTIONAL {
+		?membership org:role ?role .
+		?role foaf:name ?roleName .
+	}
+  }
+  
+  {
+	?thing lpviz:hasAbstraction ?timeAbstraction .
+	
+	?timeAbstraction time:inXSDDateTime ?dt .
+  } UNION {
+	?thing lpviz:hasAbstraction ?timeAbstraction .
+	
+	?timeAbstraction time:hasBeginning ?beginning ;
+		time:hasEnd ?end .
+
+	?beginning time:inXSDDateTime ?dtb .
+
+	?end time:inXSDDateTime ?dte .
+  } UNION {
+	?thing lpviz:hasAbstraction ?geoAbstraction .
+	
+	?geoAbstraction geo:lat ?lat ;
+		geo:long ?long .
+  }
+  
+  
+	
+	
+}

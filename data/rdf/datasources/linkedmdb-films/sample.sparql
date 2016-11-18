@@ -1,13 +1,8 @@
-PREFIX frbr: <http://purl.org/vocab/frbr/core#>
-PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
 
 CONSTRUCT {
- ?work a frbr:Work ;
-   dct:title ?title ;
-   dct:created ?date .
+  <http://data.linkedmdb.org/resource/film/261> ?p ?o .
 } WHERE {
- ?work a frbr:Work ;
-   dct:title ?title ;
-   dct:created ?date .
- FILTER (?work = <http://www.legislation.gov.uk/id/uksi/2014/243>)
+  <http://data.linkedmdb.org/resource/film/261> a movie:film ;
+    ?p ?o .
 }

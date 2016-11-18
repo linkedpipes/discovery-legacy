@@ -1,0 +1,21 @@
+PREFIX rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX nm:	<http://nomisma.org/id/>
+PREFIX nmo:	<http://nomisma.org/ontology#>
+PREFIX skos:	<http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms:	<http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX org: <http://www.w3.org/ns/org#>
+
+CONSTRUCT {
+  ?person a foaf:Person ;
+    ?personProp ?personObj ;
+    org:hasMembership ?membership .
+  
+  ?membership org:role ?role .
+} WHERE {
+  ?person a foaf:Person ;
+    ?personProp ?personObj ;
+    org:hasMembership ?membership .
+  
+  ?membership org:role ?role .
+}
