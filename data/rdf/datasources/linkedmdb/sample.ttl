@@ -49,11 +49,6 @@
 <http://www4.wiwiss.fu-berlin.de/bookmashup/persons/Earl+Wallace> rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww4.wiwiss.fu-berlin.de%2Fbookmashup%2Fpersons%2FEarl%2BWallace%3E> .
 <http://data.linkedmdb.org/resource/interlink/126951> ns1:link_source <http://data.linkedmdb.org/resource/writer/5995> .
 
-@prefix ns0: <http://data.linkedmdb.org/resource/movie/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-
 <http://data.linkedmdb.org/resource/film/261> ns0:performance <http://data.linkedmdb.org/resource/performance/39420> .
 <http://data.linkedmdb.org/resource/performance/39420>
   a ns0:performance ;
