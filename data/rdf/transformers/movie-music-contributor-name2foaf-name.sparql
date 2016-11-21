@@ -1,0 +1,11 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+
+DELETE {
+  ?person movie:music_contributor_name ?name .
+} INSERT {
+  ?person a foaf:Person ;
+	foaf:name ?name .
+} WHERE {
+  ?person movie:music_contributor_name ?name .
+}

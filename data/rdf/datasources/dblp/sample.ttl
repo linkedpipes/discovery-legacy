@@ -1,0 +1,530 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dc11: <http://purl.org/dc/elements/1.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns0: <http://swrc.ontoware.org/ontology#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/IseleJB10>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer>
+  a foaf:Agent ;
+  rdfs:seeAlso <http://www.bibsonomy.org/uri/author/Christian+Bizer>, <http://dblp.l3s.de/Authors/Christian+Bizer> ;
+  rdfs:label "Christian Bizer" ;
+  foaf:name "Christian Bizer" ;
+  foaf:homepage <http://dws.informatik.uni-mannheim.de/en/people/professors/prof-dr-christian-bizer/> .
+
+<http://www.bibsonomy.org/uri/author/Christian+Bizer> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww.bibsonomy.org%2Furi%2Fauthor%2FChristian%2BBizer%3E> .
+<http://dblp.l3s.de/Authors/Christian+Bizer> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fdblp.l3s.de%2FAuthors%2FChristian%2BBizer%3E> .
+<http://dws.informatik.uni-mannheim.de/en/people/professors/prof-dr-christian-bizer/> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fdws.informatik.uni-mannheim.de%2Fen%2Fpeople%2Fprofessors%2Fprof-dr-christian-bizer%2F%3E> .
+<http://dblp.l3s.de/d2r/resource/publications/journals/ws/LehmbergRRMPB15>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/BizerHBH11>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/IseleUBH10>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow>
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/esws/KobilarovSROSSBL09>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/BizerHIB08>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/CarrollBHS04>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/edbt/MendesMB12>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/books/sp/12/BizerMJ12>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/ws/IseleB13>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/AuerBKLCI07>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/MeuselPB14>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/2015ldow>
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/PietrigaBKL06>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/dagstuhl/PassantMMMLCBBA08>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/ijswis/PaulheimB14>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/ws/CarrollBHS05>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/ws/BeckerB09>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/bis/HahnBSHRBDS10>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/RiveroSBR12>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/CarrollBHS05>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/HartigBF09>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/BrylB14>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/cssw/2007>
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/hmd/BizerB10>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/ws/RistoskiBP15>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/expert/Bizer09>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/JentzschIB10>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/esws/BizerCG07>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/Bizer0MMSV13>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/MuhleisenB12>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/PetrovskiBB14>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/series/lncs/BrylBIVHJYC14>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/VolzBGK09>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/webdb/IseleJB11>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/2014ldow>
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/MeuselSBP15>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/AuerHBB16>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/esws/GentileKPB16>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/wirtschaftsinformatik/BizerHMOTE05>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/semweb/LehmannIJJKMHMK15>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/AuerBBH15>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/Bizer03>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/2008p>
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/ws/BizerC09>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/VolzBGK09>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/BizerHIB08a>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/csse/TolksdorfBEH04>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/jws/MeuselVLB15>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/datascience/Bizer13>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/icdt/Bizer14>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/pvldb/IseleB12>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/lrec/MendesJB12>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/wims/MeuselBP15>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/SchultzMIBB11>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/kcap/Garcia-SilvaJMB11>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/2008ldow>
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/ws/BizerM10>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/0001RBB14>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/webdb/OulabiMB16>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/BizerO04>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/wi/TolksdorfMHEOB06>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/2011ldow>
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/otm/TolksdorfBEH03>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/PetrovskiBB14>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/RitzeLOB16>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/ijswis/BizerS09>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/BeckerBEG10>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/series/synthesis/2011Heath>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/IseleB11>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/ijswis/BizerHB09>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/i-semantics/MendesJGB11>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/wims/RitzeLB15>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/ws/BizerLKABCH09>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/BizerS10>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/icwe/IseleJB12>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/tac/MendesDJB11>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/reference/sp/HeathB11>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/TolksdorfBH03>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/2013ldow>
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/2010ldow>
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/BeckerB08>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/webdb/Bizer10>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/websci/LehmbergMB14>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/esws/2007sfsw>
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/webdb/LehmbergB16>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/lrec/MendesDRSB12>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/bncod/Bizer11>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/FleischhackerPBVB14>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/PaulheimB13>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/series/xmedia/AuerLB09>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/LehmbergRMB16>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/corr/abs-1208-0291>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/BrylBP15>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/ws/BizerM12>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/sigmod/BizerBBE11>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/2012ldow>
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/MeuselVLB14>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/ecweb/MeuselPMPB15>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/SchmachtenbergBP14>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/2009ldow>
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/journals/ws/BizerM11>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/lrec/SeitnerBEFMPP16>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/semweb/FaralliB0MP16>
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> .
+
+foaf:Agent rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FAgent%3E> .
+
+http://dblp.l3s.de/d2r/resource/publications/conf/www/ArndtJMFRFM16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow>
+  a <http://swrc.ontoware.org/ontology#Proceedings>, foaf:Document ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Tom_Heath>, <http://dblp.l3s.de/d2r/resource/authors/S%C3%B6ren_Auer>, <http://dblp.l3s.de/d2r/resource/authors/Tim_Berners-Lee>, <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
+  ns0:editor <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer>, <http://dblp.l3s.de/d2r/resource/authors/Tom_Heath>, <http://dblp.l3s.de/d2r/resource/authors/Tim_Berners-Lee>, <http://dblp.l3s.de/d2r/resource/authors/S%C3%B6ren_Auer> ;
+  rdfs:label "Proceedings of the Workshop on Linked Data on the Web, LDOW 2016, co-located with 25th International World Wide Web Conference (WWW 2016)"^^xsd:string ;
+  dc11:title "Proceedings of the Workshop on Linked Data on the Web, LDOW 2016, co-located with 25th International World Wide Web Conference (WWW 2016)"^^xsd:string ;
+  dc:bibliographicCitation <http://dblp.uni-trier.de/rec/bibtex/conf/www/2016ldow> ;
+  dc11:type <http://purl.org/dc/dcmitype/Collection> ;
+  foaf:homepage <http://ceur-ws.org/Vol-1593> ;
+  owl:sameAs <http://bibsonomy.org/uri/bibtexkey/conf/www/2016ldow/dblp>, <http://dblp.rkbexplorer.com/id/conf/www/2016ldow> ;
+  dc:tableOfContent <http://dblp.uni-trier.de/db/conf/www/ldow2016.html> ;
+  ns0:series <http://dblp.l3s.de/d2r/resource/conferences/www> ;
+  dc11:identifier "DBLP conf/www/2016ldow"^^xsd:string ;
+  ns0:volume "1593"^^xsd:string ;
+  dc11:publisher "CEUR-WS.org"^^xsd:string ;
+  dc:issued "2016"^^xsd:gYear ;
+  rdfs:seeAlso <http://ceur-ws.org/Vol-1593> .
+
+<http://dblp.uni-trier.de/rec/bibtex/conf/www/2016ldow> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fdblp.uni-trier.de%2Frec%2Fbibtex%2Fconf%2Fwww%2F2016ldow%3E> .
+<http://purl.org/dc/dcmitype/Collection> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fdcmitype%2FCollection%3E> .
+<http://ceur-ws.org/Vol-1593> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fceur-ws.org%2FVol-1593%3E> .
+<http://bibsonomy.org/uri/bibtexkey/conf/www/2016ldow/dblp> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fbibsonomy.org%2Furi%2Fbibtexkey%2Fconf%2Fwww%2F2016ldow%2Fdblp%3E> .
+<http://dblp.uni-trier.de/db/conf/www/ldow2016.html> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fdblp.uni-trier.de%2Fdb%2Fconf%2Fwww%2Fldow2016.html%3E> .
+foaf:Document rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FDocument%3E> .
+<http://dblp.rkbexplorer.com/id/conf/www/2016ldow> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fdblp.rkbexplorer.com%2Fid%2Fconf%2Fwww%2F2016ldow%3E> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/KlimekSN16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/JaykumarYNLTSP16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/CimminoRR16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/RoucesMH16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/KlyneWP16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/DebruyneO16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/YanPSM16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/NetoKHMB16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/BasharatAAR16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/DimouNVMW16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/SmerosK16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/FrommholdATP16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/WellerM16a> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+ns0:Proceedings rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fswrc.ontoware.org%2Fontology%23Proceedings%3E> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/lrec/SeitnerBEFMPP16>
+  a foaf:Document, <http://swrc.ontoware.org/ontology#InProceedings> ;
+  dc:issued "2016"^^xsd:gYear ;
+  dc11:identifier "DBLP conf/lrec/SeitnerBEFMPP16"^^xsd:string ;
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer>, <http://dblp.l3s.de/d2r/resource/authors/Julian_Seitner>, <http://dblp.l3s.de/d2r/resource/authors/Heiko_Paulheim>, <http://dblp.l3s.de/d2r/resource/authors/Stefano_Faralli>, <http://dblp.l3s.de/d2r/resource/authors/Kai_Eckert_0001>, <http://dblp.l3s.de/d2r/resource/authors/Robert_Meusel>, <http://dblp.l3s.de/d2r/resource/authors/Simone_Paolo_Ponzetto> ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Robert_Meusel>, <http://dblp.l3s.de/d2r/resource/authors/Stefano_Faralli>, <http://dblp.l3s.de/d2r/resource/authors/Kai_Eckert_0001>, <http://dblp.l3s.de/d2r/resource/authors/Simone_Paolo_Ponzetto>, <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer>, <http://dblp.l3s.de/d2r/resource/authors/Heiko_Paulheim>, <http://dblp.l3s.de/d2r/resource/authors/Julian_Seitner> ;
+  rdfs:seeAlso <http://dblp.uni-trier.de/db/conf/lrec/lrec2016.html#SeitnerBEFMPP16>, <http://www.lrec-conf.org/proceedings/lrec2016/summaries/204.html> ;
+  dc11:type <http://purl.org/dc/dcmitype/Text> ;
+  owl:sameAs <http://bibsonomy.org/uri/bibtexkey/conf/lrec/SeitnerBEFMPP16/dblp>, <http://dblp.rkbexplorer.com/id/conf/lrec/SeitnerBEFMPP16> ;
+  ns0:series <http://dblp.l3s.de/d2r/resource/conferences/lrec> ;
+  dc11:title "A Large DataBase of Hypernymy Relations Extracted from the Web."^^xsd:string ;
+  rdfs:label "A Large DataBase of Hypernymy Relations Extracted from the Web."^^xsd:string ;
+  foaf:homepage <http://www.lrec-conf.org/proceedings/lrec2016/summaries/204.html> ;
+  dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/lrec/2016> ;
+  dc:bibliographicCitation <http://dblp.uni-trier.de/rec/bibtex/conf/lrec/SeitnerBEFMPP16> .
+
+<http://dblp.uni-trier.de/db/conf/lrec/lrec2016.html#SeitnerBEFMPP16> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fdblp.uni-trier.de%2Fdb%2Fconf%2Flrec%2Flrec2016.html%23SeitnerBEFMPP16%3E> .
+<http://www.lrec-conf.org/proceedings/lrec2016/summaries/204.html> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww.lrec-conf.org%2Fproceedings%2Flrec2016%2Fsummaries%2F204.html%3E> .
+<http://purl.org/dc/dcmitype/Text> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fdcmitype%2FText%3E> .
+ns0:InProceedings rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fswrc.ontoware.org%2Fontology%23InProceedings%3E> .
+<http://bibsonomy.org/uri/bibtexkey/conf/lrec/SeitnerBEFMPP16/dblp> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fbibsonomy.org%2Furi%2Fbibtexkey%2Fconf%2Flrec%2FSeitnerBEFMPP16%2Fdblp%3E> .
+<http://dblp.rkbexplorer.com/id/conf/lrec/SeitnerBEFMPP16> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fdblp.rkbexplorer.com%2Fid%2Fconf%2Flrec%2FSeitnerBEFMPP16%3E> .
+<http://dblp.uni-trier.de/rec/bibtex/conf/lrec/SeitnerBEFMPP16> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fdblp.uni-trier.de%2Frec%2Fbibtex%2Fconf%2Flrec%2FSeitnerBEFMPP16%3E> .
+foaf:Document rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FDocument%3E> .
+
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/KlimekSN16>
+  a <http://swrc.ontoware.org/ontology#InProceedings>, foaf:Document ;
+  dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Jakub_Kl%C3%ADmek>, <http://dblp.l3s.de/d2r/resource/authors/Martin_Necask%C3%BD>, <http://dblp.l3s.de/d2r/resource/authors/Petr_Skoda> ;
+  rdfs:seeAlso <http://dblp.uni-trier.de/db/conf/www/ldow2016.html#KlimekSN16>, <http://ceur-ws.org/Vol-1593/article-01.pdf> ;
+  foaf:homepage <http://ceur-ws.org/Vol-1593/article-01.pdf> ;
+  ns0:series <http://dblp.l3s.de/d2r/resource/conferences/www> ;
+  dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> ;
+  owl:sameAs <http://bibsonomy.org/uri/bibtexkey/conf/www/KlimekSN16/dblp>, <http://dblp.rkbexplorer.com/id/conf/www/KlimekSN16> ;
+  dc11:identifier "DBLP conf/www/KlimekSN16"^^xsd:string ;
+  rdfs:label "Requirements on Linked Data Consumption Platform."^^xsd:string ;
+  dc11:type <http://purl.org/dc/dcmitype/Text> ;
+  dc:issued "2016"^^xsd:gYear ;
+  dc:bibliographicCitation <http://dblp.uni-trier.de/rec/bibtex/conf/www/KlimekSN16> ;
+  foaf:maker <http://dblp.l3s.de/d2r/resource/authors/Jakub_Kl%C3%ADmek>, <http://dblp.l3s.de/d2r/resource/authors/Petr_Skoda>, <http://dblp.l3s.de/d2r/resource/authors/Martin_Necask%C3%BD> ;
+  dc11:title "Requirements on Linked Data Consumption Platform."^^xsd:string .
+
+<http://dblp.uni-trier.de/db/conf/www/ldow2016.html#KlimekSN16> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fdblp.uni-trier.de%2Fdb%2Fconf%2Fwww%2Fldow2016.html%23KlimekSN16%3E> .
+<http://ceur-ws.org/Vol-1593/article-01.pdf> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fceur-ws.org%2FVol-1593%2Farticle-01.pdf%3E> .
+<http://bibsonomy.org/uri/bibtexkey/conf/www/KlimekSN16/dblp> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fbibsonomy.org%2Furi%2Fbibtexkey%2Fconf%2Fwww%2FKlimekSN16%2Fdblp%3E> .
+<http://purl.org/dc/dcmitype/Text> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fdcmitype%2FText%3E> .
+<http://dblp.rkbexplorer.com/id/conf/www/KlimekSN16> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fdblp.rkbexplorer.com%2Fid%2Fconf%2Fwww%2FKlimekSN16%3E> .
+<http://dblp.uni-trier.de/rec/bibtex/conf/www/KlimekSN16> rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fdblp.uni-trier.de%2Frec%2Fbibtex%2Fconf%2Fwww%2FKlimekSN16%3E> .
+foaf:Document rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FDocument%3E> .
+ns0:InProceedings rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fswrc.ontoware.org%2Fontology%23InProceedings%3E> .

@@ -1,0 +1,16 @@
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+
+ASK {
+  [] lpviz:hasAbstraction ?place ;
+
+  ?place geo:location ?geo .
+  
+  OPTIONAL {
+    ?place rdfs:label ?abstractionLabel .
+  }
+  
+  ?geo a geo:SpatialThing ;
+    geo:long ?long ;
+    geo:lat ?lat .
+}

@@ -1,0 +1,10 @@
+PREFIX spa: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/space/v1#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+CONSTRUCT {
+  ?adresa owl:sameAs ?adresniMistoRUIAN
+} WHERE {
+  ?adresa spa:adresniMistoKod ?adresniMistoKod .
+	
+  BIND(IRI(CONCAT("http://ruian.linked.opendata.cz/resource/adresni-mista/", STR(?adresniMistoKod))) AS ?adresniMistoRUIAN)
+}

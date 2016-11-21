@@ -1,0 +1,10 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX swrc: <http://swrc.ontoware.org/ontology#> .
+
+DELETE {
+  ?thing swrc:editor ?editor .
+} INSERT {
+  ?editor foaf:made ?thing .
+} WHERE {
+  ?thing swrc:editor ?editor .
+}

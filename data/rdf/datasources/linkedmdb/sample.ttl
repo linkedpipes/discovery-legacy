@@ -1,0 +1,332 @@
+@prefix ns0: <http://data.linkedmdb.org/resource/movie/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+<http://data.linkedmdb.org/resource/film/261>
+  a <http://data.linkedmdb.org/resource/movie/film> ;
+  ns0:film_cut <http://data.linkedmdb.org/resource/film_cut/8619> ;
+  dc:title "Witness" ;
+  ns0:runtime "112" ;
+  ns0:writer <http://data.linkedmdb.org/resource/writer/5995>, <http://data.linkedmdb.org/resource/writer/17590>, <http://data.linkedmdb.org/resource/writer/5996> ;
+  ns0:performance <http://data.linkedmdb.org/resource/performance/39420>, <http://data.linkedmdb.org/resource/performance/89038>, <http://data.linkedmdb.org/resource/performance/39423>, <http://data.linkedmdb.org/resource/performance/39419>, <http://data.linkedmdb.org/resource/performance/159061>, <http://data.linkedmdb.org/resource/performance/39422>, <http://data.linkedmdb.org/resource/performance/109946>, <http://data.linkedmdb.org/resource/performance/54039>, <http://data.linkedmdb.org/resource/performance/39421> ;
+  ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> ;
+  ns0:initial_release_date "1985-02-08" ;
+  ns0:actor <http://data.linkedmdb.org/resource/actor/32253>, <http://data.linkedmdb.org/resource/actor/44377>, <http://data.linkedmdb.org/resource/actor/33169>, <http://data.linkedmdb.org/resource/actor/31511>, <http://data.linkedmdb.org/resource/actor/29767>, <http://data.linkedmdb.org/resource/actor/49470>, <http://data.linkedmdb.org/resource/actor/31940>, <http://data.linkedmdb.org/resource/actor/10511>, <http://data.linkedmdb.org/resource/actor/8709> ;
+  rdfs:label "Witness" ;
+  ns0:producer <http://data.linkedmdb.org/resource/producer/16714>, <http://data.linkedmdb.org/resource/producer/5812> ;
+  dc:date "1985-02-08" ;
+  ns0:relatedBook <http://www4.wiwiss.fu-berlin.de/bookmashup/books/0439271991> ;
+  ns0:language <http://www.lingvoj.org/lingvo/en> ;
+  ns0:filmid "261"^^xsd:int ;
+  foaf:page <http://www.rottentomatoes.com/alias?type=imdbid&s=0090329>, <http://www.imdb.com/title/tt0090329>, <http://www.freebase.com/view/guid/9202a8c04000641f800000000009497c> ;
+  ns0:editor <http://data.linkedmdb.org/resource/editor/1717> ;
+  ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> ;
+  ns0:director <http://data.linkedmdb.org/resource/director/8548> ;
+  ns0:location <http://data.linkedmdb.org/resource/film_location/18> .
+  
+<http://data.linkedmdb.org/resource/film_cut/8619>
+  a <http://data.linkedmdb.org/resource/movie/film_cut> ;
+  ns0:runtime "112" ;
+  rdfs:label "Film Cut #8619" ;
+  ns0:film_cut_film_cutid "8619"^^xsd:int ;
+  foaf:page <http://www.freebase.com/view/guid/9202a8c04000641f8000000001141446> .
+
+<http://www.freebase.com/view/guid/9202a8c04000641f8000000001141446> rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww.freebase.com%2Fview%2Fguid%2F9202a8c04000641f8000000001141446%3E> .
+<http://data.linkedmdb.org/resource/film/261> ns0:film_cut <http://data.linkedmdb.org/resource/film_cut/8619> .
+
+<http://data.linkedmdb.org/resource/film/261> ns0:writer <http://data.linkedmdb.org/resource/writer/5995> .
+<http://data.linkedmdb.org/resource/writer/5995>
+  a ns0:writer ;
+  ns0:writer_writerid "5995"^^xsd:int ;
+  ns0:writer_name "Earl Wallace" ;
+  rdfs:label "Earl Wallace (Writer)" ;
+  foaf:page <http://www.freebase.com/view/guid/9202a8c04000641f8000000001141411> ;
+  rdfs:SeeAlso <http://www4.wiwiss.fu-berlin.de/bookmashup/persons/Earl+Wallace> .
+
+<http://www.freebase.com/view/guid/9202a8c04000641f8000000001141411> rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww.freebase.com%2Fview%2Fguid%2F9202a8c04000641f8000000001141411%3E> .
+<http://www4.wiwiss.fu-berlin.de/bookmashup/persons/Earl+Wallace> rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww4.wiwiss.fu-berlin.de%2Fbookmashup%2Fpersons%2FEarl%2BWallace%3E> .
+<http://data.linkedmdb.org/resource/interlink/126951> ns1:link_source <http://data.linkedmdb.org/resource/writer/5995> .
+
+@prefix ns0: <http://data.linkedmdb.org/resource/movie/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+<http://data.linkedmdb.org/resource/film/261> ns0:performance <http://data.linkedmdb.org/resource/performance/39420> .
+<http://data.linkedmdb.org/resource/performance/39420>
+  a ns0:performance ;
+  ns0:film_character <http://data.linkedmdb.org/resource/film_character/9645> ;
+  ns0:performance_name "" ;
+  ns0:performance_performanceid "39420"^^xsd:int ;
+  rdfs:label "performance #39420" ;
+  foaf:page <http://www.freebase.com/view/guid/9202a8c04000641f800000000114142d> ;
+  ns0:performance_character "" ;
+  ns0:performance_film "Witness" ;
+  ns0:performance_actor "Kelly McGillis" ;
+  ns0:performance_note "" .
+
+<http://www.freebase.com/view/guid/9202a8c04000641f800000000114142d> rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww.freebase.com%2Fview%2Fguid%2F9202a8c04000641f800000000114142d%3E> .
+<http://data.linkedmdb.org/resource/actor/31511> ns0:performance <http://data.linkedmdb.org/resource/performance/39420> .
+
+<http://data.linkedmdb.org/resource/performance/39420> ns0:film_character <http://data.linkedmdb.org/resource/film_character/9645> .
+<http://data.linkedmdb.org/resource/film_character/9645>
+  a ns0:film_character ;
+  ns0:film_character_name "Rachel lapp" ;
+  ns0:film_character_film_characterid "9645"^^xsd:int ;
+  rdfs:label "Rachel lapp (Film Character)" ;
+  foaf:page <http://www.freebase.com/view/guid/9202a8c04000641f800000000b507b37> .
+
+<http://www.freebase.com/view/guid/9202a8c04000641f800000000b507b37> rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww.freebase.com%2Fview%2Fguid%2F9202a8c04000641f800000000b507b37%3E> .
+
+<http://data.linkedmdb.org/resource/film/956>
+  ns0:location <http://data.linkedmdb.org/resource/film_location/18> ;
+  ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+
+<http://data.linkedmdb.org/resource/film_location/18>
+  a ns0:film_location ;
+  ns0:film_location_name "Philadelphia, Pennsylvania" ;
+  rdfs:label "Philadelphia, Pennsylvania (Film Location)" ;
+  ns0:film_location_film_locationid "18"^^xsd:int ;
+  foaf:page <http://www.freebase.com/view/guid/9202a8c04000641f8000000000062e4e> .
+
+<http://www.freebase.com/view/guid/9202a8c04000641f8000000000062e4e> rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww.freebase.com%2Fview%2Fguid%2F9202a8c04000641f8000000000062e4e%3E> .
+<http://data.linkedmdb.org/resource/film/8681>
+  ns0:location <http://data.linkedmdb.org/resource/film_location/18> ;
+  ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+
+<http://data.linkedmdb.org/resource/film/41060> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/38154> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/1507>
+  ns0:location <http://data.linkedmdb.org/resource/film_location/18> ;
+  ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+
+<http://data.linkedmdb.org/resource/film/43006> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/24569> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/7644>
+  ns0:location <http://data.linkedmdb.org/resource/film_location/18> ;
+  ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+
+<http://data.linkedmdb.org/resource/film/8061>
+  ns0:location <http://data.linkedmdb.org/resource/film_location/18> ;
+  ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+
+<http://data.linkedmdb.org/resource/film/38213> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/1534>
+  ns0:location <http://data.linkedmdb.org/resource/film_location/18> ;
+  ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+
+<http://data.linkedmdb.org/resource/film/55242> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/39583> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/1298>
+  ns0:location <http://data.linkedmdb.org/resource/film_location/18> ;
+  ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+
+<http://data.linkedmdb.org/resource/film/38170> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/42488> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/38298> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/38156> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/38653> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/261>
+  ns0:location <http://data.linkedmdb.org/resource/film_location/18> ;
+  ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+
+<http://data.linkedmdb.org/resource/film/38663> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/144>
+  ns0:location <http://data.linkedmdb.org/resource/film_location/18> ;
+  ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+
+<http://data.linkedmdb.org/resource/film/74310> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/38665> ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+<http://data.linkedmdb.org/resource/film/4554>
+  ns0:location <http://data.linkedmdb.org/resource/film_location/18> ;
+  ns0:featured_film_location <http://data.linkedmdb.org/resource/film_location/18> .
+  
+<http://data.linkedmdb.org/resource/actor/32253>
+  a <http://data.linkedmdb.org/resource/movie/actor>, foaf:Person ;
+  foaf:page <http://www.freebase.com/view/guid/9202a8c04000641f800000000023da24> ;
+  ns0:actor_nytimes_id "" ;
+  ns0:actor_actorid "32253"^^xsd:int ;
+  ns0:actor_netflix_id "" ;
+  ns0:actor_name "Alexander Godunov" ;
+  ns0:performance <http://data.linkedmdb.org/resource/performance/87761>, <http://data.linkedmdb.org/resource/performance/89038>, <http://data.linkedmdb.org/resource/performance/68765>, <http://data.linkedmdb.org/resource/performance/81889> ;
+  rdfs:label "Alexander Godunov (Actor)" .
+
+<http://www.freebase.com/view/guid/9202a8c04000641f800000000023da24> rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww.freebase.com%2Fview%2Fguid%2F9202a8c04000641f800000000023da24%3E> .
+foaf:Person rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FPerson%3E> .
+<http://data.linkedmdb.org/resource/film/261> ns0:actor <http://data.linkedmdb.org/resource/actor/32253> .
+<http://data.linkedmdb.org/resource/film/38525> ns0:actor <http://data.linkedmdb.org/resource/actor/32253> .
+<http://data.linkedmdb.org/resource/film/41516> ns0:actor <http://data.linkedmdb.org/resource/actor/32253> .
+<http://data.linkedmdb.org/resource/film/1636> ns0:actor <http://data.linkedmdb.org/resource/actor/32253> .
+
+<http://data.linkedmdb.org/resource/film/39013> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/producer/16714>
+  a ns0:producer ;
+  rdfs:label "Edward S. Feldman (Producer)" ;
+  ns0:producer_name "Edward S. Feldman" ;
+  ns0:producer_producerid "16714"^^xsd:int ;
+  foaf:page <http://www.freebase.com/view/guid/9202a8c04000641f800000000b8f3906> .
+
+<http://www.freebase.com/view/guid/9202a8c04000641f800000000b8f3906> rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww.freebase.com%2Fview%2Fguid%2F9202a8c04000641f800000000b8f3906%3E> .
+<http://data.linkedmdb.org/resource/film/2539> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/42553> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/41783> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/19041> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/12578> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/51> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/45946> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/49353> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/38714> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/4785> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/261> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/1334> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/6051> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+<http://data.linkedmdb.org/resource/film/55836> ns0:producer <http://data.linkedmdb.org/resource/producer/16714> .
+
+<http://data.linkedmdb.org/resource/film/48636> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/editor/1717>
+  a foaf:Person, ns0:editor ;
+  rdfs:label "Thom Noble (Editor)" ;
+  ns0:editor_name "Thom Noble" ;
+  ns0:editor_editorid "1717"^^xsd:int ;
+  foaf:page <http://www.freebase.com/view/guid/9202a8c04000641f80000000047f003e> .
+
+<http://www.freebase.com/view/guid/9202a8c04000641f80000000047f003e> rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww.freebase.com%2Fview%2Fguid%2F9202a8c04000641f80000000047f003e%3E> .
+<http://data.linkedmdb.org/resource/film/9747> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/51894> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/39707> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+foaf:Person rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FPerson%3E> .
+<http://data.linkedmdb.org/resource/film/39096> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/40218> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/10286> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/4632> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/41824> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/64974> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/42337> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/93160> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/39384> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/24406> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/40617> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/261> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/16645> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/46271> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/414> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/39965> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/38768> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+<http://data.linkedmdb.org/resource/film/9336> ns0:editor <http://data.linkedmdb.org/resource/editor/1717> .
+
+<http://data.linkedmdb.org/resource/film/2179> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/music_contributor/4526>
+  a ns0:music_contributor ;
+  ns0:music_contributor_name "Maurice Jarre" ;
+  ns0:music_contributor_music_contributorid "4526"^^xsd:int ;
+  rdfs:label "Maurice Jarre (Music Contributor)" ;
+  foaf:page <http://www.freebase.com/view/guid/9202a8c04000641f80000000002035dd> .
+
+<http://www.freebase.com/view/guid/9202a8c04000641f80000000002035dd> rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww.freebase.com%2Fview%2Fguid%2F9202a8c04000641f80000000002035dd%3E> .
+<http://data.linkedmdb.org/resource/film/2230> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/8685> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/4627> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/562> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/997> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/9> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/15403> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/6820> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/80616> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/11065> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/49302> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/605> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/41117> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/16005> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/10688> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/93353> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/40069> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/4777> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/44716> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/39730> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/41411> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/43981> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/42230> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/11706> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/43381> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/38593> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/8668> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/2412> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/261> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/16557> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/5379> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/77949> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/3544> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/74047> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/1683> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/55410> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/10554> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/6285> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/70018> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/9687> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/4085> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/2072> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/1708> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/7269> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/56843> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/1267> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/38956> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/8636> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/1285> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/8466> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/3377> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/4414> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/42585> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/328> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/6672> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/2237> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/2691> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/56720> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/16900> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/19147> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/38586> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/6364> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/6426> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/9132> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/6754> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/4765> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/39384> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/52> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/56560> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/38153> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/43800> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/1156> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/16610> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/51954> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/41257> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/9038> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/5396> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/12355> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+<http://data.linkedmdb.org/resource/film/1539> ns0:music_contributor <http://data.linkedmdb.org/resource/music_contributor/4526> .
+
+<http://data.linkedmdb.org/resource/film/39013> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/director/8548>
+  a foaf:Person, ns0:director ;
+  foaf:made <http://data.linkedmdb.org/resource/film/38593>, <http://data.linkedmdb.org/resource/film/9>, <http://data.linkedmdb.org/resource/film/39013>, <http://data.linkedmdb.org/resource/film/261>, <http://data.linkedmdb.org/resource/film/57>, <http://data.linkedmdb.org/resource/film/72843>, <http://data.linkedmdb.org/resource/film/813>, <http://data.linkedmdb.org/resource/film/38153>, <http://data.linkedmdb.org/resource/film/39384>, <http://data.linkedmdb.org/resource/film/5129>, <http://data.linkedmdb.org/resource/film/41494>, <http://data.linkedmdb.org/resource/film/77169>, <http://data.linkedmdb.org/resource/film/792>, <http://data.linkedmdb.org/resource/film/45250>, <http://data.linkedmdb.org/resource/film/8128> ;
+  rdfs:label "Peter Weir (Director)" ;
+  foaf:page <http://www.freebase.com/view/guid/9202a8c04000641f8000000000058e98> ;
+  ns0:director_directorid "8548"^^xsd:int ;
+  ns0:director_name "Peter Weir" .
+
+<http://data.linkedmdb.org/resource/film/38593> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/film/9> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/film/261> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/film/57> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/film/72843> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/film/813> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://www.freebase.com/view/guid/9202a8c04000641f8000000000058e98> rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fwww.freebase.com%2Fview%2Fguid%2F9202a8c04000641f8000000000058e98%3E> .
+<http://data.linkedmdb.org/resource/film/38153> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/film/39384> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/film/5129> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/film/41494> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/film/77169> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/film/792> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/film/45250> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+<http://data.linkedmdb.org/resource/film/8128> ns0:director <http://data.linkedmdb.org/resource/director/8548> .
+foaf:Person rdfs:seeAlso <http://data.linkedmdb.org/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FPerson%3E> .

@@ -8,6 +8,8 @@ ASK {
   ?agent foaf:name ?agentName ;
 	foaf:made ?thing .
 	
+  # Zatím zbytečné, hodí se pro rankování discovery výsledků např. 
+  # JaKl : pro experimenty teď celé zakomentovat
   OPTIONAL {
     ?membership org:member ?agent .
 	
@@ -26,20 +28,35 @@ ASK {
 	?thing lpviz:hasAbstraction ?timeAbstraction .
 	
 	?timeAbstraction time:inXSDDateTime ?dt .
+	
+	OPTIONAL {
+	  ?timeAbstraction rdfs:label ?abstractionLabel . 
+    }
   } UNION {
 	?thing lpviz:hasAbstraction ?timeAbstraction .
 	
 	?timeAbstraction time:hasBeginning ?beginning ;
 		time:hasEnd ?end .
 
+	OPTIONAL {
+	  ?timeAbstraction rdfs:label ?abstractionLabel . 
+    }
+		
 	?beginning time:inXSDDateTime ?dtb .
 
 	?end time:inXSDDateTime ?dte .
   } UNION {
-	?thing lpviz:hasAbstraction ?geoAbstraction .
+	?thing lpviz:hasAbstraction ?place .
 	
-	?geoAbstraction geo:lat ?lat ;
-		geo:long ?long .
+	?place geo:location ?geo .
+  
+    OPTIONAL {
+      ?place rdfs:label ?abstractionLabel .
+    }
+  
+    ?geo a geo:SpatialThing ;
+      geo:long ?long ;
+      geo:lat ?lat .
   }
   
   

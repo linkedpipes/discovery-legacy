@@ -1,0 +1,40 @@
+PREFIX cedr: <http://cedropendata.mfcr.cz/c3lod/cedr/vocabCEDR#>
+PREFIX spa: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/space/v1#>
+PREFIX gr: <http://purl.org/goodrelations/v1#>
+
+CONSTRUCT {
+  <http://cedropendata.mfcr.cz/c3lod/cedr/resource/Dotace/B224DCBEC7F03E18383545ACD1E3C60379572C82>
+	cedr:byloRozhodnuto ?rozhodnuti ;
+    ?dotacep ?dotaceo .
+	
+  ?rozhodnuti
+    cedr:castkaRozhodnuta ?castka ;
+	cedr:rokRozhodnuti ?rokRozhodnuti .
+	
+  ?prijemce
+    cedr:obdrzelDotaci <http://cedropendata.mfcr.cz/c3lod/cedr/resource/Dotace/B224DCBEC7F03E18383545ACD1E3C60379572C82> ;
+	cedr:sidliNaAdrese ?adresa ;
+	gr:legalName ?nazevPrijemce .
+	
+  ?adresa
+    spa:adresniMistoKod ?adresniMistoKod .
+	
+  ?adresa
+    spa:adresniMistoKod ?adresniMistoKod .
+} WHERE {
+  <http://cedropendata.mfcr.cz/c3lod/cedr/resource/Dotace/B224DCBEC7F03E18383545ACD1E3C60379572C82>
+	cedr:byloRozhodnuto ?rozhodnuti ;
+    ?dotacep ?dotaceo .
+	
+  ?rozhodnuti
+    cedr:castkaRozhodnuta ?castka ;
+	cedr:rokRozhodnuti ?rokRozhodnuti .
+	
+  ?prijemce
+    cedr:obdrzelDotaci <http://cedropendata.mfcr.cz/c3lod/cedr/resource/Dotace/B224DCBEC7F03E18383545ACD1E3C60379572C82> ;
+	cedr:sidliNaAdrese ?adresa ;
+	gr:legalName ?nazevPrijemce .
+	
+  ?adresa
+    spa:adresniMistoKod ?adresniMistoKod .
+}

@@ -9,7 +9,11 @@ ASK {
 
   ?timeAbstraction time:hasBeginning ?beginning ;
     time:hasEnd ?end .
-  
+
+  OPTIONAL {
+	?timeAbstraction rdfs:label ?abstractionLabel . 
+  }
+	
   ?beginning time:inXSDDateTime ?dtb .
   
   ?end time:inXSDDateTime ?dte .
