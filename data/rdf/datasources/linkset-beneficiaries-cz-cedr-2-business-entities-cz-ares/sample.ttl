@@ -1,0 +1,11 @@
+PREFIX bus: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/business/v2#>
+PREFIX cedr: <http://cedropendata.mfcr.cz/c3lod/cedr/vocabCEDR#>
+PREFIX gr: <http://purl.org/goodrelations/v1#>
+PREFIX s:	<http://schema.org/>
+PREFIX regorg: <http://www.w3.org/ns/regorg#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+<http://cedropendata.mfcr.cz/c3lod/cedr/resource/PrijemcePomoci/0041199386749100C49360759AD7D8E5429C162D> <http://www.w3.org/2002/07/owl#sameAs> <http://linked.opendata.cz/resource/business-entity/CZ00000205> ;
+   a cedr:PravnickaOsoba, cedr:PrijemcePomoci, gr:Organization .
+   
+<http://linked.opendata.cz/resource/business-entity/CZ00000205> a gr:BusinessEntity, s:Organization, regorg:RegisteredOrganization .   

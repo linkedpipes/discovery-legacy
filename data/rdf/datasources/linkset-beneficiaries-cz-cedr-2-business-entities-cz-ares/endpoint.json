@@ -1,0 +1,8 @@
+{
+  "url": "http://cedropendata.mfcr.cz/c3lod/cedr/sparql",
+  "defaultGraphIris": [],
+  "label": "Linkset : Subsidies from public budgets in Czech Republic (Beneficiaries) --- RUIAN (Business Entities)",
+  "isLarge": true,
+  "isLinkset": true,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/linkset-beneficiaries-cz-cedr-2-buisness-entities-cz-ares/sample.ttl"
+}
