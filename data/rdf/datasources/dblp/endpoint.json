@@ -2,7 +2,7 @@
   "url": "http://dblp.l3s.de/d2r/sparql",
   "defaultGraphIris": [],
   "label": "DBLP",
-  "isLarge": true,
+  "isLarge": false,
   "isLinkset": false,
   "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/dblp/sample.ttl"
 }

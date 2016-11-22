@@ -2,7 +2,7 @@
   "url": "http://data.linkedmdb.org/sparql",
   "defaultGraphIris": [],
   "label": "LinkedMDB",
-  "isLarge": true,
+  "isLarge": false,
   "isLinkset": false,
   "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/linkedmdb/sample.ttl"
 }
