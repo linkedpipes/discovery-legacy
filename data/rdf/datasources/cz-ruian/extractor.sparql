@@ -1,0 +1,25 @@
+PREFIX ruian: <http://ruian.linked.opendata.cz/ontology/>
+PREFIX gml: <http://www.opengis.net/ont/gml#>
+PREFIX s: <http://schema.org/>
+
+CONSTRUCT {
+  ?adresniMisto a ruian:AdresniMisto, s:Place ;
+    ruian:adresniBod ?adresniBod .
+	
+  ?adresniBod a gml:Point ;
+    s:geo ?geoCoordinates .
+	
+  ?geoCoordinates a s:GeoCoordinates ;
+	s:longitude ?longitude ;
+	s:latitude ?latitude .
+} WHERE {
+  ?adresniMisto a ruian:AdresniMisto, s:Place ;
+    ruian:adresniBod ?adresniBod .
+	
+  ?adresniBod a gml:Point ;
+    s:geo ?geoCoordinates .
+	
+  ?geoCoordinates a s:GeoCoordinates ;
+	s:longitude ?longitude ;
+	s:latitude ?latitude .
+}

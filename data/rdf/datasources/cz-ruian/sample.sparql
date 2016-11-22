@@ -1,0 +1,26 @@
+PREFIX ruian: <http://ruian.linked.opendata.cz/ontology/>
+PREFIX gml: <http://www.opengis.net/ont/gml#>
+PREFIX s: <http://schema.org/>
+
+CONSTRUCT {
+  <http://ruian.linked.opendata.cz/resource/adresni-mista/15995241> a ruian:AdresniMisto, s:Place ;
+    ruian:adresniBod ?adresniBod .
+	
+  ?adresniBod a gml:Point ;
+    s:geo ?geoCoordinates .
+	
+  ?geoCoordinates a s:GeoCoordinates ;
+	s:longitude ?longitude ;
+	s:latitude ?latitude .
+} WHERE {
+  <http://ruian.linked.opendata.cz/resource/adresni-mista/15995241> a ruian:AdresniMisto, s:Place ;
+    ruian:adresniBod ?adresniBod .
+	
+  ?adresniBod a gml:Point ;
+    s:geo ?geoCoordinates .
+	
+  ?geoCoordinates a s:GeoCoordinates ;
+	s:longitude ?longitude ;
+	s:latitude ?latitude .
+}
+LIMIT 1000
