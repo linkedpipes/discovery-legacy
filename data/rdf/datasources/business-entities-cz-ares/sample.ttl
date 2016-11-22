@@ -1,0 +1,11 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ns1:	<http://linked.opendata.cz/resource/business-entity/> .
+@prefix gr:	<http://purl.org/goodrelations/v1#> .
+@prefix s:	<http://schema.org/> .
+@prefix ns4:	<http://linked.opendata.cz/resource/business-entity/CZ00007064/postal-address/> .
+
+ns1:CZ00007064	rdf:type	gr:BusinessEntity ;
+	gr:legalName	"Ministerstvo vnitra" .
+
+ns1:CZ00007064	s:address	ns4:ad ,
+		<http://linked.opendata.cz/resource/domain/ares/postal-address/309484819> .

@@ -1,0 +1,14 @@
+PREFIX gr: <http://purl.org/goodrelations/v1#>
+PREFIX s: <http://schema.org/>
+
+PREFIX ruian-link: <http://ruian.linked.opendata.cz/ontology/links/>
+
+CONSTRUCT {
+  ?be a gr:BusinessEntity ;
+    gr:legalName ?legalName ;
+    s:address ?address .
+} WHERE {
+  ?be a gr:BusinessEntity ;
+    gr:legalName ?legalName ;
+    s:address ?address .
+}
