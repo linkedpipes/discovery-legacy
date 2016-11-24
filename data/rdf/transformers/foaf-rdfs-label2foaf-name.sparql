@@ -5,7 +5,6 @@ DELETE {
   ?agent rdfs:label ?label .
 } INSERT {
   ?agent foaf:name ?label .
-  ] .
 } WHERE {
   VALUES ?type { foaf:Agent foaf:Group foaf:Person foaf:Organization }
   ?agent a ?type ;
