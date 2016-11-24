@@ -75,7 +75,7 @@ class EtlPipelineTransformer(pipeline: Pipeline) {
       val iteration = b.head.endComponent.discoveryIteration
       val lpRdf2File = new EtlRdf2File
       val rdf2File = PipelineComponent("rdf2file", lpRdf2File, iteration)
-      val lpSparqlGraphStore = EtlSparqlGraphProtocol()
+      val lpSparqlGraphStore = EtlSparqlGraphProtocol(b.head.endComponent.componentInstance.getClass.getSimpleName)
       val sparqlGraphStore = PipelineComponent("sparqlGraphStore", lpSparqlGraphStore, iteration)
 
       val bindingsToAdd = Seq(

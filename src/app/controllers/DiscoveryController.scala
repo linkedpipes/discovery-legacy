@@ -7,12 +7,14 @@ import controllers.dto.DiscoverySettings
 import org.apache.jena.riot.{Lang, RDFDataMgr}
 import play.Logger
 import play.api.libs.json.{JsError, JsNumber, Json}
+import play.api.libs.ws.WSClient
 import play.api.mvc.{Action, BodyParsers, Controller}
 import services.DiscoveryService
 import services.discovery.model.components.DataSourceInstance
+import scala.concurrent.ExecutionContext.Implicits.global
 
 @Singleton
-class DiscoveryController @Inject()(service: DiscoveryService) extends Controller {
+class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) extends Controller {
 
     def start = Action(BodyParsers.parse.json) { request =>
         Logger.debug(s"[${request.id}] A discovery was requested: ${request.body}.")
@@ -52,8 +54,21 @@ class DiscoveryController @Inject()(service: DiscoveryService) extends Controlle
                     ))),
                     "visualizer" -> p._2.lastComponent.componentInstance.getClass.getSimpleName
                 )
-            }}
+            }
+            }
         ))
+    }
+
+    def upload(id: String) = Action {
+        val url = "http://xrg12.ms.mff.cuni.cz:8090/resources/pipelines?pipeline="
+        val maybePipelines = service.getPipelines(id)
+        maybePipelines.map { p =>
+            p.map { case (uuid, pipeline) =>
+                val request = ws.url(url + s"http://demo.visualization.linkedpipes.com/discovery/$id/pipelines/${uuid.toString}")
+                request.get().foreach { r => println(r.body) }
+            }
+        }
+        Ok(Json.obj())
     }
 
     def pipeline(id: String, pipelineId: String) = Action {

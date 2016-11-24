@@ -1,21 +1,26 @@
 package services.discovery.model
 
+import services.discovery.components.analyzer.EtlSparqlGraphProtocol
 import services.discovery.model.components._
 
 case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBinding], lastComponent: PipelineComponent, lastOutputDataSample: DataSample) {
-  def isComplete: Boolean = lastComponent.componentInstance.isInstanceOf[VisualizerInstance]
+    def isComplete: Boolean = lastComponent.componentInstance.isInstanceOf[VisualizerInstance]
 
-  def prettyFormat(offset: String = ""): String = {
-    val formattedBindings = bindings.map(_.prettyFormat).mkString(", ")
-    s"${offset}Pipeline(\n$offset  bindings=$formattedBindings\n$offset  lastComponent=${lastComponent.componentInstance}\n$offset)"
-  }
+    def prettyFormat(offset: String = ""): String = {
+        val formattedBindings = bindings.map(_.prettyFormat).mkString(", ")
+        s"${offset}Pipeline(\n$offset  bindings=$formattedBindings\n$offset  lastComponent=${lastComponent.componentInstance}\n$offset)"
+    }
 
-  def endsWith(componentInstance: ComponentInstanceWithInputs): Boolean = {
-    lastComponent.componentInstance == componentInstance
-  }
+    def endsWith(componentInstance: ComponentInstanceWithInputs): Boolean = {
+        lastComponent.componentInstance == componentInstance
+    }
 
-  def height: Int = lastComponent.discoveryIteration
+    def dataSourceNames = components.filter(_.componentInstance.isInstanceOf[DataSourceInstance]).map(_.componentInstance.asInstanceOf[DataSourceInstance].label).mkString("[", ",", "]")
 
-  def name: String = "LP-VIZ generated pipeline"
+    def visualizerName = lastComponent.componentInstance.asInstanceOf[EtlSparqlGraphProtocol].name
+
+    def height: Int = lastComponent.discoveryIteration
+
+    def name: String = s"$dataSourceNames -> $visualizerName (${components.size})"
 
 }
