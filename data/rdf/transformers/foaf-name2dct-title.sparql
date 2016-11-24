@@ -4,7 +4,7 @@ PREFIX dct: <http://purl.org/dc/terms/>
 DELETE {
   ?agent foaf:name ?name .
 } INSERT {
-  agent dct:title ?name .
+  ?agent dct:title ?name .
 } WHERE {
   ?agent foaf:name ?name .
 }
