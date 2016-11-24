@@ -1,5 +1,6 @@
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 
