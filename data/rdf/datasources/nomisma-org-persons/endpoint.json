@@ -4,5 +4,5 @@
   "label": "Nomisma.org - Persons",
   "isLarge": true,
   "isLinkset": false,
-  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/nomisma-org/sample.ttl"
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/nomisma-org/sample.ttl"
 }
