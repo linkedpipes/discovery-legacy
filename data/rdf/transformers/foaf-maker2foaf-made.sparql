@@ -3,7 +3,7 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 DELETE {
   ?thing foaf:maker ?maker .
 } INSERT {
-  ?maker foaf:made ?thing
+  ?maker foaf:made ?thing .
 } WHERE {
   ?thing foaf:maker ?maker .
 }
