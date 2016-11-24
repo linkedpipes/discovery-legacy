@@ -5,7 +5,6 @@ DELETE {
   ?agent skos:prefLabel ?prefLabel .
 } INSERT {
   ?agent foaf:name ?prefLabel .
-  ] .
 } WHERE {
   VALUES ?type { foaf:Agent foaf:Group foaf:Person foaf:Organization }
   ?agent a ?type ;
