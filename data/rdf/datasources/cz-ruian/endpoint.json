@@ -1,0 +1,8 @@
+{
+  "url": "http://ruian.linked.opendata.cz/sparql",
+  "defaultGraphIris": [],
+  "label": "Address Places in Czech Republic - RÚIAN",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/cz-ruian/sample.ttl"
+}

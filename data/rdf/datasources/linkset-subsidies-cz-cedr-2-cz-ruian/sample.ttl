@@ -1,0 +1,9 @@
+@prefix s: <http://schema.org/> .
+@prefix ruian: <http://ruian.linked.opendata.cz/ontology/> .
+@prefix cedr: <http://cedropendata.mfcr.cz/c3lod/cedr/vocabCEDR#> .
+
+<http://cedropendata.mfcr.cz/c3lod/cedr/resource/Adresa/EF5A790F578275654BAE414ACB31DE57A338D74C> a cedr:Adresa, cedr:AdresaSidlo .
+
+<http://ruian.linked.opendata.cz/resource/adresni-mista/70670> a s:Place, ruian:AdresniMisto .
+
+<http://cedropendata.mfcr.cz/c3lod/cedr/resource/Adresa/EF5A790F578275654BAE414ACB31DE57A338D74C> <http://www.w3.org/2002/07/owl#sameAs> <http://ruian.linked.opendata.cz/resource/adresni-mista/70670>.

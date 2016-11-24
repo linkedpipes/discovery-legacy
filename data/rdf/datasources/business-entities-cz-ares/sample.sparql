@@ -1,0 +1,15 @@
+PREFIX gr: <http://purl.org/goodrelations/v1#>
+PREFIX s: <http://schema.org/>
+
+CONSTRUCT {
+  <http://linked.opendata.cz/resource/business-entity/CZ00007064> a gr:BusinessEntity ;
+    gr:legalName ?legalName ;
+    s:address ?address .
+}
+FROM <http://linked.opendata.cz/resource/dataset/ares/basic>
+WHERE {
+  <http://linked.opendata.cz/resource/business-entity/CZ00007064> a gr:BusinessEntity ;
+    gr:legalName ?legalName ;
+    s:address ?address .
+
+}

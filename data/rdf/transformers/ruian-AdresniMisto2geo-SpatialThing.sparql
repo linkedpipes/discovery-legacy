@@ -1,0 +1,29 @@
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX ruian: <http://ruian.linked.opendata.cz/ontology/>
+PREFIX s: <http://schema.org/>
+
+DELETE {
+  ?s ?p ?misto .
+
+  ?misto ruian:adresniBod ?bod .
+  
+  ?bod s:geo ?geo .
+  
+  ?geo s:longitude ?long ;
+    s:latitude ?lat .
+} INSERT {
+  ?misto geo:location ?geo .
+  
+  ?geo a geo:SpatialThing ;
+    geo:long ?long ;
+    geo:lat ?lat .
+} WHERE {
+
+  ?misto ruian:adresniBod ?bod .
+  
+  ?bod s:geo ?geo .
+  
+  ?geo s:longitude ?long ;
+    s:latitude ?lat .
+  
+}

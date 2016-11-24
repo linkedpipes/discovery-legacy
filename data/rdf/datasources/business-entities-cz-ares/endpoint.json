@@ -1,0 +1,8 @@
+{
+  "url": "http://linked.opendata.cz/sparql",
+  "defaultGraphIris": ["http://linked.opendata.cz/resource/dataset/ares/basic"],
+  "label": "Business Entities in Czech Republic",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/business-entities-cz-ares/sample.ttl"
+}

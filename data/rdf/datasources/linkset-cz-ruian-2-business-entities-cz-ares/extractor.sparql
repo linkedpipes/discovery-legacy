@@ -1,0 +1,16 @@
+PREFIX s: <http://schema.org/>
+PREFIX ruian: <http://ruian.linked.opendata.cz/ontology/> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+PREFIX ruian-link: <http://ruian.linked.opendata.cz/ontology/links/>
+
+CONSTRUCT {
+  ?address a s:PostalAddress .
+  
+  ?adresniMistoRUIAN a s:Place, ruian:AdresniMisto ;
+    owl:sameAS ?address .
+
+} WHERE {
+  ?address a s:PostalAddress ;
+    ruian-link:adresni-misto ?adresniMistoRUIAN .
+}

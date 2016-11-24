@@ -1,0 +1,12 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+DELETE {
+  ?agent rdfs:label ?label .
+} INSERT {
+  ?agent foaf:name ?label .
+} WHERE {
+  VALUES ?type { foaf:Agent foaf:Group foaf:Person foaf:Organization }
+  ?agent a ?type ;
+    rdfs:label ?label .
+}

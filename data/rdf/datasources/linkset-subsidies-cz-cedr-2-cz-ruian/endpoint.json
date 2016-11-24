@@ -1,0 +1,8 @@
+{
+  "url": "http://cedropendata.mfcr.cz/c3lod/cedr/sparql",
+  "defaultGraphIris": [],
+  "label": "Linkset : Subsidies from public budgets in Czech Republic (Addresses) --- RUIAN (Addresses)",
+  "isLarge": true,
+  "isLinkset": true,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/linkset-subsidies-cz-cedr-2-cz-ruian/sample.ttl"
+}

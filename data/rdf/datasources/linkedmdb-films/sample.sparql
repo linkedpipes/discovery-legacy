@@ -1,0 +1,8 @@
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+
+CONSTRUCT {
+  <http://data.linkedmdb.org/resource/film/261> ?p ?o .
+} WHERE {
+  <http://data.linkedmdb.org/resource/film/261> a movie:film ;
+    ?p ?o .
+}

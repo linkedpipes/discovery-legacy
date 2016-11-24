@@ -1,0 +1,8 @@
+{
+  "url": "http://nomisma.org/nomisma.org.ttl",
+  "defaultGraphIris": [],
+  "label": "Nomisma.org - Persons",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/nomisma-org/sample.ttl"
+}

@@ -1,0 +1,91 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix cedr: <http://cedropendata.mfcr.cz/c3lod/cedr/vocabCEDR#>.
+@prefix szcr: <http://cedropendata.mfcr.cz/c3lod/szcr/vocabSZCR#>.
+@prefix csu: <http://cedropendata.mfcr.cz/c3lod/csu/vocabCSU#>.
+@prefix mmr: <http://cedropendata.mfcr.cz/c3lod/mmr/vocabMMR#>.
+@prefix ruian: <http://cedropendata.mfcr.cz/c3lod/ruian/vocabRUIAN#>.
+@prefix eds: <http://cedropendata.mfcr.cz/c3lod/edssmvs/vocabEDSSMVS#>.
+@prefix bus: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/business/v2#>.
+@prefix spa: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/space/v1#>.
+@prefix per: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/person/v2#>.
+@prefix fkis: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/fkis/v1#>.
+@prefix cct: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/coreComponent/v1#>.
+@prefix cedrT: <http://cedropendata.mfcr.cz/c3lod/cedr/vocabCEDR/Types#>.
+@prefix isdp: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp#>.
+@prefix cmn: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/common/v1#>.
+@prefix dte: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/dataElements/v1#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix void: <http://rdfs.org/ns/void#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix gr: <http://purl.org/goodrelations/v1#>.
+@prefix adms: <http://www.w3.org/ns/adms#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rob: <http://cedropendata.mfcr.cz/c3lod/rob/vocabROB#>.
+@prefix ares: <http://cedropendata.mfcr.cz/c3lod/ares/vocabARES#>.
+
+<http://cedropendata.mfcr.cz/c3lod/cedr/resource/Dotace/B224DCBEC7F03E18383545ACD1E3C60379572C82> cedr:byloRozhodnuto <http://cedropendata.mfcr.cz/c3lod/cedr/resource/Rozhodnuti/04A543BAA5CB55F98FCB4FF48F12FC0BE6584DA3>;
+                                                                                                  cedr:podaniDatum "1900-01-04T00:00:00.000Z"^^xsd:dateTime;
+                                                                                                  cedr:projektKod "40000579551";
+                                                                                                  cedr:smlouvaPodpisDatum "2004-01-28T00:00:00.000Z"^^xsd:dateTime;
+                                                                                                  cedr:zaznamAktualizaceDatumCas "2004-12-31T00:00:00.000Z"^^xsd:dateTime;
+                                                                                                  cedr:zaznamIdentifikator "B224DCBEC7F03E18383545ACD1E3C60379572C82";
+                                                                                                  cedr:zaznamPlatnostDatum "2004-12-31T00:00:00.000Z"^^xsd:dateTime;
+                                                                                                  cedr:zmenaSmlouvaIndikator false;
+                                                                                                  fkis:projektIdentifikator "DCA-V-87/2004";
+                                                                                                  dcterms:title "DCA-V-87/2004"@cs;
+                                                                                                  a cedr:Dotace.
+
+<http://cedropendata.mfcr.cz/c3lod/cedr/resource/Rozhodnuti/04A543BAA5CB55F98FCB4FF48F12FC0BE6584DA3> cedr:castkaPozadovana 254100 ;
+                                                                                                      cedr:castkaRozhodnuta 254100 ;
+                                                                                                      cedr:dotaciPoskytl <http://cedropendata.mfcr.cz/c3lod/cedr/resource/ciselnik/DotacePoskytovatel/v01/313/19000101>;
+                                                                                                      cedr:financniProstredekCleneni <http://cedropendata.mfcr.cz/c3lod/cedr/resource/ciselnik/FinancniProstredekCleneni/v01/8/19980101>;
+                                                                                                      cedr:financovanoZeZdroje <http://cedropendata.mfcr.cz/c3lod/cedr/resource/ciselnik/FinancniZdroj/v01/t313/19000101>;
+                                                                                                      cedr:maSmlouvuORozhodnuti <http://cedropendata.mfcr.cz/c3lod/cedr/resource/RozhodnutiSmlouva/2CD98A41EE72862BF2B7B9B0D61EADCACE1D8E4C>;
+                                                                                                      cedr:refRozhodnutiRok <http://reference.data.gov.uk/doc/year/2004>;
+                                                                                                      cedr:rokRozhodnuti "2004"^^xsd:short;
+                                                                                                      cedr:rozpoctoveObdobi <http://cedropendata.mfcr.cz/c3lod/cedr/resource/RozpoctoveObdobi/39EADD4DA42044A34F892166FF2FA62D62B4CA7F>;
+                                                                                                      cedr:zaznamAktualizaceDatumCas "2004-12-31T00:00:00.000Z"^^xsd:dateTime;
+                                                                                                      cedr:zaznamIdentifikator "04A543BAA5CB55F98FCB4FF48F12FC0BE6584DA3";
+                                                                                                      cedr:zaznamPlatnostDatum "2004-12-31T00:00:00.000Z"^^xsd:dateTime;
+                                                                                                      cmn:menaKod "CZK";
+                                                                                                      fkis:investiceIndikator false;
+                                                                                                      fkis:navratnostIndikator false;
+                                                                                                      dcterms:title 254100 ;
+                                                                                                      a cedr:Rozhodnuti.
+																									  
+<http://cedropendata.mfcr.cz/c3lod/cedr/resource/PrijemcePomoci/02B5BE9A8FB4E3F43CE7D13B3D721464A82A5120> cedr:jePrislusnikStatu <http://cedropendata.mfcr.cz/c3lod/csu/resource/ciselnik/Stat/v01/CZE/19930101>;
+                                                                                                          cedr:jeRegistrovanSPravniFormou <http://cedropendata.mfcr.cz/c3lod/szcr/resource/ciselnik/PravniForma/v01/801/20020101>;
+                                                                                                          cedr:obdrzelDotaci <http://cedropendata.mfcr.cz/c3lod/cedr/resource/Dotace/B224DCBEC7F03E18383545ACD1E3C60379572C82>;
+                                                                                                          cedr:sidliNaAdrese <http://cedropendata.mfcr.cz/c3lod/cedr/resource/Adresa/A22EB079725167A148E25E39CD6982EE1DE54D04>;
+                                                                                                          cedr:zaznamAktualizaceDatumCas "2005-02-17T12:14:41.000Z"^^xsd:dateTime;
+                                                                                                          cedr:zaznamIdentifikator "02B5BE9A8FB4E3F43CE7D13B3D721464A82A5120";
+                                                                                                          cedr:zaznamPlatnostDatum "2004-12-31T00:00:00.000Z"^^xsd:dateTime;
+                                                                                                          bus:ico "00261289";
+                                                                                                          bus:obchodniJmeno "Město Dolní Poustevna"@cs;
+                                                                                                          dcterms:title "Město Dolní Poustevna"@cs;
+                                                                                                          gr:legalName "Město Dolní Poustevna"@cs;
+                                                                                                          a cedr:PravnickaOsoba,
+                                                                                                            cedr:PrijemcePomoci,
+                                                                                                            gr:Organization;
+                                                                                                          owl:sameAs <http://cedropendata.mfcr.cz/c3lod/ares/resource/EkonomikaSubjekt/00261289>.
+																										  
+<http://cedropendata.mfcr.cz/c3lod/cedr/resource/Adresa/A22EB079725167A148E25E39CD6982EE1DE54D04> cedr:nachaziSeNaUzemiStatu <http://cedropendata.mfcr.cz/c3lod/csu/resource/ciselnik/Stat/v01/CZE/19930101>;
+                                                                                                  cedr:zaznamAktualizaceDatumCas "2005-02-17T12:14:41.000Z"^^xsd:dateTime;
+                                                                                                  cedr:zaznamIdentifikator "A22EB079725167A148E25E39CD6982EE1DE54D04";
+                                                                                                  cedr:zaznamPlatnostDatum "2004-12-31T00:00:00.000Z"^^xsd:dateTime;
+                                                                                                  fkis:adresaKvalifikatorKod "1"^^xsd:short;
+                                                                                                  spa:adresniMistoKod 14141 ;
+                                                                                                  spa:castObceKod 29980 ;
+                                                                                                  spa:obecKod 562441 ;
+                                                                                                  spa:obecNazev "Dolní Poustevna"@cs;
+                                                                                                  spa:objektCisloDomovni "77"^^xsd:short;
+                                                                                                  spa:psc "40782";
+                                                                                                  spa:uliceNazev "Vilémovská"@cs;
+                                                                                                  ruian:obec <http://cedropendata.mfcr.cz/c3lod/ruian/resource/ciselnik/Obec/v01/562441/20030101>;
+                                                                                                  dcterms:title "Dolní Poustevna, Vilémovská 77"@cs;
+                                                                                                  a cedr:Adresa,
+                                                                                                    cedr:AdresaSidlo.

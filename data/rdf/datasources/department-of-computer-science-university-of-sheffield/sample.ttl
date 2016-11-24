@@ -1,0 +1,26 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ns0: <http://purl.org/net/provenance/ns#> .
+@prefix ns1: <http://zeitkunst.org/bibtex/0.1/bibtex.owl#> .
+
+<http://data.dcs.shef.ac.uk/group/oak>
+  a <http://purl.org/net/provenance/ns#Representation>, foaf:Group ;
+  foaf:name "Organisations, Information and Knowledge Group" ;
+  ns0:retrievedBy [ ] ;
+  foaf:workplaceHomepage <http://oak.dcs.shef.ac.uk> ;
+  foaf:member <http://data.dcs.shef.ac.uk/person/Stuart-Wrigley>, <http://data.dcs.shef.ac.uk/person/Matthew-Rowe>, <http://data.dcs.shef.ac.uk/person/George-Demetriou>, <http://data.dcs.shef.ac.uk/person/Daniela-Petrelli>, <http://data.dcs.shef.ac.uk/person/Victoria-Uren>, <http://data.dcs.shef.ac.uk/person/Jonathan-Butters>, <http://data.dcs.shef.ac.uk/person/Sam-Chapman>, <http://data.dcs.shef.ac.uk/person/Christopher-Brewster>, <http://data.dcs.shef.ac.uk/person/Lei-Xia>, <http://data.dcs.shef.ac.uk/person/Joao-Magalhaes>, <http://data.dcs.shef.ac.uk/person/Neil-Ireson>, <http://data.dcs.shef.ac.uk/person/Fabio-Ciravegna>, <http://data.dcs.shef.ac.uk/person/Simon-Tucker>, <http://data.dcs.shef.ac.uk/person/Rodrigo-Carvalho>, <http://data.dcs.shef.ac.uk/person/Ajay-Chakravarthy>, <http://data.dcs.shef.ac.uk/person/Gregoire-Burel>, <http://data.dcs.shef.ac.uk/person/Aba-Sah-Dadzie>, <http://data.dcs.shef.ac.uk/person/Alfonso-Sosa>, <http://data.dcs.shef.ac.uk/person/Vitaveska-Lanfranchi>, <http://data.dcs.shef.ac.uk/person/Jose-Iria>, <http://data.dcs.shef.ac.uk/person/Suvodeep-Mazumdar>, <http://data.dcs.shef.ac.uk/person/Ziqi-Zhang>, <http://data.dcs.shef.ac.uk/person/Philip-Webster>, <http://data.dcs.shef.ac.uk/person/Ravish-Bhagdev>, <http://data.dcs.shef.ac.uk/person/Elizabeth-Amparo-Cano-Basave> .
+
+<http://data.dcs.shef.ac.uk/person/Stuart-Wrigley>
+  a foaf:Person ;
+  foaf:name "Stuart Wrigley" ;
+  foaf:homepage <http://www.dcs.shef.ac.uk/~stu/> ;
+  foaf:page <http://www.dcs.shef.ac.uk/spandh/personnel.html>, <http://www.dcs.shef.ac.uk/spandh/seminars/>, <http://www.dcs.shef.ac.uk/dcs/people/staff.htm>, <http://www.dcs.shef.ac.uk/spandh/news.html>, <http://www.dcs.shef.ac.uk/spandh/seminars/abstracts2008.html>, <http://www.dcs.shef.ac.uk/dcs/people/staffA4.htm>, <http://www.dcs.shef.ac.uk/spandh/seminars>, <http://www.dcs.shef.ac.uk/dcs/people/atoz.htm>, <http://www.dcs.shef.ac.uk/~guy/index.html>, <http://www.dcs.shef.ac.uk/~guy/>, <http://www.dcs.shef.ac.uk/~guy>, <http://www.dcs.shef.ac.uk/people/groups.htm>, <http://oak.dcs.shef.ac.uk/people/>, <http://www.dcs.shef.ac.uk/spandh/projects/>, <http://www.dcs.shef.ac.uk/~vinny/docs/asr.html>, <http://www.dcs.shef.ac.uk/intranet/teaching/info/prizes.html>, <http://www.dcs.shef.ac.uk/~fabio/Fabio_Ciravegna/Open_Positions.html/Open_Positions.html>, <http://www.dcs.shef.ac.uk/spandh/projects/amida/>, <http://www.dcs.shef.ac.uk/spandh/seminars/abstracts2004.html> ;
+  foaf:mbox "4004916254d5dd83b00d8109bba8e7b3e6b8b422" ;
+  foaf:img <http://oak.dcs.shef.ac.uk/people/stuart.jpg> ;
+  foaf:made <http://data.dcs.shef.ac.uk/paper/76>, <http://data.dcs.shef.ac.uk/paper/705>, <http://data.dcs.shef.ac.uk/paper/814>, <http://data.dcs.shef.ac.uk/paper/3756>, <http://data.dcs.shef.ac.uk/paper/3427>, <http://data.dcs.shef.ac.uk/paper/3401>, <http://data.dcs.shef.ac.uk/paper/3754>, <http://data.dcs.shef.ac.uk/paper/3361>, <http://data.dcs.shef.ac.uk/paper/3996>, <http://data.dcs.shef.ac.uk/paper/4138>, <http://data.dcs.shef.ac.uk/paper/3743>, <http://data.dcs.shef.ac.uk/paper/3521>, <http://data.dcs.shef.ac.uk/paper/3385>, <http://data.dcs.shef.ac.uk/paper/3742>, <http://data.dcs.shef.ac.uk/paper/3523>, <http://data.dcs.shef.ac.uk/paper/3506>, <http://data.dcs.shef.ac.uk/paper/3760>, <http://data.dcs.shef.ac.uk/paper/3753>, <http://data.dcs.shef.ac.uk/paper/669>, <http://data.dcs.shef.ac.uk/paper/3755>, <http://data.dcs.shef.ac.uk/paper/3522>, <http://data.dcs.shef.ac.uk/paper/3451>, <http://data.dcs.shef.ac.uk/paper/3507> .
+
+<http://data.dcs.shef.ac.uk/paper/76>
+  a <http://zeitkunst.org/bibtex/0.1/bibtex.owl#Entry> ;
+  ns1:title "Speech and crosstalk detection in multichannel audio." ;
+  ns1:hasYear "2005" ;
+  ns1:hasBookTitle "IEEE Transactions on Speech and Audio Processing" ;
+  foaf:maker <http://data.dcs.shef.ac.uk/person/Stuart-Wrigley>, <http://data.dcs.shef.ac.uk/person/Guy-Brown> .

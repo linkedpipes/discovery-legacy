@@ -1,0 +1,8 @@
+{
+  "url": "http://cedropendata.mfcr.cz/c3lod/cedr/sparql",
+  "defaultGraphIris": [],
+  "label": "Subsidies from public budgets in Czech Republic",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/subsidies-cz-cedr/sample.ttl"
+}

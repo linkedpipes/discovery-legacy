@@ -1,0 +1,66 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+
+ASK {
+  ?agent foaf:name ?agentName ;
+	foaf:made ?thing .
+	
+  # Zatím zbytečné, hodí se pro rankování discovery výsledků např. 
+  # JaKl : pro experimenty teď celé zakomentovat
+  OPTIONAL {
+    ?membership org:member ?agent .
+	
+	OPTIONAL {
+		?membership org:organization ?organization .
+		?organization foaf:name ?organizationName .
+	}
+	
+	OPTIONAL {
+		?membership org:role ?role .
+		?role foaf:name ?roleName .
+	}
+  }
+  
+  {
+	?thing lpviz:hasAbstraction ?timeAbstraction .
+	
+	?timeAbstraction time:inXSDDateTime ?dt .
+	
+	OPTIONAL {
+	  ?timeAbstraction rdfs:label ?abstractionLabel . 
+    }
+  } UNION {
+	?thing lpviz:hasAbstraction ?timeAbstraction .
+	
+	?timeAbstraction time:hasBeginning ?beginning ;
+		time:hasEnd ?end .
+
+	OPTIONAL {
+	  ?timeAbstraction rdfs:label ?abstractionLabel . 
+    }
+		
+	?beginning time:inXSDDateTime ?dtb .
+
+	?end time:inXSDDateTime ?dte .
+  } UNION {
+	?thing lpviz:hasAbstraction ?place .
+	
+	?place geo:location ?geo .
+  
+    OPTIONAL {
+      ?place rdfs:label ?abstractionLabel .
+    }
+  
+    ?geo a geo:SpatialThing ;
+      geo:long ?long ;
+      geo:lat ?lat .
+  }
+  
+  
+	
+	
+}

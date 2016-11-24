@@ -1,7 +1,7 @@
 {
-  "url": "http://gov.tso.co.uk/legislation/sparql",
+  "url": "http://linked.opendata.cz/sparql",
   "defaultGraphIris": [],
-  "label": "Legislation UK - Versions of Acts",
+  "label": "Legislation CZ - Versions of Acts",
   "isLarge": true,
   "isLinkset": false,
   "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/legislation-cz-acts-versions/sample.ttl"
