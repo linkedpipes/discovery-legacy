@@ -24,7 +24,12 @@ object DiscoveryInput {
         new LegislationCzActsExtractor,
         new LegislationCzActsVersionsExtractor,
         new LegislationGbActsExtractor,
-        new LegislationGbActsVersionsExtractor
+        new LegislationGbActsVersionsExtractor,
+        new SubsidiesCzCedrExtractor,
+        new NomismaOrgPersonsExtractor,
+        new LinkedMdbFilmsExtractor,
+        new RuianExtractor,
+        new AresExtractor
     )
 
     var processors = Seq(
@@ -42,7 +47,32 @@ object DiscoveryInput {
         new Frbr_RealizationOf2Frbr_RealizationTransformer,
         new Ruian_DefinicniBod2Schema_PlaceTransformer,
         new RuianGeocoderAnalyzer,
-        new Time_Interval2Time_IntervalTransformer
+        new Time_Interval2Time_IntervalTransformer,
+        new Cedr_DotaceCastka2Rdf_Value,
+        new Cedr_SidliNaAdrese2Geo_SpatialThing,
+        new Cedr_SmlouvaPodpisDatum2Dct_Created,
+        new Cedr_SmlouvaPodpisDatum2Time_Instant,
+        new Foaf_Maker2Foaf_Made,
+        new Foaf_Name2Dct_Title,
+        new Foaf_RdfsLabel2Foaf_Name,
+        new Foaf_SkosPrefLabel2Foaf_Name,
+        new Gr_LegalName2Dct_Title,
+        new LinkedMdb_InitialReleaseOf2Time_Instant,
+        new Movie_Actor2Foaf_Made,
+        new Movie_Editor2Foaf_Made,
+        new Movie_MusicContributorName2Foaf_Name,
+        new Movie_MusicContributorName2Foaf_Made,
+        new Movie_ProducerName2Foaf_Name,
+        new Movie_Producer2Foaf_Made,
+        new Movie_WriterName2Foaf_Name,
+        new Movie_Writer2Foaf_Made,
+        new Nomisma_HasAuthority2Foaf_Made,
+        new Nomisma_HasMint2Geo_SpatialThing,
+        new Nomisma_StartDateEndDate2Time_Interval,
+        new Org_HasMembership2Org_Member,
+        new Ruian_AdresniMisto2Geo_SpatialThing,
+        new Schema_GeoCoordinates2Geo_SpatialThing,
+        new Swrc_Editor2Foaf_Made
     )
 
     val visualizers = Seq(
@@ -50,7 +80,10 @@ object DiscoveryInput {
         new TemporalEntityVisualizer,
         new TemporalEntityTimeIntervalVisualizer,
         new VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer,
-        new PopulationVisualizer
+        new PopulationVisualizer,
+        new SpatialThingVisualizer,
+        new PersonalProfilesVisualizer,
+        new ThingsOnMapVisualizer
     )
 
     def create(settings: DiscoverySettings) = {

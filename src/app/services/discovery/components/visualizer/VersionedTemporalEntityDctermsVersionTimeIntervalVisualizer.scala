@@ -7,6 +7,7 @@ class VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer extends Simple
           |PREFIX time: <http://www.w3.org/2006/time#>
           |PREFIX dct: <http://purl.org/dc/terms/>
           |PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+          |PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         """.stripMargin
 
     override protected val whereClause: String =
@@ -17,6 +18,10 @@ class VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer extends Simple
           |
           |  ?timeAbstraction time:hasBeginning ?beginning ;
           |    time:hasEnd ?end .
+          |
+          |  OPTIONAL {
+          |    ?timeAbstraction rdfs:label ?abstractionLabel .
+          |  }
           |
           |  ?beginning time:inXSDDateTime ?dtb .
           |
