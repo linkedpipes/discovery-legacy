@@ -1,5 +1,7 @@
 PREFIX cedr: <http://cedropendata.mfcr.cz/c3lod/cedr/vocabCEDR#>
 PREFIX spa: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/space/v1#>
+PREFIX gr: <http://purl.org/goodrelations/v1#>
+
 
 CONSTRUCT {
   ?dotace a cedr:Dotace ;
