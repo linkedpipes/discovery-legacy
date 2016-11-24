@@ -1,5 +1,7 @@
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 ASK {
   ?thing lpviz:hasAbstraction ?place .
