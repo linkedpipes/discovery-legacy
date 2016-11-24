@@ -64,7 +64,7 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
         val maybePipelines = service.getPipelines(id)
         maybePipelines.map { p =>
             p.map { case (uuid, pipeline) =>
-                val request = ws.url(url + s"http://demo.visualization.linkedpipes.com/discovery/$id/pipelines/${uuid.toString}")
+                val request = ws.url(url + s"http://demo.visualization.linkedpipes.com:8080/discovery/$id/pipelines/${uuid.toString}")
                 request.get().foreach { r => println(r.body) }
             }
         }
