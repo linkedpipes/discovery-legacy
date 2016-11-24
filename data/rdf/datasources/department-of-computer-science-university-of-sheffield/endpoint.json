@@ -4,5 +4,5 @@
   "label": "University of Sheffield - Department of Computer Science",
   "isLarge": false,
   "isLinkset": false,
-  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/department-of-computer-science-university-of-sheffield/sample.ttl"
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/department-of-computer-science-university-of-sheffield/sample.ttl"
 }
