@@ -1,8 +1,11 @@
 PREFIX cedr: <http://cedropendata.mfcr.cz/c3lod/cedr/vocabCEDR#>
 PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 
 DELETE {
-  ?s cedr:smlouvaPodpisDatum ?dateTime .
+  ?dotace cedr:castkaRozhodnuta ?castka .
 } INSERT {
   ?dotace lpviz:hasAbstraction [
 	rdf:value ?castka ;
@@ -10,8 +13,7 @@ DELETE {
 	rdfs:label ?abstractionLabel .
   ] .
 } WHERE {
-  ?dotace cedr:byloRozhodnuto ?rozhodnuti ;
-    cedr:castkaRozhodnuta ?castka .
+  ?dotace cedr:castkaRozhodnuta ?castka .
 	
   OPTIONAL {
     ?dotace dct:title ?title .
