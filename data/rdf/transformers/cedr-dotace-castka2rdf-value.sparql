@@ -10,7 +10,7 @@ DELETE {
   ?dotace lpviz:hasAbstraction [
 	rdf:value ?castka ;
 	lpviz:unit "CZK" ;
-	rdfs:label ?abstractionLabel .
+	rdfs:label ?abstractionLabel
   ] .
 } WHERE {
   ?dotace cedr:castkaRozhodnuta ?castka .
