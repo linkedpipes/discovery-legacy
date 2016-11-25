@@ -1,0 +1,20 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+DELETE {
+  ?town dbo:populationTotal ?population .
+} INSERT {
+  ?town lpviz:hasAbstraction [
+	rdf:value ?population ;
+	rdfs:label ?abstractionLabel
+  ] .
+} WHERE {
+  ?town dbo:populationTotal ?population .
+	
+  OPTIONAL {
+    ?town rdfs:label ?label .
+	BIND(CONCAT("Total population of ", STR(?label)) AS ?abstractionLabel)
+  }
+}

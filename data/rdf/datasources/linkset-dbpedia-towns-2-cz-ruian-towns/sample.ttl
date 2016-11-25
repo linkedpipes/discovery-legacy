@@ -1,0 +1,4 @@
+<http://dbpedia.org/resource/Semily> a <http://dbpedia.org/ontology/PopulatedPlace> ;
+	<http://www.w3.org/2002/07/owl#sameAs> <http://ruian.linked.opendata.cz/resource/obce/576964> .
+	
+<http://ruian.linked.opendata.cz/resource/obce/576964> a <http://ruian.linked.opendata.cz/ontology/Obec> .

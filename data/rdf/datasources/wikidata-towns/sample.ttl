@@ -1,0 +1,12 @@
+@prefix ns0: <http://www.wikidata.org/prop/direct/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns1: <http://www.opengis.net/ont/geosparql#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://www.wikidata.org/entity/Q1085>
+  ns0:P31 <http://www.wikidata.org/entity/Q5153359> ;
+  rdf:type <http://www.wikidata.org/entity/Q5153359> ;
+  rdfs:label "Prague"@en ;
+  ns0:P1082 1267449.0 ;
+  ns0:P281 "10000–19900" ;
+  ns0:P625 "Point(14.421388888 50.088611111)"^^ns1:wktLiteral .

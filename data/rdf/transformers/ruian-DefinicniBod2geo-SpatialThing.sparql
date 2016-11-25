@@ -1,0 +1,19 @@
+PREFIX ruian: <http://ruian.linked.opendata.cz/ontology/>
+PREFIX s: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+
+DELETE {
+  ?s ruian:definicniBod ?bod .
+} INSERT {
+  ?s lpviz:hasAbstraction  ?bod .
+  
+  ?bod rdfs:label ?abstractionLabel .
+} WHERE {
+  ?s ruian:definicniBod ?bod .
+  
+  OPTIONAL {
+	?s s:name ?label .
+	BIND(CONCAT("Definition point of ", STR(?label)) AS ?abstractionLabel)
+  }
+}
