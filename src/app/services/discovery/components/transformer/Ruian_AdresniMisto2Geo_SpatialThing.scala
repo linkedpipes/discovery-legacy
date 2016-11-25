@@ -10,8 +10,6 @@ class Ruian_AdresniMisto2Geo_SpatialThing extends SparqlUpdateTransformer {
         """.stripMargin
     protected override val deleteClause =
         """
-          |?s ?p ?misto .
-          |
           |?misto ruian:adresniBod ?bod .
           |
           |?bod s:geo ?geo .
