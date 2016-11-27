@@ -1,6 +1,6 @@
 package controllers
 
-import java.io.ByteArrayOutputStream
+import java.io._
 import javax.inject._
 
 import controllers.dto.DiscoverySettings
@@ -11,7 +11,9 @@ import play.api.libs.ws.WSClient
 import play.api.mvc.{Action, BodyParsers, Controller}
 import services.DiscoveryService
 import services.discovery.model.components.DataSourceInstance
+
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.io.Source
 
 @Singleton
 class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) extends Controller {
@@ -46,6 +48,20 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
         val maybePipelines = service.getPipelines(id)
         Ok(Json.obj(
             "pipelines" -> maybePipelines.map { pipelines => pipelines.map { p =>
+
+                val file = new File(s"/tmp/pipeline-${p._1.toString}.json")
+                val outputStream = new BufferedOutputStream(new FileOutputStream(file))
+
+                val data = service.getEtlPipeline(id, p._1.toString)
+                data.map { datasets =>
+                    datasets.foreach(d =>
+                        RDFDataMgr.write(outputStream, d, Lang.JSONLD)
+                    )
+                }
+
+                outputStream.flush()
+                outputStream.close()
+
                 Json.obj(
                     "id" -> p._1.toString,
                     "componentCount" -> JsNumber(p._2.components.size),

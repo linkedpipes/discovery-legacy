@@ -72,7 +72,10 @@ object DiscoveryInput {
         new Org_HasMembership2Org_Member,
         new Ruian_AdresniMisto2Geo_SpatialThing,
         new Schema_GeoCoordinates2Geo_SpatialThing,
-        new Swrc_Editor2Foaf_Made
+        new Swrc_Editor2Foaf_Made,
+        new Wikidata_Population2Edf_Value,
+        new Wikidata_CoordinateLocation2Geo_SpatialThing,
+        new Ruian_DefinicniBod2Geo_SpatialThing
     )
 
     val visualizers = Seq(

@@ -18,7 +18,7 @@ class Cedr_DotaceCastka2Rdf_Value extends SparqlUpdateTransformer {
           |?dotace lpviz:hasAbstraction [
           |    rdf:value ?castka ;
           |    lpviz:unit "CZK" ;
-          |    rdfs:label ?abstractionLabel .
+          |    rdfs:label ?abstractionLabel
           |] .
         """.stripMargin
     protected override val prefixes =
