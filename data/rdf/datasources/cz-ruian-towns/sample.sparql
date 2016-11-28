@@ -1,0 +1,31 @@
+PREFIX ruian: <http://ruian.linked.opendata.cz/ontology/>
+PREFIX gml: <http://www.opengis.net/ont/gml#>
+PREFIX s: <http://schema.org/>
+
+CONSTRUCT {
+  <http://ruian.linked.opendata.cz/resource/obce/533424> a ruian:Obec ;
+    ruian:definicniBod ?definicniBod ;
+    s:name ?nazevObce .
+
+  ?definicniBod a gml:Point ;
+    s:geo ?geoCoordinates .
+
+  ?geoCoordinates a s:GeoCoordinates ;
+    s:longitude ?longitude ;
+    s:latitude ?latitude .
+
+} WHERE {
+
+  <http://ruian.linked.opendata.cz/resource/obce/533424> a ruian:Obec ;
+    ruian:definicniBod/gml:pointMember ?definicniBod ;
+    s:name ?nazevObce .
+
+  ?definicniBod 
+    s:geo ?geoCoordinates .
+
+  ?geoCoordinates s:longitude ?longitude ;
+    s:latitude ?latitude .
+
+  ?adresniMisto ruian:ulice/ruian:obec <http://ruian.linked.opendata.cz/resource/obce/533424> ;
+    ruian:psc ?psc .
+}

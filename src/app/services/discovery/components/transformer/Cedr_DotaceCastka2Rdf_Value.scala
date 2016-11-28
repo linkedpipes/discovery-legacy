@@ -2,17 +2,16 @@ package services.discovery.components.transformer
 
 class Cedr_DotaceCastka2Rdf_Value extends SparqlUpdateTransformer {
 
-    protected override val whereClause =
+    protected override val prefixes =
         """
-          |?dotace cedr:byloRozhodnuto ?rozhodnuti ;
-          |    cedr:castkaRozhodnuta ?castka .
-          |
-          |OPTIONAL {
-          |    ?dotace dct:title ?title .
-          |    BIND(CONCAT("Allocated money for subsidy number ", STR(?title)) AS ?abstractionLabel)
-          |}
-        """.stripMargin
-    protected override val deleteClause = """?s cedr:smlouvaPodpisDatum ?dateTime ."""
+          | PREFIX cedr: <http://cedropendata.mfcr.cz/c3lod/cedr/vocabCEDR#>
+          | PREFIX dct: <http://purl.org/dc/terms/>
+          | PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+          | PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+          | PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>""".stripMargin
+    
+    protected override val deleteClause = """?dotace cedr:castkaRozhodnuta ?castka ."""
+    
     protected override val insertClause =
         """
           |?dotace lpviz:hasAbstraction [
@@ -21,8 +20,14 @@ class Cedr_DotaceCastka2Rdf_Value extends SparqlUpdateTransformer {
           |    rdfs:label ?abstractionLabel
           |] .
         """.stripMargin
-    protected override val prefixes =
+    
+    protected override val whereClause =
         """
-          | PREFIX cedr: <http://cedropendata.mfcr.cz/c3lod/cedr/vocabCEDR#>
-          | PREFIX dct: <http://purl.org/dc/terms/>""".stripMargin
+          |?dotace cedr:castkaRozhodnuta ?castka .
+          |
+          |OPTIONAL {
+          |    ?dotace dct:title ?title .
+          |    BIND(CONCAT("Allocated money for subsidy number ", STR(?title)) AS ?abstractionLabel)
+          |}
+        """.stripMargin
 }

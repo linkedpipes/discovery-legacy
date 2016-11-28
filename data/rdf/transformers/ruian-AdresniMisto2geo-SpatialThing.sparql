@@ -3,8 +3,6 @@ PREFIX ruian: <http://ruian.linked.opendata.cz/ontology/>
 PREFIX s: <http://schema.org/>
 
 DELETE {
-  ?s ?p ?misto .
-
   ?misto ruian:adresniBod ?bod .
   
   ?bod s:geo ?geo .

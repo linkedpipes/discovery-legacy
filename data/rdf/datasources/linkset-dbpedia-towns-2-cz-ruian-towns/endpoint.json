@@ -1,0 +1,8 @@
+{
+  "url": "http://ruian.linked.opendata.cz",
+  "defaultGraphIris": ["http://ruian.linked.opendata.cz/linkset/linkset-dbpedia-towns-2-cz-ruian-towns"],
+  "label": "Linkset : Towns from DBPedia --- Towns from RUIAN",
+  "isLarge": false,
+  "isLinkset": true,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/linkset-dbpedia-towns-2-cz-ruian-towns/sample.ttl"
+}

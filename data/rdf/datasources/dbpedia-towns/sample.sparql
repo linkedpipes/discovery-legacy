@@ -1,0 +1,9 @@
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+CONSTRUCT {
+  ?s ?p ?o
+} WHERE {
+   VALUES ?s {<http://dbpedia.org/resource/Prague>}
+   ?s a dbo:PopulatedPlace ;
+      ?p ?o .
+}

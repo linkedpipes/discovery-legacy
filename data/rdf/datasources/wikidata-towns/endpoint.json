@@ -1,0 +1,8 @@
+{
+  "url": "https://query.wikidata.org/bigdata/namespace/wdq/sparql",
+  "defaultGraphIris": [],
+  "label": "Towns in Wikidata",
+  "isLarge": true,
+  "isLinkset": false,
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/wikidata-towns/sample.ttl"
+}

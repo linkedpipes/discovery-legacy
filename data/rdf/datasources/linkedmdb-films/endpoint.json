@@ -4,5 +4,5 @@
   "label": "LinkedMDB- Films",
   "isLarge": true,
   "isLinkset": false,
-  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/linkedmdb-films/sample.ttl"
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/linkedmdb-films/sample.ttl"
 }

@@ -438,7 +438,7 @@
 
 foaf:Agent rdfs:seeAlso <http://dblp.l3s.de/d2r/sparql?query=DESCRIBE+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FAgent%3E> .
 
-http://dblp.l3s.de/d2r/resource/publications/conf/www/ArndtJMFRFM16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
+<http://dblp.l3s.de/d2r/resource/publications/conf/www/ArndtJMFRFM16> dc:partOf <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow> .
 <http://dblp.l3s.de/d2r/resource/publications/conf/www/2016ldow>
   a <http://swrc.ontoware.org/ontology#Proceedings>, foaf:Document ;
   dc11:creator <http://dblp.l3s.de/d2r/resource/authors/Tom_Heath>, <http://dblp.l3s.de/d2r/resource/authors/S%C3%B6ren_Auer>, <http://dblp.l3s.de/d2r/resource/authors/Tim_Berners-Lee>, <http://dblp.l3s.de/d2r/resource/authors/Christian_Bizer> ;
