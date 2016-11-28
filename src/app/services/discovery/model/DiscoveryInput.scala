@@ -29,7 +29,8 @@ object DiscoveryInput {
         new NomismaOrgPersonsExtractor,
         new LinkedMdbFilmsExtractor,
         new RuianExtractor,
-        new AresExtractor
+        new AresExtractor,
+        new WikidataTownsExtractor
     )
 
     var processors = Seq(
