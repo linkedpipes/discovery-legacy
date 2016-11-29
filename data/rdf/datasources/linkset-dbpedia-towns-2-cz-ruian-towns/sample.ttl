@@ -1,4 +1,23 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> .
+@prefix ruiands: <http://ruian.linked.opendata.cz/resource/dataset> .
+@prefix void: <http://rdfs.org/ns/void#> .
+
 <http://dbpedia.org/resource/Semily> a <http://dbpedia.org/ontology/PopulatedPlace> ;
 	<http://www.w3.org/2002/07/owl#sameAs> <http://ruian.linked.opendata.cz/resource/obce/576964> .
 	
 <http://ruian.linked.opendata.cz/resource/obce/576964> a <http://ruian.linked.opendata.cz/ontology/Obec> .
+
+ruiands:DpediaTowns_RuianTowns a void:Linkset ;
+    void:objectsTarget <http://ruian.linked.opendata.cz/dataset/ruian/obce> ;
+    void:subjectsTarget <http://dbpedia.org/ontology/PopulatedPlaces> ;
+    void:linkPredicate owl:sameAs ;
+    void:exampleResource <http://dbpedia.org/resource/Semily> ;
+    void:uriSpace "http://dbpedia.org/resource/" .
+
+<http://ruian.linked.opendata.cz/dataset/ruian/obce> a void:Dataset ;
+    void:class ruian:Obec .
+
+<http://dbpedia.org/ontology/PopulatedPlaces> a void:Dataset ;
+    void:class <http://dbpedia.org/ontology/PopulatedPlace> .
