@@ -13,7 +13,7 @@
    
 <http://linked.opendata.cz/resource/business-entity/CZ00000205> a gr:BusinessEntity, s:Organization, regorg:RegisteredOrganization .
 
-ruiands:Cedr_Ares a void:Linkset ;
+<http://cedropendata.mfcr.cz/c3lod/cedr/dataset/Cedr_Ares> a void:Linkset ;
     void:objectsTarget <http://linked.opendata.cz/resource/business-entities> ;
     void:subjectsTarget <http://cedropendata.mfcr.cz/c3lod/cedr/resource/PrijemciPomoci> ;
     void:linkPredicate owl:sameAs ;
