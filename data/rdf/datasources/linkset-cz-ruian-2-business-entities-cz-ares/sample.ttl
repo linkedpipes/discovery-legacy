@@ -7,8 +7,7 @@
 @prefix ns1:	<http://ruian.linked.opendata.cz/ontology/> .
 @prefix s:	<http://schema.org/> .
 
-<http://ruian.linked.opendata.cz/resource/adresni-mista/10357734>	rdf:type	ns1:AdresniMisto .
-<http://ruian.linked.opendata.cz/resource/adresni-mista/10357734>	rdf:type	s:Place ;
+<http://ruian.linked.opendata.cz/resource/adresni-mista/10357734>	rdf:type	ns1:AdresniMisto ;
 	owl:sameAS	<http://linked.opendata.cz/resource/domain/ares/postal-address/310722294> .
 	
 <http://linked.opendata.cz/resource/domain/ares/postal-address/310722294>	rdf:type	s:PostalAddress .

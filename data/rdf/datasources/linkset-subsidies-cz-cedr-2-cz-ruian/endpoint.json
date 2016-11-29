@@ -1,6 +1,6 @@
 {
-  "url": "http://cedropendata.mfcr.cz/c3lod/cedr/sparql",
-  "defaultGraphIris": [],
+  "url": "http://internal.opendata.cz/sparql",
+  "defaultGraphIris": ["http://internal.opendata.cz/linkset/cz-cedr-addresses-2-cz-ruian-addresses"],
   "label": "Linkset : Subsidies from public budgets in Czech Republic (Addresses) --- RUIAN (Addresses)",
   "isLarge": false,
   "isLinkset": true,

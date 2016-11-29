@@ -9,9 +9,9 @@
 @prefix void: <http://rdfs.org/ns/void#> .
 
 <http://cedropendata.mfcr.cz/c3lod/cedr/resource/PrijemcePomoci/0041199386749100C49360759AD7D8E5429C162D> <http://www.w3.org/2002/07/owl#sameAs> <http://linked.opendata.cz/resource/business-entity/CZ00000205> ;
-   a cedr:PravnickaOsoba, cedr:PrijemcePomoci, gr:Organization .
+   a cedr:PrijemcePomoci .
    
-<http://linked.opendata.cz/resource/business-entity/CZ00000205> a gr:BusinessEntity, s:Organization, regorg:RegisteredOrganization .
+<http://linked.opendata.cz/resource/business-entity/CZ00000205> a gr:BusinessEntity .
 
 <http://cedropendata.mfcr.cz/c3lod/cedr/dataset/Cedr_Ares> a void:Linkset ;
     void:objectsTarget <http://linked.opendata.cz/resource/business-entities> ;

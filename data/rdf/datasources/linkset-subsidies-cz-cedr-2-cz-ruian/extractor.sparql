@@ -6,9 +6,9 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
 CONSTRUCT {
   ?adresa owl:sameAs ?adresniMistoRUIAN ;
-    a cedr:Adresa, cedr:AdresaSidlo .
+    a cedr:Adresa .
 
-  ?adresniMistoRUIAN a s:Place, ruian:AdresniMisto .
+  ?adresniMistoRUIAN a ruian:AdresniMisto .
 
 } WHERE {
   ?adresa spa:adresniMistoKod ?adresniMistoKod .

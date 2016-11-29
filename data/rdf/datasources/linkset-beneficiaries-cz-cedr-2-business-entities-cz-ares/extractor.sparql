@@ -6,10 +6,10 @@ PREFIX regorg: <http://www.w3.org/ns/regorg#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
 CONSTRUCT {
-  ?prijemce a cedr:PravnickaOsoba, cedr:PrijemcePomoci, gr:Organization ;
+  ?prijemce a cedr:PrijemcePomoci ;
     owl:sameAs ?businessEntity .
 	
-  ?businessEntity a gr:BusinessEntity, s:Organization, regorg:RegisteredOrganization .
+  ?businessEntity a gr:BusinessEntity .
 } WHERE {
   ?prijemce
     cedr:obdrzelDotaci ?dotace ;
