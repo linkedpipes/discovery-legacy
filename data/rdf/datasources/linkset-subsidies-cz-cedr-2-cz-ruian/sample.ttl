@@ -3,6 +3,7 @@
 @prefix cedr: <http://cedropendata.mfcr.cz/c3lod/cedr/vocabCEDR#> .
 @prefix ruiands: <http://ruian.linked.opendata.cz/resource/dataset> .
 @prefix void: <http://rdfs.org/ns/void#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
 
 <http://cedropendata.mfcr.cz/c3lod/cedr/resource/Adresa/EF5A790F578275654BAE414ACB31DE57A338D74C> a cedr:Adresa, cedr:AdresaSidlo .
 
