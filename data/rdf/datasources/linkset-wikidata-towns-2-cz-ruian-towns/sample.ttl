@@ -2,7 +2,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> .
 @prefix ruiands: <http://ruian.linked.opendata.cz/resource/dataset> .
-@prefix void: <http://rdfs.org/ns/void#>.
+@prefix void: <http://rdfs.org/ns/void#> .
 
 ruiands:Wikidata_Ruian a void:Linkset ;
     void:objectsTarget <http://ruian.linked.opendata.cz/dataset/ruian/obce> ;
