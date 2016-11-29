@@ -1,12 +1,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> .
-@prefix ruiands: <http://ruian.linked.opendata.cz/resource/dataset>
-
-<http://www.wikidata.org/entity/Q1085> rdf:type <> .
-<http://ruian.linked.opendata.cz/resource/obce/554782> rdf:type	ruian:Obec .
-
-<http://www.wikidata.org/entity/Q1085> owl:sameAs <http://ruian.linked.opendata.cz/resource/obce/554782> .
+@prefix ruiands: <http://ruian.linked.opendata.cz/resource/dataset> .
 
 ruiands:Wikidata_Ruian a void:Linkset ;
     void:objectsTarget <http://ruian.linked.opendata.cz/dataset/ruian/obce> ;
