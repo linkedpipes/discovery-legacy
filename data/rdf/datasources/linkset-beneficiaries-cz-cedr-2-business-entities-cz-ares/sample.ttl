@@ -1,11 +1,27 @@
-PREFIX bus: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/business/v2#>
-PREFIX cedr: <http://cedropendata.mfcr.cz/c3lod/cedr/vocabCEDR#>
-PREFIX gr: <http://purl.org/goodrelations/v1#>
-PREFIX s:	<http://schema.org/>
-PREFIX regorg: <http://www.w3.org/ns/regorg#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
+@prefix bus: <http://cedropendata.mfcr.cz/c3lod/isdp/vocabIsdp/business/v2#> .
+@prefix cedr: <http://cedropendata.mfcr.cz/c3lod/cedr/vocabCEDR#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix s:	<http://schema.org/> .
+@prefix regorg: <http://www.w3.org/ns/regorg#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> 
+@prefix void: <http://rdfs.org/ns/void#> .
 
 <http://cedropendata.mfcr.cz/c3lod/cedr/resource/PrijemcePomoci/0041199386749100C49360759AD7D8E5429C162D> <http://www.w3.org/2002/07/owl#sameAs> <http://linked.opendata.cz/resource/business-entity/CZ00000205> ;
    a cedr:PravnickaOsoba, cedr:PrijemcePomoci, gr:Organization .
    
-<http://linked.opendata.cz/resource/business-entity/CZ00000205> a gr:BusinessEntity, s:Organization, regorg:RegisteredOrganization .   
+<http://linked.opendata.cz/resource/business-entity/CZ00000205> a gr:BusinessEntity, s:Organization, regorg:RegisteredOrganization .
+
+ruiands:Cedr_Ares a void:Linkset ;
+    void:objectsTarget <http://linked.opendata.cz/resource/business-entities> ;
+    void:subjectsTarget <http://cedropendata.mfcr.cz/c3lod/cedr/resource/PrijemciPomoci> ;
+    void:linkPredicate owl:sameAs ;
+    void:exampleResource <http://cedropendata.mfcr.cz/c3lod/cedr/resource/PrijemcePomoci/0041199386749100C49360759AD7D8E5429C162D> ;
+    void:uriSpace "http://cedropendata.mfcr.cz/c3lod/cedr/resource/PrijemcePomoci" .
+
+<http://cedropendata.mfcr.cz/c3lod/cedr/resource/PrijemciPomoci> a void:Dataset ;
+    void:class cedr:PrijemcePomoci .
+
+<http://linked.opendata.cz/resource/business-entities> a void:Dataset ;
+    void:class gr:BusinessEntity .
