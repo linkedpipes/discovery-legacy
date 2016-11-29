@@ -6,8 +6,21 @@ ns1:wgs84	rdf:type	s:GeoCoordinates ;
 	s:latitude	"49.39009616388889156723962514661252498626708984375" .
 @prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> .
 <http://ruian.linked.opendata.cz/resource/adresni-mista/15995241>	rdf:type	ruian:AdresniMisto ,
-		s:Place ;
-	ruian:adresniBod	<http://ruian.linked.opendata.cz/resource/adresni-mista/15995241/point/DAM.15995241.1> .
+		s:Place .
+@prefix skos:	<http://www.w3.org/2004/02/skos/core#> .
+<http://ruian.linked.opendata.cz/resource/adresni-mista/15995241>	skos:notation	"15995241" ;
+	ruian:adresniBod	<http://ruian.linked.opendata.cz/resource/adresni-mista/15995241/point/DAM.15995241.1> ;
+	ruian:cisloDomovni	3 ;
+	ruian:idTransakce	421155 .
+@prefix xsd:	<http://www.w3.org/2001/XMLSchema#> .
+<http://ruian.linked.opendata.cz/resource/adresni-mista/15995241>	ruian:platiOd	"2013-12-04T00:00:00+02:00"^^xsd:dateTime ;
+	ruian:psc	76872 ;
+	ruian:stavebniObjekt	<http://ruian.linked.opendata.cz/resource/stavebni-objekty/15879046> ;
+	ruian:ulice	<http://ruian.linked.opendata.cz/resource/ulice/238562> ;
+	ruian:vOKod	17213 ;
+	ruian:adresniPosta	<http://ruian.linked.opendata.cz/ontology/adresni-mista/AdresniPosta#76872> ;
+	s:name	"3" .
 @prefix ogcgml:	<http://www.opengis.net/ont/gml#> .
+<http://ruian.linked.opendata.cz/resource/adresni-mista/15995241>	ogcgml:id	"AD.15995241" .
 <http://ruian.linked.opendata.cz/resource/adresni-mista/15995241/point/DAM.15995241.1>	rdf:type	ogcgml:Point ;
 	s:geo	ns1:wgs84 .
