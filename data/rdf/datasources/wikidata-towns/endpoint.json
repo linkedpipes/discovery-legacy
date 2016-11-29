@@ -4,5 +4,5 @@
   "label": "Towns in Wikidata",
   "isLarge": true,
   "isLinkset": false,
-  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/wikidata-towns/sample.ttl"
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/wikidata-towns/sample.ttl"
 }
