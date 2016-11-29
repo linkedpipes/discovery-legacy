@@ -13,7 +13,8 @@ CONSTRUCT {
         rdfs:label ?townLabel ;
         wdt:P1082 ?population ;
         wdt:P281 ?postalCode ;
-        wdt:P625 ?coordinateLocation .
+        wdt:P625 ?coordinateLocation ;
+		wdt:P17 ?country .
   
 } WHERE {
    VALUES ?town {wd:Q1085}
@@ -21,7 +22,7 @@ CONSTRUCT {
           wdt:P1082 ?population ;
           wdt:P281 ?postalCode ;
           wdt:P625 ?coordinateLocation ;
-          wdt:P17 wd:Q213 .
+          wdt:P17 ?country .
   
 	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }
