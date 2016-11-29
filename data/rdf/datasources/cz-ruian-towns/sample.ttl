@@ -1,16 +1,29 @@
 @prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> .
+<http://ruian.linked.opendata.cz/resource/obce/533424>	rdf:type	ruian:Obec .
+@prefix skos:	<http://www.w3.org/2004/02/skos/core#> .
+<http://ruian.linked.opendata.cz/resource/obce/533424>	skos:notation	"533424" ;
+	ruian:definicniBod	<http://ruian.linked.opendata.cz/resource/obce/533424/multi-point/DOB.533424> ,
+		<http://ruian.linked.opendata.cz/resource/obce/533424/multi-point/DOB.533424/point/DOB.533424.1> ;
+	ruian:idTransakce	388300 ;
+	ruian:lau	<http://linked.opendata.cz/resource/region/533424> ;
+	ruian:okres	<http://ruian.linked.opendata.cz/resource/okresy/3204> ;
+	ruian:pad2	"Kou\u0159imi" ;
+	ruian:pad3	"Kou\u0159imi" ;
+	ruian:pad4	"Kou\u0159im" ;
+	ruian:pad6	"Kou\u0159imi" ;
+	ruian:pad7	"Kou\u0159im\u00ED" .
+@prefix xsd:	<http://www.w3.org/2001/XMLSchema#> .
+<http://ruian.linked.opendata.cz/resource/obce/533424>	ruian:platiOd	"2013-11-07T00:00:00+02:00"^^xsd:dateTime ;
+	ruian:pou	<http://ruian.linked.opendata.cz/resource/pou/159> ;
+	ruian:status	<http://ruian.linked.opendata.cz/ontology/obce/StatusObce#3> .
 @prefix s:	<http://schema.org/> .
+<http://ruian.linked.opendata.cz/resource/obce/533424>	s:name	"Kou\u0159im" .
 @prefix ogcgml:	<http://www.opengis.net/ont/gml#> .
-
-<http://ruian.linked.opendata.cz/resource/obce/533424>
-	rdf:type	ruian:Obec ;
-	ruian:definicniBod	<http://ruian.linked.opendata.cz/resource/obce/533424/multi-point/DOB.533424/point/DOB.533424.1> ;
-	s:name	"Kou\u0159im" .
-<http://ruian.linked.opendata.cz/resource/obce/533424/multi-point/DOB.533424/point/DOB.533424.1>
-	rdf:type	ogcgml:Point ;
-	s:geo	<http://ruian.linked.opendata.cz/resource/obce/533424/multi-point/DOB.533424/point/DOB.533424.1/wgs84> .
-<http://ruian.linked.opendata.cz/resource/obce/533424/multi-point/DOB.533424/point/DOB.533424.1/wgs84>
-	rdf:type	s:GeoCoordinates ;
+<http://ruian.linked.opendata.cz/resource/obce/533424>	ogcgml:id	"OB.533424" .
+<http://ruian.linked.opendata.cz/resource/obce/533424/multi-point/DOB.533424/point/DOB.533424.1>	rdf:type	ogcgml:Point .
+@prefix ns6:	<http://ruian.linked.opendata.cz/resource/obce/533424/multi-point/DOB.533424/point/DOB.533424.1/> .
+<http://ruian.linked.opendata.cz/resource/obce/533424/multi-point/DOB.533424/point/DOB.533424.1>	s:geo	ns6:wgs84 .
+ns6:wgs84	rdf:type	s:GeoCoordinates ;
 	s:longitude	"14.977030744444444820828721276484429836273193359375" ;
 	s:latitude	"50.00305709166666900955533492378890514373779296875" .

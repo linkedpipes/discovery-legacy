@@ -15,17 +15,14 @@ CONSTRUCT {
     s:latitude ?latitude .
 
 } WHERE {
-
   ?obec a ruian:Obec ;
-    ruian:definicniBod/gml:pointMember ?definicniBod ;
+    ruian:definicniBod ?definicniBod ;
     s:name ?nazevObce .
 
-  ?definicniBod 
+  ?definicniBod a gml:Point ;
     s:geo ?geoCoordinates .
 
-  ?geoCoordinates s:longitude ?longitude ;
+  ?geoCoordinates a s:GeoCoordinates ;
+    s:longitude ?longitude ;
     s:latitude ?latitude .
-
-  ?adresniMisto ruian:ulice/ruian:obec ?obec ;
-    ruian:psc ?psc .
 }
