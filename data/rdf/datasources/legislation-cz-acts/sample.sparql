@@ -1,13 +1,1 @@
-PREFIX lex: <http://purl.org/lex#>
-PREFIX dct: <http://purl.org/dc/terms/>
-
-CONSTRUCT {
- <http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> a lex:Act ;
-   dct:title ?title ;
-   dct:issued ?date .
-} WHERE {
- <http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999> a lex:Act ;
-   dct:title ?title ;
-   dct:issued ?date .
- 
-}
+DESCRIBE <http://linked.opendata.cz/resource/legislation/cz/act/1999/106-1999>
