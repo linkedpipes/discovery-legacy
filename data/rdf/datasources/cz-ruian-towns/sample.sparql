@@ -4,8 +4,8 @@ PREFIX s: <http://schema.org/>
 
 CONSTRUCT {
   <http://ruian.linked.opendata.cz/resource/obce/533424> a ruian:Obec ;
-    ruian:definicniBod ?definicniBod ;
-    s:name ?nazevObce .
+    ?p ?o ;
+    ruian:definicniBod ?definicniBod .
 
   ?definicniBod a gml:Point ;
     s:geo ?geoCoordinates .
@@ -17,8 +17,8 @@ CONSTRUCT {
 } WHERE {
 
   <http://ruian.linked.opendata.cz/resource/obce/533424> a ruian:Obec ;
-    ruian:definicniBod/gml:pointMember ?definicniBod ;
-    s:name ?nazevObce .
+    ?p ?o ;
+    ruian:definicniBod/gml:pointMember ?definicniBod .
 
   ?definicniBod 
     s:geo ?geoCoordinates .

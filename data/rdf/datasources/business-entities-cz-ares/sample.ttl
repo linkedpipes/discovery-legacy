@@ -1,11 +1,16 @@
 @prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix ns1:	<http://linked.opendata.cz/resource/business-entity/> .
+@prefix ns2:	<http://www.w3.org/ns/regorg#> .
+ns1:CZ00007064	rdf:type	ns2:RegisteredOrganization .
 @prefix gr:	<http://purl.org/goodrelations/v1#> .
-@prefix s:	<http://schema.org/> .
-@prefix ns4:	<http://linked.opendata.cz/resource/business-entity/CZ00007064/postal-address/> .
-
 ns1:CZ00007064	rdf:type	gr:BusinessEntity ;
 	gr:legalName	"Ministerstvo vnitra" .
-
-ns1:CZ00007064	s:address	ns4:ad ,
-		<http://linked.opendata.cz/resource/domain/ares/postal-address/309484819> .
+@prefix s:	<http://schema.org/> .
+@prefix ns5:	<http://linked.opendata.cz/resource/business-entity/CZ00007064/postal-address/> .
+ns1:CZ00007064	s:address	ns5:ad ,
+		<http://linked.opendata.cz/resource/domain/ares/postal-address/309484819> ;
+	ns2:orgActivity	<http://linked.opendata.cz/resource/domain/ares/concept-scheme/nace/84110> ,
+		<http://linked.opendata.cz/resource/domain/ares/concept-scheme/nace/84240> .
+@prefix ns6:	<http://linked.opendata.cz/resource/domain/ares/identifier/> .
+ns1:CZ00007064	ns2:registration	ns6:CZ00007064 ;
+	ns2:orgType	<http://linked.opendata.cz/resource/domain/ares/concept-scheme/organization-types/325> .

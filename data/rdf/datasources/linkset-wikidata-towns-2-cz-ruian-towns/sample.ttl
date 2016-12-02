@@ -1,10 +1,23 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> .
+@prefix ruiands: <http://ruian.linked.opendata.cz/resource/dataset> .
+@prefix void: <http://rdfs.org/ns/void#> .
 
-<http://www.wikidata.org/entity/Q1085>
-  rdf:type <http://www.wikidata.org/entity/Q5153359> .
+<http://www.wikidata.org/entity/Q1000033> a <http://www.wikidata.org/entity/Q5153359>;
+  owl:sameAs <http://ruian.linked.opendata.cz/resource/obce/580511> .
   
-<http://ruian.linked.opendata.cz/resource/obce/554782> rdf:type	ruian:Obec .
+<http://ruian.linked.opendata.cz/resource/obce/580511> a ruian:Obec .
 
-<http://www.wikidata.org/entity/Q1085> owl:sameAs <http://ruian.linked.opendata.cz/resource/obce/554782> .
+ruiands:Wikidata_Ruian a void:Linkset ;
+    void:objectsTarget <http://ruian.linked.opendata.cz/dataset/ruian/obce> ;
+    void:subjectsTarget <http://wikidata.org/dataset/towns> ;
+    void:linkPredicate owl:sameAs ;
+    void:exampleResource <http://www.wikidata.org/entity/Q1085> ;
+    void:uriSpace "http://www.wikidata.org/entity/" .
+
+<http://ruian.linked.opendata.cz/dataset/ruian/obce> a void:Dataset ;
+    void:class ruian:Obec .
+
+<http://wikidata.org/dataset/towns> a void:Dataset ;
+    void:class <http://www.wikidata.org/entity/Q5153359> .

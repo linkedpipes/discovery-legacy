@@ -1,9 +1,27 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> .
+@prefix ruiands: <http://ruian.linked.opendata.cz/resource/dataset> .
+@prefix void: <http://rdfs.org/ns/void#> .
 @prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix ns1:	<http://ruian.linked.opendata.cz/ontology/> .
 @prefix s:	<http://schema.org/> .
 
-<http://ruian.linked.opendata.cz/resource/adresni-mista/10357734>	rdf:type	ns1:AdresniMisto .
-<http://ruian.linked.opendata.cz/resource/adresni-mista/10357734>	rdf:type	s:Place ;
+<http://ruian.linked.opendata.cz/resource/adresni-mista/10357734>	rdf:type	ns1:AdresniMisto ;
 	owl:sameAS	<http://linked.opendata.cz/resource/domain/ares/postal-address/310722294> .
 	
 <http://linked.opendata.cz/resource/domain/ares/postal-address/310722294>	rdf:type	s:PostalAddress .
+
+
+ruiands:Ruian_Ares a void:Linkset ;
+    void:subjectsTarget <http://ruian.linked.opendata.cz/resource/adresni-mista> ;
+    void:objectsTarget <http://wikidata.org/dataset/towns> ;
+    void:linkPredicate owl:sameAs ;
+    void:exampleResource <http://ruian.linked.opendata.cz/resource/adresni-mista/10357734> ;
+    void:uriSpace "http://ruian.linked.opendata.cz/resource/adresni-mista/" .
+
+<http://ruian.linked.opendata.cz/resource/adresni-mista> a void:Dataset ;
+    void:class ns1:AdresniMisto .
+
+<http://wikidata.org/dataset/towns> a void:Dataset ;
+    void:class s:PostalAddress .

@@ -1,7 +1,21 @@
-@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix frbr: <http://purl.org/vocab/frbr/core#> .
-@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns0: <http://www.metalex.eu/metalex/2008-05-02#> .
+@prefix ns1: <http://purl.org/vocab/frbr/core#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
-<http://www.legislation.gov.uk/id/uksi/2014/243> a frbr:Work ;
-	dct:title "The Three Rivers (Electoral Changes) Order 2014"@en ;
-	dct:created "2014-02-05"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://www.legislation.gov.uk/id/uksi/2014/243>
+  dc:title "The Three Rivers (Electoral Changes) Order 2014"@en ;
+  dc:created "2014-02-05"^^xsd:date ;
+  rdfs:label "The Three Rivers (Electoral Changes) Order 2014"@en ;
+  dc:identifier "http://www.legislation.gov.uk/id/uksi/2014/243"^^xsd:anyURI ;
+  dc:subject "LOCAL GOVERNMENT, ENGLAND"@en ;
+  ns0:fragment <http://www.legislation.gov.uk/id/uksi/2014/243/article/6>, <http://www.legislation.gov.uk/id/uksi/2014/243/article/1>, <http://www.legislation.gov.uk/id/uksi/2014/243/article/2>, <http://www.legislation.gov.uk/id/uksi/2014/243/article/5>, <http://www.legislation.gov.uk/id/uksi/2014/243/article/8>, <http://www.legislation.gov.uk/id/uksi/2014/243/schedule/1>, <http://www.legislation.gov.uk/id/uksi/2014/243/article/4>, <http://www.legislation.gov.uk/id/uksi/2014/243/article/7>, <http://www.legislation.gov.uk/id/uksi/2014/243/schedule/2>, <http://www.legislation.gov.uk/id/uksi/2014/243/article/3> ;
+  a <http://purl.org/vocab/frbr/core#Work>, ns0:BibliographicWork ;
+  rdfs:isDefinedBy <http://www.legislation.gov.uk/uksi/2014/243/made> ;
+  ns0:realizedBy <http://www.legislation.gov.uk/uksi/2014/243/made> ;
+  ns1:realization <http://www.legislation.gov.uk/uksi/2014/243/made> ;
+  foaf:isPrimaryTopicOf <http://www.legislation.gov.uk/uksi/2014/243/made> ;
+  dc:type <http://purl.org/dc/dcmitype/Text> ;
+  dc:creator [ ] .

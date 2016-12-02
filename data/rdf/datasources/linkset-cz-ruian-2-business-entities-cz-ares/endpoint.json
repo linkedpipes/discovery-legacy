@@ -1,8 +1,8 @@
 {
-  "url": "http://linked.opendata.cz/sparql",
-  "defaultGraphIris": [],
-  "label": "RUIAN (Addresses) --- Linkset : Business Entities in Czech Republic (Addresses)",
-  "isLarge": true,
+  "url": "http://internal.opendata.cz/sparql",
+  "defaultGraphIris": ["http://internal.opendata.cz/linkset/cz-ruian-addresses-2-cz-ares-addresses"],
+  "label": "Linkset : RUIAN (Addresses) --- Business Entities in Czech Republic (Addresses)",
+  "isLarge": false,
   "isLinkset": true,
   "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/linkset-cz-ruian-2-business-entities-cz-ares/sample.ttl"
 }

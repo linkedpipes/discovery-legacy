@@ -18,9 +18,6 @@ CONSTRUCT {
 	
   ?adresa
     spa:adresniMistoKod ?adresniMistoKod .
-	
-  ?adresa
-    spa:adresniMistoKod ?adresniMistoKod .
 } WHERE {
   <http://cedropendata.mfcr.cz/c3lod/cedr/resource/Dotace/B224DCBEC7F03E18383545ACD1E3C60379572C82>
 	cedr:byloRozhodnuto ?rozhodnuti ;

@@ -4,5 +4,5 @@
   "label": "LinkedMDB",
   "isLarge": false,
   "isLinkset": false,
-  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/linkedmdb/sample.ttl"
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/linkedmdb/datasources/sample.ttl"
 }

@@ -7,10 +7,11 @@ PREFIX ruian-link: <http://ruian.linked.opendata.cz/ontology/links/>
 CONSTRUCT {
   ?address a s:PostalAddress .
   
-  ?adresniMistoRUIAN a s:Place, ruian:AdresniMisto ;
+  ?adresniMistoRUIAN a ruian:AdresniMisto ;
     owl:sameAS ?address .
 
 } WHERE {
   ?address a s:PostalAddress ;
     ruian-link:adresni-misto ?adresniMistoRUIAN .
 }
+# http://fit1.opendata.cz:8090/resources/pipelines/created-1480421882436
