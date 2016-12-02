@@ -17,7 +17,6 @@ case class DiscoveryInput(
 object DiscoveryInput {
 
     val extractors = Seq(
-        new TownsExtractor,
         new PopulatedPlacesExtractor,
         new EarthquakesExtractor,
         new DcatDatasetExtractor,
@@ -28,8 +27,9 @@ object DiscoveryInput {
         new SubsidiesCzCedrExtractor,
         new NomismaOrgPersonsExtractor,
         new LinkedMdbFilmsExtractor,
-        new RuianExtractor,
         new AresExtractor,
+        new RuianExtractor,
+        new TownsExtractor,
         new WikidataTownsExtractor
     )
 
@@ -80,7 +80,6 @@ object DiscoveryInput {
     )
 
     val visualizers = Seq(
-        new GoogleMapsVisualizer,
         new TemporalEntityVisualizer,
         new TemporalEntityTimeIntervalVisualizer,
         new VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer,

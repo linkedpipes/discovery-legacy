@@ -45,6 +45,7 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
                         }
                     }
                 }.toSeq.distinct
+
                 val filteredPipelines = givenPipelines.filterNot(_.components.exists(c => linksets.contains(c.componentInstance)))
                 tryMatchGivenPipelinesWithPort(headPort, filteredPipelines, lastStates, componentInstance, iterationNumbr).flatMap { matches =>
                     tryMatchPorts(tail, filteredPipelines, portMatches + (headPort -> matches), matches.map(_.maybeState), iterationNumbr, componentInstance)
@@ -65,12 +66,9 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
             } yield {
                 val eventualCheckResult = componentInstance.checkPort(port, state, pipeline.lastOutputDataSample, discoveryId, iterationNumber)
                 eventualCheckResult.map {
-                    case c: PortCheckResult if c.status == Status.Success =>
-                        Some(PortMatch(port, pipeline, c.maybeState))
-                    case c: PortCheckResult if c.status == Status.Error =>
-                        None
-                    case _ =>
-                        None
+                    case c: PortCheckResult if c.status == Status.Success => Some(PortMatch(port, pipeline, c.maybeState))
+                    case c: PortCheckResult if c.status == Status.Error => None
+                    case _ => None
                 }
             }
         }

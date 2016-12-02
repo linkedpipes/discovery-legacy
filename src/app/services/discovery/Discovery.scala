@@ -18,6 +18,10 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
 
     val results = new mutable.HashMap[UUID, Pipeline]
 
+    val start = System.nanoTime()
+
+    var end : Long = 0
+
     var isFinished = false
 
     def discover(input: DiscoveryInput): Future[Seq[Pipeline]] = {
@@ -51,7 +55,10 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
             discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Next iteration: ${!stop}.")
 
             stop match {
-                case true => Future.successful(nextIterationData.completedPipelines)
+                case true => {
+                    end = System.nanoTime()
+                    Future.successful(nextIterationData.completedPipelines)
+                }
                 case false => iterate(nextIterationData)
             }
         }

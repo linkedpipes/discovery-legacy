@@ -6,12 +6,10 @@ class Foaf_Name2Dct_Title extends SparqlUpdateTransformer {
         """
           |?agent foaf:name ?name .""".stripMargin
     protected override val deleteClause = "?agent foaf:name ?name ."
-    protected override val insertClause =
-        """
-          | ?agent dct:title ?name .
-        """.stripMargin
+    protected override val insertClause = "?agent dct:title ?name ."
     protected override val prefixes =
         """
           |PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+          |PREFIX dct: <http://purl.org/dc/terms/>
         """.stripMargin
 }

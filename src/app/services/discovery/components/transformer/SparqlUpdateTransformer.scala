@@ -44,8 +44,14 @@ abstract class SparqlUpdateTransformer extends SparqlTransformerInstance with De
     override def getInputPorts: Seq[Port] = Seq(port)
 
     override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Future[DataSample] = {
-        val newSample = dataSamples(port).transform(query, discoveryId, iterationNumber)
-        Future.successful(ModelDataSample(newSample))
+        try {
+            val newSample = dataSamples(port).transform(query, discoveryId, iterationNumber)
+            Future.successful(ModelDataSample(newSample))
+        } catch {
+            case e: Throwable => {
+                throw e
+            }
+        }
     }
 
     override def getQueryByPort(port: Port): SparqlQuery = query

@@ -10,10 +10,9 @@ import play.api.libs.json.{JsError, JsNumber, Json}
 import play.api.libs.ws.WSClient
 import play.api.mvc.{Action, BodyParsers, Controller}
 import services.DiscoveryService
-import services.discovery.model.components.DataSourceInstance
+import services.discovery.model.components.{DataSourceInstance, ExtractorInstance, TransformerInstance, VisualizerInstance}
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.io.Source
 
 @Singleton
 class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) extends Controller {
@@ -48,20 +47,6 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
         val maybePipelines = service.getPipelines(id)
         Ok(Json.obj(
             "pipelines" -> maybePipelines.map { pipelines => pipelines.map { p =>
-
-                val file = new File(s"/tmp/pipeline-${p._1.toString}.json")
-                val outputStream = new BufferedOutputStream(new FileOutputStream(file))
-
-                val data = service.getEtlPipeline(id, p._1.toString)
-                data.map { datasets =>
-                    datasets.foreach(d =>
-                        RDFDataMgr.write(outputStream, d, Lang.JSONLD)
-                    )
-                }
-
-                outputStream.flush()
-                outputStream.close()
-
                 Json.obj(
                     "id" -> p._1.toString,
                     "componentCount" -> JsNumber(p._2.components.size),
@@ -75,11 +60,27 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
         ))
     }
 
+    def csv(id: String) = Action {
+        val maybePipelines = service.getPipelines(id)
+        val string = maybePipelines.map { pipelineMap => pipelineMap.map { case (id, p) =>
+                val ds = p.components.map(c => c.componentInstance).collect { case d : DataSourceInstance => d }.map(_.label).mkString(",")
+                val ex = p.components.map(c => c.componentInstance).collect { case e : ExtractorInstance => e }.map(_.getClass.getSimpleName).mkString(",")
+                val tr = p.components.map(c => c.componentInstance).collect { case e : TransformerInstance => e }.map(_.getClass.getSimpleName).mkString(",")
+                val trCount = p.components.map(c => c.componentInstance).collect { case e : TransformerInstance => e }.size
+                val vi = p.components.map(c => c.componentInstance).collect { case e : VisualizerInstance => e }.map(_.getClass.getSimpleName).mkString(",")
+
+                s"$ds;$trCount;$ex;$tr;$vi"
+            }.mkString("\n")
+        }.getOrElse("")
+
+        Ok(string)
+    }
+
     def upload(id: String) = Action {
         val url = "http://xrg12.ms.mff.cuni.cz:8090/resources/pipelines?pipeline="
         val maybePipelines = service.getPipelines(id)
-        maybePipelines.map { p =>
-            p.map { case (uuid, pipeline) =>
+        maybePipelines.foreach { p =>
+            p.foreach { case (uuid, pipeline) =>
                 val request = ws.url(url + s"http://demo.visualization.linkedpipes.com:8080/discovery/$id/pipelines/${uuid.toString}")
                 request.get().foreach { r => println(r.body) }
             }

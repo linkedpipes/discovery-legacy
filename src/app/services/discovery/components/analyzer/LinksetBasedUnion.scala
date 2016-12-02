@@ -33,7 +33,6 @@ class LinksetBasedUnion extends UnionInstance {
           |    ?subjectsDs void:class ?subjectsClass .
           |    ?objectsDs void:class ?objectsClass .
           |}
-          |
         """.stripMargin
     )
 
@@ -41,11 +40,10 @@ class LinksetBasedUnion extends UnionInstance {
         s"""
            |PREFIX ldvm: <http://linked.opendata.cz/ontology/ldvm/>
            |
-       |ASK {
+           |ASK {
            |   ?x a <$isClass> .
            |}
-           |
-       |""".stripMargin
+        """.stripMargin
     )
 
     override val getInputPorts: Seq[Port] = Seq(linksPort, source1Port, source2Port)
@@ -123,7 +121,7 @@ class LinksetBasedUnion extends UnionInstance {
                 s"""
                    | PREFIX void: <http://rdfs.org/ns/void#>
                    |
-           | CONSTRUCT {
+                   | CONSTRUCT {
                    |   <${sample1.getURI}> ?p <${sample2.getURI}>
                    | } WHERE {
                    |   [] void:linkPredicate ?p .

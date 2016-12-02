@@ -31,7 +31,5 @@ class WikidataTownsExtractor extends SimpleExtractor {
           |          wdt:P281 ?postalCode ;
           |          wdt:P625 ?coordinateLocation ;
           |          wdt:P17 wd:Q213 .
-          |
-          |	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
         """.stripMargin
 }
