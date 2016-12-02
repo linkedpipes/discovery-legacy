@@ -4,5 +4,5 @@
   "label": "Towns in DBPedia",
   "isLarge": true,
   "isLinkset": false,
-  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/dbpedia-towns/sample.ttl"
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/dbpedia-towns/sample.ttl"
 }
