@@ -4,5 +4,5 @@
   "label": "DBPedia",
   "isLarge": true,
   "isLinkset": false,
-  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/earthquakes/sample.ttl"
+  "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/dbpedia-earthquakes/sample.ttl"
 }
