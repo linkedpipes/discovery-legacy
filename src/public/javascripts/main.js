@@ -109,13 +109,22 @@ $(document).ready(function () {
         "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/legislation-cz-acts/sample.ttl"
     };
 
-    var legislation_gb_acts = {
+    var legislation_gb_acts_versions = {
         "url": "http://gov.tso.co.uk/legislation/sparql",
         "defaultGraphIris": [],
         "label": "Legislation UK - Versions of Acts",
         "isLarge": true,
         "isLinkset": false,
         "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/legislation-gb-acts-versions/sample.ttl"
+    };
+
+    var legislation_gb_acts = {
+        "url": "http://gov.tso.co.uk/legislation/sparql",
+        "defaultGraphIris": [],
+        "label": "Legislation UK - Acts",
+        "isLarge": true,
+        "isLinkset": false,
+        "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/legislation-gb-acts/sample.ttl"
     };
 
     var linkedmdb = {
@@ -155,7 +164,7 @@ $(document).ready(function () {
     };
 
     var datasourceGroups = [
-        {
+        /*{
             datasources: [businessEntitiesCZ]
         },
 
@@ -192,6 +201,10 @@ $(document).ready(function () {
         },
 
         {
+            datasources: [edp]
+        },
+
+        {
             datasources: [legislation_cz_acts_versions]
         },
 
@@ -200,12 +213,12 @@ $(document).ready(function () {
         },
 
         {
+            datasources: [legislation_gb_acts_versions]
+        },
+
+        {
             datasources: [legislation_gb_acts]
         },
-/*
-        {
-            datasources: [linkedmdb]
-        },*/
 
         {
             datasources: [nomisma]
@@ -217,6 +230,9 @@ $(document).ready(function () {
 
         {
             datasources: [wikidata_towns]
+        },*/
+        {
+            datasources: [linkedmdb]
         },
     ];
 
@@ -252,9 +268,11 @@ $(document).ready(function () {
                     doneCount++;
                     $("#donecount").html(doneCount);
 
-                    var dsnames = dsGroup.datasources.map(function(ds){ return ds.label; }).join(",");
+                    var dsnames = dsGroup.datasources.map(function (ds) {
+                        return ds.label;
+                    }).join(",");
 
-                    $("#csv").append("\n\nThe following experiment has finished in " + duration + " ms;"+dsnames+"\n");
+                    $("#csv").append("\n\nThe following experiment has finished in " + duration + " ms;" + dsnames + "\n");
 
                     $("#csv").append(csv);
                 });
