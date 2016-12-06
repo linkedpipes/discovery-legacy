@@ -6,10 +6,10 @@ PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 DELETE {
   ?town wdt:P1082 ?population .
 } INSERT {
-  ?town lpviz:hasAbstraction [
-	rdf:value ?population ;
-	rdfs:label ?abstractionLabel
-  ] .
+  ?town lpviz:hasAbstraction ?abstraction .
+
+  ?abstraction rdf:value ?population ;
+	rdfs:label ?abstractionLabel .
 } WHERE {
   ?town wdt:P1082 ?population .
 	
@@ -17,4 +17,6 @@ DELETE {
     ?town rdfs:label ?label .
 	BIND(CONCAT("Population of ", STR(?label)) AS ?abstractionLabel)
   }
+  
+  BIND(IRI(CONCAT(STR(?town), "/abstraction/wikidata-coordinate-location2geo-SpatialThing")) AS ?abstraction)
 }

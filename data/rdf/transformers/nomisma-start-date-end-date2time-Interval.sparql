@@ -10,23 +10,27 @@ DELETE {
   ?s nmo:hasStartDate ?sd ;
 	nmo:hasEndDate ?ed .
 } INSERT {
-  ?s lpviz:hasAbstraction [
-	a time:Interval ;
-	time:hasBeginning [
-		a time:Instant ;
-		time:inXSDDateTime ?start 
-	];
-	time:hasEnd [
-		a time:Instant ;
-		time:inXSDDateTime ?end 
-	];
-	rdfs:label ?abstractionLabel
-  ] .
+  ?s lpviz:hasAbstraction ?abstraction .
+
+  ?abstraction a time:Interval ;
+    time:hasBeginning ?abstractionBeginning ;
+	time:hasEnd ?abstractionEnd ;
+	rdfs:label ?abstractionLabel .
+  
+  ?abstractionBeginning a time:Instant ;
+	time:inXSDDateTime ?start .
+	
+  ?abstractionEnd a time:Instant ;
+	time:inXSDDateTime ?end .
 } WHERE {
   ?s nmo:hasStartDate ?start ;
 	nmo:hasEndDate ?end ;
 	skos:prefLabel ?label .
   
   BIND(CONCAT("Existence of ", STR(?label)) AS ?abstractionLabel)
+  
+  BIND(IRI(CONCAT(STR(?s), "/abstraction/nomisma-start-date-end-date2time-Interval")) AS ?abstraction)
+  BIND(IRI(CONCAT(STR(?s), "/abstraction/nomisma-start-date-end-date2time-Interval/beginning")) AS ?abstractionBeginning)
+  BIND(IRI(CONCAT(STR(?s), "/abstraction/nomisma-start-date-end-date2time-Interval/end")) AS ?abstractionEnd)
   
 }

@@ -6,10 +6,10 @@ PREFIX dbo: <http://dbpedia.org/ontology/>
 DELETE {
   ?town dbo:populationTotal ?population .
 } INSERT {
-  ?town lpviz:hasAbstraction [
-	rdf:value ?population ;
-	rdfs:label ?abstractionLabel
-  ] .
+  ?town lpviz:hasAbstraction ?abstraction .
+  
+  ?abstraction rdf:value ?population ;
+	rdfs:label ?abstractionLabel .
 } WHERE {
   ?town dbo:populationTotal ?population .
 	
@@ -17,4 +17,6 @@ DELETE {
     ?town rdfs:label ?label .
 	BIND(CONCAT("Total population of ", STR(?label)) AS ?abstractionLabel)
   }
+  
+  BIND(IRI(CONCAT(STR(?town), "/abstraction/dbpedia-populationTotal2rdf-value")) AS ?abstraction)
 }

@@ -6,18 +6,22 @@ PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 DELETE {
   ?s dct:valid ?valid .
 } INSERT {
-  ?s lpviz:hasAbstraction [
+  ?s lpviz:hasAbstraction ?abstraction .
+  
+  ?abstraction
 	a time:Interval ;
-	time:hasBeginning [
-		a time:Instant ;
-		time:inXSDDateTime ?start 
-	];
-	time:hasEnd [
-		a time:Instant ;
-		time:inXSDDateTime ?end 
-	];
-	rdfs:label ?abstractionLabel
-  ] .
+	time:hasBeginning ?abstractionBeginning ;
+	time:hasEnd ?abstractionEnd ;
+	rdfs:label ?abstractionLabel .
+	
+  ?abstractionBeginning
+	a time:Instant ;
+	time:inXSDDateTime ?start .
+	
+  ?abstractionEnd
+	a time:Instant ;
+	time:inXSDDateTime ?end .
+	
 } WHERE {
   ?s dct:valid ?valid .
  
@@ -44,5 +48,9 @@ DELETE {
 	?s dct:title ?title .
 	  BIND(CONCAT("Validity of ", STR(?title)) AS ?abstractionLabel)
   }
+  
+  BIND(IRI(CONCAT(STR(?s), "/abstraction/dct-valid2time-Interval-01")) AS ?abstraction)
+  BIND(IRI(CONCAT(STR(?s), "/abstraction/dct-valid2time-Interval-01/beginning")) AS ?abstractionBeginning)
+  BIND(IRI(CONCAT(STR(?s), "/abstraction/dct-valid2time-Interval-01/end")) AS ?abstractionEnd)
   
 }

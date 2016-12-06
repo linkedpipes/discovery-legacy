@@ -6,11 +6,11 @@ PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 DELETE {
   ?s dct:date ?dateTime .
 } INSERT {
-  ?s lpviz:hasAbstraction [
-	a time:Instant ;
+  ?s lpviz:hasAbstraction ?abstraction .
+  
+  ?abstraction a time:Instant ;
     time:inXSDDateTime ?dateTime ;
-	rdfs:label ?abstractionLabel
-  ] .
+	rdfs:label ?abstractionLabel .
 } WHERE {
   ?s dct:date ?dateTime .
   
@@ -18,4 +18,6 @@ DELETE {
 	?s dct:title ?title .
 	 BIND(CONCAT("Date of ", STR(?title)) AS ?abstractionLabel)
   }
+  
+  BIND(IRI(CONCAT(STR(?s), "/abstraction/dct-date2time-Instant")) AS ?abstraction)
 }
