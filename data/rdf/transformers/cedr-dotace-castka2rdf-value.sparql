@@ -7,11 +7,12 @@ PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 DELETE {
   ?dotace cedr:castkaRozhodnuta ?castka .
 } INSERT {
-  ?dotace lpviz:hasAbstraction [
-	rdf:value ?castka ;
+  ?dotace lpviz:hasAbstraction ?abstraction .
+  
+  ?abstraction rdf:value ?castka ;
 	lpviz:unit "CZK" ;
-	rdfs:label ?abstractionLabel
-  ] .
+	rdfs:label ?abstractionLabel .
+	
 } WHERE {
   ?dotace cedr:castkaRozhodnuta ?castka .
 	
@@ -19,4 +20,6 @@ DELETE {
     ?dotace dct:title ?title .
 	BIND(CONCAT("Allocated money for subsidy number ", STR(?title)) AS ?abstractionLabel)
   }
+  
+  BIND(IRI(CONCAT(STR(?dotace), "/abstraction/cedr-dotace-castka2rdf-value")) AS ?abstraction)
 }

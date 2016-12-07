@@ -7,11 +7,11 @@ PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 DELETE {
   ?s cedr:smlouvaPodpisDatum ?dateTime .
 } INSERT {
-  ?s lpviz:hasAbstraction [
-	a time:Instant ;
+  ?s lpviz:hasAbstraction ?abstraction .
+  
+  ?abstraction a time:Instant ;
     time:inXSDDateTime ?dateTime ;
-	rdfs:label ?abstractionLabel
-  ] .
+	rdfs:label ?abstractionLabel .
 } WHERE {
   ?s cedr:smlouvaPodpisDatum ?dateTime .
   
@@ -19,4 +19,6 @@ DELETE {
 	?s dct:title ?title .
 	BIND(CONCAT("Signature of agreement number ", STR(?title)) AS ?abstractionLabel)
   }
+  
+  BIND(IRI(CONCAT(STR(?s), "/abstraction/cedr-smlouvaPodpisDatum2time-Instant")) AS ?abstraction)
 }

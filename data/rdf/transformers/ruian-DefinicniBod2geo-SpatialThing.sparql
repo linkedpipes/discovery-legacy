@@ -6,7 +6,7 @@ PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 DELETE {
   ?s ruian:definicniBod ?bod .
 } INSERT {
-  ?s lpviz:hasAbstraction  ?bod .
+  ?s lpviz:hasAbstraction ?bod .
   
   ?bod rdfs:label ?abstractionLabel .
 } WHERE {

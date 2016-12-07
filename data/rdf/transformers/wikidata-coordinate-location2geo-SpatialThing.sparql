@@ -7,15 +7,15 @@ PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 DELETE {
   ?s wdt:P625 ?coordinates .
 } INSERT {
-  ?s lpviz:hasAbstraction [
-    geo:location [
-      a geo:SpatialThing ;
-      geo:long ?long ;
-      geo:lat ?lat
-	]
-  ] .
+  ?s lpviz:hasAbstraction ?abstraction .
+
+  ?abstraction geo:location ?abstractionLocation .
   
-  ?misto rdfs:label ?abstractionLabel .
+  ?abstractionLocation a geo:SpatialThing ;
+      geo:long ?long ;
+      geo:lat ?lat .
+  
+  ?abstraction rdfs:label ?abstractionLabel .
 } WHERE {
 
   ?s wdt:P625 ?coordinates ;
@@ -26,5 +26,8 @@ DELETE {
   BIND(REPLACE(STR(?coordinates), "Point\\(([0-9]{2}\\.[0-9]*) ([0-9]{2}\\.[0-9]*)\\)", "$1") AS ?lat)
   
   BIND(REPLACE(STR(?coordinates), "Point\\(([0-9]{2}\\.[0-9]*) ([0-9]{2}\\.[0-9]*)\\)", "$2") AS ?long)
+  
+  BIND(IRI(CONCAT(STR(?s), "/abstraction/wikidata-coordinate-location2geo-SpatialThing")) AS ?abstraction)
+  BIND(IRI(CONCAT(STR(?s), "/abstraction/wikidata-coordinate-location2geo-SpatialThing/location")) AS ?abstractionLocation)
   
 }
