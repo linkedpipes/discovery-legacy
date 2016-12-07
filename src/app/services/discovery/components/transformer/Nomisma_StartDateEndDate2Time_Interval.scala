@@ -10,26 +10,29 @@ class Nomisma_StartDateEndDate2Time_Interval extends SparqlUpdateTransformer {
           |PREFIX nmo: <http://nomisma.org/ontology#>
           |PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
         """.stripMargin
+
     protected override val deleteClause =
         """
           |?s nmo:hasStartDate ?sd ;
           |    nmo:hasEndDate ?ed .
         """.stripMargin
+
     protected override val insertClause =
         """
-          |?s lpviz:hasAbstraction [
-          |    a time:Interval ;
-          |    time:hasBeginning [
-          |        a time:Instant ;
-          |        time:inXSDDateTime ?start
-          |    ];
-          |    time:hasEnd [
-          |        a time:Instant ;
-          |        time:inXSDDateTime ?end
-          |    ];
-          |    rdfs:label ?abstractionLabel
-          |] .
+          |?s lpviz:hasAbstraction ?abstraction .
+          |
+          |?abstraction a time:Interval ;
+          |    time:hasBeginning ?abstractionBeginning ;
+          |    time:hasEnd ?abstractionEnd ;
+          |    rdfs:label ?abstractionLabel .
+          |
+          |?abstractionBeginning a time:Instant ;
+          |    time:inXSDDateTime ?start .
+          |
+          |    ?abstractionEnd a time:Instant ;
+          |    time:inXSDDateTime ?end .
         """.stripMargin
+
     protected override val whereClause =
         """
           |?s nmo:hasStartDate ?start ;
@@ -37,5 +40,9 @@ class Nomisma_StartDateEndDate2Time_Interval extends SparqlUpdateTransformer {
           |    skos:prefLabel ?label .
           |
           |BIND(CONCAT("Existence of ", STR(?label)) AS ?abstractionLabel)
-          |""".stripMargin
+          |
+          |BIND(IRI(CONCAT(STR(?s), "/abstraction/nomisma-start-date-end-date2time-Interval")) AS ?abstraction)
+          |BIND(IRI(CONCAT(STR(?s), "/abstraction/nomisma-start-date-end-date2time-Interval/beginning")) AS ?abstractionBeginning)
+          |BIND(IRI(CONCAT(STR(?s), "/abstraction/nomisma-start-date-end-date2time-Interval/end")) AS ?abstractionEnd)
+        """.stripMargin
 }

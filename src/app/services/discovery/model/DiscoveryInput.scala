@@ -38,6 +38,7 @@ object DiscoveryInput {
         new FusionTransformer,
 
         new Dbpedia_PopulationTotal2Rdf_ValueTransformer,
+        new Dbpedia_PopulationMetro2Rdf_ValueTransformer,
         new Dbpedia_Time2Time_InstantTransformer,
         new Dct_Issued2Time_InstantTransformer,
         new Dct_Created2Time_InstantTransformer,
@@ -62,7 +63,7 @@ object DiscoveryInput {
         new Movie_Actor2Foaf_Made,
         new Movie_Editor2Foaf_Made,
         new Movie_MusicContributorName2Foaf_Name,
-        new Movie_MusicContributorName2Foaf_Made,
+        new Movie_MusicContributor2Foaf_Made,
         new Movie_ProducerName2Foaf_Name,
         new Movie_Producer2Foaf_Made,
         new Movie_WriterName2Foaf_Name,

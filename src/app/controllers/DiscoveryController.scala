@@ -1,6 +1,7 @@
 package controllers
 
 import java.io._
+import java.util.UUID
 import javax.inject._
 
 import controllers.dto.DiscoverySettings
@@ -10,8 +11,10 @@ import play.api.libs.json.{JsError, JsNumber, Json}
 import play.api.libs.ws.WSClient
 import play.api.mvc.{Action, BodyParsers, Controller}
 import services.DiscoveryService
+import services.discovery.model.{DataSample, Pipeline}
 import services.discovery.model.components.{DataSourceInstance, ExtractorInstance, TransformerInstance, VisualizerInstance}
 
+import scala.collection.mutable
 import scala.concurrent.ExecutionContext.Implicits.global
 
 @Singleton
@@ -26,7 +29,7 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
                 BadRequest(Json.obj("error" -> JsError.toJson(errors)))
             },
             settings => {
-                if (settings.sparqlEndpoints.size == 0) {
+                if (settings.sparqlEndpoints.isEmpty) {
                     Logger.debug(s"[${request.id}] Rejected discovery. Neither dumps or SPARQL endpoints were specified.")
                     BadRequest(Json.obj("error" -> "Either dumps or sparql endpoints have to be specified."))
                 } else {
@@ -62,18 +65,70 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
 
     def csv(id: String) = Action {
         val maybePipelines = service.getPipelines(id)
-        val string = maybePipelines.map { pipelineMap => pipelineMap.map { case (id, p) =>
-                val ds = p.components.map(c => c.componentInstance).collect { case d : DataSourceInstance => d }.map(_.label).mkString(",")
-                val ex = p.components.map(c => c.componentInstance).collect { case e : ExtractorInstance => e }.map(_.getClass.getSimpleName).mkString(",")
-                val tr = p.components.map(c => c.componentInstance).collect { case e : TransformerInstance => e }.map(_.getClass.getSimpleName).mkString(",")
-                val trCount = p.components.map(c => c.componentInstance).collect { case e : TransformerInstance => e }.size
-                val vi = p.components.map(c => c.componentInstance).collect { case e : VisualizerInstance => e }.map(_.getClass.getSimpleName).mkString(",")
+        val string = maybePipelines.map { pipelineMap => {
 
-                s"$ds;$trCount;$ex;$tr;$vi"
-            }.mkString("\n")
+                val pipelines = pipelineMap.map { case (_, p) => p }
+                val appGroups = pipelines.groupBy(p => p.typedVisualizers.head)
+
+                var ag = 0
+                appGroups.map { appGroup =>
+                    ag += 1
+                    val dataSourceGroups = appGroup._2.groupBy(p => p.typedDatasources.toSet)
+                    var dg = 0
+                    dataSourceGroups.map { dataSourceGroup =>
+                        dg += 1
+                        val extractorGroups = dataSourceGroup._2.groupBy(p => p.typedExtractors.toSet)
+                        var eg = 0
+                        extractorGroups.map { extractorGroup =>
+                            eg += 1
+                            var groupedPipelines = extractorGroup._2.toIndexedSeq
+                            var i = 1
+                            val groups = new mutable.HashMap[Int, Seq[Pipeline]]
+
+                            while(groupedPipelines.nonEmpty)
+                            {
+                                val groupedPipeline = groupedPipelines.head
+                                val same = for {
+                                    pCandid <- groupedPipelines.drop(1) if sampleEquals(groupedPipeline.lastOutputDataSample, pCandid.lastOutputDataSample)
+                                } yield pCandid
+
+                                val group = Seq(groupedPipeline) ++ same
+                                groups.put(i, group)
+                                i += 1
+                                groupedPipelines = groupedPipelines.filter(pip => !group.contains(pip))
+                            }
+
+                            groups.toIndexedSeq.sortBy(pg => minIteration(pg._2)).map { case (idx, pGroup) =>
+                                val pipelines = pGroup.sortBy(p => p.lastComponent.discoveryIteration)
+
+                                pipelines.map { p =>
+                                    val datasourcesString = p.typedDatasources.map(_.label).mkString(",")
+                                    val extractorsString = p.typedExtractors.map(_.getClass.getSimpleName).mkString(",")
+                                    val transformersString = p.typedTransformers.map(_.getClass.getSimpleName).mkString(",")
+                                    val transformersCount = p.typedTransformers.size
+                                    val app = p.typedVisualizers.map(_.getClass.getSimpleName).mkString(",")
+                                    val iterationNumber = p.lastComponent.discoveryIteration
+
+                                    s"Ga$ag|d$dg|e$eg|ods$idx;$datasourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber"
+                                }.mkString("\n")
+                            }.mkString("\n")
+                        }.mkString("\n")
+                    }.mkString("\n")
+                }.mkString("\n")
+            }
         }.getOrElse("")
 
         Ok(string)
+    }
+
+    def sampleEquals(ds1: DataSample, ds2: DataSample): Boolean = {
+        val uuid = UUID.randomUUID()
+        val d = ds1.getModel(uuid, 0).difference(ds2.getModel(uuid, 0))
+        d.isEmpty
+    }
+
+    def minIteration(pipelines: Seq[Pipeline]) : Int = {
+        pipelines.map(p => p.lastComponent.discoveryIteration).min
     }
 
     def upload(id: String) = Action {

@@ -1,5 +1,3 @@
 package services.discovery.model.components
 
-trait VisualizerInstance extends ComponentInstanceWithInputs {
-
-}
+trait VisualizerInstance extends ComponentInstanceWithInputs

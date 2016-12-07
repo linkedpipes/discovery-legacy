@@ -1,6 +1,6 @@
 package services.discovery.components.transformer
 
-class Movie_MusicContributorName2Foaf_Made extends SparqlUpdateTransformer {
+class Movie_MusicContributor2Foaf_Made extends SparqlUpdateTransformer {
 
     protected override val prefixes =
         """

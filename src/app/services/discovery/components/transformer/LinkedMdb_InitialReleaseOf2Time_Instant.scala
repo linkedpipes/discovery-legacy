@@ -10,18 +10,21 @@ class LinkedMdb_InitialReleaseOf2Time_Instant extends SparqlUpdateTransformer {
           |PREFIX dct: <http://purl.org/dc/terms/>
           |PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
         """.stripMargin
+
     protected override val deleteClause =
         """
           |?m movie:initial_release_date ?dateTime .
         """.stripMargin
+
     protected override val insertClause =
         """
-          |?m lpviz:hasAbstraction [
-          |    a time:Instant ;
+          |?m lpviz:hasAbstraction ?abstraction .
+          |
+          |?abstraction a time:Instant ;
           |    time:inXSDDateTime ?dateTime ;
-          |    rdfs:label ?abstractionLabel
-          |] .
+          |    rdfs:label ?abstractionLabel .
         """.stripMargin
+
     protected override val whereClause =
         """
           |?m movie:initial_release_date ?date .
@@ -29,5 +32,8 @@ class LinkedMdb_InitialReleaseOf2Time_Instant extends SparqlUpdateTransformer {
           |OPTIONAL {
           |    ?s dct:title ?title .
           |    BIND(CONCAT("Initial release date of ", STR(?title)) AS ?abstractionLabel)
-          |}""".stripMargin
+          |}
+          |
+          |BIND(IRI(CONCAT(STR(?m), "/abstraction/linkedmdb-initial-release-of2time-Instant")) AS ?abstraction)
+        """.stripMargin
 }

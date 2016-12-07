@@ -1,6 +1,6 @@
 package services.discovery.components.transformer
 
-class Dbpedia_PopulationTotal2Rdf_ValueTransformer extends SparqlUpdateTransformer {
+class Dbpedia_PopulationMetro2Rdf_ValueTransformer extends SparqlUpdateTransformer {
 
     protected override val prefixes =
         """
@@ -11,7 +11,7 @@ class Dbpedia_PopulationTotal2Rdf_ValueTransformer extends SparqlUpdateTransform
 
     protected override val deleteClause =
         """
-          |?town dbo:populationTotal ?population .
+          |?town dbo:populationMetro ?population .
         """.stripMargin
 
     protected override val insertClause =
@@ -24,13 +24,13 @@ class Dbpedia_PopulationTotal2Rdf_ValueTransformer extends SparqlUpdateTransform
 
     protected override val whereClause =
         """
-          |?town dbo:populationTotal ?population .
+          |?town dbo:populationMetro ?population .
           |
           |OPTIONAL {
           |    ?town rdfs:label ?label .
-          |    BIND(CONCAT("Total population of ", STR(?label)) AS ?abstractionLabel)
+          |    BIND(CONCAT("Metro population of ", STR(?label)) AS ?abstractionLabel)
           |}
           |
-          |BIND(IRI(CONCAT(STR(?town), "/abstraction/dbpedia-populationTotal2rdf-value")) AS ?abstraction)
+          |BIND(IRI(CONCAT(STR(?town), "/abstraction/dbpedia-populationMetro2rdf-value")) AS ?abstraction)
         """.stripMargin
 }

@@ -54,7 +54,7 @@ class PipelineBuilder(discoveryId: UUID)(implicit executor: ExecutionContext) {
     val dataSamples = portMatches.map { portMatch => portMatch.port -> portMatch.startPipeline.lastOutputDataSample }.toMap
     componentInstance match {
       case c: ProcessorInstance => c.getOutputDataSample(portMatches.last.maybeState, dataSamples, discoveryId, iterationNumber)
-      case v: VisualizerInstance => Future.successful(ModelDataSample(ModelFactory.createDefaultModel()))
+      case v: VisualizerInstance => Future.successful(portMatches.head.startPipeline.lastOutputDataSample)
     }
   }
 }

@@ -10,31 +10,37 @@ class Wikidata_CoordinateLocation2Geo_SpatialThing extends SparqlUpdateTransform
           |PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
           |PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
         """.stripMargin
+
     protected override val deleteClause =
         """
           |?s wdt:P625 ?coordinates .
         """.stripMargin
+
     protected override val insertClause =
         """
-          |?s lpviz:hasAbstraction [
-          |    geo:location [
-          |      a geo:SpatialThing ;
-          |      geo:long ?long ;
-          |      geo:lat ?lat
-          |    ]
-          |  ] .
+          |?s lpviz:hasAbstraction ?abstraction .
           |
-          |  ?misto rdfs:label ?abstractionLabel .
+          |?abstraction geo:location ?abstractionLocation .
+          |
+          |?abstractionLocation a geo:SpatialThing ;
+          |    geo:long ?long ;
+          |    geo:lat ?lat .
+          |
+          |?abstraction rdfs:label ?abstractionLabel .
         """.stripMargin
+
     protected override val whereClause =
         """
           |?s wdt:P625 ?coordinates ;
           |    rdfs:label ?label .
           |
-          |  BIND(CONCAT("Coordinate location of  ", STR(?label)) AS ?abstractionLabel)
+          |BIND(CONCAT("Coordinate location of  ", STR(?label)) AS ?abstractionLabel)
           |
-          |  BIND(REPLACE(STR(?coordinates), "Point\\(([0-9]{2}\\.[0-9]*) ([0-9]{2}\\.[0-9]*)\\)", "$1") AS ?lat)
+          |BIND(REPLACE(STR(?coordinates), "Point\\(([0-9]{2}\\.[0-9]*) ([0-9]{2}\\.[0-9]*)\\)", "$1") AS ?lat)
           |
-          |  BIND(REPLACE(STR(?coordinates), "Point\\(([0-9]{2}\\.[0-9]*) ([0-9]{2}\\.[0-9]*)\\)", "$2") AS ?long)
+          |BIND(REPLACE(STR(?coordinates), "Point\\(([0-9]{2}\\.[0-9]*) ([0-9]{2}\\.[0-9]*)\\)", "$2") AS ?long)
+          |
+          |BIND(IRI(CONCAT(STR(?s), "/abstraction/wikidata-coordinate-location2geo-SpatialThing")) AS ?abstraction)
+          |BIND(IRI(CONCAT(STR(?s), "/abstraction/wikidata-coordinate-location2geo-SpatialThing/location")) AS ?abstractionLocation)
           |""".stripMargin
 }

@@ -23,4 +23,20 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
 
     def name: String = s"$dataSourceNames -> $visualizerName (${components.size})"
 
+    def datasources = components.filter(_.componentInstance.isInstanceOf[DataSourceInstance])
+
+    def extractors = components.filter(_.componentInstance.isInstanceOf[ExtractorInstance])
+
+    def transformers = components.filter(_.componentInstance.isInstanceOf[TransformerInstance])
+
+    def visualizers = components.filter(_.componentInstance.isInstanceOf[VisualizerInstance])
+
+    def typedDatasources = datasources.map(_.componentInstance.asInstanceOf[DataSourceInstance])
+
+    def typedExtractors = extractors.map(_.componentInstance.asInstanceOf[ExtractorInstance])
+
+    def typedTransformers = transformers.map(_.componentInstance.asInstanceOf[TransformerInstance])
+
+    def typedVisualizers = visualizers.map(_.componentInstance.asInstanceOf[VisualizerInstance])
+
 }

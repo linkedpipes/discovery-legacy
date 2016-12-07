@@ -11,12 +11,16 @@ class Ruian_DefinicniBod2Geo_SpatialThing extends SparqlUpdateTransformer {
 
     protected override val deleteClause =
         """
-          |?s ruian:definicniBod ?bod .""".stripMargin
+          |?s ruian:definicniBod ?bod .
+        """.stripMargin
+
     protected override val insertClause =
         """
-          |?s lpviz:hasAbstraction  ?bod .
+          |?s lpviz:hasAbstraction ?bod .
           |
-          |?bod rdfs:label ?abstractionLabel .""".stripMargin
+          |?bod rdfs:label ?abstractionLabel .
+        """.stripMargin
+
     protected override val whereClause =
         """
           |?s ruian:definicniBod ?bod .
@@ -24,5 +28,6 @@ class Ruian_DefinicniBod2Geo_SpatialThing extends SparqlUpdateTransformer {
           |OPTIONAL {
           |    ?s s:name ?label .
           |    BIND(CONCAT("Definition point of ", STR(?label)) AS ?abstractionLabel)
-          |}""".stripMargin
+          |}
+        """.stripMargin
 }

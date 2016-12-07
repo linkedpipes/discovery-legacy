@@ -164,7 +164,7 @@ $(document).ready(function () {
     };
 
     var datasourceGroups = [
-        /*{
+        {
             datasources: [businessEntitiesCZ]
         },
 
@@ -178,7 +178,7 @@ $(document).ready(function () {
 
         {
             datasources: [cz_ruian_address_places]
-        },
+        },/*
 
         {
             datasources: [cz_ruian_towns]
@@ -230,16 +230,23 @@ $(document).ready(function () {
 
         {
             datasources: [wikidata_towns]
-        },*/
+        },
         {
             datasources: [linkedmdb]
-        },
+        },*/
     ];
 
     var count = 0;
     var doneCount = 0;
 
-    _.each(datasourceGroups, function (dsGroup) {
+    var experimentsCount = datasourceGroups.length;
+
+    if(experimentsCount > 0)
+    {
+        runExperiment(datasourceGroups[0]);
+    }
+
+    function runExperiment(dsGroup) {
 
         var startData = {
             "sparqlEndpoints": dsGroup.datasources
@@ -275,12 +282,17 @@ $(document).ready(function () {
                     $("#csv").append("\n\nThe following experiment has finished in " + duration + " ms;" + dsnames + "\n");
 
                     $("#csv").append(csv);
+
+                    if(doneCount < experimentsCount)
+                    {
+                        runExperiment(datasourceGroups[doneCount]);
+                    }
                 });
 
             });
         });
 
-    });
+    }
 
     function waitDone(id, whenDone) {
         var request = $.ajax({
