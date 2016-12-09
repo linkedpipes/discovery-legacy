@@ -5,15 +5,17 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 
 DELETE {
+  ?prijemce cedr:obdrzelDotaci ?dotace .
   ?dotace cedr:castkaRozhodnuta ?castka .
 } INSERT {
-  ?dotace lpviz:hasAbstraction ?abstraction .
+  ?prijemce lpviz:hasAbstraction ?abstraction .
   
   ?abstraction rdf:value ?castka ;
 	lpviz:unit "CZK" ;
 	rdfs:label ?abstractionLabel .
 	
 } WHERE {
+  ?prijemce cedr:obdrzelDotaci ?dotace .
   ?dotace cedr:castkaRozhodnuta ?castka .
 	
   OPTIONAL {
