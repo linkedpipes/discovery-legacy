@@ -31,7 +31,7 @@ DELETE {
   BIND(
     IF(
       CONTAINS(?start1, "end"),
-      ?end,
+      ?end1,
       ?start1
     ) AS ?start
   )
@@ -39,7 +39,7 @@ DELETE {
   BIND(
     IF(
       CONTAINS(?end1, "start"),
-      ?start,
+      ?start1,
       ?end1
     ) AS ?end
   )
