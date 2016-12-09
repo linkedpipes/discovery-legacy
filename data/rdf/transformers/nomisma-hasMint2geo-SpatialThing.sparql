@@ -8,11 +8,13 @@ PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 
 DELETE {
   ?s nmo:hasMint ?mint .
-  
   ?mint geo:location ?location .
 } INSERT {
-  ?s lpviz:hasAbstraction ?location .
-  ?location rdfs:label ?abstractionLabel .
+  ?s lpviz:hasAbstraction ?abstraction .
+  
+  ?abstraction rdfs:label ?abstractionLabel ;
+    geo:location ?location .
+    
 } WHERE {
   ?s nmo:hasMint ?mint ;
 	skos:prefLabel ?label .
@@ -20,5 +22,7 @@ DELETE {
   ?mint geo:location ?location .
   
   BIND(CONCAT("Location of the mint of ", STR(?label)) AS ?abstractionLabel)
+  
+  BIND(CONCAT(STR(?s), "/abstraction/nomisma-hasMint2geo-SpatialThing") AS ?abstraction)
   
 }
