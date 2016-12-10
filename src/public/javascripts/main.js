@@ -88,7 +88,7 @@ $(document).ready(function () {
         "label": "European Data Portal",
         "isLarge": true,
         "isLinkset": false,
-        "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/edp/sample.ttl"
+        "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/edp/sample.ttl"
     };
 
     var legislation_cz_acts_versions = {
@@ -163,7 +163,7 @@ $(document).ready(function () {
         "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/wikidata-towns/sample.ttl"
     };
 
-    var datasourceGroups = [
+    var datasourceGroups = [/*
         {
             datasources: [businessEntitiesCZ]
         },
@@ -178,7 +178,7 @@ $(document).ready(function () {
 
         {
             datasources: [cz_ruian_address_places]
-        },/*
+        },
 
         {
             datasources: [cz_ruian_towns]
@@ -222,7 +222,7 @@ $(document).ready(function () {
 
         {
             datasources: [nomisma]
-        },
+        },*/
 
         {
             datasources: [subsidies_cz_cedr]
@@ -233,7 +233,7 @@ $(document).ready(function () {
         },
         {
             datasources: [linkedmdb]
-        },*/
+        },
     ];
 
     var count = 0;

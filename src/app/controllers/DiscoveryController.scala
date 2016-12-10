@@ -12,7 +12,7 @@ import play.api.libs.ws.WSClient
 import play.api.mvc.{Action, BodyParsers, Controller}
 import services.DiscoveryService
 import services.discovery.model.{DataSample, Pipeline}
-import services.discovery.model.components.{DataSourceInstance, ExtractorInstance, TransformerInstance, VisualizerInstance}
+import services.discovery.model.components.{DataSourceInstance, ExtractorInstance, TransformerInstance, ApplicationInstance}
 
 import scala.collection.mutable
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -81,7 +81,7 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
                         var eg = 0
                         extractorGroups.map { extractorGroup =>
                             eg += 1
-                            var groupedPipelines = extractorGroup._2.toIndexedSeq
+                            var groupedPipelines = extractorGroup._2.toIndexedSeq.sortBy(p => p.lastComponent.discoveryIteration)
                             var i = 1
                             val groups = new mutable.HashMap[Int, Seq[Pipeline]]
 
@@ -109,7 +109,7 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
                                     val app = p.typedVisualizers.map(_.getClass.getSimpleName).mkString(",")
                                     val iterationNumber = p.lastComponent.discoveryIteration
 
-                                    s"Ga$ag|d$dg|e$eg|ods$idx;$datasourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber"
+                                    s"$ag;$dg;$eg;$idx;$datasourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber"
                                 }.mkString("\n")
                             }.mkString("\n")
                         }.mkString("\n")
@@ -118,7 +118,9 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
             }
         }.getOrElse("")
 
-        Ok(string)
+        val header = s"appGroup;dataSourcesGroup;extractorsGroup;dataSampleGroup;dataSources;transformerCount;extractors;transformers;app;iterationNumber"
+
+        Ok(s"$header\n$string")
     }
 
     def sampleEquals(ds1: DataSample, ds2: DataSample): Boolean = {

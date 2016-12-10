@@ -4,13 +4,13 @@ import controllers.dto.DiscoverySettings
 import services.discovery.components.analyzer.{LinksetBasedUnion, RuianGeocoderAnalyzer}
 import services.discovery.components.extractor._
 import services.discovery.components.transformer._
-import services.discovery.components.visualizer._
-import services.discovery.model.components.{DataSourceInstance, ExtractorInstance, ProcessorInstance, VisualizerInstance}
+import services.discovery.components.application._
+import services.discovery.model.components.{DataSourceInstance, ExtractorInstance, ProcessorInstance, ApplicationInstance}
 
 case class DiscoveryInput(
     dataSources: Seq[DataSourceInstance],
     extractors: Seq[ExtractorInstance],
-    visualizers: Seq[VisualizerInstance],
+    visualizers: Seq[ApplicationInstance],
     processors: Seq[ProcessorInstance]
 )
 
@@ -80,17 +80,17 @@ object DiscoveryInput {
         new Ruian_DefinicniBod2Geo_SpatialThing
     )
 
-    val visualizers = Seq(
-        new TemporalEntityVisualizer,
-        new TemporalEntityTimeIntervalVisualizer,
-        new VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer,
-        new PopulationVisualizer,
-        new SpatialThingVisualizer,
-        new PersonalProfilesVisualizer,
-        new ThingsOnMapVisualizer
+    val applications = Seq(
+        new TimeInstantsApplication,
+        new TimeIntervalsApplication,
+        new ThingsTimelinesApplication,
+        new QuantifiedThingsOnMapApplication,
+        new PersonalProfilesApplication,
+        new ThingsOnMapApplication,
+        new PlacesOnMapApplication
     )
 
     def create(settings: DiscoverySettings) = {
-        new DiscoveryInput(settings.sparqlEndpoints, extractors, visualizers, processors)
+        new DiscoveryInput(settings.sparqlEndpoints, extractors, applications, processors)
     }
 }

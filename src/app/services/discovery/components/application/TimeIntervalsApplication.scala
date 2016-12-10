@@ -1,6 +1,6 @@
-package services.discovery.components.visualizer
+package services.discovery.components.application
 
-class TemporalEntityTimeIntervalVisualizer extends SimpleVisualizer {
+class TimeIntervalsApplication extends SimpleApplication {
 
     override protected val prefixes: String =
         """
@@ -9,7 +9,7 @@ class TemporalEntityTimeIntervalVisualizer extends SimpleVisualizer {
 
     override protected val whereClause: String =
         """
-          |  [] time:hasBeginning ?beginning ;
+          |  ?i time:hasBeginning ?beginning ;
           |    time:hasEnd ?end .
           |
           |  ?beginning time:inXSDDateTime ?dtb .

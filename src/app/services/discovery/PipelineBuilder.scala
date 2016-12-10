@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger
 
 import org.apache.jena.rdf.model.ModelFactory
 import services.discovery.model._
-import services.discovery.model.components.{ComponentInstance, DataSourceInstance, ProcessorInstance, VisualizerInstance}
+import services.discovery.model.components.{ComponentInstance, DataSourceInstance, ProcessorInstance, ApplicationInstance}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -54,7 +54,7 @@ class PipelineBuilder(discoveryId: UUID)(implicit executor: ExecutionContext) {
     val dataSamples = portMatches.map { portMatch => portMatch.port -> portMatch.startPipeline.lastOutputDataSample }.toMap
     componentInstance match {
       case c: ProcessorInstance => c.getOutputDataSample(portMatches.last.maybeState, dataSamples, discoveryId, iterationNumber)
-      case v: VisualizerInstance => Future.successful(portMatches.head.startPipeline.lastOutputDataSample)
+      case v: ApplicationInstance => Future.successful(portMatches.head.startPipeline.lastOutputDataSample)
     }
   }
 }

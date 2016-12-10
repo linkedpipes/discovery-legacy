@@ -7,6 +7,7 @@ class Dbpedia_PopulationMetro2Rdf_ValueTransformer extends SparqlUpdateTransform
           | PREFIX owl: <http://www.w3.org/2002/07/owl#>
           | PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
           | PREFIX dbo: <http://dbpedia.org/ontology/>
+          | PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         """.stripMargin
 
     protected override val deleteClause =

@@ -1,6 +1,6 @@
-package services.discovery.components.visualizer
+package services.discovery.components.application
 
-class PersonalProfilesVisualizer extends SimpleVisualizer {
+class PersonalProfilesApplication extends SimpleApplication {
 
     override protected val prefixes: String =
         """

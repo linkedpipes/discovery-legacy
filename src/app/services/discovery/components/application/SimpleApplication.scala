@@ -1,14 +1,14 @@
-package services.discovery.components.visualizer
+package services.discovery.components.application
 
 import java.util.UUID
 
 import services.discovery.components.common.DescriptorChecker
-import services.discovery.model.components.{AskQuery, VisualizerInstance}
+import services.discovery.model.components.{AskQuery, ApplicationInstance}
 import services.discovery.model.{ComponentState, DataSample, Port, PortCheckResult}
 
 import scala.concurrent.Future
 
-abstract class SimpleVisualizer extends VisualizerInstance with DescriptorChecker {
+abstract class SimpleApplication extends ApplicationInstance with DescriptorChecker {
     val portName: String = "INPUT_PORT"
 
     protected val prefixes: String

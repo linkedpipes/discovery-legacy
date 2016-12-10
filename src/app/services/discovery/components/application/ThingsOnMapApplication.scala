@@ -1,6 +1,6 @@
-package services.discovery.components.visualizer
+package services.discovery.components.application
 
-class ThingsOnMapVisualizer extends SimpleVisualizer {
+class ThingsOnMapApplication extends SimpleApplication {
 
     override protected val prefixes: String =
         """
@@ -23,10 +23,5 @@ class ThingsOnMapVisualizer extends SimpleVisualizer {
           |  ?geo a geo:SpatialThing ;
           |    geo:long ?long ;
           |    geo:lat ?lat .
-          |
-          |  OPTIONAL {
-          |    ?thing lpviz:hasAbstraction ?quantity .
-          |
-          |    ?quantity rdf:value ?quantityValue .
-          |  }""".stripMargin
+        """.stripMargin
 }

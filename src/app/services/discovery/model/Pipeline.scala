@@ -4,7 +4,7 @@ import services.discovery.components.analyzer.EtlSparqlGraphProtocol
 import services.discovery.model.components._
 
 case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBinding], lastComponent: PipelineComponent, lastOutputDataSample: DataSample) {
-    def isComplete: Boolean = lastComponent.componentInstance.isInstanceOf[VisualizerInstance]
+    def isComplete: Boolean = lastComponent.componentInstance.isInstanceOf[ApplicationInstance]
 
     def prettyFormat(offset: String = ""): String = {
         val formattedBindings = bindings.map(_.prettyFormat).mkString(", ")
@@ -29,7 +29,7 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
 
     def transformers = components.filter(_.componentInstance.isInstanceOf[TransformerInstance])
 
-    def visualizers = components.filter(_.componentInstance.isInstanceOf[VisualizerInstance])
+    def visualizers = components.filter(_.componentInstance.isInstanceOf[ApplicationInstance])
 
     def typedDatasources = datasources.map(_.componentInstance.asInstanceOf[DataSourceInstance])
 
@@ -37,6 +37,6 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
 
     def typedTransformers = transformers.map(_.componentInstance.asInstanceOf[TransformerInstance])
 
-    def typedVisualizers = visualizers.map(_.componentInstance.asInstanceOf[VisualizerInstance])
+    def typedVisualizers = visualizers.map(_.componentInstance.asInstanceOf[ApplicationInstance])
 
 }

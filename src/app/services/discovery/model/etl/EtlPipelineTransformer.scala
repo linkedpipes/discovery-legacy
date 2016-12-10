@@ -2,7 +2,7 @@ package services.discovery.model.etl
 
 import services.discovery.components.analyzer.{EtlRdf2File, EtlSparqlGraphProtocol}
 import services.discovery.components.datasource.{EtlSparqlEndpoint, JenaDataSource, SparqlEndpoint}
-import services.discovery.model.components.{SparqlEndpointInstance, SparqlExtractorInstance, UnionInstance, VisualizerInstance}
+import services.discovery.model.components.{SparqlEndpointInstance, SparqlExtractorInstance, UnionInstance, ApplicationInstance}
 import services.discovery.model.{Pipeline, PipelineComponent, PortBinding, GuidGenerator}
 
 class EtlPipelineTransformer(pipeline: Pipeline) {
@@ -69,7 +69,7 @@ class EtlPipelineTransformer(pipeline: Pipeline) {
   private val visualizerRule = TransformationRule(
     "Visualizer",
     new PipelineFragmentMatcher(
-      b => Seq(b.filter(_.endComponent.componentInstance.isInstanceOf[VisualizerInstance]))
+      b => Seq(b.filter(_.endComponent.componentInstance.isInstanceOf[ApplicationInstance]))
     ),
     (p, b) => {
       val iteration = b.head.endComponent.discoveryIteration

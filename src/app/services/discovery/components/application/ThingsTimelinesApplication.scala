@@ -1,6 +1,6 @@
-package services.discovery.components.visualizer
+package services.discovery.components.application
 
-class VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer extends SimpleVisualizer {
+class ThingsTimelinesApplication extends SimpleApplication {
 
     override protected val prefixes: String =
         """
@@ -12,7 +12,7 @@ class VersionedTemporalEntityDctermsVersionTimeIntervalVisualizer extends Simple
 
     override protected val whereClause: String =
         """
-          |  [] dct:hasVersion ?version .
+          |  ?thing dct:hasVersion ?version .
           |
           |  ?version lpviz:hasAbstraction ?timeAbstraction .
           |
