@@ -15,4 +15,16 @@ ASK {
   ?geo a geo:SpatialThing ;
     geo:long ?long ;
     geo:lat ?lat .
+	
+  ?thing lpviz:hasAbstraction ?quantity .
+	
+  ?quantity rdf:value ?quantityValue .
+  
+  OPTIONAL {
+    ?quantity lpviz:unit ?quantityUnit .
+  }
+  
+  OPTIONAL {
+    ?quantity rdfs:label ?quantityAbstractionLabel .
+  }
 }

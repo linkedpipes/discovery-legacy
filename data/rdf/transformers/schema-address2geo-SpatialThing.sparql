@@ -1,0 +1,19 @@
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX s: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
+
+DELETE {
+  ?s s:address ?address .
+} INSERT {
+  ?s lpviz:hasAbstraction ?address .
+  
+  ?address rdfs:label ?abstractionLabel .
+} WHERE {
+
+  ?s s:address ?address ;
+    dct:title ?title .
+
+  BIND(CONCAT("Address of ", STR(?title)) AS ?abstractionLabel)
+  
+}
