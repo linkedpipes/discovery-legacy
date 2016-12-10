@@ -13,28 +13,29 @@ class Cedr_DotaceCastka2Rdf_Value extends SparqlUpdateTransformer {
     
     protected override val deleteClause =
         """
-          |?dotace cedr:castkaRozhodnuta ?castka .
+          |  ?prijemce cedr:obdrzelDotaci ?dotace .
+          |  ?dotace cedr:castkaRozhodnuta ?castka .
         """.stripMargin
     
     protected override val insertClause =
         """
-          |?dotace lpviz:hasAbstraction ?abstraction .
+          |  ?prijemce lpviz:hasAbstraction ?abstraction .
           |
-          |?abstraction rdf:value ?castka ;
-          |    lpviz:unit "CZK" ;
-          |    rdfs:label ?abstractionLabel .
+          |  ?abstraction rdf:value ?castka ;
+          |	lpviz:unit "CZK" ;
+          |	rdfs:label ?abstractionLabel .
         """.stripMargin
     
     protected override val whereClause =
         """
+          |?prijemce cedr:obdrzelDotaci ?dotace .
+          |  ?dotace cedr:castkaRozhodnuta ?castka .
           |
-          |?dotace cedr:castkaRozhodnuta ?castka .
-          |
-          |OPTIONAL {
+          |  OPTIONAL {
           |    ?dotace dct:title ?title .
-          |        BIND(CONCAT("Allocated money for subsidy number ", STR(?title)) AS ?abstractionLabel)
-          |}
+          |	BIND(CONCAT("Allocated money for subsidy number ", STR(?title)) AS ?abstractionLabel)
+          |  }
           |
-          |BIND(IRI(CONCAT(STR(?dotace), "/abstraction/cedr-dotace-castka2rdf-value")) AS ?abstraction)
+          |  BIND(IRI(CONCAT(STR(?dotace), "/abstraction/cedr-dotace-castka2rdf-value")) AS ?abstraction)
         """.stripMargin
 }

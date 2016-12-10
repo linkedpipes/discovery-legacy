@@ -10,23 +10,30 @@ class Nomisma_HasMint2Geo_SpatialThing extends SparqlUpdateTransformer {
           |PREFIX nmo: <http://nomisma.org/ontology#>
           |PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
         """.stripMargin
+
     protected override val deleteClause =
         """
           |?s nmo:hasMint ?mint .
           |?mint geo:location ?location .
         """.stripMargin
+
     protected override val insertClause =
         """
-          |?s lpviz:hasAbstraction ?location .
-          |?location rdfs:label ?abstractionLabel .
+          |?s lpviz:hasAbstraction ?abstraction .
+          |
+          |  ?abstraction rdfs:label ?abstractionLabel ;
+          |    geo:location ?location .
         """.stripMargin
+
     protected override val whereClause =
         """
           |?s nmo:hasMint ?mint ;
-          |skos:prefLabel ?label .
+          |	skos:prefLabel ?label .
           |
-          |?mint geo:location ?location .
+          |  ?mint geo:location ?location .
           |
-          |BIND(CONCAT("Location of the mint of ", STR(?label)) AS ?abstractionLabel)
+          |  BIND(CONCAT("Location of the mint of ", STR(?label)) AS ?abstractionLabel)
+          |
+          |  BIND(CONCAT(STR(?s), "/abstraction/nomisma-hasMint2geo-SpatialThing") AS ?abstraction)
           |""".stripMargin
 }

@@ -37,47 +37,56 @@ object DiscoveryInput {
         new LinksetBasedUnion,
         new FusionTransformer,
 
+        new Cedr_DotaceCastka2Rdf_Value,
+        new Cedr_SidliNaAdrese2Geo_SpatialThing,
+        new Cedr_SmlouvaPodpisDatum2Dct_Created,
+        new Cedr_SmlouvaPodpisDatum2Time_Instant,
+
         new Dbpedia_PopulationTotal2Rdf_ValueTransformer,
         new Dbpedia_PopulationMetro2Rdf_ValueTransformer,
-        new Dbpedia_Time2Time_InstantTransformer,
+        new Dbpedia_Date2Time_InstantTransformer,
+
         new Dct_Issued2Time_InstantTransformer,
         new Dct_Created2Time_InstantTransformer,
         new Dct_Valid2Time_Interval1Transformer,
         new Dct_Valid2Time_Interval2Transformer,
         new Dct_Date2Time_InstantTransformer,
-        new Frbr_Realization2Dct_HasVersionTransformer,
-        new Frbr_RealizationOf2Frbr_RealizationTransformer,
-        new Ruian_DefinicniBod2Schema_PlaceTransformer,
-        new RuianGeocoderAnalyzer,
-        new Time_Interval2Time_IntervalTransformer,
-        new Cedr_DotaceCastka2Rdf_Value,
-        new Cedr_SidliNaAdrese2Geo_SpatialThing,
-        new Cedr_SmlouvaPodpisDatum2Dct_Created,
-        new Cedr_SmlouvaPodpisDatum2Time_Instant,
+
         new Foaf_Maker2Foaf_Made,
         new Foaf_Name2Dct_Title,
         new Foaf_RdfsLabel2Foaf_Name,
         new Foaf_SkosPrefLabel2Foaf_Name,
+
+        new Frbr_Realization2Dct_HasVersionTransformer,
+        new Frbr_RealizationOf2Frbr_RealizationTransformer,
+
         new Gr_LegalName2Dct_Title,
-        new LinkedMdb_InitialReleaseOf2Time_Instant,
-        new Movie_Actor2Foaf_Made,
-        new Movie_Editor2Foaf_Made,
-        new Movie_MusicContributorName2Foaf_Name,
-        new Movie_MusicContributor2Foaf_Made,
-        new Movie_ProducerName2Foaf_Name,
-        new Movie_Producer2Foaf_Made,
-        new Movie_WriterName2Foaf_Name,
-        new Movie_Writer2Foaf_Made,
+
+        new Lex_Act2Frbr_Work,
+
+        new Movie_InitialReleaseOf2Time_Instant,
+        new Movie_PersonName2Foaf_Name,
+        new Movie_Person2Foaf_Made,
+
         new Nomisma_HasAuthority2Foaf_Made,
         new Nomisma_HasMint2Geo_SpatialThing,
         new Nomisma_StartDateEndDate2Time_Interval,
+
         new Org_HasMembership2Org_Member,
+
+        new RuianGeocoderAnalyzer,
         new Ruian_AdresniMisto2Geo_SpatialThing,
+        new Ruian_DefinicniBod2Geo_SpatialThing,
+
         new Schema_GeoCoordinates2Geo_SpatialThing,
+        new Schema_Address2Geo_SpatialThing,
+
         new Swrc_Editor2Foaf_Made,
+
+        new Time_Interval2Time_IntervalTransformer,
+
         new Wikidata_Population2Edf_Value,
-        new Wikidata_CoordinateLocation2Geo_SpatialThing,
-        new Ruian_DefinicniBod2Geo_SpatialThing
+        new Wikidata_CoordinateLocation2Geo_SpatialThing
     )
 
     val applications = Seq(
