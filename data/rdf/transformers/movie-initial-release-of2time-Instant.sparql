@@ -5,7 +5,7 @@ PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 
 DELETE {
-  ?m movie:initial_release_date ?dateTime .
+  ?m movie:initial_release_date ?date .
 } INSERT {
   ?m lpviz:hasAbstraction ?abstraction .
   
