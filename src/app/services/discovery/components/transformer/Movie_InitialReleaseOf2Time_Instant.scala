@@ -13,7 +13,8 @@ class Movie_InitialReleaseOf2Time_Instant extends SparqlUpdateTransformer {
 
     protected override val deleteClause =
         """
-          |?m movie:initial_release_date ?dateTime .
+          |?m movie:initial_release_date ?date ;
+          |    dct:date ?date .
         """.stripMargin
 
     protected override val insertClause =
@@ -21,7 +22,7 @@ class Movie_InitialReleaseOf2Time_Instant extends SparqlUpdateTransformer {
           |?m lpviz:hasAbstraction ?abstraction .
           |
           |  ?abstraction a time:Instant ;
-          |    time:inXSDDateTime ?dateTime ;
+          |    time:inXSDDateTime ?date ;
           |	rdfs:label ?abstractionLabel .
         """.stripMargin
 
@@ -30,8 +31,12 @@ class Movie_InitialReleaseOf2Time_Instant extends SparqlUpdateTransformer {
           |?m movie:initial_release_date ?date .
           |
           |  OPTIONAL {
-          |	?s dct:title ?title .
+          |	?m dct:title ?title .
           |	 BIND(CONCAT("Initial release date of ", STR(?title)) AS ?abstractionLabel)
+          |  }
+          |
+          |  OPTIONAL {
+          |    ?m dct:date ?date .
           |  }
           |
           |  BIND(IRI(CONCAT(STR(?m), "/abstraction/linkedmdb-initial-release-of2time-Instant")) AS ?abstraction)
