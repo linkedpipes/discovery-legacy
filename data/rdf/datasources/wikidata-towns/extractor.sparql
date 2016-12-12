@@ -13,14 +13,14 @@ CONSTRUCT {
         rdfs:label ?townLabel ;
         wdt:P1082 ?population ;
         wdt:P281 ?postalCode ;
-        wdt:P625 ?coordinateLocation .
+        wdt:P625 ?coordinateLocation ;
+		wdt:P17 wd:Q213 .
   
 } WHERE {
 	?town wdt:P31 wd:Q5153359 ;
+		  rdfs:label ?townLabel ;
           wdt:P1082 ?population ;
           wdt:P281 ?postalCode ;
           wdt:P625 ?coordinateLocation ;
           wdt:P17 wd:Q213 .
-  
-	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }

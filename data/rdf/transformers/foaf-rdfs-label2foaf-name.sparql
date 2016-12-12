@@ -9,4 +9,7 @@ DELETE {
   VALUES ?type { foaf:Agent foaf:Group foaf:Person foaf:Organization }
   ?agent a ?type ;
     rdfs:label ?label .
+  FILTER NOT EXISTS {
+    ?agent foaf:name ?label .
+  }
 }

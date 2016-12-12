@@ -7,4 +7,7 @@ DELETE {
   ?be dct:title ?name .
 } WHERE {
   ?be gr:legalName ?name .
+  FILTER NOT EXISTS {
+    ?be dct:title ?name .
+  }
 }
