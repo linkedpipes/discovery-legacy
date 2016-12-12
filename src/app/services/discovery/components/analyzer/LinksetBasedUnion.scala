@@ -38,10 +38,10 @@ class LinksetBasedUnion extends UnionInstance {
 
     def classDescriptor(isClass: String) = AskQuery(
         s"""
-           |PREFIX ldvm: <http://linked.opendata.cz/ontology/ldvm/>
+           |PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
            |
            |ASK {
-           |   ?x a <$isClass> .
+           |   ?x rdf:type <$isClass> .
            |}
         """.stripMargin
     )

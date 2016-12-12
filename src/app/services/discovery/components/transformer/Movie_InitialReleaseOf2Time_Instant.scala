@@ -13,7 +13,7 @@ class Movie_InitialReleaseOf2Time_Instant extends SparqlUpdateTransformer {
 
     protected override val deleteClause =
         """
-          |?m movie:initial_release_date ?dateTime .
+          |?m movie:initial_release_date ?date .
         """.stripMargin
 
     protected override val insertClause =

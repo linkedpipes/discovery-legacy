@@ -103,7 +103,8 @@ case class ModelDataSample(model: Model) extends DataSample {
 
     private def executeQuery[R](descriptor: SparqlQuery, executionCommand: QueryExecution => R): Future[R] = {
         Future.successful {
-            executionCommand(QueryExecutionFactory.create(createQuery(descriptor.query), model))
+            val result = executionCommand(QueryExecutionFactory.create(createQuery(descriptor.query), model))
+            result
         }
     }
 }

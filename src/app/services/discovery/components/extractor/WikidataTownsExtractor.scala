@@ -21,12 +21,14 @@ class WikidataTownsExtractor extends SimpleExtractor {
           |        rdfs:label ?townLabel ;
           |        wdt:P1082 ?population ;
           |        wdt:P281 ?postalCode ;
-          |        wdt:P625 ?coordinateLocation .
+          |        wdt:P625 ?coordinateLocation ;
+          |        wdt:P17 wd:Q213 .
         """.stripMargin
 
     override protected val whereClause: String =
         """
           |?town wdt:P31 wd:Q5153359 ;
+          |          rdfs:label ?townLabel ;
           |          wdt:P1082 ?population ;
           |          wdt:P281 ?postalCode ;
           |          wdt:P625 ?coordinateLocation ;
