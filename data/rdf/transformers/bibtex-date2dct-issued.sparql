@@ -1,4 +1,4 @@
-PREFIX bibtex: <http://zeitkunst.org/bibtex/0.1/bibtex.owl#> .
+PREFIX bibtex: <http://zeitkunst.org/bibtex/0.1/bibtex.owl#>
 PREFIX dct: <http://purl.org/dc/terms/>
 
 DELETE {
