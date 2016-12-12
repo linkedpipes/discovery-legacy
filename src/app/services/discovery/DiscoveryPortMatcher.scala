@@ -34,7 +34,9 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
                         discoveryLogger.trace(s"[$discoveryId][$iterationNumbr][matcher] Matching completed, building possible pipelines.")
                         buildPipelines(componentInstance, portMatches, iterationNumbr)
                     }
-                    case false => Future.successful(Seq())
+                    case false => {
+                        Future.successful(Seq())
+                    }
                 }
             case headPort :: tail =>
                 val linksets = portMatches.flatMap {
@@ -46,9 +48,8 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
                     }
                 }.toSeq.distinct
 
-                val filteredPipelines = givenPipelines.filterNot(_.components.exists(c => linksets.contains(c.componentInstance)))
-                tryMatchGivenPipelinesWithPort(headPort, filteredPipelines, lastStates, componentInstance, iterationNumbr).flatMap { matches =>
-                    tryMatchPorts(tail, filteredPipelines, portMatches + (headPort -> matches), matches.map(_.maybeState), iterationNumbr, componentInstance)
+                tryMatchGivenPipelinesWithPort(headPort, givenPipelines, lastStates, componentInstance, iterationNumbr).flatMap { matches =>
+                    tryMatchPorts(tail, givenPipelines, portMatches + (headPort -> matches), matches.map(_.maybeState), iterationNumbr, componentInstance)
                 }
         }
     }

@@ -25,12 +25,12 @@ object DiscoveryInput {
         new LegislationGbActsExtractor,
         new LegislationGbActsVersionsExtractor,
         new SubsidiesCzCedrExtractor,
-        new NomismaOrgPersonsExtractor,
         new LinkedMdbFilmsExtractor,
         new AresExtractor,
         new RuianExtractor,
         new TownsExtractor,
-        new WikidataTownsExtractor
+        new WikidataTownsExtractor,
+        new NomismaOrgPersonsExtractor
     )
 
     var processors = Seq(

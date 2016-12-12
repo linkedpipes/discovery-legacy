@@ -27,6 +27,8 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
 
     def extractors = components.filter(_.componentInstance.isInstanceOf[ExtractorInstance])
 
+    def processors = components.filter(_.componentInstance.isInstanceOf[ProcessorInstance]).filterNot(_.componentInstance.isInstanceOf[ExtractorInstance])
+
     def transformers = components.filter(_.componentInstance.isInstanceOf[TransformerInstance])
 
     def visualizers = components.filter(_.componentInstance.isInstanceOf[ApplicationInstance])
@@ -34,6 +36,8 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
     def typedDatasources = datasources.map(_.componentInstance.asInstanceOf[DataSourceInstance])
 
     def typedExtractors = extractors.map(_.componentInstance.asInstanceOf[ExtractorInstance])
+
+    def typedProcessors = processors.map(_.componentInstance.asInstanceOf[ProcessorInstance])
 
     def typedTransformers = transformers.map(_.componentInstance.asInstanceOf[TransformerInstance])
 

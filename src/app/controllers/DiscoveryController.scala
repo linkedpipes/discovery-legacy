@@ -104,8 +104,8 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
                                 pipelines.map { p =>
                                     val datasourcesString = p.typedDatasources.map(_.label).mkString(",")
                                     val extractorsString = p.typedExtractors.map(_.getClass.getSimpleName).mkString(",")
-                                    val transformersString = p.typedTransformers.map(_.getClass.getSimpleName).mkString(",")
-                                    val transformersCount = p.typedTransformers.size
+                                    val transformersString = p.typedProcessors.map(_.getClass.getSimpleName).mkString(",")
+                                    val transformersCount = p.typedProcessors.size
                                     val app = p.typedVisualizers.map(_.getClass.getSimpleName).mkString(",")
                                     val iterationNumber = p.lastComponent.discoveryIteration
 

@@ -4,6 +4,7 @@ import java.util.UUID
 
 import play.Logger
 import services.discovery.components.analyzer.LinksetBasedUnion
+import services.discovery.components.transformer.FusionTransformer
 import services.discovery.model._
 import services.discovery.model.components.DataSourceInstance
 import services.discovery.model.internal.IterationData
@@ -75,17 +76,26 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
         discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Starting iteration.")
         discoveryLogger.trace(s"[$id] $iterationData.")
 
-        val (extractorCandidates, otherPipelines) = iterationData.givenPipelines.partition(endsWithLargeDataset)
+        val (extractorCandidatePipelines, otherPipelines) = iterationData.givenPipelines.partition(endsWithLargeDataset)
         val extractors = iterationData.availableComponents.extractors
         val otherComponents = iterationData.availableComponents.processors ++ iterationData.availableComponents.visualizers
 
         val eventualPipelines = Future.sequence(Seq(
-            (extractorCandidates, extractors),
+            (extractorCandidatePipelines, extractors),
             (otherPipelines, otherComponents)
         ).flatMap {
-            case (pipelines, components) => components.map {
-                case c if c.isInstanceOf[LinksetBasedUnion] => portMatcher.tryMatchPorts(c, pipelines.filterNot(_.components.exists(_.componentInstance == c)), iterationData.iterationNumber)
-                case c => portMatcher.tryMatchPorts(c, pipelines, iterationData.iterationNumber)
+            case (pipelines, components) => {
+
+                components.map { component =>
+
+                    val filteredPipelines = component match {
+                        case c if c.isInstanceOf[LinksetBasedUnion] => pipelines.filterNot(_.components.count(_.componentInstance == c) > 0)
+                        case c if c.isInstanceOf[FusionTransformer] => pipelines.filter(_.components.exists(_.componentInstance.isInstanceOf[LinksetBasedUnion]))
+                        case _ => pipelines
+                    }
+
+                    portMatcher.tryMatchPorts(component, filteredPipelines, iterationData.iterationNumber)
+                }
             }
         })
 

@@ -163,76 +163,137 @@ $(document).ready(function () {
         "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/wikidata-towns/sample.ttl"
     };
 
+    var linksetRuian2Ares = {
+        "url": "http://internal.opendata.cz/sparql",
+        "defaultGraphIris": ["http://internal.opendata.cz/linkset/cz-ruian-addresses-2-cz-ares-addresses"],
+        "label": "Linkset : RUIAN (Addresses) --- Business Entities in Czech Republic (Addresses)",
+        "isLarge": false,
+        "isLinkset": true,
+        "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/linkset-cz-ruian-2-business-entities-cz-ares/sample.ttl"
+    };
+
+    var linksetCedr2Ares = {
+        "url": "http://internal.opendata.cz/sparql",
+        "defaultGraphIris": ["http://internal.opendata.cz/linkset/cz-cedr-beneficiaries-2-cz-ares-business-entities"],
+        "label": "Linkset : Subsidies from public budgets in Czech Republic (Beneficiaries) --- ARES (Business Entities)",
+        "isLarge": false,
+        "isLinkset": true,
+        "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/linkset-beneficiaries-cz-cedr-2-business-entities-cz-ares/sample.ttl"
+    };
+
+    var linksetDbpedia2Ruian = {
+        "url": "http://internal.opendata.cz/sparql",
+        "defaultGraphIris": ["http://internal.opendata.cz/linkset/dbpedia-towns-2-cz-ruian-towns"],
+        "label": "Linkset : Towns from DBPedia --- Towns from RUIAN",
+        "isLarge": false,
+        "isLinkset": true,
+        "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/linkset-dbpedia-towns-2-cz-ruian-towns/sample.ttl"
+    };
+
+    var linksetCedr2Ruian = {
+        "url": "http://internal.opendata.cz/sparql",
+        "defaultGraphIris": ["http://internal.opendata.cz/linkset/cz-cedr-addresses-2-cz-ruian-addresses"],
+        "label": "Linkset : Subsidies from public budgets in Czech Republic (Addresses) --- RUIAN (Addresses)",
+        "isLarge": false,
+        "isLinkset": true,
+        "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/linkset-subsidies-cz-cedr-2-cz-ruian/sample.ttl"
+    };
+
+    var linksetWikidata2Ruian = {
+        "url": "http://internal.opendata.cz/sparql",
+        "defaultGraphIris": ["http://internal.opendata.cz/linkset/wikidata-towns-2-cz-ruian-towns"],
+        "label": "Linkset : Towns from Wikidata --- Towns from RUIAN",
+        "isLarge": false,
+        "isLinkset": true,
+        "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/linkset-wikidata-towns-2-cz-ruian-towns/sample.ttl"
+    };
+
     var datasourceGroups = [/*
+     {
+     datasources: [businessEntitiesCZ]
+     },
+
+     {
+     datasources: [checkActions_cz_ctia]
+     },
+
+     {
+     datasources: [checkActions_cz_sao]
+     },
+
+     {
+     datasources: [cz_ruian_address_places]
+     },
+
+     {
+     datasources: [cz_ruian_towns]
+     },
+
+     {
+     datasources: [dblp]
+     },
+
+     {
+     datasources: [dbpedia_earthquakes]
+     },
+
+     {
+     datasources: [dpedia_towns]
+     },
+
+     {
+     datasources: [dcsu_sheffield]
+     },
+
+     {
+     datasources: [edp]
+     },
+
+     {
+     datasources: [legislation_cz_acts_versions]
+     },
+
+     {
+     datasources: [legislation_cz_acts]
+     },
+
+     {
+     datasources: [legislation_gb_acts_versions]
+     },
+
+     {
+     datasources: [legislation_gb_acts]
+     },
+
+     {
+     datasources: [subsidies_cz_cedr]
+     },
+     {
+     datasources: [linkedmdb]
+     },
+     {
+     datasources: [nomisma]
+     },
+     {
+     datasources: [wikidata_towns]
+     },
+     */
         {
-            datasources: [businessEntitiesCZ]
+            datasources: [linksetWikidata2Ruian, wikidata_towns, cz_ruian_towns]
         },
 
         {
-            datasources: [checkActions_cz_ctia]
+            datasources: [linksetRuian2Ares, cz_ruian_address_places, cz_ruian_towns, businessEntitiesCZ]
         },
 
         {
-            datasources: [checkActions_cz_sao]
-        },
-
-        {
-            datasources: [cz_ruian_address_places]
-        },
-
-        {
-            datasources: [cz_ruian_towns]
-        },
-
-        {
-            datasources: [dblp]
-        },
-
-        {
-            datasources: [dbpedia_earthquakes]
-        },
-
-        {
-            datasources: [dpedia_towns]
-        },
-
-        {
-            datasources: [dcsu_sheffield]
-        },
-
-        {
-            datasources: [edp]
-        },
-
-        {
-            datasources: [legislation_cz_acts_versions]
-        },
-
-        {
-            datasources: [legislation_cz_acts]
-        },
-
-        {
-            datasources: [legislation_gb_acts_versions]
-        },
-
-        {
-            datasources: [legislation_gb_acts]
-        },
-
-        {
-            datasources: [nomisma]
-        },*/
-
-        {
-            datasources: [subsidies_cz_cedr]
-        },
-
-        {
-            datasources: [wikidata_towns]
+            datasources: [linksetDbpedia2Ruian, dpedia_towns, cz_ruian_towns]
         },
         {
-            datasources: [linkedmdb]
+            datasources: [linksetCedr2Ruian, cz_ruian_address_places, subsidies_cz_cedr]
+        },
+        {
+            datasources: [linksetCedr2Ares, subsidies_cz_cedr, businessEntitiesCZ]
         },
     ];
 
@@ -241,8 +302,7 @@ $(document).ready(function () {
 
     var experimentsCount = datasourceGroups.length;
 
-    if(experimentsCount > 0)
-    {
+    if (experimentsCount > 0) {
         runExperiment(datasourceGroups[0]);
     }
 
@@ -281,10 +341,14 @@ $(document).ready(function () {
 
                     $("#csv").append("\n\nThe following experiment has finished in " + duration + " ms;" + dsnames + "\n");
 
+                    if (duration < 0) {
+                        err++;
+                        $("#err").html(err);
+                    }
+
                     $("#csv").append(csv);
 
-                    if(doneCount < experimentsCount)
-                    {
+                    if (doneCount < experimentsCount) {
                         runExperiment(datasourceGroups[doneCount]);
                     }
                 });
@@ -305,7 +369,7 @@ $(document).ready(function () {
             if (!statusData.isFinished) {
                 window.setTimeout(function () {
                     waitDone(id, whenDone);
-                }, 1000);
+                }, 5000);
             } else {
                 whenDone(id, statusData.duration);
             }
