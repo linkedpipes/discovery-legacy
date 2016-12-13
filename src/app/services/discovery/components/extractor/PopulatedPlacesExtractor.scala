@@ -10,15 +10,12 @@ class PopulatedPlacesExtractor extends SimpleExtractor {
 
     override protected val constructClause: String =
         """
-          |?p a dbo:PopulatedPlace ;
-          |    dbo:populationTotal ?population ;
-          |    dbp:officialName ?on .
+          |?s ?p ?o .
         """.stripMargin
 
     override protected val whereClause: String =
         """
-          |?p a dbo:PopulatedPlace ;
-          |    dbo:populationTotal ?population ;
-          |    dbp:officialName ?on .
+          |   ?s a dbo:PopulatedPlace ;
+          |      ?p ?o .
         """.stripMargin
 }

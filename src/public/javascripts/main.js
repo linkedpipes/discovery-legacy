@@ -233,13 +233,9 @@ $(document).ready(function () {
             datasources: [dblp]
         },
 
-        {
-            datasources: [dbpedia_earthquakes]
-        },
-
-        {
-            datasources: [dpedia_towns]
-        },
+     {
+     datasources: [dbpedia_earthquakes]
+     },
 
         {
             datasources: [dcsu_sheffield]
@@ -277,9 +273,12 @@ $(document).ready(function () {
      {
      datasources: [wikidata_towns]
      },
-     */
 
+ {
+ datasources: [dpedia_towns]
+ },
 
+*/
         {
             datasources: [linksetWikidata2Ruian, wikidata_towns, cz_ruian_towns]
         },
