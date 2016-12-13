@@ -209,71 +209,77 @@ $(document).ready(function () {
     };
 
     var datasourceGroups = [/*
-        {
-            datasources: [businessEntitiesCZ]
-        },
+     {
+     datasources: [businessEntitiesCZ]
+     },
 
-        {
-            datasources: [checkActions_cz_ctia]
-        },
+     {
+     datasources: [checkActions_cz_ctia]
+     },
 
-        {
-            datasources: [checkActions_cz_sao]
-        },
+     {
+     datasources: [checkActions_cz_sao]
+     },
 
-        {
-            datasources: [cz_ruian_address_places]
-        },
+     {
+     datasources: [cz_ruian_address_places]
+     },
 
-        {
-            datasources: [cz_ruian_towns]
-        },
+     {
+     datasources: [cz_ruian_towns]
+     },
 
-        {
-            datasources: [dblp]
-        },
+     {
+     datasources: [dblp]
+     },
 
      {
      datasources: [dbpedia_earthquakes]
      },
+<<<<<<< HEAD
+=======
 
-        {
-            datasources: [dcsu_sheffield]
-        },
+     {
+     datasources: [dpedia_towns]
+     },
+>>>>>>> e67a3b3ca641ec7977b112dde8c3cfac7b9e5489
 
-        {
-            datasources: [edp]
-        },
+     {
+     datasources: [dcsu_sheffield]
+     },
 
-        {
-            datasources: [legislation_cz_acts_versions]
-        },
+     {
+     datasources: [edp]
+     },
 
-        {
-            datasources: [legislation_cz_acts]
-        },
+     {
+     datasources: [legislation_cz_acts_versions]
+     },
 
-        {
-            datasources: [legislation_gb_acts_versions]
-        },
+     {
+     datasources: [legislation_cz_acts]
+     },
 
-        {
-            datasources: [legislation_gb_acts]
-        },
+     {
+     datasources: [legislation_gb_acts_versions]
+     },
 
-        {
-            datasources: [subsidies_cz_cedr]
-        },
-        {
-            datasources: [linkedmdb]
-        },
-         {
-         datasources: [nomisma]
-         },
+     {
+     datasources: [legislation_gb_acts]
+     },
+
+     {
+     datasources: [subsidies_cz_cedr]
+     },
+     {
+     datasources: [linkedmdb]
+     },
+     {
+     datasources: [nomisma]
+     },
      {
      datasources: [wikidata_towns]
      },
-
  {
  datasources: [dpedia_towns]
  },
