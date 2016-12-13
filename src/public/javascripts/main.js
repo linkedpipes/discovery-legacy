@@ -290,7 +290,7 @@ $(document).ready(function () {
         },
 
         {
-            datasources: [linksetRuian2Ares, cz_ruian_address_places, cz_ruian_towns, businessEntitiesCZ]
+            datasources: [linksetRuian2Ares, cz_ruian_address_places, businessEntitiesCZ]
         },
 
         {
