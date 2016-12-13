@@ -6,7 +6,8 @@ PREFIX lpviz: <http://visualization.linkedpipes.com/ontology/>
 
 DELETE {
   ?prijemce cedr:obdrzelDotaci ?dotace .
-  ?dotace cedr:castkaRozhodnuta ?castka .
+  ?dotace cedr:byloRozhodnuto ?rozhodnuti .
+  ?rozhodnuti cedr:castkaRozhodnuta ?castka .
 } INSERT {
   ?prijemce lpviz:hasAbstraction ?abstraction .
   
