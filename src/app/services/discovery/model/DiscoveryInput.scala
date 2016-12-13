@@ -37,6 +37,8 @@ object DiscoveryInput {
         new LinksetBasedUnion,
         new FusionTransformer,
 
+        new Bibtex_Date2Dct_Issued,
+
         new Cedr_DotaceCastka2Rdf_Value,
         new Cedr_SidliNaAdrese2Geo_SpatialThing,
         new Cedr_SmlouvaPodpisDatum2Dct_Created,

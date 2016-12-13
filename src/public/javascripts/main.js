@@ -209,99 +209,93 @@ $(document).ready(function () {
     };
 
     var datasourceGroups = [/*
-     {
-     datasources: [businessEntitiesCZ]
-     },
-
-     {
-     datasources: [checkActions_cz_ctia]
-     },
-
-     {
-     datasources: [checkActions_cz_sao]
-     },
-
-     {
-     datasources: [cz_ruian_address_places]
-     },
-
-     {
-     datasources: [cz_ruian_towns]
-     },
-
-     {
-     datasources: [dblp]
-     },
-
-     {
-     datasources: [dbpedia_earthquakes]
-     },
-<<<<<<< HEAD
-=======
-
-     {
-     datasources: [dpedia_towns]
-     },
->>>>>>> e67a3b3ca641ec7977b112dde8c3cfac7b9e5489
-
-     {
-     datasources: [dcsu_sheffield]
-     },
-
-     {
-     datasources: [edp]
-     },
-
-     {
-     datasources: [legislation_cz_acts_versions]
-     },
-
-     {
-     datasources: [legislation_cz_acts]
-     },
-
-     {
-     datasources: [legislation_gb_acts_versions]
-     },
-
-     {
-     datasources: [legislation_gb_acts]
-     },
-
-     {
-     datasources: [subsidies_cz_cedr]
-     },
-     {
-     datasources: [linkedmdb]
-     },
-     {
-     datasources: [nomisma]
-     },
-     {
-     datasources: [wikidata_towns]
-     },
- {
- datasources: [dpedia_towns]
- },
-
-*/
         {
-            datasources: [linksetWikidata2Ruian, wikidata_towns, cz_ruian_towns]
+            datasources: [businessEntitiesCZ]
         },
 
         {
-            datasources: [linksetRuian2Ares, cz_ruian_address_places, cz_ruian_towns, businessEntitiesCZ]
+            datasources: [checkActions_cz_ctia]
         },
 
         {
-            datasources: [linksetDbpedia2Ruian, dpedia_towns, cz_ruian_towns]
+            datasources: [checkActions_cz_sao]
+        },
+
+        {
+            datasources: [cz_ruian_address_places]
+        },
+
+        {
+            datasources: [cz_ruian_towns]
+        },
+
+        {
+            datasources: [dblp]
+        },
+
+        {
+            datasources: [dbpedia_earthquakes]
         },
         {
-            datasources: [linksetCedr2Ruian, cz_ruian_address_places, subsidies_cz_cedr]
+            datasources: [dcsu_sheffield]
         },
         {
-            datasources: [linksetCedr2Ares, subsidies_cz_cedr, businessEntitiesCZ]
+            datasources: [edp]
         },
+
+        {
+            datasources: [legislation_cz_acts_versions]
+        },
+
+        {
+            datasources: [legislation_cz_acts]
+        },
+
+        {
+            datasources: [legislation_gb_acts_versions]
+        },
+
+        {
+            datasources: [legislation_gb_acts]
+        },
+
+     /*/
+        {
+            datasources: [subsidies_cz_cedr]
+        },
+        /*
+        {
+            datasources: [linkedmdb]
+        },
+        {
+            datasources: [wikidata_towns]
+        },
+        {
+            datasources: [dpedia_towns]
+        },
+
+        /*
+         {
+         datasources: [nomisma]
+         },
+         {
+         datasources: [linksetRuian2Ares, cz_ruian_address_places, businessEntitiesCZ]
+         },
+         {
+         datasources: [linksetCedr2Ruian, cz_ruian_address_places, subsidies_cz_cedr]
+         },
+         {
+         datasources: [linksetCedr2Ares, subsidies_cz_cedr, businessEntitiesCZ]
+         },
+
+         {
+         datasources: [linksetWikidata2Ruian, wikidata_towns, cz_ruian_towns]
+         },
+
+         {
+         datasources: [linksetDbpedia2Ruian, dpedia_towns, cz_ruian_towns]
+         }
+         */
     ];
 
     var count = 0;

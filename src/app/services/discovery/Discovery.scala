@@ -74,7 +74,7 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
 
     private def iterationBody(iterationData: IterationData): Future[IterationData] = {
         discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Starting iteration.")
-        discoveryLogger.trace(s"[$id] $iterationData.")
+//        discoveryLogger.trace(s"[$id] $iterationData.")
 
         val (extractorCandidatePipelines, otherPipelines) = iterationData.givenPipelines.partition(endsWithLargeDataset)
         val extractors = iterationData.availableComponents.extractors
