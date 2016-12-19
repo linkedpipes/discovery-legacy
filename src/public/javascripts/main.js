@@ -292,7 +292,7 @@ $(document).ready(function () {
          },
          {
          datasources: [linksetCedr2Ares, subsidies_cz_cedr, businessEntitiesCZ]
-         },
+         },*/
     ];
 
     var count = 0;
