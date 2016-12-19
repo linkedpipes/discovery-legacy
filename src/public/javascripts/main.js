@@ -259,11 +259,9 @@ $(document).ready(function () {
             datasources: [legislation_gb_acts]
         },
 
-     /*/
         {
             datasources: [subsidies_cz_cedr]
         },
-        /*
         {
             datasources: [linkedmdb]
         },
@@ -273,18 +271,19 @@ $(document).ready(function () {
         {
             datasources: [dpedia_towns]
         },
-
-        /*
          {
          datasources: [nomisma]
          },
          {
          datasources: [linksetRuian2Ares, cz_ruian_address_places, businessEntitiesCZ]
          },
-         {
+     */
+
+        {
          datasources: [linksetCedr2Ruian, cz_ruian_address_places, subsidies_cz_cedr]
          },
-         {
+
+/*         {
          datasources: [linksetCedr2Ares, subsidies_cz_cedr, businessEntitiesCZ]
          },
 
@@ -295,7 +294,7 @@ $(document).ready(function () {
          {
          datasources: [linksetDbpedia2Ruian, dpedia_towns, cz_ruian_towns]
          }
-         */
+*/
     ];
 
     var count = 0;
