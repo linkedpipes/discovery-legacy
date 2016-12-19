@@ -25,7 +25,8 @@ class SubsidiesCzCedrExtractor extends SimpleExtractor {
           |    gr:legalName ?nazevPrijemce .
           |
           |  ?adresa
-          |    spa:adresniMistoKod ?adresniMistoKod .
+          |    spa:adresniMistoKod ?adresniMistoKod ;
+          |    a cedr:Adresa .
         """.stripMargin
 
     override protected val whereClause: String =
@@ -44,6 +45,7 @@ class SubsidiesCzCedrExtractor extends SimpleExtractor {
           |    gr:legalName ?nazevPrijemce .
           |    
           |  ?adresa
-          |    spa:adresniMistoKod ?adresniMistoKod .
+          |    spa:adresniMistoKod ?adresniMistoKod ;
+          |    a cedr:Adresa .
         """.stripMargin
 }

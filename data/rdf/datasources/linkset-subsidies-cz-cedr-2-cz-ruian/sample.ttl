@@ -5,12 +5,6 @@
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 
-<http://cedropendata.mfcr.cz/c3lod/cedr/resource/Adresa/EF5A790F578275654BAE414ACB31DE57A338D74C> a cedr:Adresa .
-
-<http://ruian.linked.opendata.cz/resource/adresni-mista/70670> a ruian:AdresniMisto .
-
-<http://cedropendata.mfcr.cz/c3lod/cedr/resource/Adresa/EF5A790F578275654BAE414ACB31DE57A338D74C> <http://www.w3.org/2002/07/owl#sameAs> <http://ruian.linked.opendata.cz/resource/adresni-mista/70670>.
-
 ruiands:SubsidiesCZ_Ruian a void:Linkset ;
     void:objectsTarget <http://ruian.linked.opendata.cz/dataset/ruian/adresni-mista> ;
     void:subjectsTarget <http://cedropendata.mfcr.cz/c3lod/cedr/resource/Adresy> ;
