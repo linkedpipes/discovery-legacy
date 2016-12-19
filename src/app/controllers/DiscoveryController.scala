@@ -2,20 +2,26 @@ package controllers
 
 import java.io._
 import java.util.UUID
+import java.util.concurrent.TimeUnit
 import javax.inject._
 
+import akka.stream.scaladsl.{FileIO, Source}
 import controllers.dto.DiscoverySettings
 import org.apache.jena.riot.{Lang, RDFDataMgr}
 import play.Logger
 import play.api.libs.json.{JsError, JsNumber, Json}
 import play.api.libs.ws.WSClient
+import play.api.mvc.MultipartFormData.FilePart
 import play.api.mvc.{Action, BodyParsers, Controller}
 import services.DiscoveryService
 import services.discovery.model.{DataSample, Pipeline}
-import services.discovery.model.components.{DataSourceInstance, ExtractorInstance, TransformerInstance, ApplicationInstance}
+import services.discovery.model.components.{ApplicationInstance, DataSourceInstance, ExtractorInstance, TransformerInstance}
 
 import scala.collection.mutable
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.{Await, Future}
+import scala.concurrent.duration.Duration
+import scalaj.http.{Http, MultiPart}
 
 @Singleton
 class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) extends Controller {
@@ -67,29 +73,28 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
         val maybePipelines = service.getPipelines(id)
         val string = maybePipelines.map { pipelineMap => {
 
-                val pipelines = pipelineMap.map { case (_, p) => p }
-                val appGroups = pipelines.groupBy(p => p.typedVisualizers.head)
+                val appGroups = pipelineMap.groupBy(p => p._2.typedVisualizers.head)
 
                 var ag = 0
                 appGroups.map { appGroup =>
                     ag += 1
-                    val dataSourceGroups = appGroup._2.groupBy(p => p.typedDatasources.toSet)
+                    val dataSourceGroups = appGroup._2.groupBy(p => p._2.typedDatasources.toSet)
                     var dg = 0
                     dataSourceGroups.map { dataSourceGroup =>
                         dg += 1
-                        val extractorGroups = dataSourceGroup._2.groupBy(p => p.typedExtractors.toSet)
+                        val extractorGroups = dataSourceGroup._2.groupBy(p => p._2.typedExtractors.toSet)
                         var eg = 0
                         extractorGroups.map { extractorGroup =>
                             eg += 1
-                            var groupedPipelines = extractorGroup._2.toIndexedSeq.sortBy(p => p.lastComponent.discoveryIteration)
+                            var groupedPipelines = extractorGroup._2.toIndexedSeq.sortBy(p => p._2.lastComponent.discoveryIteration)
                             var i = 1
-                            val groups = new mutable.HashMap[Int, Seq[Pipeline]]
+                            val groups = new mutable.HashMap[Int, Seq[(UUID, Pipeline)]]
 
                             while(groupedPipelines.nonEmpty)
                             {
                                 val groupedPipeline = groupedPipelines.head
                                 val same = for {
-                                    pCandid <- groupedPipelines.drop(1) if sampleEquals(groupedPipeline.lastOutputDataSample, pCandid.lastOutputDataSample)
+                                    pCandid <- groupedPipelines.drop(1) if sampleEquals(groupedPipeline._2.lastOutputDataSample, pCandid._2.lastOutputDataSample)
                                 } yield pCandid
 
                                 val group = Seq(groupedPipeline) ++ same
@@ -98,18 +103,18 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
                                 groupedPipelines = groupedPipelines.filter(pip => !group.contains(pip))
                             }
 
-                            groups.toIndexedSeq.sortBy(pg => minIteration(pg._2)).map { case (idx, pGroup) =>
-                                val pipelines = pGroup.sortBy(p => p.lastComponent.discoveryIteration)
+                            groups.toIndexedSeq.sortBy(pg => minIteration(pg._2.map(_._2))).map { case (idx, pGroup) =>
+                                val pipelines = pGroup.sortBy(p => p._2.lastComponent.discoveryIteration)
 
                                 pipelines.map { p =>
-                                    val datasourcesString = p.typedDatasources.map(_.label).mkString(",")
-                                    val extractorsString = p.typedExtractors.map(_.getClass.getSimpleName).mkString(",")
-                                    val transformersString = p.typedProcessors.map(_.getClass.getSimpleName).mkString(",")
-                                    val transformersCount = p.typedProcessors.size
-                                    val app = p.typedVisualizers.map(_.getClass.getSimpleName).mkString(",")
-                                    val iterationNumber = p.lastComponent.discoveryIteration
+                                    val datasourcesString = p._2.typedDatasources.map(_.label).mkString(",")
+                                    val extractorsString = p._2.typedExtractors.map(_.getClass.getSimpleName).mkString(",")
+                                    val transformersString = p._2.typedProcessors.map(_.getClass.getSimpleName).mkString(",")
+                                    val transformersCount = p._2.typedProcessors.size
+                                    val app = p._2.typedVisualizers.map(_.getClass.getSimpleName).mkString(",")
+                                    val iterationNumber = p._2.lastComponent.discoveryIteration
 
-                                    s"$ag;$dg;$eg;$idx;$datasourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber"
+                                    s"$ag;$dg;$eg;$idx;$datasourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber;/discovery/$id/execute/${p._1}"
                                 }.mkString("\n")
                             }.mkString("\n")
                         }.mkString("\n")
@@ -133,16 +138,21 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
         pipelines.map(p => p.lastComponent.discoveryIteration).min
     }
 
-    def upload(id: String) = Action {
-        val url = "http://xrg12.ms.mff.cuni.cz:8090/resources/pipelines?pipeline="
-        val maybePipelines = service.getPipelines(id)
-        maybePipelines.foreach { p =>
-            p.foreach { case (uuid, pipeline) =>
-                val request = ws.url(url + s"http://demo.visualization.linkedpipes.com:8080/discovery/$id/pipelines/${uuid.toString}")
-                request.get().foreach { r => println(r.body) }
-            }
-        }
-        Ok(Json.obj())
+    def execute(id: String, pipelineId: String) = Action {
+        val data = service.getEtlPipeline(id, pipelineId)
+        val prefix = "http://xrg12.ms.mff.cuni.cz:8090/"
+
+        data.map { datasets =>
+            val outputStream = new ByteArrayOutputStream()
+            datasets.foreach(d =>
+                RDFDataMgr.write(outputStream, d, Lang.JSONLD)
+            )
+            val url = prefix + "resources/pipelines"
+
+            val response = Http(url).postMulti(MultiPart("pipeline", "pipeline.jsonld", "application/ld+json", outputStream.toByteArray)).asString
+
+            Ok(response.body)
+        }.getOrElse(NotFound)
     }
 
     def pipeline(id: String, pipelineId: String) = Action {
