@@ -208,7 +208,7 @@ $(document).ready(function () {
         "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/linkset-wikidata-towns-2-cz-ruian-towns/sample.ttl"
     };
 
-    var datasourceGroups = [
+    var datasourceGroups = [/*
         {
             datasources: [businessEntitiesCZ]
         },
@@ -238,10 +238,10 @@ $(document).ready(function () {
         {
             datasources: [dpedia_towns]
         },
-
+*/
         {
             datasources: [dcsu_sheffield]
-        },
+        },/*-
 
         {
             datasources: [edp]
