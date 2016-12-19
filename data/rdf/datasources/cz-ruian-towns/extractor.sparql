@@ -1,8 +1,10 @@
 PREFIX ruian: <http://ruian.linked.opendata.cz/ontology/>
 PREFIX gml: <http://www.opengis.net/ont/gml#>
 PREFIX s: <http://schema.org/>
+        
 
 CONSTRUCT {
+    
   ?obec a ruian:Obec ;
     ruian:definicniBod ?definicniBod ;
     s:name ?nazevObce .
@@ -13,10 +15,11 @@ CONSTRUCT {
   ?geoCoordinates a s:GeoCoordinates ;
     s:longitude ?longitude ;
     s:latitude ?latitude .
-
+        
 } WHERE {
-  ?obec a ruian:Obec ;
-    ruian:definicniBod ?definicniBod ;
+    
+?obec a ruian:Obec ;
+    ruian:definicniBod/gml:pointMember ?definicniBod ;
     s:name ?nazevObce .
 
   ?definicniBod a gml:Point ;
@@ -25,4 +28,5 @@ CONSTRUCT {
   ?geoCoordinates a s:GeoCoordinates ;
     s:longitude ?longitude ;
     s:latitude ?latitude .
+        
 }
