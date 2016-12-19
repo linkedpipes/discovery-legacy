@@ -75,6 +75,8 @@ class EtlPipelineSerializer(etlPipeline: Pipeline) {
         config.resource.addProperty(config.model.createProperty(namespace, "endpoint"), sparqlEndpoint.url)
         if (sparqlEndpoint.url.contains("http://dbpedia.org/sparql")) {
             config.resource.addProperty(config.model.createProperty(namespace, "headerAccept"), "text/plain")
+        } else {
+            config.resource.addProperty(config.model.createProperty(namespace, "headerAccept"), "text/ttl")
         }
         sparqlEndpoint.defaultGraphIris.foreach { iri =>
             config.resource.addProperty(config.model.createProperty(namespace, "defaultGraph"), config.model.createResource(iri))

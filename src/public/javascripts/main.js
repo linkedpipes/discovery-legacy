@@ -215,6 +215,7 @@ $(document).ready(function () {
         {
             datasources: [checkActions_cz_ctia]
         },
+
         {
             datasources: [checkActions_cz_sao]
         },
@@ -238,10 +239,10 @@ $(document).ready(function () {
         {
             datasources: [dpedia_towns]
         },
-*/
+
         {
             datasources: [dcsu_sheffield]
-        },/*-
+        },
 
         {
             datasources: [edp]
@@ -266,6 +267,7 @@ $(document).ready(function () {
         {
             datasources: [subsidies_cz_cedr]
         },
+
         {
             datasources: [linkedmdb]
         },
@@ -275,24 +277,24 @@ $(document).ready(function () {
         {
             datasources: [dpedia_towns]
         },
-         {
-         datasources: [nomisma]
-         },
-         {
-         datasources: [linksetWikidata2Ruian, wikidata_towns, cz_ruian_towns]
-         },
         {
-         datasources: [linksetRuian2Ares, cz_ruian_address_places, businessEntitiesCZ]
-         },
-         {
-         datasources: [linksetDbpedia2Ruian, dpedia_towns, cz_ruian_towns]
-         },
-         {
-         datasources: [linksetCedr2Ruian, cz_ruian_address_places, subsidies_cz_cedr]
-         },
-         {
-         datasources: [linksetCedr2Ares, subsidies_cz_cedr, businessEntitiesCZ]
-         },*/
+            datasources: [nomisma]
+        },*/
+        {
+            datasources: [linksetWikidata2Ruian, wikidata_towns, cz_ruian_towns]
+        },/*
+        {
+            datasources: [linksetRuian2Ares, cz_ruian_address_places, businessEntitiesCZ]
+        },
+        {
+            datasources: [linksetDbpedia2Ruian, dpedia_towns, cz_ruian_towns]
+        },
+        {
+            datasources: [linksetCedr2Ruian, cz_ruian_address_places, subsidies_cz_cedr]
+        },
+        {
+            datasources: [linksetCedr2Ares, subsidies_cz_cedr, businessEntitiesCZ]
+        },*/
     ];
 
     var count = 0;
