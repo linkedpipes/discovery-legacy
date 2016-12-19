@@ -275,8 +275,9 @@ $(document).ready(function () {
         {
             datasources: [dpedia_towns]
         },
-        /*
-
+         {
+         datasources: [nomisma]
+         },
          {
          datasources: [linksetWikidata2Ruian, wikidata_towns, cz_ruian_towns]
          },
@@ -291,7 +292,7 @@ $(document).ready(function () {
          },
          {
          datasources: [linksetCedr2Ares, subsidies_cz_cedr, businessEntitiesCZ]
-         },*/
+         },
     ];
 
     var count = 0;

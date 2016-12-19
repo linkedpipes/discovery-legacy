@@ -6,7 +6,7 @@ import play.Logger
 import services.discovery.components.analyzer.LinksetBasedUnion
 import services.discovery.components.transformer.FusionTransformer
 import services.discovery.model._
-import services.discovery.model.components.DataSourceInstance
+import services.discovery.model.components.{DataSourceInstance, ExtractorInstance}
 import services.discovery.model.internal.IterationData
 
 import scala.collection.mutable
@@ -74,7 +74,7 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
 
     private def iterationBody(iterationData: IterationData): Future[IterationData] = {
         discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Starting iteration.")
-        discoveryLogger.trace(s"[$id] $iterationData.")
+        //discoveryLogger.trace(s"[$id] $iterationData.")
 
         val (extractorCandidatePipelines, otherPipelines) = iterationData.givenPipelines.partition(endsWithLargeDataset)
         val extractors = iterationData.availableComponents.extractors
@@ -90,7 +90,10 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
 
                     val filteredPipelines = component match {
                         case c if c.isInstanceOf[LinksetBasedUnion] => pipelines.filterNot(_.components.count(_.componentInstance == c) > 0)
+                          .filterNot(p => p.components.size == 1 && p.lastComponent.componentInstance.isInstanceOf[DataSourceInstance] &&
+                            p.lastComponent.componentInstance.asInstanceOf[DataSourceInstance].isLarge)
                         case c if c.isInstanceOf[FusionTransformer] => pipelines.filter(_.components.exists(_.componentInstance.isInstanceOf[LinksetBasedUnion]))
+                        case e if e.isInstanceOf[ExtractorInstance] => pipelines.filter(_.lastComponent.componentInstance.isInstanceOf[DataSourceInstance])
                         case _ => pipelines
                     }
 

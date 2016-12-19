@@ -28,14 +28,15 @@ class Cedr_DotaceCastka2Rdf_Value extends SparqlUpdateTransformer {
     
     protected override val whereClause =
         """
-          |?prijemce cedr:obdrzelDotaci ?dotace .
-          |  ?dotace cedr:castkaRozhodnuta ?castka .
+          |  ?prijemce cedr:obdrzelDotaci ?dotace .
+          |  ?dotace cedr:byloRozhodnuto ?rozhodnuti .
+          |  ?rozhodnuti cedr:castkaRozhodnuta ?castka .
           |
           |  OPTIONAL {
           |    ?dotace dct:title ?title .
           |	BIND(CONCAT("Allocated money for subsidy number ", STR(?title)) AS ?abstractionLabel)
           |  }
           |
-          |  BIND(IRI(CONCAT(STR(?dotace), "/abstraction/cedr-dotace-castka2rdf-value")) AS ?abstraction)
+          |  BIND(IRI(CONCAT(STR(?rozhodnuti), "/abstraction/cedr-dotace-castka2rdf-value")) AS ?abstraction)
         """.stripMargin
 }
