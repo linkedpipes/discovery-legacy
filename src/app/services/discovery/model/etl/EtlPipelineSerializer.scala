@@ -77,7 +77,7 @@ class EtlPipelineSerializer(etlPipeline: Pipeline) {
             config.resource.addProperty(config.model.createProperty(namespace, "headerAccept"), "text/plain")
         }
         sparqlEndpoint.defaultGraphIris.foreach { iri =>
-            config.resource.addProperty(config.model.createProperty(namespace, "defaultGraph"), iri)
+            config.resource.addProperty(config.model.createProperty(namespace, "defaultGraph"), config.model.createResource(iri))
         }
         config
     }

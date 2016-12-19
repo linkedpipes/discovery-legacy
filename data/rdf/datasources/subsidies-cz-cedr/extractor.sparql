@@ -17,7 +17,8 @@ CONSTRUCT {
 	gr:legalName ?nazevPrijemce .
 	
   ?adresa
-    spa:adresniMistoKod ?adresniMistoKod .
+    spa:adresniMistoKod ?adresniMistoKod ;
+    a cedr:Adresa .
 } WHERE {
   ?dotace a cedr:Dotace ;
 	cedr:byloRozhodnuto ?rozhodnuti ;
@@ -33,5 +34,6 @@ CONSTRUCT {
 	gr:legalName ?nazevPrijemce .
 	
   ?adresa
-    spa:adresniMistoKod ?adresniMistoKod .
+    spa:adresniMistoKod ?adresniMistoKod ;
+    a cedr:Adresa .
 }

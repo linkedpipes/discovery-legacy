@@ -12,7 +12,7 @@ GET        /discovery/:id/pipelines                            controllers.Disco
 GET        /discovery/:id/csv                                  controllers.DiscoveryController.csv(id: String)
 GET        /discovery/:id/pipelines/:pipelineId                controllers.DiscoveryController.pipeline(id: String, pipelineId: String)
 GET        /discovery/:id/stop                                 controllers.DiscoveryController.stop(id: String)
-GET        /discovery/:id/upload                               controllers.DiscoveryController.upload(id: String)
+GET        /discovery/:id/execute/:pipelineId                  controllers.DiscoveryController.execute(id: String, pipelineId: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file                                       controllers.Assets.versioned(path="/public", file: Asset)

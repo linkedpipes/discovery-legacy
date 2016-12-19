@@ -4,11 +4,6 @@
 @prefix ruiands: <http://ruian.linked.opendata.cz/resource/dataset> .
 @prefix void: <http://rdfs.org/ns/void#> .
 
-<http://www.wikidata.org/entity/Q1000033> a <http://www.wikidata.org/entity/Q5153359>;
-  owl:sameAs <http://ruian.linked.opendata.cz/resource/obce/580511> .
-  
-<http://ruian.linked.opendata.cz/resource/obce/580511> a ruian:Obec .
-
 ruiands:Wikidata_Ruian a void:Linkset ;
     void:objectsTarget <http://ruian.linked.opendata.cz/dataset/ruian/obce> ;
     void:subjectsTarget <http://wikidata.org/dataset/towns> ;

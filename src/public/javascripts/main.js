@@ -208,15 +208,13 @@ $(document).ready(function () {
         "descriptorIri": "https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/linkset-wikidata-towns-2-cz-ruian-towns/sample.ttl"
     };
 
-    var datasourceGroups = [/*
+    var datasourceGroups = [
         {
             datasources: [businessEntitiesCZ]
         },
-
         {
             datasources: [checkActions_cz_ctia]
         },
-
         {
             datasources: [checkActions_cz_sao]
         },
@@ -236,9 +234,15 @@ $(document).ready(function () {
         {
             datasources: [dbpedia_earthquakes]
         },
+
+        {
+            datasources: [dpedia_towns]
+        },
+
         {
             datasources: [dcsu_sheffield]
         },
+
         {
             datasources: [edp]
         },
@@ -275,26 +279,20 @@ $(document).ready(function () {
          datasources: [nomisma]
          },
          {
-         datasources: [linksetRuian2Ares, cz_ruian_address_places, businessEntitiesCZ]
-         },
-     */
-
-        {
-         datasources: [linksetCedr2Ruian, cz_ruian_address_places, subsidies_cz_cedr]
-         },
-
-/*         {
-         datasources: [linksetCedr2Ares, subsidies_cz_cedr, businessEntitiesCZ]
-         },
-
-         {
          datasources: [linksetWikidata2Ruian, wikidata_towns, cz_ruian_towns]
          },
-
+        {
+         datasources: [linksetRuian2Ares, cz_ruian_address_places, businessEntitiesCZ]
+         },
          {
          datasources: [linksetDbpedia2Ruian, dpedia_towns, cz_ruian_towns]
-         }
-*/
+         },
+         {
+         datasources: [linksetCedr2Ruian, cz_ruian_address_places, subsidies_cz_cedr]
+         },
+         {
+         datasources: [linksetCedr2Ares, subsidies_cz_cedr, businessEntitiesCZ]
+         },
     ];
 
     var count = 0;

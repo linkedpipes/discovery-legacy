@@ -17,7 +17,8 @@ libraryDependencies ++= Seq(
     "org.apache.jena" % "jena-arq" % "3.1.0" exclude("org.slf4j", "slf4j-log4j12"),
     "com.typesafe.akka" %% "akka-actor" % "2.4.10",
     "org.apache.commons" % "commons-io" % "1.3.2",
-    "ai.x" %% "play-json-extensions" % "0.8.0"
+    "ai.x" %% "play-json-extensions" % "0.8.0",
+    "org.scalaj" %% "scalaj-http" % "2.3.0"
 )
 
 
