@@ -20,7 +20,7 @@ class EtlPipelineSerializer(etlPipeline: Pipeline) {
     private lazy val pipelineIri = iriGenerator.pipelineIri
     private lazy val dataModel = PipelineDataModel.create(pipelineIri)
     private lazy val iterations = etlPipeline.components.map(_.discoveryIteration).distinct.sorted
-    private lazy val resultGraphUrn = GuidGenerator.nextUrn
+    lazy val resultGraphUrn = GuidGenerator.nextUrn
     private val rows = new mutable.HashMap[Int, Int]
 
     def serialize: Dataset = {

@@ -3,9 +3,8 @@ package services
 import java.util.UUID
 
 import controllers.dto.{DiscoveryResult, DiscoverySettings}
-import org.apache.jena.query.Dataset
 import services.discovery.Discovery
-import services.discovery.model.etl.EtlPipelineExporter
+import services.discovery.model.etl.{EtlPipeline, EtlPipelineExporter}
 import services.discovery.model.{DiscoveryInput, Pipeline}
 
 import scala.collection.mutable
@@ -32,9 +31,9 @@ class DiscoveryService {
         )
     }
 
-    def getEtlPipeline(id: String, pipelineId: String): Option[Seq[Dataset]] = withDiscovery(id) { discovery =>
-        EtlPipelineExporter.export(discovery.results.get(UUID.fromString(pipelineId)).toSeq)
-    }
+    def getEtlPipeline(id: String, pipelineId: String): Option[EtlPipeline] = withDiscovery(id) { discovery =>
+        EtlPipelineExporter.export(discovery.results.get(UUID.fromString(pipelineId)).toSeq).headOption
+    }.flatten
 
     def getPipelines(id: String): Option[mutable.HashMap[UUID, Pipeline]] = withDiscovery(id) { discovery =>
         discovery.results

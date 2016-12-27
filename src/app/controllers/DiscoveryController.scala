@@ -2,28 +2,21 @@ package controllers
 
 import java.io._
 import java.util.UUID
-import java.util.concurrent.TimeUnit
 import javax.inject._
 
-import akka.stream.scaladsl.{FileIO, Source}
 import controllers.dto.DiscoverySettings
 import org.apache.jena.query.DatasetFactory
 import org.apache.jena.rdf.model.ModelFactory
 import org.apache.jena.riot.{Lang, RDFDataMgr}
-import org.apache.jena.vocabulary.{RDF, RDFS}
 import play.Logger
-import play.api.libs.json.{JsError, JsNumber, Json}
+import play.api.libs.json.{JsError, JsNumber, JsString, Json}
 import play.api.libs.ws.WSClient
-import play.api.mvc.MultipartFormData.FilePart
 import play.api.mvc.{Action, BodyParsers, Controller}
 import services.DiscoveryService
+import services.discovery.model.components.DataSourceInstance
 import services.discovery.model.{DataSample, Pipeline}
-import services.discovery.model.components.{ApplicationInstance, DataSourceInstance, ExtractorInstance, TransformerInstance}
 
 import scala.collection.mutable
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.{Await, Future}
-import scala.concurrent.duration.Duration
 import scalaj.http.{Http, MultiPart}
 
 @Singleton
@@ -76,54 +69,53 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
         val maybePipelines = service.getPipelines(id)
         val string = maybePipelines.map { pipelineMap => {
 
-                val appGroups = pipelineMap.groupBy(p => p._2.typedVisualizers.head)
+            val appGroups = pipelineMap.groupBy(p => p._2.typedVisualizers.head)
 
-                var ag = 0
-                appGroups.map { appGroup =>
-                    ag += 1
-                    val dataSourceGroups = appGroup._2.groupBy(p => p._2.typedDatasources.toSet)
-                    var dg = 0
-                    dataSourceGroups.map { dataSourceGroup =>
-                        dg += 1
-                        val extractorGroups = dataSourceGroup._2.groupBy(p => p._2.typedExtractors.toSet)
-                        var eg = 0
-                        extractorGroups.map { extractorGroup =>
-                            eg += 1
-                            var groupedPipelines = extractorGroup._2.toIndexedSeq.sortBy(p => p._2.lastComponent.discoveryIteration)
-                            var i = 1
-                            val groups = new mutable.HashMap[Int, Seq[(UUID, Pipeline)]]
+            var ag = 0
+            appGroups.map { appGroup =>
+                ag += 1
+                val dataSourceGroups = appGroup._2.groupBy(p => p._2.typedDatasources.toSet)
+                var dg = 0
+                dataSourceGroups.map { dataSourceGroup =>
+                    dg += 1
+                    val extractorGroups = dataSourceGroup._2.groupBy(p => p._2.typedExtractors.toSet)
+                    var eg = 0
+                    extractorGroups.map { extractorGroup =>
+                        eg += 1
+                        var groupedPipelines = extractorGroup._2.toIndexedSeq.sortBy(p => p._2.lastComponent.discoveryIteration)
+                        var i = 1
+                        val groups = new mutable.HashMap[Int, Seq[(UUID, Pipeline)]]
 
-                            while(groupedPipelines.nonEmpty)
-                            {
-                                val groupedPipeline = groupedPipelines.head
-                                val same = for {
-                                    pCandid <- groupedPipelines.drop(1) if sampleEquals(groupedPipeline._2.lastOutputDataSample, pCandid._2.lastOutputDataSample)
-                                } yield pCandid
+                        while (groupedPipelines.nonEmpty) {
+                            val groupedPipeline = groupedPipelines.head
+                            val same = for {
+                                pCandid <- groupedPipelines.drop(1) if sampleEquals(groupedPipeline._2.lastOutputDataSample, pCandid._2.lastOutputDataSample)
+                            } yield pCandid
 
-                                val group = Seq(groupedPipeline) ++ same
-                                groups.put(i, group)
-                                i += 1
-                                groupedPipelines = groupedPipelines.filter(pip => !group.contains(pip))
-                            }
+                            val group = Seq(groupedPipeline) ++ same
+                            groups.put(i, group)
+                            i += 1
+                            groupedPipelines = groupedPipelines.filter(pip => !group.contains(pip))
+                        }
 
-                            groups.toIndexedSeq.sortBy(pg => minIteration(pg._2.map(_._2))).map { case (idx, pGroup) =>
-                                val pipelines = pGroup.sortBy(p => p._2.lastComponent.discoveryIteration)
+                        groups.toIndexedSeq.sortBy(pg => minIteration(pg._2.map(_._2))).map { case (idx, pGroup) =>
+                            val pipelines = pGroup.sortBy(p => p._2.lastComponent.discoveryIteration)
 
-                                pipelines.map { p =>
-                                    val datasourcesString = p._2.typedDatasources.map(_.label).mkString(",")
-                                    val extractorsString = p._2.typedExtractors.map(_.getClass.getSimpleName).mkString(",")
-                                    val transformersString = p._2.typedProcessors.map(_.getClass.getSimpleName).mkString(",")
-                                    val transformersCount = p._2.typedProcessors.size
-                                    val app = p._2.typedVisualizers.map(_.getClass.getSimpleName).mkString(",")
-                                    val iterationNumber = p._2.lastComponent.discoveryIteration
+                            pipelines.map { p =>
+                                val datasourcesString = p._2.typedDatasources.map(_.label).mkString(",")
+                                val extractorsString = p._2.typedExtractors.map(_.getClass.getSimpleName).mkString(",")
+                                val transformersString = p._2.typedProcessors.map(_.getClass.getSimpleName).mkString(",")
+                                val transformersCount = p._2.typedProcessors.size
+                                val app = p._2.typedVisualizers.map(_.getClass.getSimpleName).mkString(",")
+                                val iterationNumber = p._2.lastComponent.discoveryIteration
 
-                                    s"$ag;$dg;$eg;$idx;$datasourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber;/discovery/$id/execute/${p._1}"
-                                }.mkString("\n")
+                                s"$ag;$dg;$eg;$idx;$datasourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber;/discovery/$id/execute/${p._1}"
                             }.mkString("\n")
                         }.mkString("\n")
                     }.mkString("\n")
                 }.mkString("\n")
-            }
+            }.mkString("\n")
+        }
         }.getOrElse("")
 
         val header = s"appGroup;dataSourcesGroup;extractorsGroup;dataSampleGroup;dataSources;transformerCount;extractors;transformers;app;iterationNumber"
@@ -137,41 +129,43 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
         d.isEmpty
     }
 
-    def minIteration(pipelines: Seq[Pipeline]) : Int = {
+    def minIteration(pipelines: Seq[Pipeline]): Int = {
         pipelines.map(p => p.lastComponent.discoveryIteration).min
     }
 
     def execute(id: String, pipelineId: String) = Action {
-        val data = service.getEtlPipeline(id, pipelineId)
+        val etlPipeline = service.getEtlPipeline(id, pipelineId)
         val prefix = "http://xrg12.ms.mff.cuni.cz:8090"
 
-        data.map { datasets =>
+        etlPipeline.map { ep =>
             val outputStream = new ByteArrayOutputStream()
-            datasets.foreach(d =>
-                RDFDataMgr.write(outputStream, d, Lang.JSONLD)
-            )
-            val url = s"$prefix/resources/pipelines"
+            RDFDataMgr.write(outputStream, ep.dataset, Lang.JSONLD)
 
-            val response = Http(url).postMulti(MultiPart("pipeline", "pipeline.jsonld", "application/ld+json", outputStream.toByteArray)).asString.body
+            val pipelineCreationUrl = s"$prefix/resources/pipelines"
+            val response = Http(pipelineCreationUrl).postMulti(MultiPart("pipeline", "pipeline.jsonld", "application/ld+json", outputStream.toByteArray)).asString.body
 
-            val ds = DatasetFactory.create()
-            RDFDataMgr.read(ds, new StringReader(response), null, Lang.TRIG)
-            val pipelineUri = ds.listNames().next()
+            val resultDataset = DatasetFactory.create()
+            RDFDataMgr.read(resultDataset, new StringReader(response), null, Lang.TRIG)
+            val pipelineUri = resultDataset.listNames().next()
 
-            val execUrl = s"$prefix/resources/executions?pipeline=$pipelineUri"
-            val execBody = Http(execUrl).postForm.asString.body
+            val pipelineExecutionUrl = s"$prefix/resources/executions?pipeline=$pipelineUri"
+            val executionResponse = Http(pipelineExecutionUrl).postForm.asString.body
+            val executionIri = Json.parse(executionResponse) \ "iri"
 
-            Ok(execBody)
+            Ok(Json.obj(
+                "pipelineId" -> pipelineId,
+                "etlPipelineIri" -> pipelineUri,
+                "etlExecutionIri" -> executionIri.get.asInstanceOf[JsString].value,
+                "resultGraphIri" -> ep.resultGraphIri
+            ))
         }.getOrElse(NotFound)
     }
 
     def pipeline(id: String, pipelineId: String) = Action {
-        val data = service.getEtlPipeline(id, pipelineId)
-        data.map { datasets =>
+        val etlPipeline = service.getEtlPipeline(id, pipelineId)
+        etlPipeline.map { ep =>
             val outputStream = new ByteArrayOutputStream()
-            datasets.foreach(d =>
-                RDFDataMgr.write(outputStream, d, Lang.JSONLD)
-            )
+            RDFDataMgr.write(outputStream, ep.dataset, Lang.JSONLD)
             Ok(outputStream.toString())
         }.getOrElse(NotFound)
     }
