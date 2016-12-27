@@ -215,11 +215,9 @@ $(document).ready(function () {
         {
             datasources: [checkActions_cz_ctia]
         },
-
         {
             datasources: [checkActions_cz_sao]
         },
-
         {
             datasources: [cz_ruian_address_places]
         },
@@ -231,11 +229,11 @@ $(document).ready(function () {
         {
             datasources: [dblp]
         },
-
+*/
         {
             datasources: [dbpedia_earthquakes]
         },
-
+/*
         {
             datasources: [dpedia_towns]
         },
@@ -279,10 +277,10 @@ $(document).ready(function () {
         },
         {
             datasources: [nomisma]
-        },*/
+        },
         {
             datasources: [linksetWikidata2Ruian, wikidata_towns, cz_ruian_towns]
-        },/*
+        },
         {
             datasources: [linksetRuian2Ares, cz_ruian_address_places, businessEntitiesCZ]
         },

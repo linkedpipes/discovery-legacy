@@ -7,7 +7,10 @@ import javax.inject._
 
 import akka.stream.scaladsl.{FileIO, Source}
 import controllers.dto.DiscoverySettings
+import org.apache.jena.query.DatasetFactory
+import org.apache.jena.rdf.model.ModelFactory
 import org.apache.jena.riot.{Lang, RDFDataMgr}
+import org.apache.jena.vocabulary.{RDF, RDFS}
 import play.Logger
 import play.api.libs.json.{JsError, JsNumber, Json}
 import play.api.libs.ws.WSClient
@@ -140,18 +143,25 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
 
     def execute(id: String, pipelineId: String) = Action {
         val data = service.getEtlPipeline(id, pipelineId)
-        val prefix = "http://xrg12.ms.mff.cuni.cz:8090/"
+        val prefix = "http://xrg12.ms.mff.cuni.cz:8090"
 
         data.map { datasets =>
             val outputStream = new ByteArrayOutputStream()
             datasets.foreach(d =>
                 RDFDataMgr.write(outputStream, d, Lang.JSONLD)
             )
-            val url = prefix + "resources/pipelines"
+            val url = s"$prefix/resources/pipelines"
 
-            val response = Http(url).postMulti(MultiPart("pipeline", "pipeline.jsonld", "application/ld+json", outputStream.toByteArray)).asString
+            val response = Http(url).postMulti(MultiPart("pipeline", "pipeline.jsonld", "application/ld+json", outputStream.toByteArray)).asString.body
 
-            Ok(response.body)
+            val ds = DatasetFactory.create()
+            RDFDataMgr.read(ds, new StringReader(response), null, Lang.TRIG)
+            val pipelineUri = ds.listNames().next()
+
+            val execUrl = s"$prefix/resources/executions?pipeline=$pipelineUri"
+            val execBody = Http(execUrl).postForm.asString.body
+
+            Ok(execBody)
         }.getOrElse(NotFound)
     }
 
