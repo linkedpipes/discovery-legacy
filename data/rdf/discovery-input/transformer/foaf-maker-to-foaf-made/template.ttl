@@ -16,7 +16,36 @@ configuration-vocabulary:Configuration a rdfs:Class ;
 	rdfs:subClassOf ldvm:ComponentConfiguration .
 	
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
-	dcterms:title "Default configuration" .
+	dcterms:title "Default configuration" ;
+	#nevidim duvod, proc by to mela byt property query z nejakyho specialniho jinyho namespace jako v prikladech, staci ldvm ne?
+	ldvm:query  """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+		DELETE {
+		  ?thing foaf:maker ?maker .
+		} INSERT {
+		  ?maker foaf:made ?thing .
+		} WHERE {
+		  ?thing foaf:maker ?maker .
+		}
+	""" ;
+	#nevidim duvod, proc by se ta property mela jmenovat configurationSPARQL, kdyz vsude jinde se pouziva query a ne SPARQL
+	ldvm:configurationQuery """
+		PREFIX dcterms: <http://purl.org/dc/terms/>
+		PREFIX ldvm: <http://linked.opendata.cz/ontology/ldvm/>
+		PREFIX configuration-vocabulary: <http://linked.opendata.cz/vocabulary/ldvm/transformer/foaf-maker-to-foaf-made/configuration/>
+		
+		CONSTRUCT {
+			?config a configuration-vocabulary:Configuration ;
+				ldvm:query ?query ;
+				dcterms:title ?title .
+		} WHERE {
+			?config a configuration-vocabulary:Configuration .
+			OPTIONAL { ?config ldvm:query ?query . }
+			OPTIONAL { ?config dcterms:title ?title . }
+		}
+	""" .
+	
 
 transformer:input a ldvm:InputDataPortTemplate ;
 	dcterms:title "Triples with FOAF maker predicate" .
@@ -28,16 +57,11 @@ transformer:feature a ldvm:MandatoryFeature ;
 	dcterms:title "Transforms FOAF maker to FOAF made" ;
 	ldvm:descriptor transformer:descriptor .
 	
-# Tady je trochu zmena - nepopisuje to ciste jen ten input, ale chovani celeho transformeru. Stale ale plati, ze je aplikovan (ldvm:appliesTo) na input.
 transformer:descriptor a ldvm:Descriptor ;
 	ldvm:query """
 		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
-		DELETE {
-		  ?thing foaf:maker ?maker .
-		} INSERT {
-		  ?maker foaf:made ?thing .
-		} WHERE {
+		ASK {
 		  ?thing foaf:maker ?maker .
 		}
 	""" ;
