@@ -5,7 +5,7 @@
 @prefix experiment001:  <http://linked.opendata.cz/resource/ldvm/experiment/001/> .
 
 experiment001:input a rdf:Bag ;
-   rdfs:member <http://linked.opendata.cz/resource/ldvm/dataset/dblp/template>, <http://linked.opendata.cz/resource/ldvm/transformer/foaf-maker-to-foaf-made/template>, <http://linked.opendata.cz/resource/ldvm/transformer/dct-issued-to-time-instant/template>, <http://linked.opendata.cz/resource/ldvm/application/personal-profiles/template> .
+   rdfs:member <http://linked.opendata.cz/ldcp/resource/ldvm/dataset/dblp/template>, <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/foaf-maker-to-foaf-made/template>, <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/dct-issued-to-time-instant/template>, <http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/template> .
 
 #experiment001:input a rdf:Bag ;
 #   rdfs:member experiment001:dataSets ;
