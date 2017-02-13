@@ -2,24 +2,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-@prefix experiment001:  <http://linked.opendata.cz/resource/ldvm/experiment/001/> .
+@prefix experiment001:  <http://linked.opendata.cz/ldcp/resource/ldvm/experiment/001/> .
 
 experiment001:input a rdf:Bag ;
    rdfs:member <http://linked.opendata.cz/ldcp/resource/ldvm/dataset/dblp/template>, <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/foaf-maker-to-foaf-made/template>, <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/dct-issued-to-time-instant/template>, <http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/template> .
-
-#experiment001:input a rdf:Bag ;
-#   rdfs:member experiment001:dataSets ;
-#   rdfs:member experiment001:transformers ;
-#   rdfs:member experiment001:applications .
-
-#experiment001:dataSets a rdf:Bag ; # skos:Collection znamena, ze vsechny members jsou skos:Concept = divny
-#    dcterms:title "Datasets for application pipeline discovery experiment 001" ;
-#    rdfs:member <http://linked.opendata.cz/resource/ldvm/dataset/dblp/template>.
-
-#experiment001:transformers a rdf:Bag ;
-#	dcterms:title "Transformers for application pipeline discovery experiment 001" ;
-#    rdfs:member <http://linked.opendata.cz/resource/ldvm/transformer/foaf-maker-to-foaf-made/template>, <http://linked.opendata.cz/resource/ldvm/transformer/dct-issued-to-time-instant/template> .
-
-#experiment001:applications a rdf:Bag ;
-#	dcterms:title "Applications for application pipeline discovery experiment 001" ;
-#	rdfs:member <http://linked.opendata.cz/resource/ldvm/application/personal-profiles/template> .
