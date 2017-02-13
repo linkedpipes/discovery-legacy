@@ -1,6 +1,6 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
-@prefix transformer:  <http://linked.opendata.cz/resource/ldvm/transformer/foaf-maker-to-foaf-made/> .
+@prefix transformer:  <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/foaf-maker-to-foaf-made/> .
 @prefix configuration-vocabulary:  <http://linked.opendata.cz/vocabulary/ldvm/transformer/foaf-maker-to-foaf-made/configuration/> .
 
 transformer:template a ldvm:TransformerTemplate ;
