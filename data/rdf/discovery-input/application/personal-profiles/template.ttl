@@ -1,6 +1,6 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
-@prefix application:  <http://linked.opendata.cz/resource/ldvm/application/personal-profiles/> .
+@prefix application:  <http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/> .
 @prefix configuration-vocabulary:  <http://linked.opendata.cz/vocabulary/ldvm/application/personal-profiles/configuration/> .
 
 application:template a ldvm:ApplicationTemplate ;
@@ -36,7 +36,7 @@ application:defaultConfiguration a configuration-vocabulary:Configuration ;
 	application:zoom 0^^xsd:int ;
 	ldvm:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>
-		PREFIX application:  <http://linked.opendata.cz/resource/ldvm/application/personal-profiles/>
+		PREFIX application:  <http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/>
 		PREFIX configuration-vocabulary: <http://linked.opendata.cz/vocabulary/ldvm/application/personal-profiles/configuration/>
 		
 		CONSTRUCT {
