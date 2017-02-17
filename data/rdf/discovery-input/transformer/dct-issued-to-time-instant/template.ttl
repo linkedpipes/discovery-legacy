@@ -2,6 +2,7 @@
 @prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
 @prefix transformer:  <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/dct-issued-to-time-instant/> .
 @prefix configuration-vocabulary:  <http://linked.opendata.cz/vocabulary/ldvm/transformer/dct-issued-to-time-instant/configuration/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 transformer:template a ldvm:TransformerTemplate ;
 	dcterms:title "Dublin Core issued to time instant abstraction"@en;
