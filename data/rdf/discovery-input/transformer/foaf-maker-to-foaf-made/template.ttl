@@ -2,6 +2,7 @@
 @prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
 @prefix transformer:  <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/foaf-maker-to-foaf-made/> .
 @prefix configuration-vocabulary:  <http://linked.opendata.cz/vocabulary/ldvm/transformer/foaf-maker-to-foaf-made/configuration/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 transformer:template a ldvm:TransformerTemplate ;
 	dcterms:title "FOAF maker to FOAF made transformer"@en;
