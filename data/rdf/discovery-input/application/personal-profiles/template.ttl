@@ -37,7 +37,7 @@ application:defaultConfiguration a configuration-vocabulary:Configuration ;
 	dcterms:title "Default configuration for personal profiles application"@en ;
 	application:markerColor "#ff0000" ;
 	application:center application:defaultCenter ;
-	application:zoom 0^^xsd:int ;
+	application:zoom "0"^^xsd:int ;
 	ldvm:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>
 		PREFIX application:  <http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/>
