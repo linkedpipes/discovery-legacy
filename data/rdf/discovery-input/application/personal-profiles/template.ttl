@@ -2,6 +2,7 @@
 @prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
 @prefix application:  <http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/> .
 @prefix configuration-vocabulary:  <http://linked.opendata.cz/vocabulary/ldvm/application/personal-profiles/configuration/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 application:template a ldvm:ApplicationTemplate ;
 	dcterms:title "Personal Profiles Application"@en;
