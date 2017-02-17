@@ -17,17 +17,17 @@ configuration-vocabulary:Configuration a rdfs:Class ;
 	rdfs:subClassOf ldvm:ComponentConfiguration .
 	
 configuration-vocabulary:markerColor a rdf:Property ;
-	rdfs:label "Initial color of markers on the displayed map."@en
+	rdfs:label "Initial color of markers on the displayed map."@en ;
 	rdfs:domain configuration-vocabulary:Configuration ;
 	rdfs:range xsd:string .
 
 configuration-vocabulary:center a rdf:Property ;
-	rdfs:label "Geoocoordinates of the initial center of the displayed map."@en
+	rdfs:label "Geoocoordinates of the initial center of the displayed map."@en ;
 	rdfs:domain configuration-vocabulary:Configuration ;
 	rdfs:range geo:SpatialThing .
 
 configuration-vocabulary:zoom a rdf:Property ;
-	rdfs:label "Initial zoom of the displayed map."@en
+	rdfs:label "Initial zoom of the displayed map."@en ;
 	rdfs:domain configuration-vocabulary:Configuration ;
 	rdfs:range xsd:int .
 	
