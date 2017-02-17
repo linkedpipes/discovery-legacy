@@ -4,6 +4,7 @@
 @prefix configuration-vocabulary:  <http://linked.opendata.cz/vocabulary/ldvm/application/personal-profiles/configuration/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 
 application:template a ldvm:ApplicationTemplate ;
 	dcterms:title "Personal Profiles Application"@en;
