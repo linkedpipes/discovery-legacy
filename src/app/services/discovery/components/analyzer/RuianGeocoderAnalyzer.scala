@@ -2,7 +2,7 @@ package services.discovery.components.analyzer
 
 import java.util.UUID
 
-import services.discovery.components.common.DescriptorChecker
+import services.discovery.components.DescriptorChecker
 import services.discovery.model._
 import services.discovery.model.components.{AnalyzerInstance, AskQuery}
 

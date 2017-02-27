@@ -1,13 +1,35 @@
 package services.discovery.model.components
 
+import org.apache.jena.query.QueryFactory
+import org.apache.jena.rdf.model.ModelFactory
+import org.topbraid.spin.arq.{ARQ2SPIN, ARQFactory}
+import org.topbraid.spin.model._
+import org.topbraid.spin.model.update.Modify
+
 trait SparqlQuery {
-  def query: String
+    def query: String
+
+    def descriptor: AskQuery = {
+        val q = QueryFactory.create(query)
+        q.setQueryAskType()
+        AskQuery(q.serialize())
+    }
 }
 
-case class AskQuery(query: String) extends SparqlQuery
+abstract class PlainSparqlQuery extends SparqlQuery
 
-case class SelectQuery(query: String) extends SparqlQuery
+trait SparqlUpdateQuery extends SparqlQuery
 
-case class UpdateQuery(query: String) extends SparqlQuery
+trait SparqlAskQuery extends SparqlQuery
 
-case class ConstructQuery(query: String) extends SparqlQuery
+trait SparqlConstructQuery extends SparqlQuery
+
+trait SparqlSelectQuery extends SparqlQuery
+
+case class AskQuery(query: String) extends PlainSparqlQuery with SparqlAskQuery
+
+case class SelectQuery(query: String) extends PlainSparqlQuery with SparqlSelectQuery
+
+case class UpdateQuery(query: String) extends PlainSparqlQuery with SparqlUpdateQuery
+
+case class ConstructQuery(query: String) extends PlainSparqlQuery with SparqlConstructQuery

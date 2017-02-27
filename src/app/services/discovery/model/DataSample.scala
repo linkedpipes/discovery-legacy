@@ -28,7 +28,7 @@ trait DataSample {
 
     def getModel(discoveryId: UUID, iterationNumber: Int): Model
 
-    def transform(query: UpdateQuery, discoveryId: UUID, iterationNumber: Int): Model = {
+    def transform(query: SparqlUpdateQuery, discoveryId: UUID, iterationNumber: Int): Model = {
         val resultModel = ModelFactory.createDefaultModel()
         resultModel.add(getModel(discoveryId, iterationNumber))
         UpdateAction.parseExecute(query.query, resultModel)

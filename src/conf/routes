@@ -6,7 +6,7 @@
 GET        /                                                   controllers.HomeController.index
 GET        /experiments                                        controllers.HomeController.experiments()
 
-POST       /discovery/start                                    controllers.DiscoveryController.start
+GET        /discovery/start                                    controllers.DiscoveryController.start(uri: String)
 GET        /discovery/:id                                      controllers.DiscoveryController.status(id: String)
 GET        /discovery/:id/pipelines                            controllers.DiscoveryController.list(id: String)
 GET        /discovery/:id/csv                                  controllers.DiscoveryController.csv(id: String)

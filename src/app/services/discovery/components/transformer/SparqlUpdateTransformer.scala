@@ -2,50 +2,25 @@ package services.discovery.components.transformer
 
 import java.util.UUID
 
-import services.discovery.components.common.DescriptorChecker
+import services.discovery.components.DescriptorChecker
 import services.discovery.model._
-import services.discovery.model.components.{AskQuery, SparqlQuery, SparqlTransformerInstance, UpdateQuery}
+import services.discovery.model.components._
 
 import scala.concurrent.Future
 
-abstract class SparqlUpdateTransformer extends SparqlTransformerInstance with DescriptorChecker {
-    val portName = "INPUT"
-    val port = Port(portName, 0)
+class SparqlUpdateTransformer(query: UpdateQuery, features: Seq[Feature]) extends SparqlUpdateTransformerInstance with DescriptorChecker {
 
-    protected val prefixes : String
-
-    protected val deleteClause : String
-
-    protected val insertClause : String
-
-    protected val whereClause: String
-
-    private lazy val query = UpdateQuery(
-        s"""
-          |$prefixes
-          |
-          |DELETE { $deleteClause }
-          |INSERT { $insertClause }
-          |WHERE { $whereClause }
-        """.stripMargin)
-
-    private lazy val descriptor = AskQuery(
-        s"""
-          |$prefixes
-          |
-          |ASK { $whereClause }
-        """.stripMargin
-    )
+    val ports = features.flatMap(_.descriptors.map(_.port.getURI)).distinct.map(pUri => Port(pUri, 0))
 
     override def checkPort(port: Port, state: Option[ComponentState], outputDataSample: DataSample, discoveryId: UUID, iterationNumber: Int): Future[PortCheckResult] = {
-        checkStatelessDescriptors(outputDataSample, discoveryId, iterationNumber, descriptor)
+        checkStatelessDescriptors(outputDataSample, discoveryId, iterationNumber, features.filter(_.isMandatory).flatMap(_.descriptors).map(_.query): _*)
     }
 
-    override def getInputPorts: Seq[Port] = Seq(port)
+    override def getInputPorts: Seq[Port] = ports.headOption.toSeq
 
     override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Future[DataSample] = {
         try {
-            val newSample = dataSamples(port).transform(query, discoveryId, iterationNumber)
+            val newSample = dataSamples(ports.head).transform(query, discoveryId, iterationNumber)
             Future.successful(ModelDataSample(newSample))
         } catch {
             case e: Throwable => {

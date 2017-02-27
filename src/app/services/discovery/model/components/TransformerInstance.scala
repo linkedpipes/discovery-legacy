@@ -4,7 +4,7 @@ import services.discovery.model.Port
 
 trait TransformerInstance extends ProcessorInstance
 
-trait SparqlTransformerInstance extends TransformerInstance {
+trait SparqlUpdateTransformerInstance extends TransformerInstance {
 
   def getQueryByPort(port: Port) : SparqlQuery
 

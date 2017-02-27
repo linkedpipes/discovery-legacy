@@ -1,107 +1,115 @@
 package services.discovery.model
 
-import controllers.dto.DiscoverySettings
-import services.discovery.components.analyzer.{LinksetBasedUnion, RuianGeocoderAnalyzer}
-import services.discovery.components.application._
-import services.discovery.components.extractor._
-import services.discovery.components.transformer._
-import services.discovery.model.components.{ApplicationInstance, DataSourceInstance, ExtractorInstance, ProcessorInstance}
+import org.apache.jena.rdf.model.{Model, ModelFactory, Resource, ResourceFactory}
+import org.apache.jena.vocabulary.RDF
+import org.topbraid.spin.model.Construct
+import services.discovery.components.application.Application
+import services.discovery.components.datasource.SparqlEndpoint
+import services.discovery.components.extractor.SparqlConstructExtractor
+import services.discovery.components.transformer.SparqlUpdateTransformer
+import services.discovery.model.components._
+
+import scala.collection.JavaConverters._
 
 case class DiscoveryInput(
-    dataSources: Seq[DataSourceInstance],
+    dataSets: Seq[DataSet],
     extractors: Seq[ExtractorInstance],
-    visualizers: Seq[ApplicationInstance],
-    processors: Seq[ProcessorInstance]
+    processors: Seq[ProcessorInstance],
+    visualizers: Seq[ApplicationInstance]
 )
+
+trait RdfVocabulary {
+    def prefix: String
+
+    protected def resource(name: String) = ResourceFactory.createResource(s"$prefix$name")
+
+    protected def property(name: String) = ResourceFactory.createProperty(s"$prefix$name")
+}
+
+object LDVM extends RdfVocabulary {
+    val prefix = "http://linked.opendata.cz/ontology/ldvm/"
+    val DataSourceTemplate = resource("DataSourceTemplate")
+    val ExtractorTemplate = resource("ExtractorTemplate")
+    val TransformerTemplate = resource("TransformerTemplate")
+    val ApplicationTemplate = resource("ApplicationTemplate")
+    val MandatoryFeature = resource("MandatoryFeature")
+    val OptionalFeature = resource("OptionalFeature")
+    val Descriptor = resource("Descriptor")
+
+    val componentConfigurationTemplate = property("componentConfigurationTemplate")
+    val service = property("service")
+    val query = property("query")
+    val feature = property("feature")
+    val descriptor = property("descriptor")
+    val appliesTo = property("appliesTo")
+    val outputTemplate = property("outputTemplate")
+    val outputDataSample = property("outputDataSample")
+}
+
+object SD extends RdfVocabulary {
+    val prefix = "http://www.w3.org/ns/sparql-service-description#"
+
+    val endpoint = property("endpoint")
+}
+
+case class RelevantModel(importantResources: Seq[Resource])
+
+case class Feature(isMandatory: Boolean, descriptors: Seq[Descriptor])
+
+case class Descriptor(query: AskQuery, port: Resource)
+
+case class DataSet(dataSourceInstance: DataSourceInstance, extractorInstance: Option[ExtractorInstance])
 
 object DiscoveryInput {
 
-    val extractors = Seq(
-        new PopulatedPlacesExtractor,
-        new EarthquakesExtractor,
-        new DcatDatasetExtractor,
-        new LegislationCzActsExtractor,
-        new LegislationCzActsVersionsExtractor,
-        new LegislationGbActsExtractor,
-        new LegislationGbActsVersionsExtractor,
-        new SubsidiesCzCedrExtractor,
-        new LinkedMdbFilmsExtractor,
-        new AresExtractor,
-        new RuianExtractor,
-        new TownsExtractor,
-        new WikidataTownsExtractor,
-        new NomismaOrgPersonsExtractor
-    )
+    def apply(templates: Seq[Model]): DiscoveryInput = {
 
-    var processors = Seq(
-        new LinksetBasedUnion,
-        new FusionTransformer,
+        val dataSets = getDataSets(templates)
+        val processors = getProcessors(templates)
+        val applications = getApplications(templates)
 
-        new Bibtex_Date2Dct_Issued,
+        new DiscoveryInput(dataSets, Seq(), processors, applications)
+    }
 
-        new Cedr_DotaceCastka2Rdf_Value,
-        new Cedr_SidliNaAdrese2Geo_SpatialThing,
-        new Cedr_SmlouvaPodpisDatum2Dct_Created,
-        new Cedr_SmlouvaPodpisDatum2Time_Instant,
+    private def getDataSets(models: Seq[Model]): Seq[DataSet] = {
+        getTemplatesOfType(models, LDVM.DataSourceTemplate).map { template =>
+            val configuration = template.getModel.getRequiredProperty(template, LDVM.componentConfigurationTemplate).getObject.asResource()
+            val service = configuration.getPropertyResourceValue(LDVM.service)
+            val endpointUri = service.getPropertyResourceValue(SD.endpoint).getURI
+            val output = template.getRequiredProperty(LDVM.outputTemplate).getResource
+            val dataSampleUri = Option(output.getRequiredProperty(LDVM.outputDataSample).getResource.getURI)
 
-        new Dbpedia_PopulationTotal2Rdf_ValueTransformer,
-        new Dbpedia_PopulationMetro2Rdf_ValueTransformer,
-        new Dbpedia_Date2Time_InstantTransformer,
+            val extractorQuery = Option(configuration.getProperty(LDVM.query)).map(_.getString)
+            val extractor = extractorQuery.map(eq => new SparqlConstructExtractor(ConstructQuery(eq)))
+            DataSet(SparqlEndpoint(endpointUri, descriptorIri = dataSampleUri), extractor)
+        }
+    }
 
-        new Dct_Issued2Time_InstantTransformer,
-        new Dct_Created2Time_InstantTransformer,
-        new Dct_Valid2Time_Interval1Transformer,
-        new Dct_Valid2Time_Interval2Transformer,
-        new Dct_Date2Time_InstantTransformer,
+    private def getProcessors(models: Seq[Model]): Seq[ProcessorInstance] = {
+        getTemplatesOfType(models, LDVM.TransformerTemplate).map { t =>
+            val configuration = t.getRequiredProperty(LDVM.componentConfigurationTemplate).getObject.asResource()
+            val updateQuery = UpdateQuery(configuration.getRequiredProperty(LDVM.query).getString)
+            new SparqlUpdateTransformer(updateQuery, getFeatures(t))
+        }
+    }
 
-        new Foaf_Maker2Foaf_Made,
-        new Foaf_Name2Dct_Title,
-        new Foaf_RdfsLabel2Foaf_Name,
-        new Foaf_SkosPrefLabel2Foaf_Name,
+    private def getApplications(models: Seq[Model]): Seq[ApplicationInstance] = {
+        getTemplatesOfType(models, LDVM.ApplicationTemplate).map { t =>
+            new Application(getFeatures(t))
+        }
+    }
 
-        new Frbr_Realization2Dct_HasVersionTransformer,
-        new Frbr_RealizationOf2Frbr_RealizationTransformer,
+    private def getTemplatesOfType(models: Seq[Model], template: Resource): Seq[Resource] = {
+        models.flatMap(m => m.listResourcesWithProperty(RDF.`type`, template).asScala.toSeq)
+    }
 
-        new Gr_LegalName2Dct_Title,
-
-        new Lex_Act2Frbr_Work,
-
-        new Movie_InitialReleaseOf2Time_Instant,
-        new Movie_PersonName2Foaf_Name,
-        new Movie_Person2Foaf_Made,
-
-        new Nomisma_HasAuthority2Foaf_Made,
-        new Nomisma_HasMint2Geo_SpatialThing,
-        new Nomisma_StartDateEndDate2Time_Interval,
-
-        new Org_HasMembership2Org_Member,
-
-        new RuianGeocoderAnalyzer,
-        new Ruian_AdresniMisto2Geo_SpatialThing,
-        new Ruian_DefinicniBod2Geo_SpatialThing,
-
-        new Schema_GeoCoordinates2Geo_SpatialThing,
-        new Schema_Address2Geo_SpatialThing,
-
-        new Swrc_Editor2Foaf_Made,
-
-        new Time_Interval2Time_IntervalTransformer,
-
-        new Wikidata_Population2Edf_Value,
-        new Wikidata_CoordinateLocation2Geo_SpatialThing
-    )
-
-    val applications = Seq(
-        new TimeInstantsApplication,
-        new TimeIntervalsApplication,
-        new ThingsTimelinesApplication,
-        new QuantifiedThingsOnMapApplication,
-        new PersonalProfilesApplication,
-        new ThingsOnMapApplication,
-        new PlacesOnMapApplication
-    )
-
-    def create(settings: DiscoverySettings) = {
-        new DiscoveryInput(settings.sparqlEndpoints, extractors, applications, processors)
+    private def getFeatures(template: Resource): Seq[Feature] = {
+        template.listProperties(LDVM.feature).toList.asScala.map(_.getObject.asResource()).map { f =>
+            val isMandatory = f.getPropertyResourceValue(RDF.`type`).getURI.equals(LDVM.MandatoryFeature.getURI)
+            val descriptors = f.listProperties(LDVM.descriptor).toList.asScala.map(_.getObject.asResource()).map { d =>
+                Descriptor(AskQuery(d.getRequiredProperty(LDVM.query).getString), d.getRequiredProperty(LDVM.appliesTo).getObject.asResource())
+            }
+            Feature(isMandatory, descriptors)
+        }
     }
 }

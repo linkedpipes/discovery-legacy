@@ -26,8 +26,8 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
     var isFinished = false
 
     def discover(input: DiscoveryInput): Future[Seq[Pipeline]] = {
-        discoveryLogger.info(s"[$id] Starting with ${input.dataSources.size} datasources, ${input.extractors.size} extractors, ${input.processors.size} processors and ${input.visualizers.size} visualizers.")
-        val pipelines = createInitialPipelines(input.dataSources).flatMap { initialPipelines =>
+        discoveryLogger.info(s"[$id] Starting with ${input.dataSets.size} data sets, ${input.processors.size} processors and ${input.visualizers.size} applications.")
+        val pipelines = createInitialPipelines(input.dataSets).flatMap { initialPipelines =>
             val data = IterationData(
                 id = id,
                 givenPipelines = initialPipelines,
@@ -74,7 +74,6 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
 
     private def iterationBody(iterationData: IterationData): Future[IterationData] = {
         discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Starting iteration.")
-        //discoveryLogger.trace(s"[$id] $iterationData.")
 
         val (extractorCandidatePipelines, otherPipelines) = iterationData.givenPipelines.partition(endsWithLargeDataset)
         val extractors = iterationData.availableComponents.extractors
@@ -128,9 +127,9 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
         }
     }
 
-    private def createInitialPipelines(dataSources: Seq[DataSourceInstance]): Future[Seq[Pipeline]] = {
-        discoveryLogger.trace(s"[$id] Initial pipelines built from $dataSources.")
-        Future.sequence(dataSources.map(pipelineBuilder.buildInitialPipeline))
+    private def createInitialPipelines(dataSets: Seq[DataSet]): Future[Seq[Pipeline]] = {
+        discoveryLogger.trace(s"[$id] Initial pipelines built from $dataSets.")
+        Future.sequence(dataSets.map(pipelineBuilder.buildInitialPipeline))
     }
 
     private def containsBindingToIteration(iterationNumber: Int)(pipeline: Pipeline): Boolean = pipeline.bindings.exists(

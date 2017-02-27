@@ -16,7 +16,7 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
     def tryMatchPorts(componentInstance: ComponentInstanceWithInputs, givenPipelines: Seq[Pipeline], iteration: Int): Future[Seq[Pipeline]] = {
         val ports = componentInstance.getInputPorts.sortBy(_.priority)
         discoveryLogger.trace(s"[$discoveryId][$iteration][matcher] Matching ${ports.size} ports against ${givenPipelines.size} pipelines.")
-        tryMatchPorts(ports, givenPipelines, portMatches = Map(), lastStates = Seq(None), iteration, componentInstance)
+        tryMatchPorts(ports.toList, givenPipelines, portMatches = Map(), lastStates = Seq(None), iteration, componentInstance)
     }
 
     private def tryMatchPorts(
@@ -24,15 +24,15 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
         givenPipelines: Seq[Pipeline],
         portMatches: Map[Port, Seq[PortMatch]],
         lastStates: Seq[Option[ComponentState]],
-        iterationNumbr: Int,
+        iterationNumber: Int,
         componentInstance: ComponentInstanceWithInputs
     ): Future[Seq[Pipeline]] = {
         remainingPorts match {
             case Nil =>
                 portMatches.values.forall(_.nonEmpty) match {
                     case true => {
-                        discoveryLogger.trace(s"[$discoveryId][$iterationNumbr][matcher] Matching completed, building possible pipelines.")
-                        buildPipelines(componentInstance, portMatches, iterationNumbr)
+                        discoveryLogger.trace(s"[$discoveryId][$iterationNumber][matcher] Matching completed, building possible pipelines.")
+                        buildPipelines(componentInstance, portMatches, iterationNumber)
                     }
                     case false => {
                         Future.successful(Seq())
@@ -48,8 +48,8 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
                     }
                 }.toSeq.distinct
 
-                tryMatchGivenPipelinesWithPort(headPort, givenPipelines, lastStates, componentInstance, iterationNumbr).flatMap { matches =>
-                    tryMatchPorts(tail, givenPipelines, portMatches + (headPort -> matches), matches.map(_.maybeState), iterationNumbr, componentInstance)
+                tryMatchGivenPipelinesWithPort(headPort, givenPipelines, lastStates, componentInstance, iterationNumber).flatMap { matches =>
+                    tryMatchPorts(tail, givenPipelines, portMatches + (headPort -> matches), matches.map(_.maybeState), iterationNumber, componentInstance)
                 }
         }
     }

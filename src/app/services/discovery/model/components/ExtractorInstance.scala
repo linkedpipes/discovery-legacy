@@ -1,5 +1,9 @@
 package services.discovery.model.components
 
+import services.discovery.model.Port
+
 trait ExtractorInstance extends AnalyzerInstance
 
-trait SparqlExtractorInstance extends ExtractorInstance with SparqlAnalyzerInstance
+trait SparqlConstructExtractorInstance extends ExtractorInstance with SparqlAnalyzerInstance {
+    def port: Port
+}

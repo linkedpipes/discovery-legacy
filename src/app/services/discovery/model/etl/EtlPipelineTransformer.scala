@@ -2,7 +2,7 @@ package services.discovery.model.etl
 
 import services.discovery.components.analyzer.{EtlRdf2File, EtlSparqlGraphProtocol}
 import services.discovery.components.datasource.{EtlSparqlEndpoint, JenaDataSource, SparqlEndpoint}
-import services.discovery.model.components.{SparqlEndpointInstance, SparqlExtractorInstance, UnionInstance, ApplicationInstance}
+import services.discovery.model.components.{SparqlEndpointInstance, SparqlConstructExtractorInstance, UnionInstance, ApplicationInstance}
 import services.discovery.model.{Pipeline, PipelineComponent, PortBinding, GuidGenerator}
 
 class EtlPipelineTransformer(pipeline: Pipeline) {
@@ -13,9 +13,9 @@ class EtlPipelineTransformer(pipeline: Pipeline) {
     "Extractor",
     new PipelineFragmentMatcher(
       b => {
-        val endsWithExtractors = b.filter(_.endComponent.componentInstance.isInstanceOf[SparqlExtractorInstance])
+        val endsWithExtractors = b.filter(_.endComponent.componentInstance.isInstanceOf[SparqlConstructExtractorInstance])
         val startsWithSparqlEndpoint = endsWithExtractors.filter(_.startComponent.componentInstance.isInstanceOf[SparqlEndpointInstance])
-        val startsWithExtractor = b.filter(_.startComponent.componentInstance.isInstanceOf[SparqlExtractorInstance])
+        val startsWithExtractor = b.filter(_.startComponent.componentInstance.isInstanceOf[SparqlConstructExtractorInstance])
 
         startsWithSparqlEndpoint.map { se =>
           Seq(se) ++ startsWithExtractor.filter(_.startComponent == se.endComponent)
@@ -26,7 +26,7 @@ class EtlPipelineTransformer(pipeline: Pipeline) {
       val mainBinding = b.find(_.startComponent.componentInstance.isInstanceOf[SparqlEndpointInstance]).get
       val otherBinding = b.filterNot(_ == mainBinding).head
       val ds = mainBinding.startComponent.componentInstance.asInstanceOf[SparqlEndpointInstance]
-      val ex = mainBinding.endComponent.componentInstance.asInstanceOf[SparqlExtractorInstance]
+      val ex = mainBinding.endComponent.componentInstance.asInstanceOf[SparqlConstructExtractorInstance]
 
       val etlDs = EtlSparqlEndpoint(ds.url, ds.defaultGraphIris, ex.getQueryByPort(mainBinding.endPort), ds.label)
       val c = PipelineComponent(GuidGenerator.next, etlDs, mainBinding.startComponent.discoveryIteration)
