@@ -4,43 +4,43 @@ import java.io._
 import java.util.UUID
 import javax.inject._
 
-import controllers.dto.DiscoverySettings
 import org.apache.jena.query.DatasetFactory
-import org.apache.jena.rdf.model.ModelFactory
-import org.apache.jena.riot.{Lang, RDFDataMgr}
+import org.apache.jena.rdf.model.{Model, ModelFactory, Resource}
+import org.apache.jena.riot.{Lang, RDFDataMgr, RiotException}
+import org.apache.jena.vocabulary.{RDF, RDFS}
 import play.Logger
-import play.api.libs.json.{JsError, JsNumber, JsString, Json}
+import play.api.libs.json.{JsNumber, JsString, Json}
 import play.api.libs.ws.WSClient
-import play.api.mvc.{Action, BodyParsers, Controller}
+import play.api.mvc.{Action, Controller}
 import services.DiscoveryService
 import services.discovery.model.components.DataSourceInstance
-import services.discovery.model.{DataSample, Pipeline}
+import services.discovery.model.{DataSample, DiscoveryInput, Pipeline}
 
+import scala.collection.JavaConverters._
 import scala.collection.mutable
 import scalaj.http.{Http, MultiPart}
 
 @Singleton
 class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) extends Controller {
 
-    def start = Action(BodyParsers.parse.json) { request =>
-        Logger.debug(s"[${request.id}] A discovery was requested: ${request.body}.")
-        val settings = request.body.validate[DiscoverySettings]
-        settings.fold(
-            errors => {
-                Logger.debug(s"[${request.id}] Rejected discovery due to JSON errors: ${errors.toString()}")
-                BadRequest(Json.obj("error" -> JsError.toJson(errors)))
-            },
-            settings => {
-                if (settings.sparqlEndpoints.isEmpty) {
-                    Logger.debug(s"[${request.id}] Rejected discovery. Neither dumps or SPARQL endpoints were specified.")
-                    BadRequest(Json.obj("error" -> "Either dumps or sparql endpoints have to be specified."))
+    val discoveryLogger = Logger.of("discovery")
+
+    def start(uri: String) = Action {
+        fromUri(uri) {
+            case Right(model) => {
+                val experiments = model.listSubjectsWithProperty(RDF.`type`, RDF.Bag).asScala
+                val templatesByExperiment = experiments.map { e => getTemplates(model, e) }.toSeq
+                val errors = templatesByExperiment.flatMap(_._2)
+                val templates = templatesByExperiment.map(_._1)
+                if (errors.nonEmpty) {
+                    BadRequest(s"Referenced data contains some error: ${errors.map(_.getMessage).mkString(";")}.")
                 } else {
-                    val id = service.start(settings)
-                    Logger.debug(s"[${request.id}] Running discovery $id with settings: ${settings.toString}.")
-                    Ok(Json.obj("id" -> Json.toJson(id)))
+                    val ids = templates.map(t => runExperiment(t))
+                    Ok(Json.toJson(ids))
                 }
             }
-        )
+            case Left(e) => BadRequest(s"Referenced data contains some error: $uri. ${e.getMessage}.")
+        }
     }
 
     def status(id: String) = Action {
@@ -173,6 +173,29 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
     def stop(id: String) = Action {
         service.stop(id)
         Ok(Json.obj())
+    }
+
+    private def fromUri[R](uri: String)(fn: Either[Throwable, Model] => R): R = {
+        discoveryLogger.debug(s"Downloading data from $uri.")
+        val result = try {
+            val model = ModelFactory.createDefaultModel()
+            model.read(uri)
+            Right(model)
+        } catch {
+            case e: RiotException => Left(new Exception(s"The data at $uri caused the following error: ${e.getMessage}."))
+        }
+        fn(result)
+    }
+
+    private def getTemplates(model: Model, bag: Resource): (Seq[Model], Seq[Throwable]) = {
+        val templates = model.listObjectsOfProperty(bag, RDFS.member).asScala
+        val (lefts, rights) = templates.map(t => fromUri(t.asResource().getURI) { e => e }).partition(_.isLeft)
+        (rights.map(_.right.get).toSeq, lefts.map(_.left.get).toSeq)
+    }
+
+    private def runExperiment(templates: Seq[Model]): UUID = {
+        val discoveryInput = DiscoveryInput(templates)
+        service.start(discoveryInput)
     }
 
 }

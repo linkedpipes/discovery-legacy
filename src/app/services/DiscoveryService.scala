@@ -2,7 +2,7 @@ package services
 
 import java.util.UUID
 
-import controllers.dto.{DiscoveryResult, DiscoverySettings}
+import controllers.dto.DiscoveryResult
 import services.discovery.Discovery
 import services.discovery.model.etl.{EtlPipeline, EtlPipelineExporter}
 import services.discovery.model.{DiscoveryInput, Pipeline}
@@ -14,10 +14,10 @@ class DiscoveryService {
 
     private val discoveries = new scala.collection.mutable.HashMap[UUID, Discovery]
 
-    def start(settings: DiscoverySettings) = {
+    def start(input: DiscoveryInput) = {
         val discovery = Discovery.create
         discoveries.put(discovery.id, discovery)
-        discovery.discover(DiscoveryInput.create(settings))
+        discovery.discover(input)
         discovery.id
     }
 

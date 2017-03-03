@@ -1,6 +1,6 @@
 package services.discovery.components.transformer
 
-class FusionTransformer extends SparqlUpdateTransformer {
+class FusionTransformer extends SimpleSparqlUpdateTransformer {
 
     protected override val deleteClause = "?entity1 owl:sameAs ?entity2 ."
     protected override val insertClause =

@@ -1,4 +1,4 @@
-package services.discovery.components.common
+package services.discovery.components
 
 import java.util.UUID
 

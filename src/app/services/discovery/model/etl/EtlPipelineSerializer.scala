@@ -6,7 +6,7 @@ import org.apache.jena.vocabulary.RDF
 import services.discovery.components.analyzer.{EtlRdf2File, EtlSparqlGraphProtocol}
 import services.discovery.components.datasource.{EtlSparqlEndpoint, SparqlEndpoint}
 import services.discovery.model._
-import services.discovery.model.components.{SparqlEndpointInstance, SparqlTransformerInstance}
+import services.discovery.model.components.{SparqlEndpointInstance, SparqlUpdateTransformerInstance}
 
 import scala.collection.mutable
 
@@ -41,7 +41,7 @@ class EtlPipelineSerializer(etlPipeline: Pipeline) {
             c.componentInstance match {
                 case se: SparqlEndpoint => addSparqlEndpoint(c, se)
                 case ese: EtlSparqlEndpoint => addSparqlEndpoint(c, ese)
-                case t: SparqlTransformerInstance => addSparqlTransformer(c, t)
+                case t: SparqlUpdateTransformerInstance => addSparqlTransformer(c, t)
                 case f: EtlRdf2File => addRdf2File(c, f)
                 case gp: EtlSparqlGraphProtocol => addOutput(c, gp)
                 case _ => (null, null)
@@ -49,7 +49,7 @@ class EtlPipelineSerializer(etlPipeline: Pipeline) {
         }.toMap
     }
 
-    private def addSparqlTransformer(pipelineComponent: PipelineComponent, sparqlTransformerInstance: SparqlTransformerInstance): (PipelineComponent, ConfiguredComponent) = {
+    private def addSparqlTransformer(pipelineComponent: PipelineComponent, sparqlTransformerInstance: SparqlUpdateTransformerInstance): (PipelineComponent, ConfiguredComponent) = {
 
         val componentResource = addComponent(pipelineComponent.componentInstance.getClass.getSimpleName, "http://localhost:8080/resources/components/t-sparqlUpdate", pipelineComponent.discoveryIteration)
         val config = createConfig(componentResource, "http://plugins.linkedpipes.com/ontology/t-sparqlUpdate#Configuration")
