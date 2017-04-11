@@ -43,6 +43,13 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
         }
     }
 
+    def startExperiment = Action(parse.json) { request =>
+        val uris = request.body.as[Seq[String]]
+        val templates = uris.map { u => fromUri(u){ e => e } }.filter(_.isRight).map(_.right.get)
+        val discoveryId = runExperiment(templates)
+        Ok(Json.toJson(discoveryId))
+    }
+
     def status(id: String) = Action {
         val result = service.getStatus(id)
         Ok(Json.toJson(result))
