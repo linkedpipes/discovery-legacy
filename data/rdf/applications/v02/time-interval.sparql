@@ -1,0 +1,14 @@
+PREFIX time: <http://www.w3.org/2006/time#>
+
+ASK {
+
+  ?interval time:hasBeginning ?beginning ;
+    time:hasEnd ?end .
+	
+  ?beginning time:inDateTime ?dateTimeDescription .
+  
+  ?end time:inDateTime ?dateTimeDescription .
+}
+
+# Dokumentace ontologie dostupná na https://www.w3.org/TR/owl-time/
+# Předpokládáme, že aplikace umí pracovat s properties time:hasBeginning a time:hasEnd (ostatní neřeší), jejich hodnoty interpretuje jako instance time:Instant (které interpretuje tak, jak je uvedeno pro timeline-instant).

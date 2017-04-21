@@ -1,0 +1,20 @@
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+ASK {
+  ?observation a qb:Observation ;
+    qb:dataSet ?dataSet ;
+    ?sourceDimension ?source ;
+    ?targetDimension ?target ;
+    ?measure ?value .
+
+  ?sourceDimension a qb:DimensionProperty .
+  
+  ?targetDimension a qb:DimensionProperty .
+  
+  FILTER (?sourceDimension != ?targetDimension)
+  
+}
+
+# testuje existenci dvou různých dimenzí, pokud je tam dimenzí více, je na appce jak se s tím vypořádá (očekával bych, že umožní uživateli si dvě dimenze vybrat)
+# shodu source a target neřeší - tj. množina všech sources a množina všech targets mohou být disjunktní, nebo mít neprázdný průnik, nebo se shodovat
+# očekávám ale i tak vizualizace typu Chord či Co-occurrence matrix (tj. dojde k sesypání hodnot z dimenzí na jednu hromadu?)

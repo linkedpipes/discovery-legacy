@@ -1,0 +1,7 @@
+PREFIX time: <http://www.w3.org/2006/time#>
+
+ASK {
+  ?thing ?hasTemporalAbstraction ?instant .
+  
+  ?instant time:inDateTime ?dateTimeDescription .
+}

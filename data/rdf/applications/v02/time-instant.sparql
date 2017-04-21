@@ -1,0 +1,8 @@
+PREFIX time: <http://www.w3.org/2006/time#>
+
+ASK {
+  ?instant time:inDateTime ?dateTimeDescription .
+}
+
+# Dokumentace ontologie dostupná na https://www.w3.org/TR/owl-time/
+# Aplikace umí pracovat pouze s property time:inDateTime jejiž obor hodnot je time:DateTimeDescription. Umí interpretovat všechny properties s doménou time:DateTimeDescription

@@ -1,0 +1,12 @@
+PREFIX time: <http://www.w3.org/2006/time#>
+
+ASK {
+  ?thing ?hasTemporalAbstraction ?interval .
+  
+  ?interval time:hasBeginning ?beginning ;
+    time:hasEnd ?end .
+	
+  ?beginning time:inDateTime ?dateTimeDescription .
+  
+  ?end time:inDateTime ?dateTimeDescription .
+}

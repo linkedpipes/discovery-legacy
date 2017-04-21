@@ -1,0 +1,9 @@
+PREFIX s: <http://schema.org/>
+
+ASK {
+  ?place s:geo ?geocoordinates ;
+    rdf:value ?value .
+  
+  ?geocoordinates s:longitude ?longitude ;
+    s:latitude ?latitude .
+}
