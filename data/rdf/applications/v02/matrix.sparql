@@ -7,13 +7,13 @@ ASK {
     ?targetDimension ?target ;
     ?measure ?value .
 
-  FILTER(ISNUMERIC(?quantifiedAbstraction) && ISIRI(?source) && ISIRI(?target))
+  FILTER(ISNUMERIC(?value) && ISIRI(?source) && ISIRI(?target))
 	
-  ?sourceDimension a qb:DimensionProperty .
+#  ?sourceDimension a qb:DimensionProperty .
   
-  ?targetDimension a qb:DimensionProperty .
-  
-  FILTER (?sourceDimension != ?targetDimension)
+#  ?targetDimension a qb:DimensionProperty .
+    
+#  FILTER (?sourceDimension != ?targetDimension)
   
 }
 
