@@ -5,9 +5,9 @@ ASK {
   ?interval time:hasBeginning ?beginning ;
     time:hasEnd ?end .
 	
-  ?beginning time:inDateTime ?dateTimeDescription .
+  ?beginning time:inDateTime ?dateTimeDescriptionBeginning .
   
-  ?end time:inDateTime ?dateTimeDescription .
+  ?end time:inDateTime ?dateTimeDescriptionEnd .
 }
 
 # Dokumentace ontologie dostupná na https://www.w3.org/TR/owl-time/

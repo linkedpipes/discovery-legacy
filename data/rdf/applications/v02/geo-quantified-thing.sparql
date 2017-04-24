@@ -1,0 +1,13 @@
+PREFIX s: <http://schema.org/>
+
+ASK {
+  ?thing ?hasSpatialAbstraction ?spatialAbstraction ;
+    ?hasQuantifiedAbstraction ?quantifiedAbstraction .
+  
+  ?spatialAbstraction s:geo ?geocoordinates .
+  
+  ?geocoordinates s:longitude ?longitude ;
+    s:latitude ?latitude .
+	
+  FILTER(ISNUMERIC(?quantifiedAbstraction))
+}
