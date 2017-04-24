@@ -1,4 +1,3 @@
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 
 ASK {
@@ -8,16 +7,11 @@ ASK {
     ?targetDimension ?target ;
     ?measure ?value .
 
-  FILTER(ISNUMERIC(?value) && ISIRI(?source) && ISIRI(?target))
-	
-#  ?sourceDimension a qb:DimensionProperty .
+  ?sourceDimension a qb:DimensionProperty .
   
-#  ?targetDimension a qb:DimensionProperty .
-    
-#  FILTER (?sourceDimension != ?targetDimension)
-  
-}
+  ?targetDimension a qb:DimensionProperty .
 
-# testuje existenci dvou různých dimenzí, pokud je tam dimenzí více, je na appce jak se s tím vypořádá (očekával bych, že umožní uživateli si dvě dimenze vybrat)
-# shodu source a target neřeší - tj. množina všech sources a množina všech targets mohou být disjunktní, nebo mít neprázdný průnik, nebo se shodovat
-# očekávám ale i tak vizualizace typu Chord či Co-occurrence matrix (tj. dojde k sesypání hodnot z dimenzí na jednu hromadu?)
+  ?measure a qb:MeasureProperty .
+    
+  FILTER (?sourceDimension != ?targetDimension) 
+}
