@@ -7,7 +7,7 @@ object AppGen {
         val appTitle = args(1)
         val appDescription = args(2)
         val queryFilePath = args(3)
-        val query = Source.fromFile(queryFilePath).mkString
+        val query = Source.fromFile(queryFilePath)
 
         val template =
             s"""
