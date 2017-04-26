@@ -1,0 +1,298 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
+@prefix application:  <http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/> .
+@prefix configuration-vocabulary:  <http://linked.opendata.cz/vocabulary/ldvm/application/personal-profiles/configuration/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+application:template a ldvm:ApplicationTemplate ;
+	dcterms:title "Personal Profiles Application"@en;
+	dcterms:description "Displays things made by people on a map or timeline"@en;
+	ldvm:componentConfigurationTemplate application:defaultConfiguration ;
+	ldvm:inputTemplate application:input ;
+	ldvm:feature application:personsFeature, application:personsThingsAsMarkersFeature, application:personsThingsAsMarkersWithLabelsFeature, application:personsThingsAsMarkersWithDescriptionsFeature, application:personsThingsAsTimeInstantsFeature, application:personsThingsAsTimeInstantsWithLabelsFeature, application:personsThingsAsTimeInstantsWithDescriptionsFeature, application:personsThingsAsTimeIntervalsFeature, application:personsThingsAsTimeIntervalsWithLabelsFeature, application:personsThingsAsTimeIntervalsWithDescriptionsFeature .
+	
+configuration-vocabulary:Configuration a rdfs:Class ;
+	rdfs:label "Class of configurations of personal profiles application"@en;
+	rdfs:subClassOf ldvm:ComponentConfiguration .
+	
+configuration-vocabulary:markerColor a rdf:Property ;
+	rdfs:label "Initial color of markers on the displayed map."@en ;
+	rdfs:domain configuration-vocabulary:Configuration ;
+	rdfs:range xsd:string .
+
+configuration-vocabulary:center a rdf:Property ;
+	rdfs:label "Geoocoordinates of the initial center of the displayed map."@en ;
+	rdfs:domain configuration-vocabulary:Configuration ;
+	rdfs:range geo:SpatialThing .
+
+configuration-vocabulary:zoom a rdf:Property ;
+	rdfs:label "Initial zoom of the displayed map."@en ;
+	rdfs:domain configuration-vocabulary:Configuration ;
+	rdfs:range xsd:int .
+	
+application:defaultConfiguration a configuration-vocabulary:Configuration ;
+	dcterms:title "Default configuration for personal profiles application"@en ;
+	application:markerColor "#ff0000" ;
+	application:center application:defaultCenter ;
+	application:zoom "0"^^xsd:int ;
+	ldvm:configurationQuery """
+		PREFIX dcterms: <http://purl.org/dc/terms/>
+		PREFIX application:  <http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/>
+		PREFIX configuration-vocabulary: <http://linked.opendata.cz/vocabulary/ldvm/application/personal-profiles/configuration/>
+		
+		CONSTRUCT {
+			?config a configuration-vocabulary:Configuration ;
+				dcterms:title ?title ;
+				application:markerColor ?markerColor ;
+				application:center ?center ;
+				application:zoom ?zoom .
+				
+			?center geo:long ?long ;
+				geo:lat ?lat .
+		} WHERE {
+			?config a configuration-vocabulary:Configuration .
+			OPTIONAL { ?config dcterms:title ?title . }
+			OPTIONAL { ?config application:markerColor ?markerColor . }
+			OPTIONAL { 
+				?config application:center ?center .
+				?center geo:long ?long ;
+				  geo:lat ?lat .
+			}
+			OPTIONAL { ?config application:zoom ?zoom . }
+		}
+	""" .
+	
+application:defaultCenter a geo:SpatialThing ;
+	geo:long 14.4038611 ;
+	geo:lat 50.0883378 .
+	
+application:input a ldvm:InputDataPortTemplate ;
+	dcterms:title "Persons and things they made with temporal or geospatial abstraction." .
+	
+application:personsFeature a ldvm:MandatoryFeature ;
+	dcterms:title "Displays persons and things they made." ;
+	ldvm:descriptor application:personsDescriptor .
+	
+application:personsThingsAsMarkersFeature a ldvm:OptionalFeature ;
+	dcterms:title "Displays things made by persons as markers on a map." ;
+	ldvm:descriptor application:personsThingsAsMarkersDescriptor .
+	
+application:personsThingsAsMarkersWithLabelsFeature a ldvm:OptionalFeature ;
+	dcterms:title "Adds labels to markers representing things made by persons on a map." ;
+	ldvm:descriptor application:personsThingsAsMarkersWithLabelsDescriptor .
+	
+application:personsThingsAsMarkersWithDescriptionsFeature a ldvm:OptionalFeature ;
+	dcterms:title "Adds descriptions to markers representing things made by persons on a map." ;
+	ldvm:descriptor application:personsThingsAsMarkersWithDescriptionsDescriptor .
+	
+application:personsThingsAsTimeInstantsFeature a ldvm:OptionalFeature ;
+	dcterms:title "Displays things made by persons as time instants on a time line." ;
+	ldvm:descriptor application:personsThingsAsTimeInstantsDescriptor .
+	
+application:personsThingsAsTimeInstantsWithLabelsFeature a ldvm:OptionalFeature ;
+	dcterms:title "Adds labels to time instants reprensenting things made by persons on a time line." ;
+	ldvm:descriptor application:personsThingsAsTimeInstantsWithLabelsDescriptor .
+	
+application:personsThingsAsTimeInstantsWithDescriptionsFeature a ldvm:OptionalFeature ;
+	dcterms:title "Adds descriptions to time instants reprensenting things made by persons on a time line." ;
+	ldvm:descriptor application:personsThingsAsTimeInstantsWithDescriptionsDescriptor .
+	
+application:personsThingsAsTimeIntervalsFeature a ldvm:OptionalFeature ;
+	dcterms:title "Displays things made by persons as time intervals on a time line." ;
+	ldvm:descriptor application:personsThingsAsTimeIntervalsDescriptor .
+	
+application:personsThingsAsTimeIntervalsWithLabelsFeature a ldvm:OptionalFeature ;
+	dcterms:title "Adds labels to time intervals reprensenting things made by persons on a time line." ;
+	ldvm:descriptor application:personsThingsAsTimeIntervalsWithLabelsDescriptor .
+	
+application:personsThingsAsTimeIntervalsWithDescriptionsFeature a ldvm:OptionalFeature ;
+	dcterms:title "Adds descriptions to time intervals reprensenting things made by persons on a time line." ;
+	ldvm:descriptor application:personsThingsAsTimeIntervalsWithDescriptionsDescriptor .
+		
+application:personsDescriptor a ldvm:Descriptor ;
+	dcterms:title "Check for presence of persons and things they made" ;
+	ldvm:query """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		
+		ASK {
+			?agent foaf:name ?agentName ;
+				foaf:made ?thing .
+		}
+	""" ;
+	ldvm:appliesTo application:input .
+
+application:personsThingsAsMarkersDescriptor a ldvm:Descriptor ;
+	dcterms:title "Check for presence of persons and things they made with geospatial abstraction" ;
+	ldvm:query """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+		
+		ASK {
+			?agent foaf:made ?thing .
+			
+			?thing ?hasAbstraction ?place .
+		
+			?place geo:location ?geo .
+		  
+			?geo a geo:SpatialThing ;
+				geo:long ?long ;
+				geo:lat ?lat .
+		}
+	""" ;
+	ldvm:appliesTo application:input .
+	
+application:personsThingsAsMarkersWithLabelsDescriptor a ldvm:Descriptor ;
+	dcterms:title "Check for presence of persons and things they made with labeled geospatial abstraction" ;
+	ldvm:query """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+		PREFIX dcterms: <http://purl.org/dc/terms/> 
+		
+		ASK {
+			?agent foaf:made ?thing .
+			
+			?thing ?hasAbstraction ?place .
+		
+			?place geo:location ?geo ;
+				dcterms:title ?abstractionLabel .
+		  
+			?geo a geo:SpatialThing ;
+				geo:long ?long ;
+				geo:lat ?lat .
+		}
+	""" ;
+	ldvm:appliesTo application:input .
+	
+application:personsThingsAsMarkersWithDescriptionsDescriptor a ldvm:Descriptor ;
+	dcterms:title "Check for presence of persons and things they made with described geospatial abstraction" ;
+	ldvm:query """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+		PREFIX dcterms: <http://purl.org/dc/terms/> 
+		
+		ASK {
+			?agent foaf:made ?thing .
+			
+			?thing ?hasAbstraction ?place .
+		
+			?place geo:location ?geo ;
+				dcterms:description ?abstractionDescription .
+		  
+			?geo a geo:SpatialThing ;
+				geo:long ?long ;
+				geo:lat ?lat .
+		}
+	""" ;
+	ldvm:appliesTo application:input .
+
+application:personsThingsAsTimeInstantsDescriptor a ldvm:Descriptor ;
+	dcterms:title "Check for presence of persons and things they made with temporal instant abstraction" ;
+	ldvm:query """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX time: <http://www.w3.org/2006/time#>
+		PREFIX dcterms: <http://purl.org/dc/terms/> 
+		
+		ASK {
+			?agent foaf:made ?thing .
+			
+			?thing ?hasAbstraction ?instant .
+	
+			?instant time:inXSDDateTime ?dt .
+		}
+	""" ;
+	ldvm:appliesTo application:input .
+	
+application:personsThingsAsTimeInstantsWithLabelsDescriptor a ldvm:Descriptor ;
+	dcterms:title "Check for presence of persons and things they made with labeled temporal instant abstraction" ;
+	ldvm:query """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX time: <http://www.w3.org/2006/time#>
+		PREFIX dcterms: <http://purl.org/dc/terms/> 
+		
+		ASK {
+			?agent foaf:made ?thing .
+			
+			?thing ?hasAbstraction ?instant ;
+				dcterms:title ?abstractionDescription .
+	
+			?instant time:inXSDDateTime ?dt .
+		}
+	""" ;
+	ldvm:appliesTo application:input .
+	
+application:personsThingsAsTimeInstantsWithDescriptionsDescriptor a ldvm:Descriptor ;
+	dcterms:title "Check for presence of persons and things they made with described temporal instant abstraction" ;
+	ldvm:query """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX time: <http://www.w3.org/2006/time#>
+		PREFIX dcterms: <http://purl.org/dc/terms/> 
+		
+		ASK {
+			?agent foaf:made ?thing .
+			
+			?thing ?hasAbstraction ?instant ;
+				dcterms:description ?abstractionDescription .
+	
+			?instant time:inXSDDateTime ?dt .
+		}
+	""" ;
+	ldvm:appliesTo application:input .
+	
+application:personsThingsAsTimeIntervalsDescriptor a ldvm:Descriptor ;
+	dcterms:title "Check for presence of persons and things they made with temporal interval abstraction" ;
+	ldvm:query """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX time: <http://www.w3.org/2006/time#>
+		PREFIX dcterms: <http://purl.org/dc/terms/> 
+		
+		ASK {
+			?agent foaf:made ?thing .
+			
+			?thing ?hasAbstraction ?interval .
+	
+			?interval time:hasBeginning ?beginning ;
+				time:hasEnd ?end .
+		}
+	""" ;
+	ldvm:appliesTo application:input .
+	
+application:personsThingsAsTimeIntervalsWithLabelsDescriptor a ldvm:Descriptor ;
+	dcterms:title "Check for presence of persons and things they made with labeled temporal interval abstraction" ;
+	ldvm:query """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX time: <http://www.w3.org/2006/time#>
+		PREFIX dcterms: <http://purl.org/dc/terms/> 
+		
+		ASK {
+			?agent foaf:made ?thing .
+			
+			?thing ?hasAbstraction ?interval ;
+				dcterms:title ?abstractionDescription .
+	
+			?interval time:hasBeginning ?beginning ;
+				time:hasEnd ?end .
+		}
+	""" ;
+	ldvm:appliesTo application:input .
+	
+application:personsThingsAsTimeIntervalsWithDescriptionsDescriptor a ldvm:Descriptor ;
+	dcterms:title "Check for presence of persons and things they made with described temporal interval abstraction" ;
+	ldvm:query """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX time: <http://www.w3.org/2006/time#>
+		PREFIX dcterms: <http://purl.org/dc/terms/> 
+		
+		ASK {
+			?agent foaf:made ?thing .
+			
+			?thing ?hasAbstraction ?interval ;
+				dcterms:description ?abstractionDescription .
+	
+			?interval time:hasBeginning ?beginning ;
+				time:hasEnd ?end .
+		}
+	""" ;
+	ldvm:appliesTo application:input .

@@ -1,0 +1,70 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
+@prefix transformer:  <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/foaf-maker-to-foaf-made/> .
+@prefix configuration-vocabulary:  <http://linked.opendata.cz/vocabulary/ldvm/transformer/foaf-maker-to-foaf-made/configuration/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+transformer:template a ldvm:TransformerTemplate ;
+	dcterms:title "FOAF maker to FOAF made transformer"@en;
+	dcterms:description "Transforms triples with FOAF maker property to FOAF made property"@en;
+	ldvm:componentConfigurationTemplate transformer:defaultConfiguration ;
+	ldvm:inputTemplate transformer:input ;
+	ldvm:outputTemplate transformer:output ;
+	ldvm:feature transformer:feature .
+	
+configuration-vocabulary:Configuration a rdfs:Class ;
+	rdfs:label "Class of configurations of FOAF maker to FOAF made transformer"@en;
+	rdfs:subClassOf ldvm:ComponentConfiguration .
+	
+transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
+	dcterms:title "Default configuration" ;
+	#nevidim duvod, proc by to mela byt property query z nejakyho specialniho jinyho namespace jako v prikladech, staci ldvm ne?
+	ldvm:query  """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+		DELETE {
+		  ?thing foaf:maker ?maker .
+		} INSERT {
+		  ?maker foaf:made ?thing .
+		} WHERE {
+		  ?thing foaf:maker ?maker .
+		}
+	""" ;
+	#nevidim duvod, proc by se ta property mela jmenovat configurationSPARQL, kdyz vsude jinde se pouziva query a ne SPARQL
+	ldvm:configurationQuery """
+		PREFIX dcterms: <http://purl.org/dc/terms/>
+		PREFIX ldvm: <http://linked.opendata.cz/ontology/ldvm/>
+		PREFIX configuration-vocabulary: <http://linked.opendata.cz/vocabulary/ldvm/transformer/foaf-maker-to-foaf-made/configuration/>
+		
+		CONSTRUCT {
+			?config a configuration-vocabulary:Configuration ;
+				ldvm:query ?query ;
+				dcterms:title ?title .
+		} WHERE {
+			?config a configuration-vocabulary:Configuration .
+			OPTIONAL { ?config ldvm:query ?query . }
+			OPTIONAL { ?config dcterms:title ?title . }
+		}
+	""" .
+	
+
+transformer:input a ldvm:InputDataPortTemplate ;
+	dcterms:title "Triples with FOAF maker predicate" .
+	
+transformer:output a ldvm:OutputDataPortTemplate ;
+	dcterms:title "Triples with FOAF made predicate" .
+	
+transformer:feature a ldvm:MandatoryFeature ;
+	dcterms:title "Transforms FOAF maker to FOAF made" ;
+	ldvm:descriptor transformer:descriptor .
+	
+transformer:descriptor a ldvm:Descriptor ;
+	ldvm:query """
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+		ASK {
+		  ?thing foaf:maker ?maker .
+		}
+	""" ;
+	ldvm:appliesTo transformer:input .
