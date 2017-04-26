@@ -1,0 +1,17 @@
+PREFIX qb: <http://purl.org/linked-data/cube#>
+
+ASK {
+  ?observation a qb:Observation ;
+    qb:dataSet ?dataSet ;
+    ?sourceDimension ?source ;
+    ?targetDimension ?target ;
+    ?measure ?value .
+
+  ?sourceDimension a qb:DimensionProperty .
+  
+  ?targetDimension a qb:DimensionProperty .
+
+  ?measure a qb:MeasureProperty .
+    
+  FILTER (?sourceDimension != ?targetDimension) 
+}

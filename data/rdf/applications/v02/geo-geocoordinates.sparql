@@ -1,0 +1,6 @@
+PREFIX s: <http://schema.org/>
+
+ASK {
+  ?geocoordinates s:longitude ?longitude ;
+    s:latitude ?latitude .
+}

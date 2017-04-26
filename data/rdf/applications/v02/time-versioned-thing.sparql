@@ -1,0 +1,15 @@
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX time: <http://www.w3.org/2006/time#>
+
+ASK {
+  ?thing dct:hasVersion ?version .
+  
+  ?version ?hasTemporalAbstraction ?interval .
+  
+  ?interval time:hasBeginning ?beginning ;
+    time:hasEnd ?end .
+	
+  ?beginning time:inDateTime ?dateTimeDescriptionBeginning .
+  
+  ?end time:inDateTime ?dateTimeDescriptionEnd .
+}
