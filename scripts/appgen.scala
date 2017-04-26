@@ -7,7 +7,7 @@ object AppGen {
         val appTitle = args(1)
         val appDescription = args(2)
         val queryFilePath = args(3)
-        val query = Source.fromFile(queryFilePath)
+        val query = Source.fromFile(queryFilePath).mkString
 
         val template =
             s"""
@@ -54,7 +54,7 @@ object AppGen {
                |
                | application:defaultDescriptor a ldvm:Descriptor ;
                |     dcterms:title "Checks if default feature of $appTitle can be applied." ;
-               |     ldvm:query \"\"\"$query\"\"\" ;
+               |     ldvm:query \"\"\"\n$query\n\"\"\" ;
                |     ldvm:appliesTo application:input .
                """.stripMargin
 
