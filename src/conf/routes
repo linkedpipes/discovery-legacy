@@ -10,6 +10,7 @@ GET        /discovery/start                                    controllers.Disco
 POST       /discovery/start                                    controllers.DiscoveryController.startExperiment()
 GET        /discovery/:id                                      controllers.DiscoveryController.status(id: String)
 GET        /discovery/:id/pipelines                            controllers.DiscoveryController.list(id: String)
+GET        /discovery/:id/pipeline-groups                      controllers.DiscoveryController.pipelineGroups(id: String)
 GET        /discovery/:id/csv                                  controllers.DiscoveryController.csv(id: String)
 GET        /discovery/:id/pipelines/:pipelineId                controllers.DiscoveryController.pipeline(id: String, pipelineId: String)
 GET        /discovery/:id/stop                                 controllers.DiscoveryController.stop(id: String)

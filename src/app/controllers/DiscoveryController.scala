@@ -4,16 +4,17 @@ import java.io._
 import java.util.UUID
 import javax.inject._
 
+import controllers.dto.PipelineGrouping
 import org.apache.jena.query.DatasetFactory
 import org.apache.jena.rdf.model.{Model, ModelFactory, Resource}
 import org.apache.jena.riot.{Lang, RDFDataMgr, RiotException}
 import org.apache.jena.vocabulary.{RDF, RDFS}
 import play.Logger
-import play.api.libs.json.{JsNumber, JsString, Json}
+import play.api.libs.json._
 import play.api.libs.ws.WSClient
 import play.api.mvc.{Action, Controller}
 import services.DiscoveryService
-import services.discovery.model.components.DataSourceInstance
+import services.discovery.model.components.{DataSourceInstance, ExtractorInstance}
 import services.discovery.model.{DataSample, DiscoveryInput, Pipeline}
 
 import scala.collection.JavaConverters._
@@ -72,58 +73,36 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
         ))
     }
 
+    def pipelineGroups(id: String) = Action {
+        Ok(service.getPipelines(id).map { pipelineMap =>
+            JsObject(Seq("pipelineGroups" -> Json.toJson(PipelineGrouping.create(pipelineMap)) ))
+        }.getOrElse(JsObject(Seq())))
+    }
+
     def csv(id: String) = Action {
-        val maybePipelines = service.getPipelines(id)
-        val string = maybePipelines.map { pipelineMap => {
-
-            val appGroups = pipelineMap.groupBy(p => p._2.typedVisualizers.head)
-
-            var ag = 0
-            appGroups.map { appGroup =>
-                ag += 1
-                val dataSourceGroups = appGroup._2.groupBy(p => p._2.typedDatasources.toSet)
-                var dg = 0
-                dataSourceGroups.map { dataSourceGroup =>
-                    dg += 1
-                    val extractorGroups = dataSourceGroup._2.groupBy(p => p._2.typedExtractors.toSet)
-                    var eg = 0
-                    extractorGroups.map { extractorGroup =>
-                        eg += 1
-                        var groupedPipelines = extractorGroup._2.toIndexedSeq.sortBy(p => p._2.lastComponent.discoveryIteration)
-                        var i = 1
-                        val groups = new mutable.HashMap[Int, Seq[(UUID, Pipeline)]]
-
-                        while (groupedPipelines.nonEmpty) {
-                            val groupedPipeline = groupedPipelines.head
-                            val same = for {
-                                pCandid <- groupedPipelines.drop(1) if sampleEquals(groupedPipeline._2.lastOutputDataSample, pCandid._2.lastOutputDataSample)
-                            } yield pCandid
-
-                            val group = Seq(groupedPipeline) ++ same
-                            groups.put(i, group)
-                            i += 1
-                            groupedPipelines = groupedPipelines.filter(pip => !group.contains(pip))
-                        }
-
-                        groups.toIndexedSeq.sortBy(pg => minIteration(pg._2.map(_._2))).map { case (idx, pGroup) =>
-                            val pipelines = pGroup.sortBy(p => p._2.lastComponent.discoveryIteration)
+        val maybeGrouping = service.getPipelines(id).map { pipelineMap => PipelineGrouping.create(pipelineMap) }
+        val string = maybeGrouping.map { grouping =>
+            grouping.applicationGroups.map { applicationGroup =>
+                applicationGroup.dataSourceGroups.map { dataSourceGroup =>
+                    dataSourceGroup.extractorGroups.map { extractorGroup =>
+                        extractorGroup.dataSampleGroups.sortBy(g => g.minimalIteration).map { dataSampleGroup =>
+                            val pipelines = dataSampleGroup.pipelines.toSeq.sortBy(p => p._2.lastComponent.discoveryIteration)
 
                             pipelines.map { p =>
-                                val datasourcesString = p._2.typedDatasources.map(_.label).mkString(",")
+                                val dataSourcesString = p._2.typedDatasources.map(_.label).mkString(",")
                                 val extractorsString = p._2.typedExtractors.map(_.getClass.getSimpleName).mkString(",")
                                 val transformersString = p._2.typedProcessors.map(_.getClass.getSimpleName).mkString(",")
                                 val transformersCount = p._2.typedProcessors.size
-                                val app = p._2.typedVisualizers.map(_.getClass.getSimpleName).mkString(",")
+                                val app = p._2.typedApplications.map(_.getClass.getSimpleName).mkString(",")
                                 val iterationNumber = p._2.lastComponent.discoveryIteration
 
-                                s"$ag;$dg;$eg;$idx;$datasourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber;/discovery/$id/execute/${p._1}"
+                                s"$dataSourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber;/discovery/$id/execute/${p._1}"
                             }.mkString("\n")
                         }.mkString("\n")
                     }.mkString("\n")
                 }.mkString("\n")
             }.mkString("\n")
-        }
-        }.getOrElse("")
+        }.mkString("\n")
 
         val header = s"appGroup;dataSourcesGroup;extractorsGroup;dataSampleGroup;dataSources;transformerCount;extractors;transformers;app;iterationNumber"
 

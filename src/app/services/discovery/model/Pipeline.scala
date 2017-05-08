@@ -2,6 +2,8 @@ package services.discovery.model
 
 import services.discovery.components.analyzer.EtlSparqlGraphProtocol
 import services.discovery.model.components._
+import play.api.libs.json._
+import play.api.libs.functional.syntax._
 
 case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBinding], lastComponent: PipelineComponent, lastOutputDataSample: DataSample) {
     def isComplete: Boolean = lastComponent.componentInstance.isInstanceOf[ApplicationInstance]
@@ -17,11 +19,14 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
 
     def dataSourceNames = components.filter(_.componentInstance.isInstanceOf[DataSourceInstance]).map(_.componentInstance.asInstanceOf[DataSourceInstance].label).mkString("[", ",", "]")
 
-    def visualizerName = lastComponent.componentInstance.asInstanceOf[EtlSparqlGraphProtocol].name
+    def applicationName = lastComponent.componentInstance match {
+        case esgp : EtlSparqlGraphProtocol => esgp.name
+        case x => x.getClass.getSimpleName
+    }
 
     def height: Int = lastComponent.discoveryIteration
 
-    def name: String = s"$dataSourceNames -> $visualizerName (${components.size})"
+    def name: String = s"$dataSourceNames -> $applicationName (${components.size})"
 
     def datasources = components.filter(_.componentInstance.isInstanceOf[DataSourceInstance])
 
@@ -31,7 +36,7 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
 
     def transformers = components.filter(_.componentInstance.isInstanceOf[TransformerInstance])
 
-    def visualizers = components.filter(_.componentInstance.isInstanceOf[ApplicationInstance])
+    def applications = components.filter(_.componentInstance.isInstanceOf[ApplicationInstance])
 
     def typedDatasources = datasources.map(_.componentInstance.asInstanceOf[DataSourceInstance])
 
@@ -41,6 +46,27 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
 
     def typedTransformers = transformers.map(_.componentInstance.asInstanceOf[TransformerInstance])
 
-    def typedVisualizers = visualizers.map(_.componentInstance.asInstanceOf[ApplicationInstance])
+    def typedApplications = applications.map(_.componentInstance.asInstanceOf[ApplicationInstance])
 
+}
+
+object Pipeline {
+
+    implicit val writes: Writes[Pipeline] = (
+        (JsPath \ "descriptor").write[String] and
+            (JsPath \ "name").write[String]
+        )(unlift(Pipeline.destruct))
+
+    def destruct(arg: Pipeline): Option[(String, String)] = {
+        val datasourcesString = arg.typedDatasources.map(_.label).mkString(",")
+        val extractorsString = arg.typedExtractors.map(_.getClass.getSimpleName).mkString(",")
+        val transformersString = arg.typedProcessors.map(_.getClass.getSimpleName).mkString(",")
+        val transformersCount = arg.typedProcessors.size
+        val app = arg.typedApplications.map(_.getClass.getSimpleName).mkString(",")
+        val iterationNumber = arg.lastComponent.discoveryIteration
+
+        val descriptor = s"$datasourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber"
+
+        Some((descriptor, arg.name))
+    }
 }
