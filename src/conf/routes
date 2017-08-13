@@ -4,8 +4,10 @@
 
 # An example controller showing a sample home page
 GET        /                                                   controllers.HomeController.index
+GET        /status                                             controllers.HomeController.status
 GET        /experiments                                        controllers.HomeController.experiments()
 
+GET        /discovery/components                               controllers.DiscoveryController.listComponents()
 GET        /discovery/start                                    controllers.DiscoveryController.start(uri: String)
 POST       /discovery/start                                    controllers.DiscoveryController.startExperiment()
 GET        /discovery/:id                                      controllers.DiscoveryController.status(id: String)

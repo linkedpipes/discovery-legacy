@@ -26,7 +26,7 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
     var isFinished = false
 
     def discover(input: DiscoveryInput): Future[Seq[Pipeline]] = {
-        discoveryLogger.info(s"[$id] Starting with ${input.dataSets.size} data sets, ${input.processors.size} processors and ${input.visualizers.size} applications.")
+        discoveryLogger.info(s"[$id] Starting with ${input.dataSets.size} data sets, ${input.processors.size} processors and ${input.applications.size} applications.")
         val pipelines = createInitialPipelines(input.dataSets).flatMap { initialPipelines =>
             val data = IterationData(
                 id = id,
@@ -77,7 +77,7 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
 
         val (extractorCandidatePipelines, otherPipelines) = iterationData.givenPipelines.partition(endsWithLargeDataset)
         val extractors = iterationData.availableComponents.extractors
-        val otherComponents = iterationData.availableComponents.processors ++ iterationData.availableComponents.visualizers
+        val otherComponents = iterationData.availableComponents.processors ++ iterationData.availableComponents.applications
 
         val eventualPipelines = Future.sequence(Seq(
             (extractorCandidatePipelines, extractors),

@@ -67,15 +67,15 @@ class EtlPipelineTransformer(pipeline: Pipeline) {
   )
 
   private val visualizerRule = TransformationRule(
-    "Visualizer",
+    "Application",
     new PipelineFragmentMatcher(
       b => Seq(b.filter(_.endComponent.componentInstance.isInstanceOf[ApplicationInstance]))
     ),
     (p, b) => {
       val iteration = b.head.endComponent.discoveryIteration
-      val lpRdf2File = new EtlRdf2File
+      val lpRdf2File = EtlRdf2File()
       val rdf2File = PipelineComponent("rdf2file", lpRdf2File, iteration)
-      val lpSparqlGraphStore = EtlSparqlGraphProtocol(b.head.endComponent.componentInstance.getClass.getSimpleName)
+      val lpSparqlGraphStore = EtlSparqlGraphProtocol(b.head.endComponent.componentInstance.label)
       val sparqlGraphStore = PipelineComponent("sparqlGraphStore", lpSparqlGraphStore, iteration)
 
       val bindingsToAdd = Seq(
@@ -98,9 +98,11 @@ class EtlPipelineTransformer(pipeline: Pipeline) {
     (p, b) => {
       b.foldLeft(p)((pip, binding) => {
         val jenaSource = binding.startComponent.componentInstance.asInstanceOf[JenaDataSource]
+        val urn = GuidGenerator.nextUrn
         val endpointInstance = new SparqlEndpoint(
+          s"https://linked.opendata.cz/ontology/datasource/$urn",
           "http://example.com",
-          Seq(GuidGenerator.nextUrn),
+          Seq(urn),
           label = jenaSource.label
         )
         val newPipelineComponent = binding.startComponent.copy(componentInstance = endpointInstance)

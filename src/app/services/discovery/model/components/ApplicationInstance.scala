@@ -8,10 +8,11 @@ trait ApplicationInstance extends ComponentInstanceWithInputs
 object ApplicationInstance {
     implicit val writes : Writes[ApplicationInstance] = (
         (JsPath \ "portCount").write[Int] and
-            (JsPath \ "name").write[String]
+            (JsPath \ "uri").write[String] and
+            (JsPath \ "label").write[String]
         )(unlift(ApplicationInstance.destruct))
 
-    def destruct(i: ApplicationInstance) : Option[(Int, String)] = {
-        Some((i.getInputPorts.size, i.getClass.getSimpleName))
+    def destruct(i: ApplicationInstance) : Option[(Int, String, String)] = {
+        Some((i.getInputPorts.size, i.uri, i.label))
     }
 }

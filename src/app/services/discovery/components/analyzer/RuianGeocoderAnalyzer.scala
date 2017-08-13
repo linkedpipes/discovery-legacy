@@ -26,6 +26,8 @@ class RuianGeocoderAnalyzer extends AnalyzerInstance with DescriptorChecker {
     ))
   }
 
+  override def label: String = "RUIAN geocoder"
+
   private val geoPortDescriptor = AskQuery(
     """
       |   prefix xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -65,4 +67,7 @@ class RuianGeocoderAnalyzer extends AnalyzerInstance with DescriptorChecker {
   }
 
   override val getInputPorts: Seq[Port] = Seq(Port(linkPortName, 0), Port(geoPortName, 0))
+
+  override def uri: String = "https://linked.opendata.cz/ontology/analyzer/ruian-geocoder"
+
 }

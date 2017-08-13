@@ -36,6 +36,8 @@ class LinksetBasedUnion extends UnionInstance {
         """.stripMargin
     )
 
+    override def label: String = "Linkset-based Union"
+
     def classDescriptor(isClass: String) = AskQuery(
         s"""
            |PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -139,4 +141,8 @@ class LinksetBasedUnion extends UnionInstance {
         models.foreach(result.add)
         result
     }
+
+    override def uri: String = "https://linked.opendata.cz/ontology/analyzer/linkset-based-union"
+
+
 }

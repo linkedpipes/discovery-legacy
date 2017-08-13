@@ -18,13 +18,26 @@ import services.discovery.model.components.{DataSourceInstance, ExtractorInstanc
 import services.discovery.model.{DataSample, DiscoveryInput, Pipeline}
 
 import scala.collection.JavaConverters._
-import scala.collection.mutable
 import scalaj.http.{Http, MultiPart}
 
 @Singleton
 class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) extends Controller {
 
     val discoveryLogger = Logger.of("discovery")
+
+    def listComponents = Action {
+        val uris = Seq(
+            "http://linked.opendata.cz/ldcp/resource/ldvm/dataset/dblp/template",
+            "http://linked.opendata.cz/ldcp/resource/ldvm/transformer/foaf-maker-to-foaf-made/template",
+            "http://linked.opendata.cz/ldcp/resource/ldvm/transformer/dct-issued-to-time-instant/template",
+            "http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/template"
+        )
+
+        val templateModels = uris.map { u => fromUri(u){ e => e } }.filter(_.isRight).map(_.right.get)
+        val input = DiscoveryInput(templateModels)
+
+        Ok(Json.toJson(input))
+    }
 
     def start(uri: String) = Action {
         fromUri(uri) {
@@ -34,20 +47,20 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
                 val errors = templatesByExperiment.flatMap(_._2)
                 val templates = templatesByExperiment.map(_._1)
                 if (errors.nonEmpty) {
-                    BadRequest(s"Referenced data contains some error: ${errors.map(_.getMessage).mkString(";")}.")
+                    BadRequest(s"Referenced data contain some error: ${errors.map(_.getMessage).mkString(";")}.")
                 } else {
                     val ids = templates.map(t => runExperiment(t))
                     Ok(Json.toJson(ids))
                 }
             }
-            case Left(e) => BadRequest(s"Referenced data contains some error: $uri. ${e.getMessage}.")
+            case Left(e) => BadRequest(s"Referenced data contain some error: $uri. ${e.getMessage}.")
         }
     }
 
     def startExperiment = Action(parse.json) { request =>
         val uris = request.body.as[Seq[String]]
-        val templates = uris.map { u => fromUri(u){ e => e } }.filter(_.isRight).map(_.right.get)
-        val discoveryId = runExperiment(templates)
+        val templateModels = uris.map { u => fromUri(u){ e => e } }.filter(_.isRight).map(_.right.get)
+        val discoveryId = runExperiment(templateModels)
         Ok(Json.obj( "id" -> Json.toJson(discoveryId)))
     }
 
@@ -175,8 +188,8 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
 
     private def getTemplates(model: Model, bag: Resource): (Seq[Model], Seq[Throwable]) = {
         val templates = model.listObjectsOfProperty(bag, RDFS.member).asScala
-        val (lefts, rights) = templates.map(t => fromUri(t.asResource().getURI) { e => e }).partition(_.isLeft)
-        (rights.map(_.right.get).toSeq, lefts.map(_.left.get).toSeq)
+        val (errors, templateModels) = templates.map(t => fromUri(t.asResource().getURI) { e => e }).partition(_.isLeft)
+        (templateModels.map(_.right.get).toSeq, errors.map(_.left.get).toSeq)
     }
 
     private def runExperiment(templates: Seq[Model]): UUID = {

@@ -5,7 +5,7 @@ import java.util.UUID
 import controllers.dto.PipelineGrouping.PipelineGroup
 import play.api.libs.json.{Json, Writes}
 import services.discovery.model.{DataSample, Pipeline}
-import services.discovery.model.components.{DataSourceInstance, ExtractorInstance}
+import services.discovery.model.components.ExtractorInstance
 
 import scala.collection.mutable
 

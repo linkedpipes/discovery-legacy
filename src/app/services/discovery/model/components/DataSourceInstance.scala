@@ -9,8 +9,6 @@ trait DataSourceInstance extends ComponentInstanceWithOutput {
 
   def isLinkset: Boolean
 
-  def label: String
-
 }
 
 trait SparqlEndpointInstance extends DataSourceInstance {
@@ -26,10 +24,11 @@ object DataSourceInstance {
   implicit val writes : Writes[DataSourceInstance] = (
       (JsPath \ "isLarge").write[Boolean] and
           (JsPath \ "isLinkset").write[Boolean] and
-          (JsPath \ "label").write[String]
+          (JsPath \ "label").write[String] and
+          (JsPath \ "uri").write[String]
       )(unlift(DataSourceInstance.destruct))
 
-  def destruct(i: DataSourceInstance) : Option[(Boolean, Boolean, String)] = {
-    Some((i.isLarge, i.isLinkset, i.label))
+  def destruct(i: DataSourceInstance) : Option[(Boolean, Boolean, String, String)] = {
+    Some((i.isLarge, i.isLinkset, i.label, i.uri))
   }
 }

@@ -1,13 +1,16 @@
 package services.discovery.model
 
-import org.apache.jena.rdf.model.{Model, ModelFactory, Resource, ResourceFactory}
-import org.apache.jena.vocabulary.RDF
-import org.topbraid.spin.model.Construct
+import org.apache.jena.rdf.model.{Model, Resource, ResourceFactory}
+import org.apache.jena.vocabulary.{DCTerms, RDF}
+import play.api.libs.functional.syntax.unlift
+import play.api.libs.json.{JsPath, Writes}
 import services.discovery.components.application.Application
 import services.discovery.components.datasource.SparqlEndpoint
 import services.discovery.components.extractor.SparqlConstructExtractor
 import services.discovery.components.transformer.SparqlUpdateTransformer
 import services.discovery.model.components._
+import play.api.libs.functional.syntax._
+
 
 import scala.collection.JavaConverters._
 
@@ -15,7 +18,7 @@ case class DiscoveryInput(
     dataSets: Seq[DataSet],
     extractors: Seq[ExtractorInstance],
     processors: Seq[ProcessorInstance],
-    visualizers: Seq[ApplicationInstance]
+    applications: Seq[ApplicationInstance]
 )
 
 trait RdfVocabulary {
@@ -62,11 +65,24 @@ case class DataSet(dataSourceInstance: DataSourceInstance, extractorInstance: Op
 
 object DiscoveryInput {
 
-    def apply(templates: Seq[Model]): DiscoveryInput = {
+    implicit val writes : Writes[DiscoveryInput] = (
+        (JsPath \ "datasets").write[Map[String, DataSourceInstance]] and
+            (JsPath \ "processors").write[Map[String, ProcessorInstance]] and
+            (JsPath \ "applications").write[Map[String, ApplicationInstance]]
+        )(unlift(DiscoveryInput.destruct))
 
-        val dataSets = getDataSets(templates)
-        val processors = getProcessors(templates)
-        val applications = getApplications(templates)
+    def destruct(i: DiscoveryInput) : Option[(Map[String, DataSourceInstance], Map[String, ProcessorInstance], Map[String, ApplicationInstance])] = {
+        Some((
+            i.dataSets.map(d => (d.dataSourceInstance.uri, d.dataSourceInstance)).toMap,
+            i.processors.map(p => (p.uri, p)).toMap,
+            i.applications.map(a => (a.uri, a)).toMap
+        ))
+    }
+
+    def apply(templateModels: Seq[Model]): DiscoveryInput = {
+        val dataSets = getDataSets(templateModels)
+        val processors = getProcessors(templateModels)
+        val applications = getApplications(templateModels)
 
         new DiscoveryInput(dataSets, Seq(), processors, applications)
     }
@@ -78,29 +94,32 @@ object DiscoveryInput {
             val endpointUri = service.getPropertyResourceValue(SD.endpoint).getURI
             val output = template.getRequiredProperty(LDVM.outputTemplate).getResource
             val dataSampleUri = Option(output.getRequiredProperty(LDVM.outputDataSample).getResource.getURI)
+            val label = template.getProperty(DCTerms.title).getString
 
             val extractorQuery = Option(configuration.getProperty(LDVM.query)).map(_.getString)
-            val extractor = extractorQuery.map(eq => new SparqlConstructExtractor(ConstructQuery(eq)))
-            DataSet(SparqlEndpoint(endpointUri, descriptorIri = dataSampleUri), extractor)
+            val extractor = extractorQuery.map(eq => new SparqlConstructExtractor(s"${template.getURI}#extractor", ConstructQuery(eq), s"$label extractor"))
+            DataSet(SparqlEndpoint(template.getURI, endpointUri, descriptorIri = dataSampleUri, label = label), extractor)
         }
     }
 
     private def getProcessors(models: Seq[Model]): Seq[ProcessorInstance] = {
-        getTemplatesOfType(models, LDVM.TransformerTemplate).map { t =>
-            val configuration = t.getRequiredProperty(LDVM.componentConfigurationTemplate).getObject.asResource()
+        getTemplatesOfType(models, LDVM.TransformerTemplate).map { template =>
+            val label = template.getProperty(DCTerms.title).getString
+            val configuration = template.getRequiredProperty(LDVM.componentConfigurationTemplate).getObject.asResource()
             val updateQuery = UpdateQuery(configuration.getRequiredProperty(LDVM.query).getString)
-            new SparqlUpdateTransformer(updateQuery, getFeatures(t))
+            new SparqlUpdateTransformer(template.getURI, updateQuery, getFeatures(template), label)
         }
     }
 
     private def getApplications(models: Seq[Model]): Seq[ApplicationInstance] = {
-        getTemplatesOfType(models, LDVM.ApplicationTemplate).map { t =>
-            new Application(getFeatures(t))
+        getTemplatesOfType(models, LDVM.ApplicationTemplate).map { template =>
+            val label = template.getProperty(DCTerms.title).getString
+            new Application(template.getURI, getFeatures(template), label)
         }
     }
 
-    private def getTemplatesOfType(models: Seq[Model], template: Resource): Seq[Resource] = {
-        models.flatMap(m => m.listResourcesWithProperty(RDF.`type`, template).asScala.toSeq)
+    private def getTemplatesOfType(models: Seq[Model], templateType: Resource): Seq[Resource] = {
+        models.flatMap(m => m.listResourcesWithProperty(RDF.`type`, templateType).asScala.toSeq)
     }
 
     private def getFeatures(template: Resource): Seq[Feature] = {

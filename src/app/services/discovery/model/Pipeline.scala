@@ -20,7 +20,7 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
     def dataSourceNames = components.filter(_.componentInstance.isInstanceOf[DataSourceInstance]).map(_.componentInstance.asInstanceOf[DataSourceInstance].label).mkString("[", ",", "]")
 
     def applicationName = lastComponent.componentInstance match {
-        case esgp : EtlSparqlGraphProtocol => esgp.name
+        case esgp : EtlSparqlGraphProtocol => esgp.label
         case x => x.getClass.getSimpleName
     }
 

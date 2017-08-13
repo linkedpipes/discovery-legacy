@@ -18,4 +18,8 @@ class FusionTransformer extends SimpleSparqlUpdateTransformer {
           |PREFIX owl: <http://www.w3.org/2002/07/owl#>
           |PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
           |PREFIX dbo: <http://dbpedia.org/ontology/>""".stripMargin
+
+    override def uri: String = "https://linked.opendata.cz/ontology/transformers/fusion"
+
+    override def label: String = "Fusion transformer"
 }

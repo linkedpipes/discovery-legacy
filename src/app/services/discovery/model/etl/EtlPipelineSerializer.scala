@@ -51,7 +51,7 @@ class EtlPipelineSerializer(etlPipeline: Pipeline) {
 
     private def addSparqlTransformer(pipelineComponent: PipelineComponent, sparqlTransformerInstance: SparqlUpdateTransformerInstance): (PipelineComponent, ConfiguredComponent) = {
 
-        val componentResource = addComponent(pipelineComponent.componentInstance.getClass.getSimpleName, "http://localhost:8080/resources/components/t-sparqlUpdate", pipelineComponent.discoveryIteration)
+        val componentResource = addComponent(pipelineComponent.componentInstance.label, "http://localhost:8080/resources/components/t-sparqlUpdate", pipelineComponent.discoveryIteration)
         val config = createConfig(componentResource, "http://plugins.linkedpipes.com/ontology/t-sparqlUpdate#Configuration")
         val query = sparqlTransformerInstance.getQueryByPort(sparqlTransformerInstance.getInputPorts.head).query
         config.resource.addProperty(config.model.createProperty("http://plugins.linkedpipes.com/ontology/t-sparqlUpdate#query"), query)

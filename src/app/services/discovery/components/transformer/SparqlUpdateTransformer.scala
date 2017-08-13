@@ -8,7 +8,7 @@ import services.discovery.model.components._
 
 import scala.concurrent.Future
 
-class SparqlUpdateTransformer(query: UpdateQuery, features: Seq[Feature]) extends SparqlUpdateTransformerInstance with DescriptorChecker {
+class SparqlUpdateTransformer(override val uri: String, query: UpdateQuery, features: Seq[Feature], override val label: String) extends SparqlUpdateTransformerInstance with DescriptorChecker {
 
     val ports = features.flatMap(_.descriptors.map(_.port.getURI)).distinct.map(pUri => Port(pUri, 0))
 

@@ -5,4 +5,8 @@ import services.discovery.model.components.ComponentInstance
 
 case class EtlRdf2File() extends ComponentInstance {
   val port = Port("input", 0)
+
+  override def uri: String = "https://linked.opendata.cz/ontology/analyzer/etl-rdf2file"
+
+  override def label: String = "RDF to File"
 }

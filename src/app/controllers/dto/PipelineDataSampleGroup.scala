@@ -10,12 +10,12 @@ case class PipelineDataSampleGroup(dataSample: DataSample, minimalIteration: Int
 object PipelineDataSampleGroup {
     implicit val writes: Writes[PipelineDataSampleGroup] = (
         (JsPath \ "minimalIteration").write[Int] and
-            (JsPath \ "pipelineId").write[String] and
-            (JsPath \ "pipeline").write[Pipeline]
+            (JsPath \ "pipeline").write[Pipeline] and
+            (JsPath \ "pipeline" \ "id").write[String]
     )(unlift(PipelineDataSampleGroup.destruct))
 
-    def destruct(arg: PipelineDataSampleGroup): Option[(Int, String, Pipeline)] = {
+    def destruct(arg: PipelineDataSampleGroup): Option[(Int, Pipeline, String)] = {
         val representant = arg.pipelines.toSeq.sortBy(_._2.lastComponent.discoveryIteration).head
-        Some((arg.minimalIteration, representant._1.toString, representant._2))
+        Some((arg.minimalIteration, representant._2, representant._1.toString))
     }
 }
