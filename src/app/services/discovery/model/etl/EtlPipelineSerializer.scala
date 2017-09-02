@@ -134,7 +134,10 @@ class EtlPipelineSerializer(etlPipeline: Pipeline) {
         config.resource.addProperty(config.model.createProperty(namespace + "repository"), "VIRTUOSO")
         config.resource.addProperty(config.model.createProperty(namespace + "replace"), config.model.asInstanceOf[ModelCon].createTypedLiteral(true))
         config.resource.addProperty(config.model.createProperty(namespace + "graph"), resultGraphUrn)
-        config.resource.addProperty(config.model.createProperty(namespace + "endpoint"), "http://demo.visualization.linkedpipes.com:8890/sparql")
+        config.resource.addProperty(config.model.createProperty(namespace + "endpoint"), "http://xrg12.ms.mff.cuni.cz:8890/sparql-graph-crud-auth")
+        config.resource.addProperty(config.model.createProperty(namespace + "password"), "dba")
+        config.resource.addProperty(config.model.createProperty(namespace + "user"), "dba")
+        config.resource.addProperty(config.model.createProperty(namespace + "authentification"), config.model.asInstanceOf[ModelCon].createTypedLiteral(true))
         config
     }
 
