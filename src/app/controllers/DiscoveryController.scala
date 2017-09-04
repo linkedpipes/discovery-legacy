@@ -19,6 +19,9 @@ import services.discovery.model.{DataSample, DiscoveryInput, Pipeline}
 
 import scala.collection.JavaConverters._
 import scalaj.http.{Http, MultiPart}
+import org.apache.jena.rdf.model.Model
+import org.apache.jena.rdf.model.ModelFactory
+import org.apache.jena.riot.RDFDataMgr
 
 @Singleton
 class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) extends Controller {
@@ -172,6 +175,19 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
     def stop(id: String) = Action {
         service.stop(id)
         Ok(Json.obj())
+    }
+
+    def executionStatus(iri: String) = Action {
+        fromJsonLd(iri) { m =>
+            println(m.listStatements().toList.size())
+        }
+        Ok("ok")
+    }
+
+    private def fromJsonLd[R](iri: String)(fn: Model => R) : R = {
+        val model = ModelFactory.createDefaultModel
+        RDFDataMgr.read(model, iri, Lang.JSONLD)
+        fn(model)
     }
 
     private def fromUri[R](uri: String)(fn: Either[Throwable, Model] => R): R = {
