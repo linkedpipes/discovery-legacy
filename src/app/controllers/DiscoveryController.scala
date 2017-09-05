@@ -5,7 +5,7 @@ import java.util.UUID
 import javax.inject._
 
 import controllers.dto.PipelineGrouping
-import org.apache.jena.query.DatasetFactory
+import org.apache.jena.query.{Dataset, DatasetFactory}
 import org.apache.jena.rdf.model.{Model, ModelFactory, Resource}
 import org.apache.jena.riot.{Lang, RDFDataMgr, RiotException}
 import org.apache.jena.vocabulary.{RDF, RDFS}
@@ -14,14 +14,12 @@ import play.api.libs.json._
 import play.api.libs.ws.WSClient
 import play.api.mvc.{Action, Controller}
 import services.DiscoveryService
-import services.discovery.model.components.{DataSourceInstance, ExtractorInstance}
+import services.discovery.model.components.DataSourceInstance
 import services.discovery.model.{DataSample, DiscoveryInput, Pipeline}
 
 import scala.collection.JavaConverters._
 import scalaj.http.{Http, MultiPart}
-import org.apache.jena.rdf.model.Model
-import org.apache.jena.rdf.model.ModelFactory
-import org.apache.jena.riot.RDFDataMgr
+
 
 @Singleton
 class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) extends Controller {
@@ -178,16 +176,22 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
     }
 
     def executionStatus(iri: String) = Action {
-        fromJsonLd(iri) { m =>
-            println(m.listStatements().toList.size())
+        fromJsonLd(iri) { d =>
+            val model = d.getNamedModel(iri)
+            val statusNodes = model.listObjectsOfProperty(model.createProperty("http://etl.linkedpipes.com/ontology/status")).toList.asScala
+            val isRunning = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/running"))
+            val isFinished = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/finished"))
+
+            Ok(Json.obj(
+                "isRunning" -> Json.toJson(isRunning),
+                "isFinished" -> Json.toJson(isFinished)
+            ))
         }
-        Ok("ok")
     }
 
-    private def fromJsonLd[R](iri: String)(fn: Model => R) : R = {
-        val model = ModelFactory.createDefaultModel
-        RDFDataMgr.read(model, iri, Lang.JSONLD)
-        fn(model)
+    private def fromJsonLd[R](iri: String)(fn: Dataset => R) : R = {
+        val dataset = RDFDataMgr.loadDataset(iri, Lang.JSONLD)
+        fn(dataset)
     }
 
     private def fromUri[R](uri: String)(fn: Either[Throwable, Model] => R): R = {
