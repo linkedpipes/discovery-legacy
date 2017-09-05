@@ -176,9 +176,9 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
     }
 
     def executionStatus(iri: String) = Action {
-        fromJsonLd(iri) { d =>
-            val model = d.getNamedModel(iri)
-            val statusNodes = model.listObjectsOfProperty(model.createProperty("http://etl.linkedpipes.com/ontology/status")).toList.asScala
+        fromJsonLd(s"$iri/overview") { d =>
+            val model = d.getDefaultModel
+            val statusNodes = model.listObjectsOfProperty(model.createProperty("http://etl.linkedpipes.com/ontology/executionStatus")).toList.asScala
             val isRunning = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/running"))
             val isFinished = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/finished"))
 
