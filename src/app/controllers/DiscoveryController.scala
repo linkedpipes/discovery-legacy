@@ -29,6 +29,8 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
     def listComponents = Action {
         val uris = Seq(
             "http://linked.opendata.cz/ldcp/resource/ldvm/dataset/dblp/template",
+            "https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod/template",
+            "https://linked.opendata.cz/ldcp/resource/ldvm/dataset/deusto.es/template",
             "http://linked.opendata.cz/ldcp/resource/ldvm/transformer/foaf-maker-to-foaf-made/template",
             "http://linked.opendata.cz/ldcp/resource/ldvm/transformer/dct-issued-to-time-instant/template",
             "http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/template"
@@ -180,11 +182,19 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
             val model = d.getDefaultModel
             val statusNodes = model.listObjectsOfProperty(model.createProperty("http://etl.linkedpipes.com/ontology/executionStatus")).toList.asScala
             val isRunning = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/running"))
+            val isQueued = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/queued"))
             val isFinished = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/finished"))
+            val isCancelled = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/cancelled"))
+            val isCancelling = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/cancelling"))
+            val isFailed = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/failed"))
 
             Ok(Json.obj(
                 "isRunning" -> Json.toJson(isRunning),
-                "isFinished" -> Json.toJson(isFinished)
+                "isQueued" -> Json.toJson(isQueued),
+                "isFinished" -> Json.toJson(isFinished),
+                "isCancelled" -> Json.toJson(isCancelled),
+                "isCancelling" -> Json.toJson(isCancelling),
+                "isFailed" -> Json.toJson(isFailed)
             ))
         }
     }
