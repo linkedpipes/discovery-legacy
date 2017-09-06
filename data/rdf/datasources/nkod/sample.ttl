@@ -1,0 +1,31 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcat:	<http://www.w3.org/ns/dcat#> .
+<https://nkod.opendata.cz/zdroj/datov\u00E1-sada/164170823>	rdf:type	dcat:Dataset .
+@prefix xsd:	<http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:	<http://purl.org/dc/terms/> .
+<https://nkod.opendata.cz/zdroj/datov\u00E1-sada/164170823>	dct:modified	"2017-08-25"^^xsd:date ;
+	dct:spatial	<https://ruian.linked.opendata.cz/zdroj/st\u00E1ty/1> ;
+	dct:title	"Po\u010Det vyplacen\u00FDch d\u016Fchod\u016F v \u010Cesk\u00E9 republice dle m\u011Bs\u00ED\u010Dn\u00ED v\u00FD\u0161e d\u016Fchodu"@cs ;
+	dct:description	"Po\u010Det vyplacen\u00FDch d\u016Fchod\u016F v \u010Cesk\u00E9 republice podle roku, druhu d\u016Fchodu, m\u011Bs\u00ED\u010Dn\u00ED v\u00FD\u0161e d\u016Fchodu a pohlav\u00ED"@cs .
+@prefix foaf:	<http://xmlns.com/foaf/0.1/> .
+@prefix ns5:	<https://data.cssz.cz/documentation/> .
+<https://nkod.opendata.cz/zdroj/datov\u00E1-sada/164170823>	foaf:page	ns5:vyplacene-duchody-dle-vyse ;
+	dct:publisher	<https://linked.opendata.cz/zdroj/ekonomick\u00FD-subjekt/00006963> .
+@prefix ns6:	<http://publications.europa.eu/resource/authority/frequency/> .
+<https://nkod.opendata.cz/zdroj/datov\u00E1-sada/164170823>	dct:accrualPeriodicity	ns6:ANNUAL ;
+	dcat:keyword	"vyplacen\u00E9 d\u00E1vky"@cs ,
+		"v\u00FD\u0161e d\u00E1vek"@cs ,
+		"d\u016Fchodov\u00E9 poji\u0161t\u011Bn\u00ED"@cs ,
+		"statistika"@cs ,
+		"d\u016Fchodov\u00E1 ro\u010Denka"@cs ;
+	dcat:theme	<http://eurovoc.europa.eu/385> ,
+		<http://eurovoc.europa.eu/3751> .
+@prefix ns7:	<https://nkod.opendata.cz/zdroj/datov\u00E1-sada/164170823/> .
+<https://nkod.opendata.cz/zdroj/datov\u00E1-sada/164170823>	dct:temporal	ns7:časové-pokrytí ;
+	dct:issued	"2017-02-02"^^xsd:date ;
+	dcat:contactPoint	ns7:kontaktní-bod ;
+	dcat:distribution	<https://nkod.opendata.cz/zdroj/datov\u00E1-sada/164170823/17> ,
+		<https://nkod.opendata.cz/zdroj/datov\u00E1-sada/164170823/15> ,
+		<https://nkod.opendata.cz/zdroj/datov\u00E1-sada/164170823/16> .
+<https://linked.opendata.cz/zdroj/ekonomick\u00FD-subjekt/00006963>	rdf:type	foaf:Agent ;
+	foaf:name	"\u010Cesk\u00E1 spr\u00E1va soci\u00E1ln\u00EDho zabezpe\u010Den\u00ED"@cs .

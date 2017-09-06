@@ -1,0 +1,11 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ns1:	<http://www.morelab.deusto.es/labman/resource//people/> .
+@prefix foaf:	<http://xmlns.com/foaf/0.1/> .
+ns1:lazaro-luis	rdf:type	foaf:Person .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+ns1:lazaro-luis	rdfs:label	"L\u00E1zaro, Luis" ;
+	foaf:name	"L\u00E1zaro, Luis" .
+@prefix ns4:	<http://www.morelab.deusto.es/ontologies/swrcfe#> .
+ns1:lazaro-luis	ns4:isMember	0 ;
+	foaf:firstName	"L\u00E1zaro," ;
+	foaf:familyName	"Luis" .
