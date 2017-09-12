@@ -13,7 +13,7 @@ dataset:template a ldvm:DataSourceTemplate ;
 	ldvm:componentConfigurationTemplate dataset:defaultConfiguration .
 
 dataset:output a ldvm:OutputDataPortTemplate ;
-	ldvm:outputDataSample <https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/nkod/sample.ttl> .
+	ldvm:outputDataSample <https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/nkod-dcterms/sample.ttl> .
 	
 dataset:defaultConfiguration a d-sparql:SparqlEndpointDataSourceConfiguration ;
 	ldvm:service dataset:defaultService ;
