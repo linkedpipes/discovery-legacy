@@ -24,7 +24,7 @@ dataset:defaultConfiguration a d-sparql:SparqlEndpointDataSourceConfiguration ;
 		  ?s ?p ?o .
 		} WHERE {
 		  ?s ?p ?o .
-		} LIMIT 1000
+		}
 	""" ;
 	ldvm:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>
