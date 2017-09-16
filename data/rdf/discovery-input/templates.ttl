@@ -5,6 +5,7 @@
     <http://linked.opendata.cz/ldcp/property/hasTemplate> <http://linked.opendata.cz/ldcp/resource/ldvm/dataset/dblp/template> ;
     <http://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod/template> ;
     <http://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/deusto.es/template> ;
+    <http://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod-dcterms/template> ;
     <http://linked.opendata.cz/ldcp/property/hasTemplate> <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/foaf-maker-to-foaf-made/template> ;
     <http://linked.opendata.cz/ldcp/property/hasTemplate> <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/dct-issued-to-time-instant/template> ;
     <http://linked.opendata.cz/ldcp/property/hasTemplate> <http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/template> ;
