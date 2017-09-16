@@ -12,7 +12,8 @@ application:template a ldvm:ApplicationTemplate ;
 	dcterms:description "Displays things made by people on a map or timeline"@en;
 	ldvm:componentConfigurationTemplate application:defaultConfiguration ;
 	ldvm:inputTemplate application:input ;
-	ldvm:feature application:personsFeature, application:personsThingsAsMarkersFeature, application:personsThingsAsMarkersWithLabelsFeature, application:personsThingsAsMarkersWithDescriptionsFeature, application:personsThingsAsTimeInstantsFeature, application:personsThingsAsTimeInstantsWithLabelsFeature, application:personsThingsAsTimeInstantsWithDescriptionsFeature, application:personsThingsAsTimeIntervalsFeature, application:personsThingsAsTimeIntervalsWithLabelsFeature, application:personsThingsAsTimeIntervalsWithDescriptionsFeature .
+	ldvm:feature application:personsFeature, application:personsThingsAsMarkersFeature, application:personsThingsAsMarkersWithLabelsFeature, application:personsThingsAsMarkersWithDescriptionsFeature, application:personsThingsAsTimeInstantsFeature, application:personsThingsAsTimeInstantsWithLabelsFeature, application:personsThingsAsTimeInstantsWithDescriptionsFeature, application:personsThingsAsTimeIntervalsFeature, application:personsThingsAsTimeIntervalsWithLabelsFeature, application:personsThingsAsTimeIntervalsWithDescriptionsFeature ;
+	ldvm:executor <https://oo.ps> .
 	
 configuration-vocabulary:Configuration a rdfs:Class ;
 	rdfs:label "Class of configurations of personal profiles application"@en;
