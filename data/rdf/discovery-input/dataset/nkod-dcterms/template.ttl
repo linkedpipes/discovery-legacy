@@ -5,26 +5,29 @@
 @prefix configuration-vocabulary:  <http://linked.opendata.cz/vocabulary/ldvm/dataset/dblp/configuration/> .
 @prefix d-sparql: <http://linked.opendata.cz/ontology/ldvm/datasource/sparql/> .
 
-@prefix dataset:  <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod/> .
+@prefix dataset:  <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod-dcterms/> .
 
 dataset:template a ldvm:DataSourceTemplate ;
-	dcterms:title "Czech National Open Data Catalog"@en, "Národní katalog otevřených dat (NKOD)"@cs ;
+	dcterms:title "Czech National Open Data Catalog - dataset DC terms only"@en, "Národní katalog otevřených dat (NKOD) - jen dcterms datasetů"@cs ;
 	ldvm:outputTemplate dataset:output ;
 	ldvm:componentConfigurationTemplate dataset:defaultConfiguration .
 
 dataset:output a ldvm:OutputDataPortTemplate ;
-	dcterms:title "NKOD triples"@en, "NKOD trojice"@cs ;
-	ldvm:outputDataSample <https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/nkod/sample.ttl> .
+	ldvm:outputDataSample <https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/nkod-dcterms/sample.ttl> .
 	
 dataset:defaultConfiguration a d-sparql:SparqlEndpointDataSourceConfiguration ;
-	dcterms:title "Default NKOD configuration"@en ;
 	ldvm:service dataset:defaultService ;
 	ldvm:query """
-		CONSTRUCT {
-		  ?s ?p ?o .
-		} WHERE {
-		  ?s ?p ?o .
-		}
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+CONSTRUCT WHERE {
+?dataset a dcat:Dataset;
+    dcterms:title ?title ;
+    dcterms:description ?description ;
+    dcterms:issued ?issued ;
+    dcterms:modified ?modified .
+}
 	""" ;
 	ldvm:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>

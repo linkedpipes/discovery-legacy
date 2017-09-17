@@ -11,7 +11,8 @@
      dcterms:description "App that displays dcterms instances"@en;
      ldvm:componentConfigurationTemplate application:defaultConfiguration ;
      ldvm:inputTemplate application:input ;
-     ldvm:feature application:defaultFeature .
+     ldvm:feature application:defaultFeature ;
+     ldvm:executor <https://visualisation-apps.netlify.com/dcterms> .
 
  configuration-vocabulary:Configuration a rdfs:Class ;
      rdfs:label "Class of configurations of DCTerms Application"@en;
