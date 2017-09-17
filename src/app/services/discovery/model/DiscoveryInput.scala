@@ -47,6 +47,7 @@ object LDVM extends RdfVocabulary {
     val appliesTo = property("appliesTo")
     val outputTemplate = property("outputTemplate")
     val outputDataSample = property("outputDataSample")
+    val executor = property("executor")
 }
 
 object SD extends RdfVocabulary {
@@ -114,7 +115,8 @@ object DiscoveryInput {
     private def getApplications(models: Seq[Model]): Seq[ApplicationInstance] = {
         getTemplatesOfType(models, LDVM.ApplicationTemplate).map { template =>
             val label = template.getProperty(DCTerms.title).getString
-            new Application(template.getURI, getFeatures(template), label)
+            val executorUri = template.getProperty(LDVM.executor).getResource.getURI
+            new Application(template.getURI, executorUri, getFeatures(template), label)
         }
     }
 

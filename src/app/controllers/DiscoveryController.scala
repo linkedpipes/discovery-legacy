@@ -5,66 +5,40 @@ import java.util.UUID
 import javax.inject._
 
 import controllers.dto.PipelineGrouping
-import org.apache.jena.query.{Dataset, DatasetFactory}
-import org.apache.jena.rdf.model.{Model, ModelFactory, Resource}
-import org.apache.jena.riot.{Lang, RDFDataMgr, RiotException}
-import org.apache.jena.vocabulary.{RDF, RDFS}
+import org.apache.jena.query.DatasetFactory
+import org.apache.jena.riot.{Lang, RDFDataMgr}
 import play.Logger
+import play.api.Configuration
 import play.api.libs.json._
-import play.api.libs.ws.WSClient
 import play.api.mvc.{Action, Controller}
 import services.DiscoveryService
 import services.discovery.model.components.DataSourceInstance
-import services.discovery.model.{DataSample, DiscoveryInput, Pipeline}
+import services.discovery.model.{DataSample, Pipeline}
 
-import scala.collection.JavaConverters._
 import scalaj.http.{Http, MultiPart}
 
 
 @Singleton
-class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) extends Controller {
+class DiscoveryController @Inject()(service: DiscoveryService, configuration: Configuration) extends Controller {
 
     val discoveryLogger = Logger.of("discovery")
 
     def listComponents = Action {
-        val uris = Seq(
-            "http://linked.opendata.cz/ldcp/resource/ldvm/dataset/dblp/template",
-            "https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod/template",
-            "https://linked.opendata.cz/ldcp/resource/ldvm/dataset/deusto.es/template",
-            "http://linked.opendata.cz/ldcp/resource/ldvm/transformer/foaf-maker-to-foaf-made/template",
-            "http://linked.opendata.cz/ldcp/resource/ldvm/transformer/dct-issued-to-time-instant/template",
-            "http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/template"
-        )
-
-        val templateModels = uris.map { u => fromUri(u){ e => e } }.filter(_.isRight).map(_.right.get)
-        val input = DiscoveryInput(templateModels)
-
-        Ok(Json.toJson(input))
-    }
-
-    def start(uri: String) = Action {
-        fromUri(uri) {
-            case Right(model) => {
-                val experiments = model.listSubjectsWithProperty(RDF.`type`, RDF.Bag).asScala
-                val templatesByExperiment = experiments.map { e => getTemplates(model, e) }.toSeq
-                val errors = templatesByExperiment.flatMap(_._2)
-                val templates = templatesByExperiment.map(_._1)
-                if (errors.nonEmpty) {
-                    BadRequest(s"Referenced data contain some error: ${errors.map(_.getMessage).mkString(";")}.")
-                } else {
-                    val ids = templates.map(t => runExperiment(t))
-                    Ok(Json.toJson(ids))
+        configuration.getString("ldvm.templateSourceUri") match {
+            case Some(templateSourceUri) => Ok(
+                service.listTemplates(templateSourceUri) match {
+                    case Some(input) => Json.toJson(input)
+                    case _ => Json.toJson(Json.obj("error" -> JsString("Error while downloading template data.")))
                 }
-            }
-            case Left(e) => BadRequest(s"Referenced data contain some error: $uri. ${e.getMessage}.")
+            )
+            case _ => InternalServerError("The server does not know where to look for LDVM templates.")
         }
     }
 
     def startExperiment = Action(parse.json) { request =>
         val uris = request.body.as[Seq[String]]
-        val templateModels = uris.map { u => fromUri(u){ e => e } }.filter(_.isRight).map(_.right.get)
-        val discoveryId = runExperiment(templateModels)
-        Ok(Json.obj( "id" -> Json.toJson(discoveryId)))
+        val discoveryId = service.runExperiment(uris)
+        Ok(Json.obj("id" -> Json.toJson(discoveryId)))
     }
 
     def status(id: String) = Action {
@@ -75,23 +49,24 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
     def list(id: String) = Action {
         val maybePipelines = service.getPipelines(id)
         Ok(Json.obj(
-            "pipelines" -> maybePipelines.map { pipelines => pipelines.map { p =>
-                Json.obj(
-                    "id" -> p._1.toString,
-                    "componentCount" -> JsNumber(p._2.components.size),
-                    "dataSources" -> Json.arr(p._2.components.filter(_.componentInstance.isInstanceOf[DataSourceInstance]).map(d => Json.obj(
-                        "label" -> d.componentInstance.asInstanceOf[DataSourceInstance].label
-                    ))),
-                    "visualizer" -> p._2.lastComponent.componentInstance.getClass.getSimpleName
-                )
-            }
+            "pipelines" -> maybePipelines.map { pipelines =>
+                pipelines.map { p =>
+                    Json.obj(
+                        "id" -> p._1.toString,
+                        "componentCount" -> JsNumber(p._2.components.size),
+                        "dataSources" -> Json.arr(p._2.components.filter(_.componentInstance.isInstanceOf[DataSourceInstance]).map(d => Json.obj(
+                            "label" -> d.componentInstance.asInstanceOf[DataSourceInstance].label
+                        ))),
+                        "visualizer" -> p._2.lastComponent.componentInstance.getClass.getSimpleName
+                    )
+                }
             }
         ))
     }
 
     def pipelineGroups(id: String) = Action {
         Ok(service.getPipelines(id).map { pipelineMap =>
-            JsObject(Seq("pipelineGroups" -> Json.toJson(PipelineGrouping.create(pipelineMap)) ))
+            JsObject(Seq("pipelineGroups" -> Json.toJson(PipelineGrouping.create(pipelineMap))))
         }.getOrElse(JsObject(Seq())))
     }
 
@@ -135,16 +110,30 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
         pipelines.map(p => p.lastComponent.discoveryIteration).min
     }
 
-    def execute(id: String, pipelineId: String) = Action {
-        val etlPipeline = service.getEtlPipeline(id, pipelineId)
-        val prefix = "http://xrg12.ms.mff.cuni.cz:8090"
+    def getSparqlService(discoveryId: String, pipelineId: String) = Action { r =>
+        service.getService(discoveryId, pipelineId, r.host, configuration.getString("ldvm.endpointUri").get) match {
+            case Some(model) => {
+                val outputStream = new ByteArrayOutputStream()
+                RDFDataMgr.write(outputStream, model, Lang.TTL)
+                Ok(outputStream.toString())
+            }
+            case _ => NotFound
+        }
+    }
 
-        etlPipeline.map { ep =>
+    def execute(id: String, pipelineId: String) = Action {
+        val result = for {
+            prefix <- configuration.getString("etl.hostname")
+            endpointUri <- configuration.getString("ldvm.endpointUri")
+            etlPipeline <- service.getEtlPipeline(id, pipelineId, endpointUri)
+        } yield {
             val outputStream = new ByteArrayOutputStream()
-            RDFDataMgr.write(outputStream, ep.dataset, Lang.JSONLD)
+            RDFDataMgr.write(outputStream, etlPipeline.dataset, Lang.JSONLD)
 
             val pipelineCreationUrl = s"$prefix/resources/pipelines"
-            val response = Http(pipelineCreationUrl).postMulti(MultiPart("pipeline", "pipeline.jsonld", "application/ld+json", outputStream.toByteArray)).asString.body
+            val response = Http(pipelineCreationUrl).postMulti(
+                MultiPart("pipeline", "pipeline.jsonld", "application/ld+json", outputStream.toByteArray)
+            ).asString.body
 
             val resultDataset = DatasetFactory.create()
             RDFDataMgr.read(resultDataset, new StringReader(response), null, Lang.TRIG)
@@ -158,18 +147,24 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
                 "pipelineId" -> pipelineId,
                 "etlPipelineIri" -> pipelineUri,
                 "etlExecutionIri" -> executionIri.get.asInstanceOf[JsString].value,
-                "resultGraphIri" -> ep.resultGraphIri
+                "resultGraphIri" -> etlPipeline.resultGraphIri
             ))
-        }.getOrElse(NotFound)
+        }
+
+        result.getOrElse(NotFound)
     }
 
     def pipeline(id: String, pipelineId: String) = Action {
-        val etlPipeline = service.getEtlPipeline(id, pipelineId)
-        etlPipeline.map { ep =>
+        val rdf = for {
+            endpointUri <- configuration.getString("ldvm.endpointUri")
+            etlPipeline <- service.getEtlPipeline(id, pipelineId, endpointUri)
+        } yield {
             val outputStream = new ByteArrayOutputStream()
-            RDFDataMgr.write(outputStream, ep.dataset, Lang.JSONLD)
+            RDFDataMgr.write(outputStream, etlPipeline.dataset, Lang.JSONLD)
             Ok(outputStream.toString())
-        }.getOrElse(NotFound)
+        }
+
+        rdf.getOrElse(NotFound)
     }
 
     def stop(id: String) = Action {
@@ -178,53 +173,7 @@ class DiscoveryController @Inject()(service: DiscoveryService, ws: WSClient) ext
     }
 
     def executionStatus(iri: String) = Action {
-        fromJsonLd(s"$iri/overview") { d =>
-            val model = d.getDefaultModel
-            val statusNodes = model.listObjectsOfProperty(model.createProperty("http://etl.linkedpipes.com/ontology/executionStatus")).toList.asScala
-            val isRunning = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/running"))
-            val isQueued = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/queued"))
-            val isFinished = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/finished"))
-            val isCancelled = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/cancelled"))
-            val isCancelling = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/cancelling"))
-            val isFailed = statusNodes.exists(n => n.asResource().getURI.equals("http://etl.linkedpipes.com/resources/status/failed"))
-
-            Ok(Json.obj(
-                "isRunning" -> Json.toJson(isRunning),
-                "isQueued" -> Json.toJson(isQueued),
-                "isFinished" -> Json.toJson(isFinished),
-                "isCancelled" -> Json.toJson(isCancelled),
-                "isCancelling" -> Json.toJson(isCancelling),
-                "isFailed" -> Json.toJson(isFailed)
-            ))
-        }
-    }
-
-    private def fromJsonLd[R](iri: String)(fn: Dataset => R) : R = {
-        val dataset = RDFDataMgr.loadDataset(iri, Lang.JSONLD)
-        fn(dataset)
-    }
-
-    private def fromUri[R](uri: String)(fn: Either[Throwable, Model] => R): R = {
-        discoveryLogger.debug(s"Downloading data from $uri.")
-        val result = try {
-            val model = ModelFactory.createDefaultModel()
-            model.read(uri)
-            Right(model)
-        } catch {
-            case e: RiotException => Left(new Exception(s"The data at $uri caused the following error: ${e.getMessage}."))
-        }
-        fn(result)
-    }
-
-    private def getTemplates(model: Model, bag: Resource): (Seq[Model], Seq[Throwable]) = {
-        val templates = model.listObjectsOfProperty(bag, RDFS.member).asScala
-        val (errors, templateModels) = templates.map(t => fromUri(t.asResource().getURI) { e => e }).partition(_.isLeft)
-        (templateModels.map(_.right.get).toSeq, errors.map(_.left.get).toSeq)
-    }
-
-    private def runExperiment(templates: Seq[Model]): UUID = {
-        val discoveryInput = DiscoveryInput(templates)
-        service.start(discoveryInput)
+        Ok(Json.toJson(service.executionStatus(iri)))
     }
 
 }

@@ -98,7 +98,7 @@ class EtlPipelineTransformer(pipeline: Pipeline) {
     (p, b) => {
       b.foldLeft(p)((pip, binding) => {
         val jenaSource = binding.startComponent.componentInstance.asInstanceOf[JenaDataSource]
-        val urn = GuidGenerator.nextUrn
+        val urn = GuidGenerator.nextIri
         val endpointInstance = new SparqlEndpoint(
           s"https://linked.opendata.cz/ontology/datasource/$urn",
           "http://example.com",

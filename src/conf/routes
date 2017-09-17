@@ -8,7 +8,6 @@ GET        /status                                             controllers.HomeC
 GET        /experiments                                        controllers.HomeController.experiments()
 
 GET        /discovery/components                               controllers.DiscoveryController.listComponents()
-GET        /discovery/start                                    controllers.DiscoveryController.start(uri: String)
 POST       /discovery/start                                    controllers.DiscoveryController.startExperiment()
 GET        /discovery/:id                                      controllers.DiscoveryController.status(id: String)
 GET        /discovery/:id/pipelines                            controllers.DiscoveryController.list(id: String)
@@ -17,6 +16,7 @@ GET        /discovery/:id/csv                                  controllers.Disco
 GET        /discovery/:id/pipelines/:pipelineId                controllers.DiscoveryController.pipeline(id: String, pipelineId: String)
 GET        /discovery/:id/stop                                 controllers.DiscoveryController.stop(id: String)
 GET        /discovery/:id/execute/:pipelineId                  controllers.DiscoveryController.execute(id: String, pipelineId: String)
+GET        /discovery/:id/:pipelineId/service                  controllers.DiscoveryController.getSparqlService(id: String, pipelineId: String)
 GET        /execution/status                                   controllers.DiscoveryController.executionStatus(iri: String)
 
 # Map static resources from the /public folder to the /assets URL path

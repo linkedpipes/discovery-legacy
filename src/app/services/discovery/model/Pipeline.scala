@@ -21,7 +21,7 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
 
     def applicationName = lastComponent.componentInstance match {
         case esgp : EtlSparqlGraphProtocol => esgp.label
-        case x => x.getClass.getSimpleName
+        case x => s"${x.label} (${x.getClass.getSimpleName})"
     }
 
     def height: Int = lastComponent.discoveryIteration
@@ -59,10 +59,10 @@ object Pipeline {
 
     def destruct(arg: Pipeline): Option[(String, String)] = {
         val datasourcesString = arg.typedDatasources.map(_.label).mkString(",")
-        val extractorsString = arg.typedExtractors.map(_.getClass.getSimpleName).mkString(",")
-        val transformersString = arg.typedProcessors.map(_.getClass.getSimpleName).mkString(",")
+        val extractorsString = arg.typedExtractors.map(i => s"${i.label} (${i.getClass.getSimpleName})").mkString(",")
+        val transformersString = arg.typedProcessors.map(i => s"${i.label} (${i.getClass.getSimpleName})").mkString(",")
         val transformersCount = arg.typedProcessors.size
-        val app = arg.typedApplications.map(_.getClass.getSimpleName).mkString(",")
+        val app = arg.typedApplications.map(i => s"${i.label} (${i.getClass.getSimpleName})").mkString(",")
         val iterationNumber = arg.lastComponent.discoveryIteration
 
         val descriptor = s"$datasourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber"

@@ -14,13 +14,13 @@ case class Config(resource: Resource, model: Model)
 
 case class ConfiguredComponent(resource: Resource, config: Config)
 
-class EtlPipelineSerializer(etlPipeline: Pipeline) {
+class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String) {
 
     private lazy val iriGenerator = new EtlIriGenerator
     private lazy val pipelineIri = iriGenerator.pipelineIri
     private lazy val dataModel = PipelineDataModel.create(pipelineIri)
     private lazy val iterations = etlPipeline.components.map(_.discoveryIteration).distinct.sorted
-    lazy val resultGraphUrn = GuidGenerator.nextUrn
+    lazy val resultGraphIri = GuidGenerator.nextIri
     private val rows = new mutable.HashMap[Int, Int]
 
     def serialize: Dataset = {
@@ -133,8 +133,8 @@ class EtlPipelineSerializer(etlPipeline: Pipeline) {
         val config = createConfig(componentResource, namespace + "Configuration")
         config.resource.addProperty(config.model.createProperty(namespace + "repository"), "VIRTUOSO")
         config.resource.addProperty(config.model.createProperty(namespace + "replace"), config.model.asInstanceOf[ModelCon].createTypedLiteral(true))
-        config.resource.addProperty(config.model.createProperty(namespace + "graph"), resultGraphUrn)
-        config.resource.addProperty(config.model.createProperty(namespace + "endpoint"), "http://xrg22.ms.mff.cuni.cz:8991/sparql-graph-crud-auth")
+        config.resource.addProperty(config.model.createProperty(namespace + "graph"), resultGraphIri)
+        config.resource.addProperty(config.model.createProperty(namespace + "endpoint"), s"$endpointUri/sparql-graph-crud-auth")
         config.resource.addProperty(config.model.createProperty(namespace + "password"), "dba")
         config.resource.addProperty(config.model.createProperty(namespace + "user"), "dba")
         config.resource.addProperty(config.model.createProperty(namespace + "authentification"), config.model.asInstanceOf[ModelCon].createTypedLiteral(true))
@@ -146,7 +146,7 @@ class EtlPipelineSerializer(etlPipeline: Pipeline) {
         val config = createConfig(componentResource, namespace + "Configuration")
         config.resource.addProperty(config.model.createProperty(namespace + "fileName"), "data.ttl")
         config.resource.addProperty(config.model.createProperty(namespace + "fileType"), "text/turtle")
-        config.resource.addProperty(config.model.createProperty(namespace + "graphUri"), resultGraphUrn)
+        config.resource.addProperty(config.model.createProperty(namespace + "graphUri"), resultGraphIri)
         config
     }
 
