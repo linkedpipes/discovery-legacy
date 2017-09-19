@@ -8,7 +8,7 @@
 @prefix dataset:  <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod-dcterms/> .
 
 dataset:template a ldvm:DataSourceTemplate ;
-	dcterms:title "Czech National Open Data Catalog - dataset DC terms only"@en, "Národní katalog otevřených dat (NKOD) - jen dcterms datasetů"@cs ;
+	dcterms:title "Czech National Open Data Catalog - dataset DC terms only, 1 dataset"@en, "Národní katalog otevřených dat (NKOD) - jen dcterms datasetů"@cs ;
 	ldvm:outputTemplate dataset:output ;
 	ldvm:componentConfigurationTemplate dataset:defaultConfiguration .
 
@@ -22,7 +22,7 @@ PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
 CONSTRUCT WHERE {
-?dataset a dcat:Dataset;
+<https://nkod.opendata.cz/zdroj/datová-sada/247025855> a dcat:Dataset;
     dcterms:title ?title ;
     dcterms:description ?description ;
     dcterms:issued ?issued ;

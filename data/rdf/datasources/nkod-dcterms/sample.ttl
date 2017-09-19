@@ -2,7 +2,7 @@
 @prefix xsd:	<http://www.w3.org/2001/XMLSchema#> .
 @prefix dct:	<http://purl.org/dc/terms/> .
 
-<https://nkod.opendata.cz/zdroj/datová-sada/164170823> a dcat:Dataset ;
+<https://nkod.opendata.cz/zdroj/datová-sada/247025855> a dcat:Dataset ;
 	dct:modified	"2017-08-25"^^xsd:date ;
 	dct:title	"Po\u010Det vyplacen\u00FDch d\u016Fchod\u016F v \u010Cesk\u00E9 republice dle m\u011Bs\u00ED\u010Dn\u00ED v\u00FD\u0161e d\u016Fchodu"@cs ;
 	dct:description	"Po\u010Det vyplacen\u00FDch d\u016Fchod\u016F v \u010Cesk\u00E9 republice podle roku, druhu d\u016Fchodu, m\u011Bs\u00ED\u010Dn\u00ED v\u00FD\u0161e d\u016Fchodu a pohlav\u00ED"@cs ;
