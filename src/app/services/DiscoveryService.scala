@@ -75,7 +75,7 @@ class DiscoveryService {
 
                 val service = model.createResource(s"${host}/discovery/${discoveryId}/${pipelineId}/service")
                 service.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}Service"))
-                service.addProperty(model.createProperty(s"${servicePrefix}endpoint"), model.createResource(endpointUri))
+                service.addProperty(model.createProperty(s"${servicePrefix}endpoint"), model.createResource(s"$endpointUri/sparql"))
                 service.addProperty(model.createProperty(s"${servicePrefix}supportedLanguage"), model.createResource(s"${servicePrefix}SPARQL11Query"))
                 service.addProperty(model.createProperty(s"${servicePrefix}resultFormat"), model.createResource("http://www.w3.org/ns/formats/RDF_XML"))
                 service.addProperty(model.createProperty(s"${servicePrefix}resultFormat"), model.createResource("http://www.w3.org/ns/formats/Turtle"))
