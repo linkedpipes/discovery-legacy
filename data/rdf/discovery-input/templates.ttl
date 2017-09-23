@@ -2,7 +2,7 @@
 
 <http://linked.opendata.cz/ldcp/resource/ldvm/templates>
     a <http://linked.opendata.cz/ldcp/resource/discovery/input> ;
-    <http://linked.opendata.cz/ldcp/property/hasTemplate> <http://linked.opendata.cz/ldcp/resource/ldvm/dataset/dblp/template> ;
+    <http://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/dblp/template> ;
     <http://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod/template> ;
     <http://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/deusto.es/template> ;
     <http://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod-dcterms/template> ;
