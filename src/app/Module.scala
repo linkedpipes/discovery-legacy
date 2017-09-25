@@ -1,6 +1,7 @@
 import java.time.Clock
 
 import com.google.inject.AbstractModule
+import play.api.db.evolutions.EvolutionsComponents
 import services.DiscoveryService
 
 /**

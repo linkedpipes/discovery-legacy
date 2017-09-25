@@ -3,6 +3,7 @@ package services
 import java.util.UUID
 
 import controllers.dto.DiscoveryResult
+import models.ExecutionResult
 import org.apache.jena.query.Dataset
 import org.apache.jena.rdf.model.{AnonId, Model, ModelFactory}
 import org.apache.jena.riot.{Lang, RDFDataMgr, RiotException}
@@ -19,7 +20,6 @@ import scala.collection.mutable
 class DiscoveryService {
 
     private val discoveries = new scala.collection.mutable.HashMap[UUID, Discovery]
-    private val etlPipelines = new scala.collection.mutable.HashMap[Pipeline, EtlPipeline]
     private val discoveryLogger = Logger.of("discovery")
 
     def start(input: DiscoveryInput) = {
@@ -47,9 +47,7 @@ class DiscoveryService {
 
     def getEtlPipeline(id: String, pipelineId: String, endpointUri: String): Option[EtlPipeline] = {
         withPipeline(id, pipelineId) { (p, d) =>
-            val etlPipeline = EtlPipelineExporter.export(p, endpointUri)
-            etlPipelines.put(p, etlPipeline)
-            etlPipeline
+            EtlPipelineExporter.export(p, endpointUri)
         }
     }
 
@@ -57,33 +55,28 @@ class DiscoveryService {
         discovery.results
     }
 
-    def getService(discoveryId: String, pipelineId: String, host: String, endpointUri: String): Option[Model] = {
-        withPipeline(discoveryId, pipelineId) { (p, d) =>
-            etlPipelines.get(p).map { ep =>
+    def getService(executionResult: ExecutionResult, host: String, endpointUri: String): Model = {
+        val servicePrefix = "http://www.w3.org/ns/sparql-service-description#"
 
-                val servicePrefix = "http://www.w3.org/ns/sparql-service-description#"
+        val model = ModelFactory.createDefaultModel()
 
-                val model = ModelFactory.createDefaultModel()
+        val namedGraph = model.createResource(AnonId.create())
+        namedGraph.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}NamedGraph"))
+        namedGraph.addProperty(model.createProperty(s"${servicePrefix}name"), model.createResource(executionResult.graphIri))
 
-                val namedGraph = model.createResource(AnonId.create())
-                namedGraph.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}NamedGraph"))
-                namedGraph.addProperty(model.createProperty(s"${servicePrefix}name"), model.createResource(ep.resultGraphIri))
+        val dataset = model.createResource(AnonId.create())
+        dataset.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}Dataset"))
+        dataset.addProperty(model.createProperty(s"${servicePrefix}namedGraph"), namedGraph)
 
-                val dataset = model.createResource(AnonId.create())
-                dataset.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}Dataset"))
-                dataset.addProperty(model.createProperty(s"${servicePrefix}namedGraph"), namedGraph)
+        val service = model.createResource(s"${host}/discovery/${executionResult.discoveryId}/${executionResult.pipelineId}/service")
+        service.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}Service"))
+        service.addProperty(model.createProperty(s"${servicePrefix}endpoint"), model.createResource(s"$endpointUri/sparql"))
+        service.addProperty(model.createProperty(s"${servicePrefix}supportedLanguage"), model.createResource(s"${servicePrefix}SPARQL11Query"))
+        service.addProperty(model.createProperty(s"${servicePrefix}resultFormat"), model.createResource("http://www.w3.org/ns/formats/RDF_XML"))
+        service.addProperty(model.createProperty(s"${servicePrefix}resultFormat"), model.createResource("http://www.w3.org/ns/formats/Turtle"))
+        service.addProperty(model.createProperty(s"${servicePrefix}defaultDataset"), dataset)
 
-                val service = model.createResource(s"${host}/discovery/${discoveryId}/${pipelineId}/service")
-                service.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}Service"))
-                service.addProperty(model.createProperty(s"${servicePrefix}endpoint"), model.createResource(s"$endpointUri/sparql"))
-                service.addProperty(model.createProperty(s"${servicePrefix}supportedLanguage"), model.createResource(s"${servicePrefix}SPARQL11Query"))
-                service.addProperty(model.createProperty(s"${servicePrefix}resultFormat"), model.createResource("http://www.w3.org/ns/formats/RDF_XML"))
-                service.addProperty(model.createProperty(s"${servicePrefix}resultFormat"), model.createResource("http://www.w3.org/ns/formats/Turtle"))
-                service.addProperty(model.createProperty(s"${servicePrefix}defaultDataset"), dataset)
-
-                model
-            }
-        }.flatten
+        model
     }
 
     def listTemplates(templateSourceUri: String): Option[DiscoveryInput] = {

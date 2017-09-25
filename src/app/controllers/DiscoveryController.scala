@@ -5,34 +5,42 @@ import java.util.UUID
 import javax.inject._
 
 import controllers.dto.PipelineGrouping
+import dao.ExecutionResultDao
+import models.ExecutionResult
 import org.apache.jena.query.DatasetFactory
 import org.apache.jena.riot.{Lang, RDFDataMgr}
 import play.Logger
 import play.api.Configuration
+import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import play.api.libs.json._
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.InjectedController
 import services.DiscoveryService
 import services.discovery.model.components.DataSourceInstance
 import services.discovery.model.{DataSample, Pipeline}
+import slick.jdbc.JdbcProfile
 
+import scala.concurrent.{ExecutionContext, Future}
 import scalaj.http.{Http, MultiPart}
 
 
 @Singleton
-class DiscoveryController @Inject()(service: DiscoveryService, configuration: Configuration) extends Controller {
+class DiscoveryController @Inject()(
+    service: DiscoveryService,
+    configuration: Configuration,
+    executionResultDao: ExecutionResultDao,
+    protected val dbConfigProvider: DatabaseConfigProvider
+)(implicit executionContext: ExecutionContext) extends InjectedController with HasDatabaseConfigProvider[JdbcProfile] {
 
     val discoveryLogger = Logger.of("discovery")
 
     def listComponents = Action {
-        configuration.getString("ldvm.templateSourceUri") match {
-            case Some(templateSourceUri) => Ok(
-                service.listTemplates(templateSourceUri) match {
-                    case Some(input) => Json.toJson(input)
-                    case _ => Json.toJson(Json.obj("error" -> JsString("Error while downloading template data.")))
-                }
-            )
-            case _ => InternalServerError("The server does not know where to look for LDVM templates.")
-        }
+        val templateSourceUri = configuration.get[String]("ldvm.templateSourceUri")
+        Ok(
+            service.listTemplates(templateSourceUri) match {
+                case Some(input) => Json.toJson(input)
+                case _ => Json.toJson(Json.obj("error" -> JsString("Error while downloading template data.")))
+            }
+        )
     }
 
     def startExperiment = Action(parse.json) { request =>
@@ -110,61 +118,68 @@ class DiscoveryController @Inject()(service: DiscoveryService, configuration: Co
         pipelines.map(p => p.lastComponent.discoveryIteration).min
     }
 
-    def getSparqlService(discoveryId: String, pipelineId: String) = Action { r =>
-        service.getService(discoveryId, pipelineId, r.host, configuration.getString("ldvm.endpointUri").get) match {
-            case Some(model) => {
+    def getSparqlService(discoveryId: String, pipelineId: String) = Action.async { r =>
+        executionResultDao.all().map { executionResults =>
+            val result = executionResults.filter(er => er.discoveryId == discoveryId && er.pipelineId == pipelineId).lastOption
+
+            result match {
+                case Some(res) => {
+                    val model = service.getService(res, r.host, configuration.get[String]("ldvm.endpointUri"))
+                    val outputStream = new ByteArrayOutputStream()
+                    RDFDataMgr.write(outputStream, model, Lang.TTL)
+                    Ok(outputStream.toString())
+                }
+                case _ => NotFound
+            }
+        }
+    }
+
+    def execute(id: String, pipelineId: String) = Action.async {
+
+        val prefix = configuration.get[String]("etl.hostname")
+        val endpointUri = configuration.get[String]("ldvm.endpointUri")
+
+        service.getEtlPipeline(id, pipelineId, endpointUri) match {
+            case Some(etlPipeline) => {
                 val outputStream = new ByteArrayOutputStream()
-                RDFDataMgr.write(outputStream, model, Lang.TTL)
+                RDFDataMgr.write(outputStream, etlPipeline.dataset, Lang.JSONLD)
+
+                val pipelineCreationUrl = s"$prefix/resources/pipelines"
+                val response = Http(pipelineCreationUrl).postMulti(
+                    MultiPart("pipeline", "pipeline.jsonld", "application/ld+json", outputStream.toByteArray)
+                ).asString.body
+
+                val resultDataset = DatasetFactory.create()
+                RDFDataMgr.read(resultDataset, new StringReader(response), null, Lang.TRIG)
+                val pipelineUri = resultDataset.listNames().next()
+
+                val pipelineExecutionUrl = s"$prefix/resources/executions?pipeline=$pipelineUri"
+                val executionResponse = Http(pipelineExecutionUrl).postForm.asString.body
+                val executionIri = Json.parse(executionResponse) \ "iri"
+
+                executionResultDao.insert(ExecutionResult(UUID.randomUUID(), id, pipelineId, etlPipeline.resultGraphIri)).map { _ =>
+                    Ok(Json.obj(
+                        "pipelineId" -> pipelineId,
+                        "etlPipelineIri" -> pipelineUri,
+                        "etlExecutionIri" -> executionIri.get.asInstanceOf[JsString].value,
+                        "resultGraphIri" -> etlPipeline.resultGraphIri
+                    ))
+                }
+            }
+            case _ => Future.successful(NotFound)
+        }
+    }
+
+    def pipeline(id: String, pipelineId: String) = Action {
+        val endpointUri = configuration.get[String]("ldvm.endpointUri")
+        service.getEtlPipeline(id, pipelineId, endpointUri) match {
+            case Some(etlPipeline) => {
+                val outputStream = new ByteArrayOutputStream()
+                RDFDataMgr.write(outputStream, etlPipeline.dataset, Lang.JSONLD)
                 Ok(outputStream.toString())
             }
             case _ => NotFound
         }
-    }
-
-    def execute(id: String, pipelineId: String) = Action {
-        val result = for {
-            prefix <- configuration.getString("etl.hostname")
-            endpointUri <- configuration.getString("ldvm.endpointUri")
-            etlPipeline <- service.getEtlPipeline(id, pipelineId, endpointUri)
-        } yield {
-            val outputStream = new ByteArrayOutputStream()
-            RDFDataMgr.write(outputStream, etlPipeline.dataset, Lang.JSONLD)
-
-            val pipelineCreationUrl = s"$prefix/resources/pipelines"
-            val response = Http(pipelineCreationUrl).postMulti(
-                MultiPart("pipeline", "pipeline.jsonld", "application/ld+json", outputStream.toByteArray)
-            ).asString.body
-
-            val resultDataset = DatasetFactory.create()
-            RDFDataMgr.read(resultDataset, new StringReader(response), null, Lang.TRIG)
-            val pipelineUri = resultDataset.listNames().next()
-
-            val pipelineExecutionUrl = s"$prefix/resources/executions?pipeline=$pipelineUri"
-            val executionResponse = Http(pipelineExecutionUrl).postForm.asString.body
-            val executionIri = Json.parse(executionResponse) \ "iri"
-
-            Ok(Json.obj(
-                "pipelineId" -> pipelineId,
-                "etlPipelineIri" -> pipelineUri,
-                "etlExecutionIri" -> executionIri.get.asInstanceOf[JsString].value,
-                "resultGraphIri" -> etlPipeline.resultGraphIri
-            ))
-        }
-
-        result.getOrElse(NotFound)
-    }
-
-    def pipeline(id: String, pipelineId: String) = Action {
-        val rdf = for {
-            endpointUri <- configuration.getString("ldvm.endpointUri")
-            etlPipeline <- service.getEtlPipeline(id, pipelineId, endpointUri)
-        } yield {
-            val outputStream = new ByteArrayOutputStream()
-            RDFDataMgr.write(outputStream, etlPipeline.dataset, Lang.JSONLD)
-            Ok(outputStream.toString())
-        }
-
-        rdf.getOrElse(NotFound)
     }
 
     def stop(id: String) = Action {
