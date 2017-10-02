@@ -13,7 +13,7 @@ application:template a ldvm:ApplicationTemplate ;
 	ldvm:componentConfigurationTemplate application:defaultConfiguration ;
 	ldvm:inputTemplate application:input ;
 	ldvm:feature application:personsFeature, application:personsThingsAsMarkersFeature, application:personsThingsAsMarkersWithLabelsFeature, application:personsThingsAsMarkersWithDescriptionsFeature, application:personsThingsAsTimeInstantsFeature, application:personsThingsAsTimeInstantsWithLabelsFeature, application:personsThingsAsTimeInstantsWithDescriptionsFeature, application:personsThingsAsTimeIntervalsFeature, application:personsThingsAsTimeIntervalsWithLabelsFeature, application:personsThingsAsTimeIntervalsWithDescriptionsFeature ;
-	ldvm:executor <https://oo.ps> .
+	ldvm:executor <https://visualisation-apps.netlify.com/foaf> .
 	
 configuration-vocabulary:Configuration a rdfs:Class ;
 	rdfs:label "Class of configurations of personal profiles application"@en;
