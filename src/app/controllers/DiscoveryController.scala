@@ -49,6 +49,11 @@ class DiscoveryController @Inject()(
         Ok(Json.obj("id" -> Json.toJson(discoveryId)))
     }
 
+    def startExperimentFromInput(uri: String) = Action {
+        val discoveryId = service.runExperimentFromInput(uri)
+        Ok(Json.obj("id" -> Json.toJson(discoveryId)))
+    }
+
     def status(id: String) = Action {
         val result = service.getStatus(id)
         Ok(Json.toJson(result))

@@ -37,6 +37,17 @@ class DiscoveryService {
         start(discoveryInput)
     }
 
+    def runExperimentFromInput(inputUri: String) : UUID = {
+        val uris = fromUri(inputUri) {
+            case Right(model) => {
+                val templates = model.listObjectsOfProperty(model.getProperty("http://linked.opendata.cz/ldcp/property/hasTemplate")).toList.asScala
+                templates.map(_.asResource().getURI)
+            }
+            case _ => Seq()
+        }
+        runExperiment(uris)
+    }
+
     def getStatus(id: String): Option[DiscoveryResult] = withDiscovery(id) { discovery =>
         DiscoveryResult(
             discovery.results.size,
