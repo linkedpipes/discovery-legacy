@@ -1,0 +1,7 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+<http://linked.opendata.cz/ldcp/resource/ldvm/experiment/1/config> a <http://linked.opendata.cz/ldcp/resource/discovery/input> ;
+    <http://linked.opendata.cz/ldcp/property/hasTemplate> 
+      <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod-dcterms/template>, 
+      <http://linked.opendata.cz/ldcp/resource/ldvm/application/dcterms/template>
+    .
