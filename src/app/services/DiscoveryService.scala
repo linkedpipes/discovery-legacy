@@ -32,7 +32,7 @@ class DiscoveryService {
     def stop(id: String) = {}
 
     def runExperiment(templateUris: Seq[String]): UUID = {
-        val templates = templateUris.map { u => fromUri(u) { e => e } }.filter(_.isRight).map(_.right.get)
+        val templates = templateUris.par.map { u => fromUri(u) { e => e } }.filter(_.isRight).map(_.right.get).seq
         val discoveryInput = DiscoveryInput(templates)
         start(discoveryInput)
     }

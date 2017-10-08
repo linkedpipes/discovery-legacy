@@ -1,7 +1,5 @@
 package dao
 
-import java.util.UUID
-
 import scala.concurrent.{ExecutionContext, Future}
 import javax.inject.Inject
 
@@ -20,11 +18,15 @@ class ExecutionResultDao @Inject() (
 
     def all(): Future[Seq[ExecutionResult]] = db.run(ExecutionResults.result)
 
+    def findByPipelineId(disoveryId: String, pipelineId: String) : Future[Option[ExecutionResult]] = {
+        db.run(ExecutionResults.filter(r => r.pipelineId === pipelineId && r.discoveryId === disoveryId).take(1).result.headOption)
+    }
+
     def insert(executionResult: ExecutionResult): Future[Unit] = db.run(ExecutionResults += executionResult).map { _ => () }
 
     private class ExecutionResultsTable(tag: Tag) extends Table[ExecutionResult](tag, "ExecutionResult") {
 
-        def id = column[UUID]("id", O.PrimaryKey)
+        def id = column[String]("id", O.PrimaryKey)
         def discoveryId = column[String]("discovery_id")
         def pipelineId = column[String]("pipeline_id")
         def graphIri = column[String]("graph_iri")

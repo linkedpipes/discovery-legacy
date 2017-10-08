@@ -124,18 +124,14 @@ class DiscoveryController @Inject()(
     }
 
     def getSparqlService(discoveryId: String, pipelineId: String) = Action.async { r =>
-        executionResultDao.all().map { executionResults =>
-            val result = executionResults.filter(er => er.discoveryId == discoveryId && er.pipelineId == pipelineId).lastOption
-
-            result match {
-                case Some(res) => {
-                    val model = service.getService(res, r.host, configuration.get[String]("ldvm.endpointUri"))
-                    val outputStream = new ByteArrayOutputStream()
-                    RDFDataMgr.write(outputStream, model, Lang.TTL)
-                    Ok(outputStream.toString())
-                }
-                case _ => NotFound
+        executionResultDao.findByPipelineId(discoveryId, pipelineId).map {
+            case Some(res) => {
+                val model = service.getService(res, r.host, configuration.get[String]("ldvm.endpointUri"))
+                val outputStream = new ByteArrayOutputStream()
+                RDFDataMgr.write(outputStream, model, Lang.TTL)
+                Ok(outputStream.toString())
             }
+            case _ => NotFound
         }
     }
 
@@ -162,7 +158,7 @@ class DiscoveryController @Inject()(
                 val executionResponse = Http(pipelineExecutionUrl).postForm.asString.body
                 val executionIri = Json.parse(executionResponse) \ "iri"
 
-                executionResultDao.insert(ExecutionResult(UUID.randomUUID(), id, pipelineId, etlPipeline.resultGraphIri)).map { _ =>
+                executionResultDao.insert(ExecutionResult(UUID.randomUUID().toString, id, pipelineId, etlPipeline.resultGraphIri)).map { _ =>
                     Ok(Json.obj(
                         "pipelineId" -> pipelineId,
                         "etlPipelineIri" -> pipelineUri,

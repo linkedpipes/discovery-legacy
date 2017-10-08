@@ -6,6 +6,8 @@
 GET        /                                                   controllers.HomeController.index
 GET        /status                                             controllers.HomeController.status
 GET        /experiments                                        controllers.HomeController.experiments()
+POST       /persist                                            controllers.HomeController.persist()
+GET        /result/:id                                         controllers.HomeController.result(id)
 
 GET        /discovery/components                               controllers.DiscoveryController.listComponents()
 POST       /discovery/start                                    controllers.DiscoveryController.startExperiment()
