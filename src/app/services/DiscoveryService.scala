@@ -79,7 +79,7 @@ class DiscoveryService {
         dataset.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}Dataset"))
         dataset.addProperty(model.createProperty(s"${servicePrefix}namedGraph"), namedGraph)
 
-        val service = model.createResource(s"${host}/discovery/${executionResult.discoveryId}/${executionResult.pipelineId}/service")
+        val service = model.createResource(s"$host/discovery/${executionResult.discoveryId}/${executionResult.pipelineId}/service")
         service.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}Service"))
         service.addProperty(model.createProperty(s"${servicePrefix}endpoint"), model.createResource(s"$endpointUri/sparql"))
         service.addProperty(model.createProperty(s"${servicePrefix}supportedLanguage"), model.createResource(s"${servicePrefix}SPARQL11Query"))

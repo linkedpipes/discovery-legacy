@@ -1,5 +1,8 @@
 package services.discovery.model
 
+import java.io.StringWriter
+import java.util.UUID
+
 import services.discovery.components.analyzer.EtlSparqlGraphProtocol
 import services.discovery.model.components._
 import play.api.libs.json._
@@ -48,16 +51,23 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
 
     def typedApplications = applications.map(_.componentInstance.asInstanceOf[ApplicationInstance])
 
+    def dataSample = {
+        val s = new StringWriter()
+        lastOutputDataSample.getModel(UUID.randomUUID(), height).write(s, "TTL")
+        s.toString
+    }
+
 }
 
 object Pipeline {
 
     implicit val writes: Writes[Pipeline] = (
         (JsPath \ "descriptor").write[String] and
-            (JsPath \ "name").write[String]
+            (JsPath \ "name").write[String] and
+            (JsPath \ "dataSample").write[String]
         )(unlift(Pipeline.destruct))
 
-    def destruct(arg: Pipeline): Option[(String, String)] = {
+    def destruct(arg: Pipeline): Option[(String, String, String)] = {
         val datasourcesString = arg.typedDatasources.map(_.label).mkString(",")
         val extractorsString = arg.typedExtractors.map(i => s"${i.label} (${i.getClass.getSimpleName})").mkString(",")
         val transformersString = arg.typedProcessors.map(i => s"${i.label} (${i.getClass.getSimpleName})").mkString(",")
@@ -67,6 +77,6 @@ object Pipeline {
 
         val descriptor = s"$datasourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber"
 
-        Some((descriptor, arg.name))
+        Some((descriptor, arg.name, arg.dataSample))
     }
 }
