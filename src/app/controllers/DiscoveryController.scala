@@ -60,7 +60,7 @@ class DiscoveryController @Inject()(
     }
 
     def list(id: String) = Action {
-        val maybePipelines = service.getPipelines(id)
+        val maybePipelines = service.getPipelinesOfDiscovery(id)
         Ok(Json.obj(
             "pipelines" -> maybePipelines.map { pipelines =>
                 pipelines.map { p =>
@@ -78,13 +78,13 @@ class DiscoveryController @Inject()(
     }
 
     def pipelineGroups(id: String) = Action {
-        Ok(service.getPipelines(id).map { pipelineMap =>
+        Ok(service.getPipelinesOfDiscovery(id).map { pipelineMap =>
             JsObject(Seq("pipelineGroups" -> Json.toJson(PipelineGrouping.create(pipelineMap))))
         }.getOrElse(JsObject(Seq())))
     }
 
     def csv(id: String) = Action {
-        val maybeGrouping = service.getPipelines(id).map { pipelineMap => PipelineGrouping.create(pipelineMap) }
+        val maybeGrouping = service.getPipelinesOfDiscovery(id).map { pipelineMap => PipelineGrouping.create(pipelineMap) }
         val string = maybeGrouping.map { grouping =>
             grouping.applicationGroups.map { applicationGroup =>
                 applicationGroup.dataSourceGroups.map { dataSourceGroup =>
@@ -125,14 +125,23 @@ class DiscoveryController @Inject()(
 
     def getSparqlService(discoveryId: String, pipelineId: String) = Action.async { r =>
         executionResultDao.findByPipelineId(discoveryId, pipelineId).map {
-            case Some(res) => {
-                val model = service.getService(res, r.host, configuration.get[String]("ldvm.endpointUri"))
+            case Some(executionResult) => {
+                val model = service.getService(executionResult, r.host, configuration.get[String]("ldvm.endpointUri"))
                 val outputStream = new ByteArrayOutputStream()
                 RDFDataMgr.write(outputStream, model, Lang.TTL)
                 Ok(outputStream.toString())
             }
             case _ => NotFound
         }
+    }
+
+    def getDataSampleSparqlService(discoveryId: String, pipelineId: String) = Action.async { r =>
+        Future.successful(service.withPipeline(discoveryId: String, pipelineId: String) { (p,d) =>
+            val model = service.getDataSampleService(pipelineId, discoveryId, p.dataSample, r.host, configuration.get[String]("ldvm.endpointUri"))
+            val outputStream = new ByteArrayOutputStream()
+            RDFDataMgr.write(outputStream, model, Lang.TTL)
+            Ok(outputStream.toString())
+        }.getOrElse(NotFound))
     }
 
     def execute(id: String, pipelineId: String) = Action.async {
@@ -145,8 +154,7 @@ class DiscoveryController @Inject()(
                 val outputStream = new ByteArrayOutputStream()
                 RDFDataMgr.write(outputStream, etlPipeline.dataset, Lang.JSONLD)
 
-                val pipelineCreationUrl = s"$prefix/resources/pipelines"
-                val response = Http(pipelineCreationUrl).postMulti(
+                val response = Http(s"$prefix/resources/pipelines").postMulti(
                     MultiPart("pipeline", "pipeline.jsonld", "application/ld+json", outputStream.toByteArray)
                 ).asString.body
 

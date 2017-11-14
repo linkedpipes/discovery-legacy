@@ -2,7 +2,7 @@ package services
 
 import java.util.UUID
 
-import controllers.dto.DiscoveryResult
+import controllers.dto.DiscoveryStatus
 import models.ExecutionResult
 import org.apache.jena.query.Dataset
 import org.apache.jena.rdf.model.{AnonId, Model, ModelFactory}
@@ -11,10 +11,11 @@ import org.apache.jena.vocabulary.RDF
 import play.Logger
 import services.discovery.Discovery
 import services.discovery.model.etl.{EtlPipeline, EtlPipelineExporter}
-import services.discovery.model.{DiscoveryInput, Pipeline}
+import services.discovery.model.{DataSample, DiscoveryInput, Pipeline}
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable
+import scalaj.http.{Http, MultiPart}
 
 
 class DiscoveryService {
@@ -37,6 +38,10 @@ class DiscoveryService {
         start(discoveryInput)
     }
 
+    def getPipelinesOfDiscovery(discoveryId: String): Option[mutable.HashMap[UUID, Pipeline]] = withDiscovery(discoveryId) { discovery =>
+        discovery.results
+    }
+
     def runExperimentFromInput(inputUri: String) : UUID = {
         val uris = fromUri(inputUri) {
             case Right(model) => {
@@ -48,8 +53,8 @@ class DiscoveryService {
         runExperiment(uris)
     }
 
-    def getStatus(id: String): Option[DiscoveryResult] = withDiscovery(id) { discovery =>
-        DiscoveryResult(
+    def getStatus(id: String): Option[DiscoveryStatus] = withDiscovery(id) { discovery =>
+        DiscoveryStatus(
             discovery.results.size,
             discovery.isFinished,
             (discovery.end - discovery.start) / (1000 * 1000) // ns -> ms
@@ -62,24 +67,35 @@ class DiscoveryService {
         }
     }
 
-    def getPipelines(id: String): Option[mutable.HashMap[UUID, Pipeline]] = withDiscovery(id) { discovery =>
-        discovery.results
+    def getDataSampleService(pipelineId: String, discoveryId: String, dataSample: String, host: String, endpointUri: String) : Model = {
+        val graphUri = s"urn:$discoveryId/$pipelineId"
+        val response = Http(s"$endpointUri/sparql?context-uri=$graphUri&query=CONSTRUCT{ ?s ?p ?o} FROM <$graphUri> WHERE { ?s ?p ?o }").postMulti(
+            MultiPart("datasample", "datasample.ttl", "text/ttl", dataSample)
+        ).asString.body
+
+        println(response)
+
+        service(pipelineId, discoveryId, host, endpointUri, graphUri)
     }
 
     def getService(executionResult: ExecutionResult, host: String, endpointUri: String): Model = {
+        service(executionResult.pipelineId, executionResult.discoveryId, host, endpointUri, executionResult.graphIri)
+    }
+
+    def service(pipelineId: String, discoveryId: String, host: String, endpointUri: String, graphIri: String) : Model = {
         val servicePrefix = "http://www.w3.org/ns/sparql-service-description#"
 
         val model = ModelFactory.createDefaultModel()
 
         val namedGraph = model.createResource(AnonId.create())
         namedGraph.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}NamedGraph"))
-        namedGraph.addProperty(model.createProperty(s"${servicePrefix}name"), model.createResource(executionResult.graphIri))
+        namedGraph.addProperty(model.createProperty(s"${servicePrefix}name"), model.createResource(graphIri))
 
         val dataset = model.createResource(AnonId.create())
         dataset.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}Dataset"))
         dataset.addProperty(model.createProperty(s"${servicePrefix}namedGraph"), namedGraph)
 
-        val service = model.createResource(s"$host/discovery/${executionResult.discoveryId}/${executionResult.pipelineId}/service")
+        val service = model.createResource(s"$host/discovery/$discoveryId/$pipelineId/service")
         service.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}Service"))
         service.addProperty(model.createProperty(s"${servicePrefix}endpoint"), model.createResource(s"$endpointUri/sparql"))
         service.addProperty(model.createProperty(s"${servicePrefix}supportedLanguage"), model.createResource(s"${servicePrefix}SPARQL11Query"))
@@ -121,12 +137,12 @@ class DiscoveryService {
         }
     }
 
-    private def withDiscovery[R](id: String)(action: Discovery => R): Option[R] = {
+    def withDiscovery[R](id: String)(action: Discovery => R): Option[R] = {
         val uuid = UUID.fromString(id)
         discoveries.get(uuid).map(action)
     }
 
-    private def withPipeline[R](discoveryId: String, pipelineId: String)(action: (Pipeline, Discovery) => R): Option[R] = {
+    def withPipeline[R](discoveryId: String, pipelineId: String)(action: (Pipeline, Discovery) => R): Option[R] = {
         withDiscovery(discoveryId) { discovery =>
             val uuid = UUID.fromString(pipelineId)
             discovery.results.get(uuid).map { p => action(p, discovery) }

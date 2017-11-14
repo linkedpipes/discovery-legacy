@@ -20,6 +20,7 @@ GET        /discovery/:id/pipelines/:pipelineId                controllers.Disco
 GET        /discovery/:id/stop                                 controllers.DiscoveryController.stop(id: String)
 GET        /discovery/:id/execute/:pipelineId                  controllers.DiscoveryController.execute(id: String, pipelineId: String)
 GET        /discovery/:id/:pipelineId/service                  controllers.DiscoveryController.getSparqlService(id: String, pipelineId: String)
+GET        /discovery/:id/:pipelineId/ods/service              controllers.DiscoveryController.getDataSampleSparqlService(id: String, pipelineId: String)
 GET        /execution/status                                   controllers.DiscoveryController.executionStatus(iri: String)
 
 # Map static resources from the /public folder to the /assets URL path

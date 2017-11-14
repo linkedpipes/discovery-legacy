@@ -15,7 +15,7 @@ object PipelineDataSampleGroup {
     )(unlift(PipelineDataSampleGroup.destruct))
 
     def destruct(arg: PipelineDataSampleGroup): Option[(Int, Pipeline, String)] = {
-        val representant = arg.pipelines.toSeq.sortBy(_._2.lastComponent.discoveryIteration).head
+        val representant = arg.pipelines.toSeq.minBy(_._2.lastComponent.discoveryIteration)
         Some((arg.minimalIteration, representant._2, representant._1.toString))
     }
 }
