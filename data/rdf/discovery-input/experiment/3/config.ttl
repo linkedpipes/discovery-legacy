@@ -3,7 +3,7 @@
 <http://linked.opendata.cz/ldcp/resource/ldvm/experiment/3/config> a <http://linked.opendata.cz/ldcp/resource/discovery/input> ;
     <http://linked.opendata.cz/ldcp/property/hasTemplate> 
       <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod-dcterms/template>,
-      <<http://linked.opendata.cz/ldcp/resource/ldvm/application/dcterms/template>,
+      <http://linked.opendata.cz/ldcp/resource/ldvm/application/dcterms/template>,
       <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/dce-to-dcterms-title/template>,
       <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/skos-preflabel-to-dcterms-title/template>
     .
