@@ -1,5 +1,6 @@
 package services
 
+import java.net.URLEncoder
 import java.util.UUID
 
 import controllers.dto.DiscoveryStatus
@@ -69,11 +70,11 @@ class DiscoveryService {
 
     def getDataSampleService(pipelineId: String, discoveryId: String, dataSample: String, host: String, endpointUri: String) : Model = {
         val graphUri = s"urn:$discoveryId/$pipelineId"
-        val response = Http(s"$endpointUri/sparql?context-uri=$graphUri&query=CONSTRUCT{ ?s ?p ?o} FROM <$graphUri> WHERE { ?s ?p ?o }").postMulti(
-            MultiPart("datasample", "datasample.ttl", "text/ttl", dataSample)
-        ).asString.body
+        val encodedGraphUri = URLEncoder.encode(graphUri, "UTF-8")
+        val truncateQuery = URLEncoder.encode(s"CONSTRUCT{ ?s ?p ?o} FROM <$graphUri> WHERE { ?s ?p ?o }", "UTF-8")
 
-        println(response)
+        val params = s"context-uri=$encodedGraphUri&query=$truncateQuery"
+        val response = Http(s"$endpointUri/sparql?$params").put(dataSample).header("Content-Type", "text/turtle").asString
 
         service(pipelineId, discoveryId, host, endpointUri, graphUri)
     }
@@ -95,7 +96,7 @@ class DiscoveryService {
         dataset.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}Dataset"))
         dataset.addProperty(model.createProperty(s"${servicePrefix}namedGraph"), namedGraph)
 
-        val service = model.createResource(s"$host/discovery/$discoveryId/$pipelineId/service")
+        val service = model.createResource(s"http://$host/discovery/$discoveryId/$pipelineId/service")
         service.addProperty(RDF.`type`, model.createResource(s"${servicePrefix}Service"))
         service.addProperty(model.createProperty(s"${servicePrefix}endpoint"), model.createResource(s"$endpointUri/sparql"))
         service.addProperty(model.createProperty(s"${servicePrefix}supportedLanguage"), model.createResource(s"${servicePrefix}SPARQL11Query"))
