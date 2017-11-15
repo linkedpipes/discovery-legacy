@@ -9,7 +9,7 @@ import services.discovery.model.components._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class SparqlConstructExtractor(override val uri: String, query: ConstructQuery, override val label: String) extends SparqlConstructExtractorInstance with DescriptorChecker {
+class SparqlConstructExtractor(override val iri: String, query: ConstructQuery, override val label: String) extends SparqlConstructExtractorInstance with DescriptorChecker {
 
     val portName: String = "INPUT_PORT"
 

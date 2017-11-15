@@ -1,6 +1,6 @@
 package services.discovery.model.components
 
 trait ComponentInstance {
-    def uri : String
+    def iri : String
     def label: String
 }

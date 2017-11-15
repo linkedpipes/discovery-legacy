@@ -21,5 +21,5 @@ case class EtlSparqlEndpoint(
         Future.successful(ModelDataSample.Empty)
     }
 
-    override def uri: String = "https://linked.opendata.cz/ontology/datasource/etl-sparql-endpoint"
+    override def iri: String = "https://linked.opendata.cz/ontology/datasource/etl-sparql-endpoint"
 }

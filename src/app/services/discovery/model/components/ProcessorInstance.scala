@@ -12,11 +12,11 @@ object ProcessorInstance {
     implicit val writes : Writes[ProcessorInstance] = (
         (JsPath \ "portCount").write[Int] and
             (JsPath \ "name").write[String] and
-            (JsPath \ "uri").write[String] and
+            (JsPath \ "iri").write[String] and
             (JsPath \ "label").write[String]
         )(unlift(ProcessorInstance.destruct))
 
     def destruct(i: ProcessorInstance) : Option[(Int, String, String, String)] = {
-        Some((i.getInputPorts.size, i.getClass.getSimpleName, i.uri, i.label))
+        Some((i.getInputPorts.size, i.getClass.getSimpleName, i.iri, i.label))
     }
 }

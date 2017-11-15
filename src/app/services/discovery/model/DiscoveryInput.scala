@@ -74,9 +74,9 @@ object DiscoveryInput {
 
     def destruct(i: DiscoveryInput) : Option[(Map[String, DataSourceInstance], Map[String, ProcessorInstance], Map[String, ApplicationInstance])] = {
         Some((
-            i.dataSets.map(d => (d.dataSourceInstance.uri, d.dataSourceInstance)).toMap,
-            i.processors.map(p => (p.uri, p)).toMap,
-            i.applications.map(a => (a.uri, a)).toMap
+            i.dataSets.map(d => (d.dataSourceInstance.iri, d.dataSourceInstance)).toMap,
+            i.processors.map(p => (p.iri, p)).toMap,
+            i.applications.map(a => (a.iri, a)).toMap
         ))
     }
 

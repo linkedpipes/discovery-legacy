@@ -25,10 +25,10 @@ object DataSourceInstance {
       (JsPath \ "isLarge").write[Boolean] and
           (JsPath \ "isLinkset").write[Boolean] and
           (JsPath \ "label").write[String] and
-          (JsPath \ "uri").write[String]
+          (JsPath \ "iri").write[String]
       )(unlift(DataSourceInstance.destruct))
 
   def destruct(i: DataSourceInstance) : Option[(Boolean, Boolean, String, String)] = {
-    Some((i.isLarge, i.isLinkset, i.label, i.uri))
+    Some((i.isLarge, i.isLinkset, i.label, i.iri))
   }
 }

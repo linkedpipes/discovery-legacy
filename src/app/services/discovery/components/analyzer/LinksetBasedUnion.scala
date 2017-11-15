@@ -142,7 +142,7 @@ class LinksetBasedUnion extends UnionInstance {
         result
     }
 
-    override def uri: String = "https://linked.opendata.cz/ontology/analyzer/linkset-based-union"
+    override def iri: String = "https://linked.opendata.cz/ontology/analyzer/linkset-based-union"
 
 
 }

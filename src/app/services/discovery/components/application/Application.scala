@@ -8,7 +8,7 @@ import services.discovery.model.components.ApplicationInstance
 
 import scala.concurrent.Future
 
-class Application(override val uri: String, val executorUri: String, features: Seq[Feature], override val label: String) extends ApplicationInstance with DescriptorChecker {
+class Application(override val iri: String, val executorUri: String, features: Seq[Feature], override val label: String) extends ApplicationInstance with DescriptorChecker {
     override def checkPort(port: Port, state: Option[ComponentState], outputDataSample: DataSample, discoveryId: UUID, iterationNumber: Int): Future[PortCheckResult] = {
         checkStatelessDescriptors(outputDataSample, discoveryId, iterationNumber, features.filter(_.isMandatory).flatMap(_.descriptors).map(_.query): _*)
     }
