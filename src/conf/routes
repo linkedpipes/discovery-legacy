@@ -11,7 +11,8 @@ GET        /result/:id                                         controllers.HomeC
 
 GET        /discovery/components                               controllers.DiscoveryController.listComponents()
 POST       /discovery/start                                    controllers.DiscoveryController.startExperiment()
-GET        /discovery/startFromInput                           controllers.DiscoveryController.startExperimentFromInput(uri: String)
+GET        /discovery/startFromInputIri                        controllers.DiscoveryController.startExperimentFromInputIri(iri: String)
+POST       /discovery/startFromInput                           controllers.DiscoveryController.startExperimentFromInput()
 GET        /discovery/:id                                      controllers.DiscoveryController.status(id: String)
 GET        /discovery/:id/pipelines                            controllers.DiscoveryController.list(id: String)
 GET        /discovery/:id/pipeline-groups                      controllers.DiscoveryController.pipelineGroups(id: String)

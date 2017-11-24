@@ -2,6 +2,7 @@ package services
 
 import java.net.URLEncoder
 import java.util.UUID
+import java.io.ByteArrayInputStream
 
 import controllers.dto.DiscoveryStatus
 import models.ExecutionResult
@@ -34,7 +35,7 @@ class DiscoveryService {
     def stop(id: String) = {}
 
     def runExperiment(templateUris: Seq[String]): UUID = {
-        val templates = templateUris.par.map { u => fromUri(u) { e => e } }.filter(_.isRight).map(_.right.get).seq
+        val templates = templateUris.par.map { u => fromIri(u) { e => e } }.filter(_.isRight).map(_.right.get).seq
         val discoveryInput = DiscoveryInput(templates)
         start(discoveryInput)
     }
@@ -43,15 +44,24 @@ class DiscoveryService {
         discovery.results
     }
 
-    def runExperimentFromInput(inputUri: String) : UUID = {
-        val uris = fromUri(inputUri) {
-            case Right(model) => {
-                val templates = model.listObjectsOfProperty(model.getProperty("http://linked.opendata.cz/ldcp/property/hasTemplate")).toList.asScala
-                templates.map(_.asResource().getURI)
-            }
+    def runExperimentFromInputIri(inputIri: String) : UUID = {
+        val iris = fromIri(inputIri) {
+            case Right(model) => extractTemplates(model)
             case _ => Seq()
         }
-        runExperiment(uris)
+        runExperiment(iris)
+    }
+
+    def runExperimentFromInput(input: String) : UUID = {
+        println(input)
+        val model = ModelFactory.createDefaultModel()
+        model.read(new ByteArrayInputStream(input.getBytes("UTF-8")), null, "TTL")
+        runExperiment(extractTemplates(model))
+    }
+
+    def extractTemplates(model: Model) : Seq[String] = {
+        val templates = model.listObjectsOfProperty(model.getProperty("http://linked.opendata.cz/ldcp/property/hasTemplate")).toList.asScala
+        templates.map(_.asResource().getURI)
     }
 
     def getStatus(id: String): Option[DiscoveryStatus] = withDiscovery(id) { discovery =>
@@ -108,11 +118,11 @@ class DiscoveryService {
     }
 
     def listTemplates(templateSourceUri: String): Option[DiscoveryInput] = {
-        fromUri(templateSourceUri) {
+        fromIri(templateSourceUri) {
             case Right(model) => {
                 val templates = model.listObjectsOfProperty(model.getProperty("http://linked.opendata.cz/ldcp/property/hasTemplate")).toList.asScala
                 val templateUris = templates.map(_.asResource().getURI)
-                val templateModels = templateUris.map { u => fromUri(u) { e => e } }.filter(_.isRight).map(_.right.get)
+                val templateModels = templateUris.map { u => fromIri(u) { e => e } }.filter(_.isRight).map(_.right.get)
                 Some(DiscoveryInput(templateModels))
             }
             case Left(e) => None
@@ -155,7 +165,7 @@ class DiscoveryService {
         fn(dataset)
     }
 
-    private def fromUri[R](uri: String)(fn: Either[Throwable, Model] => R): R = {
+    private def fromIri[R](uri: String)(fn: Either[Throwable, Model] => R): R = {
         discoveryLogger.debug(s"Downloading data from $uri.")
         val result = try {
             val model = ModelFactory.createDefaultModel()

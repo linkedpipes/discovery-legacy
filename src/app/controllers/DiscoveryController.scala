@@ -13,7 +13,7 @@ import play.Logger
 import play.api.Configuration
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import play.api.libs.json._
-import play.api.mvc.InjectedController
+import play.api.mvc.{InjectedController, Request, AnyContent}
 import services.DiscoveryService
 import services.discovery.model.components.DataSourceInstance
 import services.discovery.model.{DataSample, Pipeline}
@@ -49,8 +49,14 @@ class DiscoveryController @Inject()(
         Ok(Json.obj("id" -> Json.toJson(discoveryId)))
     }
 
-    def startExperimentFromInput(uri: String) = Action {
-        val discoveryId = service.runExperimentFromInput(uri)
+    def startExperimentFromInputIri(iri: String) = Action {
+        val discoveryId = service.runExperimentFromInputIri(iri)
+        Ok(Json.obj("id" -> Json.toJson(discoveryId)))
+    }
+
+    def startExperimentFromInput = Action { request: Request[AnyContent] =>
+        val body: AnyContent = request.body
+        val discoveryId = service.runExperimentFromInput(body.asText.getOrElse(""))
         Ok(Json.obj("id" -> Json.toJson(discoveryId)))
     }
 
