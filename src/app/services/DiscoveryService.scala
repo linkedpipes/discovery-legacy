@@ -80,11 +80,12 @@ class DiscoveryService {
 
     def getDataSampleService(pipelineId: String, discoveryId: String, dataSample: String, host: String, endpointUri: String) : Model = {
         val graphUri = s"urn:$discoveryId/$pipelineId"
-        val encodedGraphUri = URLEncoder.encode(graphUri, "UTF-8")
-        val truncateQuery = URLEncoder.encode(s"CONSTRUCT{ ?s ?p ?o} FROM <$graphUri> WHERE { ?s ?p ?o }", "UTF-8")
 
-        val params = s"context-uri=$encodedGraphUri&query=$truncateQuery"
-        val response = Http(s"$endpointUri/sparql?$params").put(dataSample).header("Content-Type", "text/turtle").asString
+        val encodedGraphUri = URLEncoder.encode(graphUri, "UTF-8")
+        val encodedTruncateQuery = URLEncoder.encode(s"CONSTRUCT{ ?s ?p ?o } FROM <$graphUri> WHERE { ?s ?p ?o }", "UTF-8")
+
+        val params = s"context-uri=$encodedGraphUri"
+        val response = Http(s"$endpointUri/sparql?$params").postData(dataSample).header("Content-Type", "text/turtle").asString
 
         service(pipelineId, discoveryId, host, endpointUri, graphUri)
     }
