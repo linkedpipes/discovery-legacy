@@ -7,7 +7,7 @@ import java.io.ByteArrayInputStream
 import controllers.dto.DiscoveryStatus
 import models.ExecutionResult
 import org.apache.jena.query.Dataset
-import org.apache.jena.rdf.model.{AnonId, Model, ModelFactory}
+import org.apache.jena.rdf.model.{AnonId, Model, ModelFactory, Resource}
 import org.apache.jena.riot.{Lang, RDFDataMgr, RiotException}
 import org.apache.jena.vocabulary.RDF
 import play.Logger
@@ -52,8 +52,14 @@ class DiscoveryService {
         runExperiment(iris)
     }
 
+    def getExperimentsInputIris(iri: String) : Seq[String] = {
+        fromIri(iri) {
+            case Right(model) => extractExperiments(model, iri)
+            case _ => Seq()
+        }
+    }
+
     def runExperimentFromInput(input: String) : UUID = {
-        println(input)
         val model = ModelFactory.createDefaultModel()
         model.read(new ByteArrayInputStream(input.getBytes("UTF-8")), null, "TTL")
         runExperiment(extractTemplates(model))
@@ -62,6 +68,26 @@ class DiscoveryService {
     def extractTemplates(model: Model) : Seq[String] = {
         val templates = model.listObjectsOfProperty(model.getProperty("http://linked.opendata.cz/ldcp/property/hasTemplate")).toList.asScala
         templates.map(_.asResource().getURI)
+    }
+
+    def extractExperiments(model: Model, iri: String) : Seq[String] = {
+        val head = Option(model.getResource(iri))
+        head match {
+            case Some(listHead) => extractList(model, listHead)
+            case None => Seq()
+        }
+    }
+
+    def extractList(model: Model, listHead: Resource) : Seq[String] = {
+        var currentHead = listHead
+        val buffer = new mutable.ArrayBuffer[String]()
+
+        do {
+            buffer.+=:(currentHead.getRequiredProperty(RDF.first).getResource.getURI)
+            currentHead = currentHead.getRequiredProperty(RDF.rest).getResource
+        } while (!currentHead.equals(RDF.nil))
+
+        buffer
     }
 
     def getStatus(id: String): Option[DiscoveryStatus] = withDiscovery(id) { discovery =>
