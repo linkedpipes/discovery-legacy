@@ -23,6 +23,7 @@ import scalaj.http.{Http, MultiPart}
 class DiscoveryService {
 
     private val discoveries = new scala.collection.mutable.HashMap[UUID, Discovery]
+    private val csvRequests = new scala.collection.mutable.HashMap[UUID, Seq[(String, String)]]
     private val discoveryLogger = Logger.of("discovery")
 
     def start(input: DiscoveryInput) = {
@@ -31,6 +32,14 @@ class DiscoveryService {
         discovery.discover(input)
         discovery.id
     }
+
+    def addCsvRequest(data: Seq[(String, String)]) : UUID = {
+        val id = UUID.randomUUID()
+        csvRequests.put(id, data)
+        id
+    }
+
+    def getCsvRequest(id: UUID) = csvRequests.get(id)
 
     def stop(id: String) = {}
 

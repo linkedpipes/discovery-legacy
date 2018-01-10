@@ -2,6 +2,7 @@ package controllers
 
 import java.io._
 import java.util.UUID
+import java.util.zip.{ZipEntry, ZipOutputStream}
 import javax.inject._
 
 import akka.util.ByteString
@@ -102,7 +103,7 @@ class DiscoveryController @Inject()(
         }.getOrElse(JsObject(Seq())))
     }
 
-    def getStats = Action(parse.json(maxLength = 100 * 1024 * 1024)) { request =>
+    def requestStats = Action(parse.json(maxLength = 100 * 1024 * 1024)) { request =>
         val discoveries = request.body.as[Seq[JsObject]]
         val pairs = discoveries.map { d =>
           val inputIri = (d \ "inputIri").as[String]
@@ -111,26 +112,42 @@ class DiscoveryController @Inject()(
             (inputIri, discoveryId)
         }
 
-        val csvData = getCsvStats(pairs)
-
-        Result(
-            header = ResponseHeader(200, Map.empty),
-            body = HttpEntity.Strict(ByteString(csvData.mkString("\n\n")), Some("text/plain"))
-        )
+        Ok(JsObject(Seq(("id", JsString(service.addCsvRequest(pairs).toString)))))
     }
 
-    private def getCsvStats(pairs: Seq[(String, String)]) : Seq[String] = {
+    def getStats(id: String) = Action {
+        service.getCsvRequest(UUID.fromString(id)).map { request =>
+            val csvFiles = getCsvStats(request)
+
+            val outputByteStream = new ByteArrayOutputStream()
+            val zip = new ZipOutputStream(new BufferedOutputStream(outputByteStream))
+            csvFiles.foreach { case (name, content) =>
+                zip.putNextEntry(new ZipEntry(name))
+                zip.write(content.map(_.toByte).toArray)
+                zip.closeEntry()
+            }
+            zip.close()
+
+            Result(
+                header = ResponseHeader(200, Map("Content-Disposition" -> "attachment; filename=results.zip")),
+                body = HttpEntity.Strict(ByteString(outputByteStream.toByteArray), Some("application/zip"))
+            )
+        }.getOrElse(NotFound)
+    }
+
+    private def getCsvStats(pairs: Seq[(String, String)]) : Seq[(String, String)] = {
         Seq(
-            getGlobalCsvStats(pairs),
-            getDataSourceExperimentCsvStats(pairs),
-            getApplicationExperimentCsvStats(pairs),
-            getDataSourceApplicationExperimentCsvStats(pairs)
-        )
+            ("1.csv", getGlobalCsvStats(pairs)),
+            ("2.csv", getDataSourceExperimentCsvStats(pairs)),
+            ("3.csv", getApplicationExperimentCsvStats(pairs)),
+            ("4.csv", getDataSourceApplicationExperimentCsvStats(pairs))
+        ) ++ pairs.map(p => (s"${p._2}.csv", getDetailedCsv(p._2)))
     }
 
     private def getDataSourceExperimentCsvStats(pairs: Seq[(String, String)]) : String = {
 
         val heading = Seq(
+            "Discovery ID",
             "Experiment URI",
             "Datasource URI",
             "Datasource template label",
@@ -144,6 +161,7 @@ class DiscoveryController @Inject()(
                 val dataSources = discovery.input.dataSets.map(ds => ds.dataSourceInstance)
                 dataSources.map { d =>
                     Seq(
+                        id,
                         inputIri,
                         d.iri,
                         d.label,
@@ -165,6 +183,7 @@ class DiscoveryController @Inject()(
 
     private def getApplicationExperimentCsvStats(pairs: Seq[(String, String)]) : String = {
         val heading = Seq(
+            "Discovery ID",
             "Experiment URI",
             "Application URI",
             "Application template label",
@@ -177,6 +196,7 @@ class DiscoveryController @Inject()(
             service.withDiscovery(id) { d =>
                 d.input.applications.map { a =>
                     Seq(
+                        id,
                         inputIri,
                         a.iri,
                         a.label,
@@ -198,6 +218,7 @@ class DiscoveryController @Inject()(
     private def getDataSourceApplicationExperimentCsvStats(pairs: Seq[(String, String)]) : String = {
 
         val heading = Seq(
+            "Discovery ID",
             "Experiment URI",
             "Datasource URI",
             "Application URI",
@@ -213,12 +234,15 @@ class DiscoveryController @Inject()(
                     val dataSources = discovery.input.dataSets.map(ds => ds.dataSourceInstance)
                     dataSources.map { d =>
                         Seq(
+                            id,
                             inputIri,
                             d.iri,
                             a.iri,
                             d.label,
                             a.label,
-                            0,
+                            service.getPipelinesOfDiscovery(id).map(PipelineGrouping.create).map { g =>
+                                g.applicationGroups.filter(ag => ag.applicationInstance == a).flatMap(ag => ag.dataSourceGroups).filter(_.dataSourceInstances == d).map(_.extractorGroups.map(_.dataSampleGroups.size).sum).sum
+                            }.get,
                             service.getPipelinesOfDiscovery(id).map(pipelines => pipelines.count { p =>
                                 p._2.components.exists(c => c.componentInstance == a) && p._2.components.exists(c => c.componentInstance == d)
                             }).get
@@ -234,6 +258,7 @@ class DiscoveryController @Inject()(
     private def getGlobalCsvStats(pairs: Seq[(String, String)]) : String = {
 
         val heading = Seq(
+            "Discovery ID",
             "Experiment URI",
             "Application group count",
             "Datasource group count",
@@ -249,12 +274,14 @@ class DiscoveryController @Inject()(
             service.withDiscovery(id) { d =>
                 service.getPipelinesOfDiscovery(id).map { pipelineMap => PipelineGrouping.create(pipelineMap) }.map { g =>
                     Seq(
+                        id,
                         inputIri,
                         g.applicationGroups.size,
                         g.applicationGroups.map(ag => ag.dataSourceGroups.size).sum,
                         g.applicationGroups.map(ag => ag.dataSourceGroups.map(ds => ds.extractorGroups.size).sum).sum,
                         g.applicationGroups.map(ag => ag.dataSourceGroups.map(ds => ds.extractorGroups.map(eg => eg.dataSampleGroups.size).sum).sum).sum,
-                        d.end - d.start,
+                        g.pipelines.size,
+                        (d.end - d.start) / (1000 * 1000), // ns -> ms
                         d.input.applications.size,
                         d.input.dataSets.size,
                         d.input.processors.size
@@ -267,8 +294,12 @@ class DiscoveryController @Inject()(
     }
 
     def csv(id: String) = Action {
+        Ok(getDetailedCsv(id))
+    }
+
+    private def getDetailedCsv(id: String) = {
         val maybeGrouping = service.getPipelinesOfDiscovery(id).map { pipelineMap => PipelineGrouping.create(pipelineMap) }
-        val string = maybeGrouping.map { grouping =>
+        val lines = maybeGrouping.map { grouping =>
             grouping.applicationGroups.map { applicationGroup =>
                 applicationGroup.dataSourceGroups.map { dataSourceGroup =>
                     dataSourceGroup.extractorGroups.map { extractorGroup =>
@@ -276,14 +307,23 @@ class DiscoveryController @Inject()(
                             val pipelines = dataSampleGroup.pipelines.toSeq.sortBy(p => p._2.lastComponent.discoveryIteration)
 
                             pipelines.map { p =>
-                                val dataSourcesString = p._2.typedDatasources.map(_.label).mkString(",")
-                                val extractorsString = p._2.typedExtractors.map(_.getClass.getSimpleName).mkString(",")
-                                val transformersString = p._2.typedProcessors.map(_.getClass.getSimpleName).mkString(",")
+                                val dataSourcesString = p._2.typedDatasources.map(_.label).mkString("\\,")
+                                val extractorsString = p._2.typedExtractors.map(_.getClass.getSimpleName).mkString("\\,")
+                                val transformersString = p._2.typedProcessors.map(_.label).mkString("\\,")
                                 val transformersCount = p._2.typedProcessors.size
-                                val app = p._2.typedApplications.map(_.getClass.getSimpleName).mkString(",")
+                                val app = p._2.typedApplications.map(_.label).mkString("\\,")
                                 val iterationNumber = p._2.lastComponent.discoveryIteration
 
-                                s"$dataSourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber;/discovery/$id/execute/${p._1}"
+                                Seq(
+                                    id,
+                                    dataSourcesString,
+                                    transformersCount,
+                                    extractorsString,
+                                    transformersString,
+                                    app,
+                                    iterationNumber,
+                                    s"/discovery/$id/execute/${p._1}"
+                                ).mkString(",")
                             }.mkString("\n")
                         }.mkString("\n")
                     }.mkString("\n")
@@ -291,9 +331,21 @@ class DiscoveryController @Inject()(
             }.mkString("\n")
         }.mkString("\n")
 
-        val header = s"appGroup;dataSourcesGroup;extractorsGroup;dataSampleGroup;dataSources;transformerCount;extractors;transformers;app;iterationNumber"
+        val header = Seq(
+            "discoveryId",
+            "appGroup",
+            "dataSourcesGroup",
+            "extractorsGroup",
+            "dataSampleGroup",
+            "dataSources",
+            "transformerCount",
+            "extractors",
+            "transformers",
+            "app",
+            "iterationNumber"
+        ).mkString(",")
 
-        Ok(s"$header\n$string")
+        Seq(header, lines).mkString("\n")
     }
 
     def sampleEquals(ds1: DataSample, ds2: DataSample): Boolean = {

@@ -7,7 +7,7 @@ import services.discovery.model.Pipeline
 
 import scala.collection.mutable
 
-case class PipelineGrouping(applicationGroups: Seq[PipelineApplicationGroup])
+case class PipelineGrouping(applicationGroups: Seq[PipelineApplicationGroup], pipelines: mutable.HashMap[UUID, Pipeline])
 
 object PipelineGrouping {
 
@@ -17,6 +17,6 @@ object PipelineGrouping {
 
     def create(pipelines: mutable.HashMap[UUID, Pipeline]) : PipelineGrouping = {
         val groups = pipelines.groupBy(p => p._2.typedApplications.head)
-        PipelineGrouping(groups.map { g => PipelineApplicationGroup.create(g) }.toSeq)
+        PipelineGrouping(groups.map { g => PipelineApplicationGroup.create(g) }.toSeq, pipelines)
     }
 }

@@ -7,7 +7,8 @@ GET        /                                                   controllers.HomeC
 GET        /status                                             controllers.HomeController.status
 GET        /experiments                                        controllers.HomeController.experiments()
 POST       /persist                                            controllers.HomeController.persist()
-POST       /getStats                                           controllers.DiscoveryController.getStats()
+POST       /requestStats                                       controllers.DiscoveryController.requestStats()
+GET        /getStats                                           controllers.DiscoveryController.getStats(id: String)
 GET        /result/:id                                         controllers.HomeController.result(id)
 
 GET        /discovery/components                               controllers.DiscoveryController.listComponents()
