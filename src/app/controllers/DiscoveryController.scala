@@ -4,6 +4,7 @@ import java.io._
 import java.util.UUID
 import javax.inject._
 
+import akka.util.ByteString
 import controllers.dto.PipelineGrouping
 import dao.ExecutionResultDao
 import models.ExecutionResult
@@ -12,8 +13,9 @@ import org.apache.jena.riot.{Lang, RDFDataMgr}
 import play.Logger
 import play.api.Configuration
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
+import play.api.http.HttpEntity
 import play.api.libs.json._
-import play.api.mvc.{InjectedController, Request, AnyContent}
+import play.api.mvc._
 import services.DiscoveryService
 import services.discovery.model.components.DataSourceInstance
 import services.discovery.model.{DataSample, Pipeline}
@@ -54,9 +56,15 @@ class DiscoveryController @Inject()(
         Ok(Json.obj("id" -> Json.toJson(discoveryId)))
     }
 
-    def getExperimentsInputIris(iri: String) = Action {
-        val inputIris = service.getExperimentsInputIris(iri)
+    def getExperimentsInputIrisFromIri(iri: String) = Action {
+        val inputIris = service.getExperimentsInputIrisFromIri(iri)
         Ok(Json.obj("inputIris" -> Json.arr(inputIris.map(ii => Json.toJson(ii)))))
+    }
+
+    def getExperimentsInputIris = Action { request: Request[AnyContent] =>
+        val body: AnyContent = request.body
+        val inputIris = service.getExperimentsInputIris(body.asText.getOrElse(""))
+        Ok(Json.obj("inputIris" -> inputIris.map(ii => Json.toJson(ii))))
     }
 
     def startExperimentFromInput = Action { request: Request[AnyContent] =>
@@ -92,6 +100,170 @@ class DiscoveryController @Inject()(
         Ok(service.getPipelinesOfDiscovery(id).map { pipelineMap =>
             JsObject(Seq("pipelineGroups" -> Json.toJson(PipelineGrouping.create(pipelineMap))))
         }.getOrElse(JsObject(Seq())))
+    }
+
+    def getStats = Action(parse.json(maxLength = 100 * 1024 * 1024)) { request =>
+        val discoveries = request.body.as[Seq[JsObject]]
+        val pairs = discoveries.map { d =>
+          val inputIri = (d \ "inputIri").as[String]
+          val discoveryId = (d \ "id").as[String]
+
+            (inputIri, discoveryId)
+        }
+
+        val csvData = getCsvStats(pairs)
+
+        Result(
+            header = ResponseHeader(200, Map.empty),
+            body = HttpEntity.Strict(ByteString(csvData.mkString("\n\n")), Some("text/plain"))
+        )
+    }
+
+    private def getCsvStats(pairs: Seq[(String, String)]) : Seq[String] = {
+        Seq(
+            getGlobalCsvStats(pairs),
+            getDataSourceExperimentCsvStats(pairs),
+            getApplicationExperimentCsvStats(pairs),
+            getDataSourceApplicationExperimentCsvStats(pairs)
+        )
+    }
+
+    private def getDataSourceExperimentCsvStats(pairs: Seq[(String, String)]) : String = {
+
+        val heading = Seq(
+            "Experiment URI",
+            "Datasource URI",
+            "Datasource template label",
+            "Extractor group count",
+            "App count",
+            "Pipeline count"
+        ).mkString(";")
+
+        val lines = pairs.map { case (inputIri, id) =>
+            service.withDiscovery(id) { discovery =>
+                val dataSources = discovery.input.dataSets.map(ds => ds.dataSourceInstance)
+                dataSources.map { d =>
+                    Seq(
+                        inputIri,
+                        d.iri,
+                        d.label,
+                        service.getPipelinesOfDiscovery(id).map(PipelineGrouping.create).map { g =>
+                            g.applicationGroups.map(_.dataSourceGroups.filter(_.dataSourceInstances.contains(d)).map(_.extractorGroups).size).sum
+                        }.get,
+                        service.getPipelinesOfDiscovery(id).map(PipelineGrouping.create).map { g =>
+                            g.applicationGroups.count(_.dataSourceGroups.exists(_.dataSourceInstances.contains(d)))
+                        }.get,
+                        service.getPipelinesOfDiscovery(id).map(pipelines => pipelines.count(p => p._2.components.exists(c => c.componentInstance == d))).get
+                    ).mkString(";")
+                }.mkString("\n")
+            }.get
+        }.mkString("\n")
+
+        Seq(heading, lines).mkString("\n")
+
+    }
+
+    private def getApplicationExperimentCsvStats(pairs: Seq[(String, String)]) : String = {
+        val heading = Seq(
+            "Experiment URI",
+            "Application URI",
+            "Application template label",
+            "Extractor group count",
+            "Datasource count",
+            "Pipeline count"
+        ).mkString(";")
+
+        val lines = pairs.map { case (inputIri, id) =>
+            service.withDiscovery(id) { d =>
+                d.input.applications.map { a =>
+                    Seq(
+                        inputIri,
+                        a.iri,
+                        a.label,
+                        service.getPipelinesOfDiscovery(id).map(PipelineGrouping.create).map { g =>
+                            g.applicationGroups.filter(_.applicationInstance == a).map(_.dataSourceGroups.map(_.extractorGroups).size).sum
+                        }.get,
+                        service.getPipelinesOfDiscovery(id).map(PipelineGrouping.create).map { g =>
+                            g.applicationGroups.filter(_.applicationInstance == a).flatMap(_.dataSourceGroups.map(_.dataSourceInstances)).distinct.size
+                        }.get,
+                        service.getPipelinesOfDiscovery(id).map(pipelines => pipelines.count(p => p._2.components.exists(c => c.componentInstance == a))).get
+                    ).mkString(";")
+                }.mkString("\n")
+            }.get
+        }.mkString("\n")
+
+        Seq(heading, lines).mkString("\n")
+    }
+
+    private def getDataSourceApplicationExperimentCsvStats(pairs: Seq[(String, String)]) : String = {
+
+        val heading = Seq(
+            "Experiment URI",
+            "Datasource URI",
+            "Application URI",
+            "DataSource template label",
+            "Application template label",
+            "Group count?",
+            "Pipeline count"
+        ).mkString(";")
+
+        val lines = pairs.map { case (inputIri, id) =>
+            service.withDiscovery(id) { discovery =>
+                discovery.input.applications.flatMap { a =>
+                    val dataSources = discovery.input.dataSets.map(ds => ds.dataSourceInstance)
+                    dataSources.map { d =>
+                        Seq(
+                            inputIri,
+                            d.iri,
+                            a.iri,
+                            d.label,
+                            a.label,
+                            0,
+                            service.getPipelinesOfDiscovery(id).map(pipelines => pipelines.count { p =>
+                                p._2.components.exists(c => c.componentInstance == a) && p._2.components.exists(c => c.componentInstance == d)
+                            }).get
+                        ).mkString(";")
+                    }
+                }.mkString("\n")
+            }.get
+        }.mkString("\n")
+
+        Seq(heading, lines).mkString("\n")
+    }
+
+    private def getGlobalCsvStats(pairs: Seq[(String, String)]) : String = {
+
+        val heading = Seq(
+            "Experiment URI",
+            "Application group count",
+            "Datasource group count",
+            "Extractor group count",
+            "Data sample group count",
+            "Discovery duration",
+            "Application count",
+            "Data source count",
+            "Transformer count"
+        ).mkString(";")
+
+        val lines = pairs.map { case (inputIri, id) =>
+            service.withDiscovery(id) { d =>
+                service.getPipelinesOfDiscovery(id).map { pipelineMap => PipelineGrouping.create(pipelineMap) }.map { g =>
+                    Seq(
+                        inputIri,
+                        g.applicationGroups.size,
+                        g.applicationGroups.map(ag => ag.dataSourceGroups.size).sum,
+                        g.applicationGroups.map(ag => ag.dataSourceGroups.map(ds => ds.extractorGroups.size).sum).sum,
+                        g.applicationGroups.map(ag => ag.dataSourceGroups.map(ds => ds.extractorGroups.map(eg => eg.dataSampleGroups.size).sum).sum).sum,
+                        d.end - d.start,
+                        d.input.applications.size,
+                        d.input.dataSets.size,
+                        d.input.processors.size
+                    ).mkString(";")
+                }.get
+            }.get
+        }.mkString("\n")
+
+        Seq(heading, lines).mkString("\n")
     }
 
     def csv(id: String) = Action {

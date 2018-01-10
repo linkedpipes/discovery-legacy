@@ -25,7 +25,10 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
 
     var isFinished = false
 
+    var input : DiscoveryInput = null
+
     def discover(input: DiscoveryInput): Future[Seq[Pipeline]] = {
+        this.input = input
         discoveryLogger.info(s"[$id] Starting with ${input.dataSets.size} data sets, ${input.processors.size} processors and ${input.applications.size} applications.")
         val pipelines = createInitialPipelines(input.dataSets).flatMap { initialPipelines =>
             val data = IterationData(

@@ -52,11 +52,17 @@ class DiscoveryService {
         runExperiment(iris)
     }
 
-    def getExperimentsInputIris(iri: String) : Seq[String] = {
+    def getExperimentsInputIrisFromIri(iri: String) : Seq[String] = {
         fromIri(iri) {
-            case Right(model) => extractExperiments(model, iri)
+            case Right(model) => extractExperiments(model)
             case _ => Seq()
         }
+    }
+
+    def getExperimentsInputIris(ttl: String) : Seq[String] = {
+        val model = ModelFactory.createDefaultModel()
+        model.read(new ByteArrayInputStream(ttl.getBytes("UTF-8")), null, "TTL")
+        extractExperiments(model)
     }
 
     def runExperimentFromInput(input: String) : UUID = {
@@ -70,8 +76,9 @@ class DiscoveryService {
         templates.map(_.asResource().getURI)
     }
 
-    def extractExperiments(model: Model, iri: String) : Seq[String] = {
-        val head = Option(model.getResource(iri))
+    def extractExperiments(model: Model) : Seq[String] = {
+        val list = model.listObjectsOfProperty(model.getProperty("https://linked.opendata.cz/ldcp/property/hasExperiments")).toList.asScala
+        val head = Option(list.head.asResource())
         head match {
             case Some(listHead) => extractList(model, listHead)
             case None => Seq()
@@ -83,7 +90,7 @@ class DiscoveryService {
         val buffer = new mutable.ArrayBuffer[String]()
 
         do {
-            buffer.+=:(currentHead.getRequiredProperty(RDF.first).getResource.getURI)
+            buffer.+=(currentHead.getRequiredProperty(RDF.first).getResource.getURI)
             currentHead = currentHead.getRequiredProperty(RDF.rest).getResource
         } while (!currentHead.equals(RDF.nil))
 
