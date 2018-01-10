@@ -137,7 +137,7 @@ class DiscoveryController @Inject()(
             "Extractor group count",
             "App count",
             "Pipeline count"
-        ).mkString(";")
+        ).mkString(",")
 
         val lines = pairs.map { case (inputIri, id) =>
             service.withDiscovery(id) { discovery =>
@@ -154,7 +154,7 @@ class DiscoveryController @Inject()(
                             g.applicationGroups.count(_.dataSourceGroups.exists(_.dataSourceInstances.contains(d)))
                         }.get,
                         service.getPipelinesOfDiscovery(id).map(pipelines => pipelines.count(p => p._2.components.exists(c => c.componentInstance == d))).get
-                    ).mkString(";")
+                    ).mkString(",")
                 }.mkString("\n")
             }.get
         }.mkString("\n")
@@ -171,7 +171,7 @@ class DiscoveryController @Inject()(
             "Extractor group count",
             "Datasource count",
             "Pipeline count"
-        ).mkString(";")
+        ).mkString(",")
 
         val lines = pairs.map { case (inputIri, id) =>
             service.withDiscovery(id) { d =>
@@ -187,7 +187,7 @@ class DiscoveryController @Inject()(
                             g.applicationGroups.filter(_.applicationInstance == a).flatMap(_.dataSourceGroups.map(_.dataSourceInstances)).distinct.size
                         }.get,
                         service.getPipelinesOfDiscovery(id).map(pipelines => pipelines.count(p => p._2.components.exists(c => c.componentInstance == a))).get
-                    ).mkString(";")
+                    ).mkString(",")
                 }.mkString("\n")
             }.get
         }.mkString("\n")
@@ -205,7 +205,7 @@ class DiscoveryController @Inject()(
             "Application template label",
             "Group count?",
             "Pipeline count"
-        ).mkString(";")
+        ).mkString(",")
 
         val lines = pairs.map { case (inputIri, id) =>
             service.withDiscovery(id) { discovery =>
@@ -222,7 +222,7 @@ class DiscoveryController @Inject()(
                             service.getPipelinesOfDiscovery(id).map(pipelines => pipelines.count { p =>
                                 p._2.components.exists(c => c.componentInstance == a) && p._2.components.exists(c => c.componentInstance == d)
                             }).get
-                        ).mkString(";")
+                        ).mkString(",")
                     }
                 }.mkString("\n")
             }.get
@@ -243,7 +243,7 @@ class DiscoveryController @Inject()(
             "Application count",
             "Data source count",
             "Transformer count"
-        ).mkString(";")
+        ).mkString(",")
 
         val lines = pairs.map { case (inputIri, id) =>
             service.withDiscovery(id) { d =>
@@ -258,7 +258,7 @@ class DiscoveryController @Inject()(
                         d.input.applications.size,
                         d.input.dataSets.size,
                         d.input.processors.size
-                    ).mkString(";")
+                    ).mkString(",")
                 }.get
             }.get
         }.mkString("\n")
