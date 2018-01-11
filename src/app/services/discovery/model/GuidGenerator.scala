@@ -19,5 +19,5 @@ class EtlIriGenerator {
 object GuidGenerator {
   def next = UUID.randomUUID().toString
 
-  def nextIri = "https://linked.opendata.cz/resource/ldvm/result/graph/" + next
+  def nextIri = "https://linked.opendata.cz/resource/ldcp/result/graph/" + next
 }
