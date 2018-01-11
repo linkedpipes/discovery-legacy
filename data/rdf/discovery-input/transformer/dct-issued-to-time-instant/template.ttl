@@ -1,7 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
 @prefix transformer:  <https://linked.opendata.cz/ldcp/resource/ldvm/transformer/dct-issued-to-time-instant/> .
-@prefix configuration-vocabulary:  <https://linked.opendata.cz/vocabulary/ldvm/transformer/dct-issued-to-time-instant/configuration/> .
+@prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/transformer/dct-issued-to-time-instant/configuration/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 transformer:template a ldcp:TransformerTemplate ;
@@ -47,7 +47,7 @@ transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
 	ldcp:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>
 		PREFIX ldcp: <https://linked.opendata.cz/vocabulary/ldcp/>
-		PREFIX configuration-vocabulary: <https://linked.opendata.cz/vocabulary/ldvm/transformer/dct-issued-to-time-instant/configuration/>
+		PREFIX configuration-vocabulary: <https://linked.opendata.cz/ldcp/vocabulary/transformer/dct-issued-to-time-instant/configuration/>
 		
 		CONSTRUCT {
 			?config a configuration-vocabulary:Configuration ;

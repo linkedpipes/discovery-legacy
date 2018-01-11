@@ -1,7 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
 @prefix transformer:  <https://linked.opendata.cz/ldcp/resource/ldvm/transformer/foaf-maker-to-foaf-made/> .
-@prefix configuration-vocabulary:  <https://linked.opendata.cz/vocabulary/ldvm/transformer/foaf-maker-to-foaf-made/configuration/> .
+@prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/transformer/foaf-maker-to-foaf-made/configuration/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
@@ -35,7 +35,7 @@ transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
 	ldcp:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>
 		PREFIX ldcp: <https://linked.opendata.cz/vocabulary/ldcp/>
-		PREFIX configuration-vocabulary: <https://linked.opendata.cz/vocabulary/ldvm/transformer/foaf-maker-to-foaf-made/configuration/>
+		PREFIX configuration-vocabulary: <https://linked.opendata.cz/ldcp/vocabulary/transformer/foaf-maker-to-foaf-made/configuration/>
 		
 		CONSTRUCT {
 			?config a configuration-vocabulary:Configuration ;

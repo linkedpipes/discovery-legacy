@@ -2,7 +2,7 @@
  @prefix dcterms: <http://purl.org/dc/terms/> .
  @prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
  @prefix application:  <https://linked.opendata.cz/ldcp/resource/ldvm/application/dcterms/> .
- @prefix configuration-vocabulary:  <https://linked.opendata.cz/vocabulary/ldvm/application/dcterms/configuration/> .
+ @prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/application/dcterms/configuration/> .
  @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
  @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
@@ -23,7 +23,7 @@
      ldcp:configurationQuery """
          PREFIX dcterms: <http://purl.org/dc/terms/>
          PREFIX application:  <https://linked.opendata.cz/ldcp/resource/ldvm/application/dcterms/>
-         PREFIX configuration-vocabulary: <https://linked.opendata.cz/vocabulary/ldvm/application/dcterms/configuration/>
+         PREFIX configuration-vocabulary: <https://linked.opendata.cz/ldcp/vocabulary/application/dcterms/configuration/>
 
          CONSTRUCT {
              ?config a configuration-vocabulary:Configuration ;

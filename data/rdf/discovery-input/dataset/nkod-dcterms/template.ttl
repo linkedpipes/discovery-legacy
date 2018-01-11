@@ -2,7 +2,7 @@
 @prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
 
 @prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
-@prefix configuration-vocabulary:  <https://linked.opendata.cz/vocabulary/ldvm/dataset/dblp/configuration/> .
+@prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/dataset/dblp/configuration/> .
 @prefix d-sparql: <https://linked.opendata.cz/vocabulary/ldcp/datasource/sparql/> .
 
 @prefix dataset:  <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod-dcterms/> .
@@ -32,7 +32,7 @@ CONSTRUCT WHERE {
 	ldcp:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>
 		PREFIX ldcp: <https://linked.opendata.cz/vocabulary/ldcp/>
-		PREFIX configuration-vocabulary: <https://linked.opendata.cz/vocabulary/ldvm/dataset/dblp/configuration/>
+		PREFIX configuration-vocabulary: <https://linked.opendata.cz/ldcp/vocabulary/dataset/dblp/configuration/>
 		
 		CONSTRUCT {
 			?config a configuration-vocabulary:Configuration ;

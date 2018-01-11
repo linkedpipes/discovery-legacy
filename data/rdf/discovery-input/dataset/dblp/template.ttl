@@ -2,7 +2,7 @@
 @prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
 @prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
 @prefix dataset:  <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/dblp/> .
-@prefix configuration-vocabulary:  <https://linked.opendata.cz/vocabulary/ldvm/dataset/dblp/configuration/> .
+@prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/dataset/dblp/configuration/> .
 @prefix d-sparql: <https://linked.opendata.cz/vocabulary/ldcp/datasource/sparql/> .
 
 dataset:template a ldcp:DataSourceTemplate ;
@@ -12,11 +12,10 @@ dataset:template a ldcp:DataSourceTemplate ;
 
 dataset:output a ldcp:OutputDataPortTemplate ;
 	dcterms:title "DBLP triples" ;
-	ldcp:outputDataSample <https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/dblp/sample.ttl> . #divny takhle psat URL souboru s jinymi triples, co to vlastne znamena z pohledu RDF modelu? Ma to byt resource? Nemelo by to byt ""?
+	ldcp:outputDataSample <https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/dblp/sample.ttl> .
 	
 dataset:defaultConfiguration a d-sparql:SparqlEndpointDataSourceConfiguration ;
 	dcterms:title "Default DBLP configuration" ;
-	# nevidim duvod proc by property service nemohla byt v ldvm slovniku
 	ldcp:service dataset:defaultService ;
 	ldcp:query """
 		CONSTRUCT {
@@ -28,7 +27,7 @@ dataset:defaultConfiguration a d-sparql:SparqlEndpointDataSourceConfiguration ;
 	ldcp:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>
 		PREFIX ldcp: <https://linked.opendata.cz/vocabulary/ldcp/>
-		PREFIX configuration-vocabulary: <https://linked.opendata.cz/vocabulary/ldvm/dataset/dblp/configuration/>
+		PREFIX configuration-vocabulary: <https://linked.opendata.cz/ldcp/vocabulary/dataset/dblp/configuration/>
 		
 		CONSTRUCT {
 			?config a configuration-vocabulary:Configuration ;
