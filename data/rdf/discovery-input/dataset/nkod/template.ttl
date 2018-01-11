@@ -5,7 +5,7 @@
 @prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/dataset/dblp/configuration/> .
 @prefix d-sparql: <https://linked.opendata.cz/vocabulary/ldcp/datasource/sparql/> .
 
-@prefix dataset:  <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod/> .
+@prefix dataset:  <https://linked.opendata.cz/ldcp/resource/dataset/nkod/> .
 
 dataset:template a ldcp:DataSourceTemplate ;
 	dcterms:title "Czech National Open Data Catalog"@en, "Národní katalog otevřených dat (NKOD)"@cs ;

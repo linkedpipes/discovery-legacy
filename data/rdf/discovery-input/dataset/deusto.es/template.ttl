@@ -5,7 +5,7 @@
 @prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/dataset/dblp/configuration/> .
 @prefix d-sparql: <https://linked.opendata.cz/vocabulary/ldcp/datasource/sparql/> .
 
-@prefix dataset:  <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/deusto.es/> .
+@prefix dataset:  <https://linked.opendata.cz/ldcp/resource/dataset/deusto.es/> .
 
 dataset:template a ldcp:DataSourceTemplate ;
 	dcterms:title "deusto.es" ;

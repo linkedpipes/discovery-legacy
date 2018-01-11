@@ -3,7 +3,7 @@
 
 @prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
 
-@prefix transformer:  <https://linked.opendata.cz/ldcp/resource/ldvm/transformer/dce-to-dcterms-title/> .
+@prefix transformer:  <https://linked.opendata.cz/ldcp/resource/transformer/dce-to-dcterms-title/> .
 @prefix configuration-vocabulary:  <https://linked.opendata.cz/vocabulary/ldvm/transformer/dce-to-dcterms-title/configuration/> .
 
 transformer:template a ldcp:TransformerTemplate ;

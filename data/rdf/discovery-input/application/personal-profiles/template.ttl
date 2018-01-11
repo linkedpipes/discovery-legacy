@@ -1,6 +1,6 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
-@prefix application:  <https://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/> .
+@prefix application:  <https://linked.opendata.cz/ldcp/resource/application/personal-profiles/> .
 @prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/application/personal-profiles/configuration/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -41,7 +41,7 @@ application:defaultConfiguration a configuration-vocabulary:Configuration ;
 	application:zoom "0"^^xsd:int ;
 	ldcp:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>
-		PREFIX application:  <https://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/>
+		PREFIX application:  <https://linked.opendata.cz/ldcp/resource/application/personal-profiles/>
 		PREFIX configuration-vocabulary: <https://linked.opendata.cz/ldcp/vocabulary/application/personal-profiles/configuration/>
 		
 		CONSTRUCT {

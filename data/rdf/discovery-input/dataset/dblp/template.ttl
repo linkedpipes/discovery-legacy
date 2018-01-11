@@ -1,7 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
 @prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
-@prefix dataset:  <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/dblp/> .
+@prefix dataset:  <https://linked.opendata.cz/ldcp/resource/dataset/dblp/> .
 @prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/dataset/dblp/configuration/> .
 @prefix d-sparql: <https://linked.opendata.cz/vocabulary/ldcp/datasource/sparql/> .
 
