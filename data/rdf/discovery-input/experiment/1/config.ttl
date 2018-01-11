@@ -1,7 +1,7 @@
-<https://linked.opendata.cz/ldcp/resource/experiment/1/config> a <https://linked.opendata.cz/ldcp/resource/discovery/Experiment> ;
-    <https://linked.opendata.cz/ldcp/property/hasDiscovery>
+<https://discovery.linkedpipes.com/resource/experiment/1/config> a <https://discovery.linkedpipes.com/resource/discovery/Experiment> ;
+    <https://discovery.linkedpipes.com/vocabulary/experiment/hasDiscovery>
     (
-        <https://linked.opendata.cz/ldcp/resource/discovery/1/config>
-        <https://linked.opendata.cz/ldcp/resource/discovery/2/config>
-        <https://linked.opendata.cz/ldcp/resource/discovery/3/config>
+        <https://discovery.linkedpipes.com/resource/discovery/1/config>
+        <https://discovery.linkedpipes.com/resource/discovery/2/config>
+        <https://discovery.linkedpipes.com/resource/discovery/3/config>
     ).

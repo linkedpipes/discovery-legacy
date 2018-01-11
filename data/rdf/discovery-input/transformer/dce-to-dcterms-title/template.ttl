@@ -1,25 +1,25 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-@prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
+@prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
 
-@prefix transformer:  <https://linked.opendata.cz/ldcp/resource/transformer/dce-to-dcterms-title/> .
-@prefix configuration-vocabulary:  <https://linked.opendata.cz/vocabulary/ldvm/transformer/dce-to-dcterms-title/configuration/> .
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/dce-to-dcterms-title/configuration/> .
 
-transformer:template a ldcp:TransformerTemplate ;
+transformer:template a lpd:TransformerTemplate ;
 	dcterms:title "Dublin Core elements title to Dublin Core terms title"@en;
-	ldcp:componentConfigurationTemplate transformer:defaultConfiguration ;
-	ldcp:inputTemplate transformer:input ;
-	ldcp:outputTemplate transformer:output ;
-	ldcp:feature transformer:feature .
+	lpd:componentConfigurationTemplate transformer:defaultConfiguration ;
+	lpd:inputTemplate transformer:input ;
+	lpd:outputTemplate transformer:output ;
+	lpd:feature transformer:feature .
 	
 configuration-vocabulary:Configuration a rdfs:Class ;
 	rdfs:label "Class of configurations of Dublin Core elements title to Dublin Core terms title"@en;
-	rdfs:subClassOf ldcp:ComponentConfiguration .
+	rdfs:subClassOf lpd:ComponentConfiguration .
 	
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
 	dcterms:title "Default configuration" ;
-	ldcp:query  """
+	lpd:query  """
 		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX dce: <http://purl.org/dc/elements/1.1/>
 		PREFIX dct: <http://purl.org/dc/terms/>
@@ -34,34 +34,34 @@ transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
 		  ?s dce:title ?title .
 		}
 	""" ;
-	ldcp:configurationQuery """
+	lpd:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>
-		PREFIX ldcp: <https://linked.opendata.cz/vocabulary/ldcp/>
-		PREFIX configuration-vocabulary: <https://linked.opendata.cz/vocabulary/ldvm/transformer/dce-to-dcterms-title/configuration/>
+		PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
+		PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/dce-to-dcterms-title/configuration/>
 		
 		CONSTRUCT {
 			?config a configuration-vocabulary:Configuration ;
-				ldcp:query ?query ;
+				lpd:query ?query ;
 				dcterms:title ?title .
 		} WHERE {
 			?config a configuration-vocabulary:Configuration .
-			OPTIONAL { ?config ldcp:query ?query . }
+			OPTIONAL { ?config lpd:query ?query . }
 			OPTIONAL { ?config dcterms:title ?title . }
 		}
 	""" .
 
-transformer:input a ldcp:InputDataPortTemplate ;
+transformer:input a lpd:InputDataPortTemplate ;
 	dcterms:title "Triples with Dublin Core elements title predicate" .
 	
-transformer:output a ldcp:OutputDataPortTemplate ;
+transformer:output a lpd:OutputDataPortTemplate ;
 	dcterms:title "Representation of objects of the input triples expressed as Dublin Core terms triples" .
 	
-transformer:feature a ldcp:MandatoryFeature ;
+transformer:feature a lpd:MandatoryFeature ;
 	dcterms:title "Transforms Dublin Core elements title to Dublin Core terms title" ;
-	ldcp:descriptor transformer:descriptor .
+	lpd:descriptor transformer:descriptor .
 	
-transformer:descriptor a ldcp:Descriptor ;
-	ldcp:query """
+transformer:descriptor a lpd:Descriptor ;
+	lpd:query """
 		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 		PREFIX dct: <http://purl.org/dc/terms/>
 		PREFIX time: <http://www.w3.org/2006/time#>
@@ -70,4 +70,4 @@ transformer:descriptor a ldcp:Descriptor ;
 		  ?s dct:issued ?dateTime .
 		}
 	""" ;
-	ldcp:appliesTo transformer:input .
+	lpd:appliesTo transformer:input .
