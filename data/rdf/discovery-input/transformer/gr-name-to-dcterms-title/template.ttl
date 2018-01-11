@@ -1,25 +1,25 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-@prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
+@prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
 
-@prefix transformer:  <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/gr-name-to-dcterms-title/> .
-@prefix configuration-vocabulary:  <http://linked.opendata.cz/vocabulary/ldvm/transformer/gr-name-to-dcterms-title/configuration/> .
+@prefix transformer:  <https://linked.opendata.cz/ldcp/resource/ldvm/transformer/gr-name-to-dcterms-title/> .
+@prefix configuration-vocabulary:  <https://linked.opendata.cz/vocabulary/ldvm/transformer/gr-name-to-dcterms-title/configuration/> .
 
-transformer:template a ldvm:TransformerTemplate ;
+transformer:template a ldcp:TransformerTemplate ;
   dcterms:title "GoodRelations name to Dublin Core terms title"@en;
-  ldvm:componentConfigurationTemplate transformer:defaultConfiguration ;
-  ldvm:inputTemplate transformer:input ;
-  ldvm:outputTemplate transformer:output ;
-  ldvm:feature transformer:feature .
+  ldcp:componentConfigurationTemplate transformer:defaultConfiguration ;
+  ldcp:inputTemplate transformer:input ;
+  ldcp:outputTemplate transformer:output ;
+  ldcp:feature transformer:feature .
   
 configuration-vocabulary:Configuration a rdfs:Class ;
   rdfs:label "Class of configurations of GoodRelations name to Dublin Core terms title"@en;
-  rdfs:subClassOf ldvm:ComponentConfiguration .
+  rdfs:subClassOf ldcp:ComponentConfiguration .
   
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   dcterms:title "Default configuration" ;
-  ldvm:query  """
+  ldcp:query  """
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX gr:  <http://purl.org/goodrelations/v1#>
 PREFIX dct: <http://purl.org/dc/terms/>
@@ -34,34 +34,34 @@ WHERE {
   ?s gr:name ?title .
 }
   """ ;
-  ldvm:configurationQuery """
+  ldcp:configurationQuery """
     PREFIX dcterms: <http://purl.org/dc/terms/>
-    PREFIX ldvm: <http://linked.opendata.cz/ontology/ldvm/>
-    PREFIX configuration-vocabulary: <http://linked.opendata.cz/vocabulary/ldvm/transformer/gr-name-to-dcterms-title/configuration/>
+    PREFIX ldcp: <https://linked.opendata.cz/vocabulary/ldcp/>
+    PREFIX configuration-vocabulary: <https://linked.opendata.cz/vocabulary/ldvm/transformer/gr-name-to-dcterms-title/configuration/>
     
     CONSTRUCT {
       ?config a configuration-vocabulary:Configuration ;
-        ldvm:query ?query ;
+        ldcp:query ?query ;
         dcterms:title ?title .
     } WHERE {
       ?config a configuration-vocabulary:Configuration .
-      OPTIONAL { ?config ldvm:query ?query . }
+      OPTIONAL { ?config ldcp:query ?query . }
       OPTIONAL { ?config dcterms:title ?title . }
     }
   """ .
 
-transformer:input a ldvm:InputDataPortTemplate ;
+transformer:input a ldcp:InputDataPortTemplate ;
   dcterms:title "Triples with GoodRelations name predicate" .
   
-transformer:output a ldvm:OutputDataPortTemplate ;
+transformer:output a ldcp:OutputDataPortTemplate ;
   dcterms:title "Representation of objects of the input triples expressed as Dublin Core terms triples" .
   
-transformer:feature a ldvm:MandatoryFeature ;
+transformer:feature a ldcp:MandatoryFeature ;
   dcterms:title "Transforms GoodRelations name to Dublin Core terms title" ;
-  ldvm:descriptor transformer:descriptor .
+  ldcp:descriptor transformer:descriptor .
   
-transformer:descriptor a ldvm:Descriptor ;
-  ldvm:query """
+transformer:descriptor a ldcp:Descriptor ;
+  ldcp:query """
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX gr: <http://purl.org/goodrelations/v1#>
 PREFIX time: <http://www.w3.org/2006/time#>
@@ -70,4 +70,4 @@ ASK {
   ?s gr:name ?title .
 }
   """ ;
-  ldvm:appliesTo transformer:input .
+  ldcp:appliesTo transformer:input .

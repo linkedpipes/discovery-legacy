@@ -1,13 +1,13 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 
-<http://linked.opendata.cz/ldcp/resource/ldvm/templates>
-    a <http://linked.opendata.cz/ldcp/resource/discovery/input> ;
-    <http://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/dblp/template> ;
-    <http://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod/template> ;
-    <http://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/deusto.es/template> ;
-    <http://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod-dcterms/template> ;
-    <http://linked.opendata.cz/ldcp/property/hasTemplate> <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/foaf-maker-to-foaf-made/template> ;
-    <http://linked.opendata.cz/ldcp/property/hasTemplate> <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/dct-issued-to-time-instant/template> ;
-    <http://linked.opendata.cz/ldcp/property/hasTemplate> <http://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/template> ;
-    <http://linked.opendata.cz/ldcp/property/hasTemplate> <http://linked.opendata.cz/ldcp/resource/ldvm/application/dcterms/template>
+<https://linked.opendata.cz/ldcp/resource/ldvm/templates>
+    a <https://linked.opendata.cz/ldcp/resource/discovery/input> ;
+    <https://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/dblp/template> ;
+    <https://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod/template> ;
+    <https://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/deusto.es/template> ;
+    <https://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/dataset/nkod-dcterms/template> ;
+    <https://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/transformer/foaf-maker-to-foaf-made/template> ;
+    <https://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/transformer/dct-issued-to-time-instant/template> ;
+    <https://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/application/personal-profiles/template> ;
+    <https://linked.opendata.cz/ldcp/property/hasTemplate> <https://linked.opendata.cz/ldcp/resource/ldvm/application/dcterms/template>
     .
