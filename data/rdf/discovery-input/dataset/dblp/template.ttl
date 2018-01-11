@@ -1,41 +1,41 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
-@prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
-@prefix dataset:  <https://linked.opendata.cz/ldcp/resource/dataset/dblp/> .
-@prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/dataset/dblp/configuration/> .
-@prefix d-sparql: <https://linked.opendata.cz/vocabulary/ldcp/datasource/sparql/> .
+@prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
+@prefix dataset:  <https://discovery.linkedpipes.com/resource/dataset/dblp/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/dataset/dblp/configuration/> .
+@prefix d-sparql: <https://discovery.linkedpipes.com/vocabulary/datasource/sparql/> .
 
-dataset:template a ldcp:DataSourceTemplate ;
+dataset:template a lpd:DataSourceTemplate ;
 	dcterms:title "DBLP" ;
-	ldcp:outputTemplate dataset:output ;
-	ldcp:componentConfigurationTemplate dataset:defaultConfiguration .
+	lpd:outputTemplate dataset:output ;
+	lpd:componentConfigurationTemplate dataset:defaultConfiguration .
 
-dataset:output a ldcp:OutputDataPortTemplate ;
+dataset:output a lpd:OutputDataPortTemplate ;
 	dcterms:title "DBLP triples" ;
-	ldcp:outputDataSample <https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/dblp/sample.ttl> .
+	lpd:outputDataSample <https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/dblp/sample.ttl> .
 	
 dataset:defaultConfiguration a d-sparql:SparqlEndpointDataSourceConfiguration ;
 	dcterms:title "Default DBLP configuration" ;
-	ldcp:service dataset:defaultService ;
-	ldcp:query """
+	lpd:service dataset:defaultService ;
+	lpd:query """
 		CONSTRUCT {
 		  ?s ?p ?o .
 		} WHERE {
 		  ?s ?p ?o .
 		}
 	""" ;
-	ldcp:configurationQuery """
+	lpd:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>
-		PREFIX ldcp: <https://linked.opendata.cz/vocabulary/ldcp/>
-		PREFIX configuration-vocabulary: <https://linked.opendata.cz/ldcp/vocabulary/dataset/dblp/configuration/>
+		PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
+		PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/dataset/dblp/configuration/>
 		
 		CONSTRUCT {
 			?config a configuration-vocabulary:Configuration ;
-				ldcp:query ?query ;
+				lpd:query ?query ;
 				dcterms:title ?title .
 		} WHERE {
 			?config a configuration-vocabulary:Configuration .
-			OPTIONAL { ?config ldcp:query ?query . }
+			OPTIONAL { ?config lpd:query ?query . }
 			OPTIONAL { ?config dcterms:title ?title . }
 		}
 	""" .

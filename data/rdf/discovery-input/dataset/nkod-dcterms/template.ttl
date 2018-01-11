@@ -1,23 +1,23 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
 
-@prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
-@prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/dataset/dblp/configuration/> .
-@prefix d-sparql: <https://linked.opendata.cz/vocabulary/ldcp/datasource/sparql/> .
+@prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/dataset/dblp/configuration/> .
+@prefix d-sparql: <https://discovery.linkedpipes.com/vocabulary/datasource/sparql/> .
 
-@prefix dataset:  <https://linked.opendata.cz/ldcp/resource/dataset/nkod-dcterms/> .
+@prefix dataset:  <https://discovery.linkedpipes.com/resource/dataset/nkod-dcterms/> .
 
-dataset:template a ldcp:DataSourceTemplate ;
+dataset:template a lpd:DataSourceTemplate ;
 	dcterms:title "Czech National Open Data Catalog - dataset DC terms only, 1 dataset"@en, "Národní katalog otevřených dat (NKOD) - jen dcterms datasetů"@cs ;
-	ldcp:outputTemplate dataset:output ;
-	ldcp:componentConfigurationTemplate dataset:defaultConfiguration .
+	lpd:outputTemplate dataset:output ;
+	lpd:componentConfigurationTemplate dataset:defaultConfiguration .
 
-dataset:output a ldcp:OutputDataPortTemplate ;
-	ldcp:outputDataSample <https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/nkod-dcterms/sample.ttl> .
+dataset:output a lpd:OutputDataPortTemplate ;
+	lpd:outputDataSample <https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/nkod-dcterms/sample.ttl> .
 	
 dataset:defaultConfiguration a d-sparql:SparqlEndpointDataSourceConfiguration ;
-	ldcp:service dataset:defaultService ;
-	ldcp:query """
+	lpd:service dataset:defaultService ;
+	lpd:query """
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
@@ -29,18 +29,18 @@ CONSTRUCT WHERE {
     dcterms:modified ?modified .
 }
 	""" ;
-	ldcp:configurationQuery """
+	lpd:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>
-		PREFIX ldcp: <https://linked.opendata.cz/vocabulary/ldcp/>
-		PREFIX configuration-vocabulary: <https://linked.opendata.cz/ldcp/vocabulary/dataset/dblp/configuration/>
+		PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
+		PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/dataset/dblp/configuration/>
 		
 		CONSTRUCT {
 			?config a configuration-vocabulary:Configuration ;
-				ldcp:query ?query ;
+				lpd:query ?query ;
 				dcterms:title ?title .
 		} WHERE {
 			?config a configuration-vocabulary:Configuration .
-			OPTIONAL { ?config ldcp:query ?query . }
+			OPTIONAL { ?config lpd:query ?query . }
 			OPTIONAL { ?config dcterms:title ?title . }
 		}
 	""" .
