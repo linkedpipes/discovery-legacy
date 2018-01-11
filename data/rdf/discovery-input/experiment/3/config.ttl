@@ -1,7 +1,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 
-<https://linked.opendata.cz/ldcp/resource/experiment/3/config> a <https://linked.opendata.cz/ldcp/resource/discovery/input> ;
-    <https://linked.opendata.cz/ldcp/vocabulary/experiment/hasTemplate> 
+<https://linked.opendata.cz/ldcp/resource/experiment/3/config> a <https://linked.opendata.cz/ldcp/resource/discovery/Input> ;
+    <https://linked.opendata.cz/ldcp/vocabulary/discovery/hasTemplate> 
       <https://linked.opendata.cz/ldcp/resource/dataset/nkod-dcterms/template>,
       <https://linked.opendata.cz/ldcp/resource/application/dcterms/template>,
       <https://linked.opendata.cz/ldcp/resource/transformer/dce-to-dcterms-title/template>,
@@ -9,7 +9,7 @@
     .
 
 <https://linked.opendata.cz/ldcp/resource/experiment/3/config> 
-    <https://linked.opendata.cz/ldcp/vocabulary/experiment/hasTemplate> 
+    <https://linked.opendata.cz/ldcp/vocabulary/discovery/hasTemplate> 
       <https://linked.opendata.cz/ldcp/resource/lod/templates/http---202.45.139.84-10035-catalogs-fao-repositories-agrovoc> , 
       <https://linked.opendata.cz/ldcp/resource/lod/templates/http---apps.morelab.deusto.es-labman-sparql> , 
       <https://linked.opendata.cz/ldcp/resource/lod/templates/http---commons.dbpedia.org-sparql> , 
