@@ -1,29 +1,29 @@
 
  @prefix dcterms: <http://purl.org/dc/terms/> .
- @prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
- @prefix application:  <http://linked.opendata.cz/ldcp/resource/ldvm/application/dcterms/> .
- @prefix configuration-vocabulary:  <http://linked.opendata.cz/vocabulary/ldvm/application/dcterms/configuration/> .
+ @prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
+ @prefix application:  <https://linked.opendata.cz/ldcp/resource/application/dcterms/> .
+ @prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/application/dcterms/configuration/> .
  @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
  @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
- application:template a ldvm:ApplicationTemplate ;
+ application:template a ldcp:ApplicationTemplate ;
      dcterms:title "DCTerms Application"@en;
      dcterms:description "App that displays dcterms instances"@en;
-     ldvm:componentConfigurationTemplate application:defaultConfiguration ;
-     ldvm:inputTemplate application:input ;
-     ldvm:feature application:defaultFeature ;
-     ldvm:executor <https://visualisation-apps.netlify.com/dcterms> .
+     ldcp:componentConfigurationTemplate application:defaultConfiguration ;
+     ldcp:inputTemplate application:input ;
+     ldcp:feature application:defaultFeature ;
+     ldcp:executor <https://visualisation-apps.netlify.com/dcterms> .
 
  configuration-vocabulary:Configuration a rdfs:Class ;
      rdfs:label "Class of configurations of DCTerms Application"@en;
-     rdfs:subClassOf ldvm:ComponentConfiguration .
+     rdfs:subClassOf ldcp:ComponentConfiguration .
 
  application:defaultConfiguration a configuration-vocabulary:Configuration ;
      dcterms:title "Default configuration for DCTerms Application"@en ;
-     ldvm:configurationQuery """
+     ldcp:configurationQuery """
          PREFIX dcterms: <http://purl.org/dc/terms/>
-         PREFIX application:  <http://linked.opendata.cz/ldcp/resource/ldvm/application/dcterms/>
-         PREFIX configuration-vocabulary: <http://linked.opendata.cz/vocabulary/ldvm/application/dcterms/configuration/>
+         PREFIX application:  <https://linked.opendata.cz/ldcp/resource/application/dcterms/>
+         PREFIX configuration-vocabulary: <https://linked.opendata.cz/ldcp/vocabulary/application/dcterms/configuration/>
 
          CONSTRUCT {
              ?config a configuration-vocabulary:Configuration ;
@@ -34,19 +34,19 @@
          }
      """ .
 
- application:input a ldvm:InputDataPortTemplate ;
+ application:input a ldcp:InputDataPortTemplate ;
      dcterms:title "Input of DCTerms Application" .
 
- application:defaultFeature a ldvm:MandatoryFeature ;
+ application:defaultFeature a ldcp:MandatoryFeature ;
      dcterms:title "The default feature of DCTerms Application" ;
-     ldvm:descriptor application:defaultDescriptor .
+     ldcp:descriptor application:defaultDescriptor .
 
- application:defaultDescriptor a ldvm:Descriptor ;
+ application:defaultDescriptor a ldcp:Descriptor ;
      dcterms:title "Checks if default feature of DCTerms Application can be applied." ;
-     ldvm:query """
+     ldcp:query """
 PREFIX dct: <http://purl.org/dc/terms/>
 ASK { [] dct:title [] } 
 
 """ ;
-     ldvm:appliesTo application:input .
+     ldcp:appliesTo application:input .
                

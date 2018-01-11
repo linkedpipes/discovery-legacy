@@ -1,25 +1,25 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
-@prefix transformer:  <http://linked.opendata.cz/ldcp/resource/ldvm/transformer/dct-issued-to-time-instant/> .
-@prefix configuration-vocabulary:  <http://linked.opendata.cz/vocabulary/ldvm/transformer/dct-issued-to-time-instant/configuration/> .
+@prefix ldcp:       <https://linked.opendata.cz/vocabulary/ldcp/> .
+@prefix transformer:  <https://linked.opendata.cz/ldcp/resource/transformer/dct-issued-to-time-instant/> .
+@prefix configuration-vocabulary:  <https://linked.opendata.cz/ldcp/vocabulary/transformer/dct-issued-to-time-instant/configuration/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-transformer:template a ldvm:TransformerTemplate ;
+transformer:template a ldcp:TransformerTemplate ;
 	dcterms:title "Dublin Core issued to time instant abstraction"@en;
 	dcterms:description "Transforms triples with Dublin Core issued predicate to triples with Dublin Core termporal predicate and objects expressed as Time Instant instance "@en;
-	ldvm:componentConfigurationTemplate transformer:defaultConfiguration ;
-	ldvm:inputTemplate transformer:input ;
-	ldvm:outputTemplate transformer:output ;
-	ldvm:feature transformer:temporalFeature, transformer:temporalLabelFeature . #Jsou tyto features OK? Obe se totiz aplikuji (appliesTo) na jeden stejny input.
+	ldcp:componentConfigurationTemplate transformer:defaultConfiguration ;
+	ldcp:inputTemplate transformer:input ;
+	ldcp:outputTemplate transformer:output ;
+	ldcp:feature transformer:temporalFeature, transformer:temporalLabelFeature . #Jsou tyto features OK? Obe se totiz aplikuji (appliesTo) na jeden stejny input.
 	
 configuration-vocabulary:Configuration a rdfs:Class ;
 	rdfs:label "Class of configurations of Dublin Core issued to time instant abstraction transformer"@en;
-	rdfs:subClassOf ldvm:ComponentConfiguration .
+	rdfs:subClassOf ldcp:ComponentConfiguration .
 	
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
 	dcterms:title "Default configuration" ;
 	#nevidim duvod, proc by to mela byt property query z nejakyho specialniho jinyho namespace jako v prikladech, staci ldvm ne?
-	ldvm:query  """
+	ldcp:query  """
 		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 		PREFIX dct: <http://purl.org/dc/terms/>
 		PREFIX time: <http://www.w3.org/2006/time#>
@@ -44,34 +44,34 @@ transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
 		}
 	""" ;
 	#nevidim duvod, proc by se ta property mela jmenovat configurationSPARQL, kdyz vsude jinde se pouziva query a ne SPARQL
-	ldvm:configurationQuery """
+	ldcp:configurationQuery """
 		PREFIX dcterms: <http://purl.org/dc/terms/>
-		PREFIX ldvm: <http://linked.opendata.cz/ontology/ldvm/>
-		PREFIX configuration-vocabulary: <http://linked.opendata.cz/vocabulary/ldvm/transformer/dct-issued-to-time-instant/configuration/>
+		PREFIX ldcp: <https://linked.opendata.cz/vocabulary/ldcp/>
+		PREFIX configuration-vocabulary: <https://linked.opendata.cz/ldcp/vocabulary/transformer/dct-issued-to-time-instant/configuration/>
 		
 		CONSTRUCT {
 			?config a configuration-vocabulary:Configuration ;
-				ldvm:query ?query ;
+				ldcp:query ?query ;
 				dcterms:title ?title .
 		} WHERE {
 			?config a configuration-vocabulary:Configuration .
-			OPTIONAL { ?config ldvm:query ?query . }
+			OPTIONAL { ?config ldcp:query ?query . }
 			OPTIONAL { ?config dcterms:title ?title . }
 		}
 	""" .
 
-transformer:input a ldvm:InputDataPortTemplate ;
+transformer:input a ldcp:InputDataPortTemplate ;
 	dcterms:title "Triples with Dublin Core issued predicate" .
 	
-transformer:output a ldvm:OutputDataPortTemplate ;
+transformer:output a ldcp:OutputDataPortTemplate ;
 	dcterms:title "Representation of objects of the input triples expressed as Time Instant instance linked with the subjects of the input triples by Dublin Core temporal" .
 	
-transformer:temporalFeature a ldvm:MandatoryFeature ;
+transformer:temporalFeature a ldcp:MandatoryFeature ;
 	dcterms:title "Transforms Dublin Core issued to Time Instant linked by Dublin Core temporal" ;
-	ldvm:descriptor transformer:temporalDescriptor .
+	ldcp:descriptor transformer:temporalDescriptor .
 	
-transformer:temporalDescriptor a ldvm:Descriptor ;
-	ldvm:query """
+transformer:temporalDescriptor a ldcp:Descriptor ;
+	ldcp:query """
 		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 		PREFIX dct: <http://purl.org/dc/terms/>
 		PREFIX time: <http://www.w3.org/2006/time#>
@@ -80,14 +80,14 @@ transformer:temporalDescriptor a ldvm:Descriptor ;
 		  ?s dct:issued ?dateTime .
 		}
 	""" ;
-	ldvm:appliesTo transformer:input .
+	ldcp:appliesTo transformer:input .
 	
-transformer:temporalLabelFeature a ldvm:OptionalFeature ;
+transformer:temporalLabelFeature a ldcp:OptionalFeature ;
 	dcterms:title "Adds temporal label to the resulting Time Instant" ;
-	ldvm:descriptor transformer:temporalLabelDescriptor .
+	ldcp:descriptor transformer:temporalLabelDescriptor .
 	
-transformer:temporalLabelDescriptor a ldvm:Descriptor ;
-	ldvm:query """
+transformer:temporalLabelDescriptor a ldcp:Descriptor ;
+	ldcp:query """
 		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 		PREFIX dct: <http://purl.org/dc/terms/>
 		PREFIX time: <http://www.w3.org/2006/time#>
@@ -97,4 +97,4 @@ transformer:temporalLabelDescriptor a ldvm:Descriptor ;
 		     dct:title ?title .
 		}
 	""" ;
-	ldvm:appliesTo transformer:input .
+	ldcp:appliesTo transformer:input .
