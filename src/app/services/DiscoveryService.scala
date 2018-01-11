@@ -81,7 +81,8 @@ class DiscoveryService {
     }
 
     def extractTemplates(model: Model) : Seq[String] = {
-        val templates = model.listObjectsOfProperty(model.getProperty("http://linked.opendata.cz/ldcp/property/hasTemplate")).toList.asScala
+        val templates = model.listObjectsOfProperty(model.getProperty("
+linked.opendata.cz/ldcp/property/hasTemplate")).toList.asScala
         templates.map(_.asResource().getURI)
     }
 
@@ -163,7 +164,7 @@ class DiscoveryService {
     def listTemplates(templateSourceUri: String): Option[DiscoveryInput] = {
         fromIri(templateSourceUri) {
             case Right(model) => {
-                val templates = model.listObjectsOfProperty(model.getProperty("http://linked.opendata.cz/ldcp/property/hasTemplate")).toList.asScala
+                val templates = model.listObjectsOfProperty(model.getProperty("https://linked.opendata.cz/ldcp/property/hasTemplate")).toList.asScala
                 val templateUris = templates.map(_.asResource().getURI)
                 val templateModels = templateUris.map { u => fromIri(u) { e => e } }.filter(_.isRight).map(_.right.get)
                 Some(DiscoveryInput(templateModels))
