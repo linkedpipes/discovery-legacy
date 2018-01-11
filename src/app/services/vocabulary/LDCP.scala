@@ -1,7 +1,7 @@
 package services.vocabulary
 
 object LDCP extends RdfVocabulary {
-  val prefix = "https://linked.opendata.cz/vocabulary/ldcp/"
+  val prefix = "https://discovery.linkedpipes.com/vocabulary/"
   val DataSourceTemplate = resource("DataSourceTemplate")
   val ExtractorTemplate = resource("ExtractorTemplate")
   val TransformerTemplate = resource("TransformerTemplate")
@@ -19,6 +19,6 @@ object LDCP extends RdfVocabulary {
   val outputTemplate = property("outputTemplate")
   val outputDataSample = property("outputDataSample")
   val executor = property("executor")
-  val hasTemplate = property("hasTemplate")
-  val hasExperiments = property("hasExperiments")
+  val hasTemplate = property("discovery/hasTemplate")
+  val hasExperiments = property("discovery/hasExperiments")
 }
