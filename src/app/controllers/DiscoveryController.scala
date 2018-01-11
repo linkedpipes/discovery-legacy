@@ -37,7 +37,7 @@ class DiscoveryController @Inject()(
     val discoveryLogger = Logger.of("discovery")
 
     def listComponents = Action {
-        val templateSourceUri = configuration.get[String]("ldvm.templateSourceUri")
+        val templateSourceUri = configuration.get[String]("ldcp.templateSourceUri")
         Ok(
             service.listTemplates(templateSourceUri) match {
                 case Some(input) => Json.toJson(input)
@@ -361,7 +361,7 @@ class DiscoveryController @Inject()(
     def getSparqlService(discoveryId: String, pipelineId: String) = Action.async { r =>
         executionResultDao.findByPipelineId(discoveryId, pipelineId).map {
             case Some(executionResult) => {
-                val model = service.getService(executionResult, r.host, configuration.get[String]("ldvm.endpointUri"))
+                val model = service.getService(executionResult, r.host, configuration.get[String]("ldcp.endpointUri"))
                 val outputStream = new ByteArrayOutputStream()
                 RDFDataMgr.write(outputStream, model, Lang.TTL)
                 Ok(outputStream.toString())
@@ -372,7 +372,7 @@ class DiscoveryController @Inject()(
 
     def getDataSampleSparqlService(discoveryId: String, pipelineId: String) = Action.async { r =>
         Future.successful(service.withPipeline(discoveryId: String, pipelineId: String) { (p,d) =>
-            val model = service.getDataSampleService(pipelineId, discoveryId, p.dataSample, r.host, configuration.get[String]("ldvm.endpointUri"))
+            val model = service.getDataSampleService(pipelineId, discoveryId, p.dataSample, r.host, configuration.get[String]("ldcp.endpointUri"))
             val outputStream = new ByteArrayOutputStream()
             RDFDataMgr.write(outputStream, model, Lang.TTL)
             Ok(outputStream.toString())
@@ -381,8 +381,8 @@ class DiscoveryController @Inject()(
 
     def execute(id: String, pipelineId: String) = Action.async {
 
-        val prefix = configuration.get[String]("etl.hostname")
-        val endpointUri = configuration.get[String]("ldvm.endpointUri")
+        val prefix = configuration.get[String]("ldcp.etl.hostname")
+        val endpointUri = configuration.get[String]("ldcp.endpointUri")
 
         service.getEtlPipeline(id, pipelineId, endpointUri) match {
             case Some(etlPipeline) => {
@@ -415,7 +415,7 @@ class DiscoveryController @Inject()(
     }
 
     def pipeline(id: String, pipelineId: String) = Action {
-        val endpointUri = configuration.get[String]("ldvm.endpointUri")
+        val endpointUri = configuration.get[String]("ldcp.endpointUri")
         service.getEtlPipeline(id, pipelineId, endpointUri) match {
             case Some(etlPipeline) => {
                 val outputStream = new ByteArrayOutputStream()
