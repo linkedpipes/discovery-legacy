@@ -14,7 +14,7 @@ import play.Logger
 import services.discovery.Discovery
 import services.discovery.model.etl.{EtlPipeline, EtlPipelineExporter}
 import services.discovery.model.{DataSample, DiscoveryInput, Pipeline}
-import services.vocabulary.{ETL, LDCP}
+import services.vocabulary.{ETL, LPD}
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable
@@ -82,12 +82,12 @@ class DiscoveryService {
     }
 
     def extractTemplates(model: Model) : Seq[String] = {
-        val templates = model.listObjectsOfProperty(LDCP.hasTemplate).toList.asScala
+        val templates = model.listObjectsOfProperty(LPD.hasTemplate).toList.asScala
         templates.map(_.asResource().getURI)
     }
 
     def extractExperiments(model: Model) : Seq[String] = {
-        val list = model.listObjectsOfProperty(LDCP.hasExperiments).toList.asScala
+        val list = model.listObjectsOfProperty(LPD.hasDiscovery).toList.asScala
         val head = Option(list.head.asResource())
         head match {
             case Some(listHead) => extractList(model, listHead)
@@ -164,7 +164,7 @@ class DiscoveryService {
     def listTemplates(templateSourceUri: String): Option[DiscoveryInput] = {
         fromIri(templateSourceUri) {
             case Right(model) => {
-                val templates = model.listObjectsOfProperty(LDCP.hasTemplate).toList.asScala
+                val templates = model.listObjectsOfProperty(LPD.hasTemplate).toList.asScala
                 val templateUris = templates.map(_.asResource().getURI)
                 val templateModels = templateUris.map { u => fromIri(u) { e => e } }.filter(_.isRight).map(_.right.get)
                 Some(DiscoveryInput(templateModels))

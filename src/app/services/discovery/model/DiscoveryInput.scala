@@ -10,7 +10,7 @@ import services.discovery.components.extractor.SparqlConstructExtractor
 import services.discovery.components.transformer.SparqlUpdateTransformer
 import services.discovery.model.components._
 import play.api.libs.functional.syntax._
-import services.vocabulary.{LDCP, SD}
+import services.vocabulary.{LPD, SD}
 
 import scala.collection.JavaConverters._
 
@@ -54,33 +54,33 @@ object DiscoveryInput {
     }
 
     private def getDataSets(models: Seq[Model]): Seq[DataSet] = {
-        getTemplatesOfType(models, LDCP.DataSourceTemplate).map { template =>
-            val configuration = template.getModel.getRequiredProperty(template, LDCP.componentConfigurationTemplate).getObject.asResource()
-            val service = configuration.getPropertyResourceValue(LDCP.service)
+        getTemplatesOfType(models, LPD.DataSourceTemplate).map { template =>
+            val configuration = template.getModel.getRequiredProperty(template, LPD.componentConfigurationTemplate).getObject.asResource()
+            val service = configuration.getPropertyResourceValue(LPD.service)
             val endpointUri = service.getPropertyResourceValue(SD.endpoint).getURI
-            val output = template.getRequiredProperty(LDCP.outputTemplate).getResource
-            val dataSampleUri = Option(output.getRequiredProperty(LDCP.outputDataSample).getResource.getURI)
+            val output = template.getRequiredProperty(LPD.outputTemplate).getResource
+            val dataSampleUri = Option(output.getRequiredProperty(LPD.outputDataSample).getResource.getURI)
             val label = template.getProperty(DCTerms.title).getString
 
-            val extractorQuery = Option(configuration.getProperty(LDCP.query)).map(_.getString)
+            val extractorQuery = Option(configuration.getProperty(LPD.query)).map(_.getString)
             val extractor = extractorQuery.map(eq => new SparqlConstructExtractor(s"${template.getURI}#extractor", ConstructQuery(eq), s"$label extractor"))
             DataSet(SparqlEndpoint(template.getURI, endpointUri, descriptorIri = dataSampleUri, label = label), extractor)
         }
     }
 
     private def getProcessors(models: Seq[Model]): Seq[ProcessorInstance] = {
-        getTemplatesOfType(models, LDCP.TransformerTemplate).map { template =>
+        getTemplatesOfType(models, LPD.TransformerTemplate).map { template =>
             val label = template.getProperty(DCTerms.title).getString
-            val configuration = template.getRequiredProperty(LDCP.componentConfigurationTemplate).getObject.asResource()
-            val updateQuery = UpdateQuery(configuration.getRequiredProperty(LDCP.query).getString)
+            val configuration = template.getRequiredProperty(LPD.componentConfigurationTemplate).getObject.asResource()
+            val updateQuery = UpdateQuery(configuration.getRequiredProperty(LPD.query).getString)
             new SparqlUpdateTransformer(template.getURI, updateQuery, getFeatures(template), label)
         }
     }
 
     private def getApplications(models: Seq[Model]): Seq[ApplicationInstance] = {
-        getTemplatesOfType(models, LDCP.ApplicationTemplate).map { template =>
+        getTemplatesOfType(models, LPD.ApplicationTemplate).map { template =>
             val label = template.getProperty(DCTerms.title).getString
-            val executorUri = template.getProperty(LDCP.executor).getResource.getURI
+            val executorUri = template.getProperty(LPD.executor).getResource.getURI
             new Application(template.getURI, executorUri, getFeatures(template), label)
         }
     }
@@ -90,10 +90,10 @@ object DiscoveryInput {
     }
 
     private def getFeatures(template: Resource): Seq[Feature] = {
-        template.listProperties(LDCP.feature).toList.asScala.map(_.getObject.asResource()).map { f =>
-            val isMandatory = f.getPropertyResourceValue(RDF.`type`).getURI.equals(LDCP.MandatoryFeature.getURI)
-            val descriptors = f.listProperties(LDCP.descriptor).toList.asScala.map(_.getObject.asResource()).map { d =>
-                Descriptor(AskQuery(d.getRequiredProperty(LDCP.query).getString), d.getRequiredProperty(LDCP.appliesTo).getObject.asResource())
+        template.listProperties(LPD.feature).toList.asScala.map(_.getObject.asResource()).map { f =>
+            val isMandatory = f.getPropertyResourceValue(RDF.`type`).getURI.equals(LPD.MandatoryFeature.getURI)
+            val descriptors = f.listProperties(LPD.descriptor).toList.asScala.map(_.getObject.asResource()).map { d =>
+                Descriptor(AskQuery(d.getRequiredProperty(LPD.query).getString), d.getRequiredProperty(LPD.appliesTo).getObject.asResource())
             }
             Feature(isMandatory, descriptors)
         }
