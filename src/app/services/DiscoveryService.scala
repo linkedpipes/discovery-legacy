@@ -81,8 +81,7 @@ class DiscoveryService {
     }
 
     def extractTemplates(model: Model) : Seq[String] = {
-        val templates = model.listObjectsOfProperty(model.getProperty("
-linked.opendata.cz/ldcp/property/hasTemplate")).toList.asScala
+        val templates = model.listObjectsOfProperty(model.getProperty("https://linked.opendata.cz/ldcp/property/hasTemplate")).toList.asScala
         templates.map(_.asResource().getURI)
     }
 
