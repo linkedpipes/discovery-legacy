@@ -1,24 +1,19 @@
 package services
 
-import java.net.URLEncoder
 import java.util.UUID
-import java.io.ByteArrayInputStream
 
 import controllers.dto.DiscoveryStatus
 import models.ExecutionResult
-import org.apache.jena.query.Dataset
 import org.apache.jena.rdf.model.{AnonId, Model, ModelFactory, Resource}
-import org.apache.jena.riot.{Lang, RDFDataMgr, RiotException}
 import org.apache.jena.vocabulary.RDF
 import play.Logger
 import services.discovery.Discovery
 import services.discovery.model.etl.{EtlPipeline, EtlPipelineExporter}
-import services.discovery.model.{DataSample, DiscoveryInput, Pipeline}
+import services.discovery.model.{DiscoveryInput, Pipeline}
 import services.vocabulary.{ETL, LPD}
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable
-import scalaj.http.{Http, MultiPart}
 
 
 class DiscoveryService {
@@ -45,7 +40,7 @@ class DiscoveryService {
     def stop(id: String) = {}
 
     def runExperiment(templateUris: Seq[String]): UUID = {
-        val templates = templateUris.par.map { u => fromIri(u) { e => e } }.filter(_.isRight).map(_.right.get).seq
+        val templates = templateUris.par.map { u => RdfUtils.fromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get).seq
         val discoveryInput = DiscoveryInput(templates)
         start(discoveryInput)
     }
@@ -55,7 +50,7 @@ class DiscoveryService {
     }
 
     def runExperimentFromInputIri(inputIri: String) : UUID = {
-        val iris = fromIri(inputIri) {
+        val iris = RdfUtils.fromIri(inputIri)(discoveryLogger) {
             case Right(model) => extractTemplates(model)
             case _ => Seq()
         }
@@ -63,22 +58,18 @@ class DiscoveryService {
     }
 
     def getExperimentsInputIrisFromIri(iri: String) : Seq[String] = {
-        fromIri(iri) {
+        RdfUtils.fromIri(iri)(discoveryLogger) {
             case Right(model) => extractExperiments(model)
             case _ => Seq()
         }
     }
 
-    def getExperimentsInputIris(ttl: String) : Seq[String] = {
-        val model = ModelFactory.createDefaultModel()
-        model.read(new ByteArrayInputStream(ttl.getBytes("UTF-8")), null, "TTL")
-        extractExperiments(model)
+    def getExperimentsInputIris(ttlData: String) : Seq[String] = {
+        extractExperiments(RdfUtils.fromTtl(ttlData))
     }
 
-    def runExperimentFromInput(input: String) : UUID = {
-        val model = ModelFactory.createDefaultModel()
-        model.read(new ByteArrayInputStream(input.getBytes("UTF-8")), null, "TTL")
-        runExperiment(extractTemplates(model))
+    def runExperimentFromInput(ttlData: String) : UUID = {
+        runExperiment(extractTemplates(RdfUtils.fromTtl(ttlData)))
     }
 
     def extractTemplates(model: Model) : Seq[String] = {
@@ -123,13 +114,7 @@ class DiscoveryService {
 
     def getDataSampleService(pipelineId: String, discoveryId: String, dataSample: String, host: String, endpointUri: String) : Model = {
         val graphUri = s"urn:$discoveryId/$pipelineId"
-
-        val encodedGraphUri = URLEncoder.encode(graphUri, "UTF-8")
-        val encodedTruncateQuery = URLEncoder.encode(s"CONSTRUCT{ ?s ?p ?o } FROM <$graphUri> WHERE { ?s ?p ?o }", "UTF-8")
-
-        val params = s"context-uri=$encodedGraphUri"
-        val response = Http(s"$endpointUri/sparql?$params").postData(dataSample).header("Content-Type", "text/turtle").asString
-
+        RdfUtils.graphStoreBlazegraph(dataSample, endpointUri, graphUri)
         service(pipelineId, discoveryId, host, endpointUri, graphUri)
     }
 
@@ -162,11 +147,11 @@ class DiscoveryService {
     }
 
     def listTemplates(templateSourceUri: String): Option[DiscoveryInput] = {
-        fromIri(templateSourceUri) {
+        RdfUtils.fromIri(templateSourceUri)(discoveryLogger) {
             case Right(model) => {
                 val templates = model.listObjectsOfProperty(LPD.hasTemplate).toList.asScala
                 val templateUris = templates.map(_.asResource().getURI)
-                val templateModels = templateUris.map { u => fromIri(u) { e => e } }.filter(_.isRight).map(_.right.get)
+                val templateModels = templateUris.map { u => RdfUtils.fromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get)
                 Some(DiscoveryInput(templateModels))
             }
             case Left(e) => None
@@ -174,7 +159,7 @@ class DiscoveryService {
     }
 
     def executionStatus(iri: String): ExecutionStatus = {
-        fromJsonLd(s"$iri/overview") { d =>
+        RdfUtils.fromJsonLd(s"$iri/overview") { d =>
 
             val model = d.getDefaultModel
             val statusNodes = model.listObjectsOfProperty(ETL.executionStatus).toList.asScala
@@ -202,23 +187,6 @@ class DiscoveryService {
             val uuid = UUID.fromString(pipelineId)
             discovery.results.get(uuid).map { p => action(p, discovery) }
         }.flatten
-    }
-
-    private def fromJsonLd[R](iri: String)(fn: Dataset => R): R = {
-        val dataset = RDFDataMgr.loadDataset(iri, Lang.JSONLD)
-        fn(dataset)
-    }
-
-    private def fromIri[R](uri: String)(fn: Either[Throwable, Model] => R): R = {
-        discoveryLogger.debug(s"Downloading data from $uri.")
-        val result = try {
-            val model = ModelFactory.createDefaultModel()
-            model.read(uri)
-            Right(model)
-        } catch {
-            case e: RiotException => Left(new Exception(s"The data at $uri caused the following error: ${e.getMessage}."))
-        }
-        fn(result)
     }
 
 }
