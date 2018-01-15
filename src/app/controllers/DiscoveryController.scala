@@ -59,7 +59,7 @@ class DiscoveryController @Inject()(
 
     def getExperimentsInputIrisFromIri(iri: String) = Action {
         val inputIris = service.getExperimentsInputIrisFromIri(iri)
-        Ok(Json.obj("inputIris" -> Json.arr(inputIris.map(ii => Json.toJson(ii)))))
+        Ok(Json.obj("inputIris" -> inputIris.map(ii => Json.toJson(ii))))
     }
 
     def getExperimentsInputIris = Action { request: Request[AnyContent] =>
