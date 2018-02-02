@@ -3,40 +3,39 @@
 
 @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
 
-@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/> .
-@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/dce-to-dcterms-date/configuration/> .
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/dcterms-datesubmitted-to-dcterms-date/configuration/> .
 
 transformer:template a lpd:TransformerTemplate ;
-  dcterms:title "Dublin Core elements date to Dublin Core terms date"@en;
+  dcterms:title "Dublin Core terms dateSubmitted to Dublin Core terms date"@en;
   lpd:componentConfigurationTemplate transformer:defaultConfiguration ;
   lpd:inputTemplate transformer:input ;
   lpd:outputTemplate transformer:output ;
   lpd:feature transformer:feature .
   
 configuration-vocabulary:Configuration a rdfs:Class ;
-  rdfs:label "Class of configurations of Dublin Core elements date to Dublin Core terms date"@en;
+  rdfs:label "Class of configurations of Dublin Core terms dateSubmitted to Dublin Core terms date"@en;
   rdfs:subClassOf lpd:ComponentConfiguration .
   
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   dcterms:title "Default configuration" ;
   lpd:query  """
-PREFIX dce: <http://purl.org/dc/elements/1.1/>
 PREFIX dct: <http://purl.org/dc/terms/>
 
 DELETE {
-  ?s dce:date ?date .
+  ?s dct:dateSubmitted ?date .
 }
 INSERT {
   ?s dct:date ?date .
 } 
 WHERE {
-  ?s dce:date ?date .
+  ?s dct:dateSubmitted ?date .
 }
   """ ;
   lpd:configurationQuery """
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
-    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/dce-to-dcterms-date/configuration/>
+    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/dcterms-datesubmitted-to-dcterms-date/configuration/>
     
     CONSTRUCT {
       ?config a configuration-vocabulary:Configuration ;
@@ -50,21 +49,21 @@ WHERE {
   """ .
 
 transformer:input a lpd:InputDataPortTemplate ;
-  dcterms:title "Triples with Dublin Core elements date predicate" .
+  dcterms:title "Triples with Dublin Core terms dateSubmitted predicate" .
   
 transformer:output a lpd:OutputDataPortTemplate ;
   dcterms:title "Representation of objects of the input triples expressed as Dublin Core terms triples" .
   
 transformer:feature a lpd:MandatoryFeature ;
-  dcterms:title "Transforms Dublin Core elements date to Dublin Core terms date" ;
+  dcterms:title "Transforms Dublin Core terms dateSubmitted to Dublin Core terms date" ;
   lpd:descriptor transformer:descriptor .
   
 transformer:descriptor a lpd:Descriptor ;
   lpd:query """
-PREFIX dce: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
 
 ASK {
-  ?s dce:date ?date .
+  ?s dct:dateSubmitted ?date .
 }
   """ ;
   lpd:appliesTo transformer:input .

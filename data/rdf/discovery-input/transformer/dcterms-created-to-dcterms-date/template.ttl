@@ -23,13 +23,13 @@ transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
 PREFIX dct: <http://purl.org/dc/terms/>
 
 DELETE {
-  ?s dc:created ?date .
+  ?s dct:created ?date .
 }
 INSERT {
-  ?s dc:date ?date .
+  ?s dct:date ?date .
 } 
 WHERE {
-  ?s dc:created ?date .
+  ?s dct:created ?date .
 }
   """ ;
   lpd:configurationQuery """
@@ -63,7 +63,7 @@ transformer:descriptor a lpd:Descriptor ;
 PREFIX dct: <http://purl.org/dc/terms/>
 
 ASK {
-  ?s dc:created ?date .
+  ?s dct:created ?date .
 }
   """ ;
   lpd:appliesTo transformer:input .
