@@ -23,9 +23,9 @@ class DiscoveryService {
     private val discoveryLogger = Logger.of("discovery")
 
     def start(input: DiscoveryInput) = {
-        val discovery = Discovery.create
+        val discovery = Discovery.create(input)
         discoveries.put(discovery.id, discovery)
-        discovery.discover(input)
+        discovery.start
         discovery.id
     }
 
@@ -102,7 +102,7 @@ class DiscoveryService {
         DiscoveryStatus(
             discovery.results.size,
             discovery.isFinished,
-            (discovery.end - discovery.start) / (1000 * 1000) // ns -> ms
+            discovery.duration
         )
     }
 

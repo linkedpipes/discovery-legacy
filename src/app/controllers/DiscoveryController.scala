@@ -281,7 +281,7 @@ class DiscoveryController @Inject()(
                         g.applicationGroups.map(ag => ag.dataSourceGroups.map(ds => ds.extractorGroups.size).sum).sum,
                         g.applicationGroups.map(ag => ag.dataSourceGroups.map(ds => ds.extractorGroups.map(eg => eg.dataSampleGroups.size).sum).sum).sum,
                         g.pipelines.size,
-                        (d.end - d.start) / (1000 * 1000), // ns -> ms
+                        d.duration,
                         d.input.applications.size,
                         d.input.dataSets.size,
                         d.input.processors.size

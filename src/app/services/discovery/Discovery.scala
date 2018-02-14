@@ -13,22 +13,26 @@ import scala.collection.mutable
 import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
 
-class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder: PipelineBuilder, maximalIterationsCount: Int = 10)(implicit executor: ExecutionContext) {
-
-    private val discoveryLogger = Logger.of("discovery")
+class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount: Int = 10)
+               (portMatcher: DiscoveryPortMatcher, pipelineBuilder: PipelineBuilder)
+               (implicit executor: ExecutionContext)
+{
 
     val results = new mutable.HashMap[UUID, Pipeline]
 
-    val start = System.nanoTime()
-
-    var end : Long = 0
-
     var isFinished = false
 
-    var input : DiscoveryInput = null
+    private val discoveryLogger = Logger.of("discovery")
 
-    def discover(input: DiscoveryInput): Future[Seq[Pipeline]] = {
-        this.input = input
+    private val startTime = System.nanoTime()
+
+    private var endTime : Long = 0
+
+    def duration: Long = {
+        (endTime - startTime) / (1000 * 1000) // ns -> ms
+    }
+
+    def start: Future[Seq[Pipeline]] = {
         discoveryLogger.info(s"[$id] Starting with ${input.dataSets.size} data sets, ${input.processors.size} processors and ${input.applications.size} applications.")
         val pipelines = createInitialPipelines(input.dataSets).flatMap { initialPipelines =>
             val data = IterationData(
@@ -51,7 +55,7 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
     private def iterate(iterationData: IterationData): Future[Seq[Pipeline]] = {
         iterationBody(iterationData).flatMap { nextIterationData =>
 
-            val discoveredNewPipeline = nextIterationData.givenPipelines.size > iterationData.givenPipelines.size
+            val discoveredNewPipeline = nextIterationData.givenPipelines.lengthCompare(iterationData.givenPipelines.size) > 0
             val stop = !discoveredNewPipeline || iterationData.iterationNumber == maximalIterationsCount
 
             discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Iteration finished.")
@@ -60,7 +64,7 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
 
             stop match {
                 case true => {
-                    end = System.nanoTime()
+                    endTime = System.nanoTime()
                     Future.successful(nextIterationData.completedPipelines)
                 }
                 case false => iterate(nextIterationData)
@@ -92,7 +96,7 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
 
                     val filteredPipelines = component match {
                         case c if c.isInstanceOf[LinksetBasedUnion] => pipelines.filterNot(_.components.count(_.componentInstance == c) > 0)
-                          .filterNot(p => p.components.size == 1 && p.lastComponent.componentInstance.isInstanceOf[DataSourceInstance] &&
+                          .filterNot(p => p.components.lengthCompare(1) == 0 && p.lastComponent.componentInstance.isInstanceOf[DataSourceInstance] &&
                             p.lastComponent.componentInstance.asInstanceOf[DataSourceInstance].isLarge)
                         case c if c.isInstanceOf[FusionTransformer] => pipelines.filter(_.components.exists(_.componentInstance.isInstanceOf[LinksetBasedUnion]))
                         case e if e.isInstanceOf[ExtractorInstance] => pipelines.filter(_.lastComponent.componentInstance.isInstanceOf[DataSourceInstance])
@@ -117,8 +121,11 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
                 results.put(UUID.randomUUID(), p)
             }
 
-            val nextIterationGivenPipelines = (iterationData.givenPipelines ++ partialPipelines).distinct
             val nextIterationCompletePipelines = iterationData.completedPipelines ++ completePipelines
+            val nextIterationGivenPipelines = input.needsSmallerFragments match {
+                case true => (iterationData.givenPipelines ++ partialPipelines).distinct
+                case false => partialPipelines.toSeq
+            }
 
             IterationData(
                 iterationData.id,
@@ -141,9 +148,9 @@ class Discovery(val id: UUID, portMatcher: DiscoveryPortMatcher, pipelineBuilder
 }
 
 object Discovery {
-    def create : Discovery = {
+    def create(input: DiscoveryInput) : Discovery = {
         val uuid = UUID.randomUUID()
         val builder = new PipelineBuilder(uuid)
-        new Discovery(uuid, new DiscoveryPortMatcher(uuid, builder), builder)
+        new Discovery(uuid, input)(new DiscoveryPortMatcher(uuid, builder), builder)
     }
 }

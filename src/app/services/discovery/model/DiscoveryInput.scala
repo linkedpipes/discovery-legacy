@@ -19,7 +19,12 @@ case class DiscoveryInput(
     extractors: Seq[ExtractorInstance],
     processors: Seq[ProcessorInstance],
     applications: Seq[ApplicationInstance]
-)
+) {
+    def needsSmallerFragments: Boolean = {
+        val containsLinksetBasedUnion = false
+        containsLinksetBasedUnion
+    }
+}
 
 case class RelevantModel(importantResources: Seq[Resource])
 
