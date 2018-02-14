@@ -12,7 +12,7 @@ import scalaj.http.Http
 
 object RdfUtils {
 
-  def fromTtl(ttlData: String) = {
+  def modelFromTtl(ttlData: String) = {
     val model = ModelFactory.createDefaultModel()
     model.read(new ByteArrayInputStream(ttlData.getBytes("UTF-8")), null, "TTL")
   }
@@ -21,7 +21,7 @@ object RdfUtils {
     fn(RDFDataMgr.loadDataset(iri, Lang.JSONLD))
   }
 
-  def fromIri[R](uri: String)(discoveryLogger: ALogger)(fn: Either[Throwable, Model] => R): R = {
+  def modelFromIri[R](uri: String)(discoveryLogger: ALogger)(fn: Either[Throwable, Model] => R): R = {
     discoveryLogger.debug(s"Downloading data from $uri.")
     val result = try {
       val model = ModelFactory.createDefaultModel()

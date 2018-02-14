@@ -48,7 +48,7 @@ class DiscoveryController @Inject()(
 
     def startExperiment = Action(parse.json) { request =>
         val uris = request.body.as[Seq[String]]
-        val discoveryId = service.runExperiment(uris)
+        val discoveryId = service.runExperiment(uris, Map())
         Ok(Json.obj("id" -> Json.toJson(discoveryId)))
     }
 

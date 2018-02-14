@@ -39,9 +39,9 @@ class DiscoveryService {
 
     def stop(id: String) = {}
 
-    def runExperiment(templateUris: Seq[String]): UUID = {
-        val templates = templateUris.par.map { u => RdfUtils.fromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get).seq
-        val discoveryInput = DiscoveryInput(templates)
+    def runExperiment(templateUris: Seq[String], templateGrouping: Map[String, List[String]]): UUID = {
+        val templates = templateUris.par.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get).seq
+        val discoveryInput = DiscoveryInput(templates, templateGrouping)
         start(discoveryInput)
     }
 
@@ -50,26 +50,26 @@ class DiscoveryService {
     }
 
     def runExperimentFromInputIri(inputIri: String) : UUID = {
-        val iris = RdfUtils.fromIri(inputIri)(discoveryLogger) {
-            case Right(model) => extractTemplates(model)
-            case _ => Seq()
+        RdfUtils.modelFromIri(inputIri)(discoveryLogger) {
+            case Right(model) => runExperiment(extractTemplates(model), getGroupings(model))
+            case _ => runExperiment(Seq(), Map())
         }
-        runExperiment(iris)
     }
 
     def getExperimentsInputIrisFromIri(iri: String) : Seq[String] = {
-        RdfUtils.fromIri(iri)(discoveryLogger) {
+        RdfUtils.modelFromIri(iri)(discoveryLogger) {
             case Right(model) => extractExperiments(model)
             case _ => Seq()
         }
     }
 
     def getExperimentsInputIris(ttlData: String) : Seq[String] = {
-        extractExperiments(RdfUtils.fromTtl(ttlData))
+        extractExperiments(RdfUtils.modelFromTtl(ttlData))
     }
 
     def runExperimentFromInput(ttlData: String) : UUID = {
-        runExperiment(extractTemplates(RdfUtils.fromTtl(ttlData)))
+        val model = RdfUtils.modelFromTtl(ttlData)
+        runExperiment(extractTemplates(model), getGroupings(model))
     }
 
     def extractTemplates(model: Model) : Seq[String] = {
@@ -147,15 +147,26 @@ class DiscoveryService {
     }
 
     def listTemplates(templateSourceUri: String): Option[DiscoveryInput] = {
-        RdfUtils.fromIri(templateSourceUri)(discoveryLogger) {
+        RdfUtils.modelFromIri(templateSourceUri)(discoveryLogger) {
             case Right(model) => {
                 val templates = model.listObjectsOfProperty(LPD.hasTemplate).toList.asScala
-                val templateUris = templates.map(_.asResource().getURI)
-                val templateModels = templateUris.map { u => RdfUtils.fromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get)
-                Some(DiscoveryInput(templateModels))
+                val templateIris = templates.map(_.asResource().getURI)
+                val templateGroups = model.listSubjectsWithProperty(RDF.`type`, LPD.TransformerGroup).asScala.toList
+                val templateGroupings = templateGroups.map { tg =>
+                    (tg.asResource().getURI, model.listObjectsOfProperty(tg, LPD.hasTransformer).asScala.toList.map(_.asResource().getURI))
+                }
+                val templateModels = templateIris.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get)
+                Some(DiscoveryInput(templateModels, getGroupings(model)))
             }
             case Left(e) => None
         }
+    }
+
+    private def getGroupings(model: Model) : Map[String, List[String]] = {
+        val templateGroups = model.listSubjectsWithProperty(RDF.`type`, LPD.TransformerGroup).asScala.toList
+        templateGroups.map { tg =>
+            (tg.asResource().getURI, model.listObjectsOfProperty(tg, LPD.hasTransformer).asScala.toList.map(_.asResource().getURI))
+        }.toMap
     }
 
     def executionStatus(iri: String): ExecutionStatus = {

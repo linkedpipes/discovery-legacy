@@ -21,7 +21,7 @@ case class DiscoveryInput(
     applications: Seq[ApplicationInstance]
 ) {
     def needsSmallerFragments: Boolean = {
-        val containsLinksetBasedUnion = false
+        val containsLinksetBasedUnion = true
         containsLinksetBasedUnion
     }
 }
@@ -36,13 +36,13 @@ case class DataSet(dataSourceInstance: DataSourceInstance, extractorInstance: Op
 
 object DiscoveryInput {
 
-    implicit val writes : Writes[DiscoveryInput] = (
+    implicit val writes: Writes[DiscoveryInput] = (
         (JsPath \ "datasets").write[Map[String, DataSourceInstance]] and
             (JsPath \ "processors").write[Map[String, ProcessorInstance]] and
             (JsPath \ "applications").write[Map[String, ApplicationInstance]]
-        )(unlift(DiscoveryInput.destruct))
+        ) (unlift(DiscoveryInput.destruct))
 
-    def destruct(i: DiscoveryInput) : Option[(Map[String, DataSourceInstance], Map[String, ProcessorInstance], Map[String, ApplicationInstance])] = {
+    def destruct(i: DiscoveryInput): Option[(Map[String, DataSourceInstance], Map[String, ProcessorInstance], Map[String, ApplicationInstance])] = {
         Some((
             i.dataSets.map(d => (d.dataSourceInstance.iri, d.dataSourceInstance)).toMap,
             i.processors.map(p => (p.iri, p)).toMap,
@@ -50,9 +50,9 @@ object DiscoveryInput {
         ))
     }
 
-    def apply(templateModels: Seq[Model]): DiscoveryInput = {
+    def apply(templateModels: Seq[Model], templateGroupings: Map[String, List[String]]): DiscoveryInput = {
         val dataSets = getDataSets(templateModels)
-        val processors = getProcessors(templateModels)
+        val processors = getProcessors(templateModels, templateGroupings)
         val applications = getApplications(templateModels)
 
         new DiscoveryInput(dataSets, Seq(), processors, applications)
@@ -73,13 +73,13 @@ object DiscoveryInput {
         }
     }
 
-    private def getProcessors(models: Seq[Model]): Seq[ProcessorInstance] = {
+    private def getProcessors(models: Seq[Model], templateGroupings: Map[String, List[String]]): Seq[ProcessorInstance] = {
         getTemplatesOfType(models, LPD.TransformerTemplate).map { template =>
             val label = template.getProperty(DCTerms.title).getString
             val configuration = template.getRequiredProperty(LPD.componentConfigurationTemplate).getObject.asResource()
             val updateQuery = UpdateQuery(configuration.getRequiredProperty(LPD.query).getString)
-            val group = template.getModel.listObjectsOfProperty(template, LPD.hasTransformer).asScala.toList.headOption
-            new SparqlUpdateTransformer(template.getURI, updateQuery, getFeatures(template), label, group.map(_.asResource().getURI))
+            val groupIri = templateGroupings.find(tg => tg._2.contains(template.getURI)).map(_._1)
+            new SparqlUpdateTransformer(template.getURI, updateQuery, getFeatures(template), label, groupIri)
         }
     }
 
