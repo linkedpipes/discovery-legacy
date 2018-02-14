@@ -24,7 +24,7 @@ abstract class SimpleSparqlUpdateTransformer extends SparqlUpdateTransformerInst
         s"""
            |$prefixes
            |
-          |DELETE { $deleteClause }
+           |DELETE { $deleteClause }
            |INSERT { $insertClause }
            |WHERE { $whereClause }
         """.stripMargin)
@@ -33,7 +33,7 @@ abstract class SimpleSparqlUpdateTransformer extends SparqlUpdateTransformerInst
         s"""
            |$prefixes
            |
-          |ASK { $whereClause }
+           |ASK { $whereClause }
         """.stripMargin
     )
 

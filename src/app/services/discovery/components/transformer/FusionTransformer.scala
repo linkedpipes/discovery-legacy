@@ -22,4 +22,6 @@ class FusionTransformer extends SimpleSparqlUpdateTransformer {
     override def iri: String = "https://linked.opendata.cz/ontology/transformers/fusion"
 
     override def label: String = "Fusion transformer"
+
+    override def transformerGroupIri: Option[String] = None
 }

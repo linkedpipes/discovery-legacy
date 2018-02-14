@@ -78,7 +78,8 @@ object DiscoveryInput {
             val label = template.getProperty(DCTerms.title).getString
             val configuration = template.getRequiredProperty(LPD.componentConfigurationTemplate).getObject.asResource()
             val updateQuery = UpdateQuery(configuration.getRequiredProperty(LPD.query).getString)
-            new SparqlUpdateTransformer(template.getURI, updateQuery, getFeatures(template), label)
+            val group = template.getModel.listObjectsOfProperty(template, LPD.hasTransformer).asScala.toList.headOption
+            new SparqlUpdateTransformer(template.getURI, updateQuery, getFeatures(template), label, group.map(_.asResource().getURI))
         }
     }
 
