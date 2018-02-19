@@ -11,7 +11,9 @@
       <https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template>,
       <https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template>,
       <https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template>
+      <https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>
+      <https://discovery.linkedpipes.com/resource/transformer-group/timeline-test-2/date>
     .
 
 <https://discovery.linkedpipes.com/resource/discovery/timeline-test-2/config> 
@@ -82,3 +84,16 @@
       <https://discovery.linkedpipes.com/resource/lod/templates/https---ruian.linked.opendata.cz-sparql> , 
       <https://discovery.linkedpipes.com/resource/lod/templates/https---w3id.org-scholarlydata-sparql> , 
       <https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql> .
+
+<https://discovery.linkedpipes.com/resource/transformer-group/timeline-test-2/date> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/dcterms-dateaccepted-to-dcterms-date/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/dcterms-datecopyrighted-to-dcterms-date/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template>
+    .
