@@ -307,11 +307,11 @@ class DiscoveryController @Inject()(
                             val pipelines = dataSampleGroup.pipelines.toSeq.sortBy(p => p._2.lastComponent.discoveryIteration)
 
                             pipelines.map { p =>
-                                val dataSourcesString = p._2.typedDatasources.map(_.label).mkString("\\,")
-                                val extractorsString = p._2.typedExtractors.map(_.getClass.getSimpleName).mkString("\\,")
-                                val transformersString = p._2.typedProcessors.map(_.label).mkString("\\,")
+                                val dataSourcesString = p._2.typedDatasources.map(_.label).mkString(",")
+                                val extractorsString = p._2.typedExtractors.map(_.getClass.getSimpleName).mkString(",")
+                                val transformersString = p._2.typedProcessors.map(_.label).mkString(",")
                                 val transformersCount = p._2.typedProcessors.size
-                                val app = p._2.typedApplications.map(_.label).mkString("\\,")
+                                val app = p._2.typedApplications.map(_.label).mkString(",")
                                 val iterationNumber = p._2.lastComponent.discoveryIteration
 
                                 Seq(
@@ -323,7 +323,7 @@ class DiscoveryController @Inject()(
                                     app,
                                     iterationNumber,
                                     s"/discovery/$id/execute/${p._1}"
-                                ).mkString(",")
+                                ).map(e => s"$e").mkString(",")
                             }.mkString("\n")
                         }.mkString("\n")
                     }.mkString("\n")
