@@ -1,0 +1,11 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+<https://discovery.linkedpipes.com/resource/discovery/wikidata-01/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> 
+      <https://discovery.linkedpipes.com/resource/application/map/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/wikidata-coordinate-location-to-schema-geocoordinates/template>
+    .
+
+<https://discovery.linkedpipes.com/resource/discovery/wikidata-01/config> 
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> 
+      <https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q2583015> .

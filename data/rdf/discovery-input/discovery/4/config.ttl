@@ -7,8 +7,10 @@
       <https://discovery.linkedpipes.com/resource/application/map/template>,
       <https://discovery.linkedpipes.com/resource/transformer/geo-pos-to-schema-geocoordinates/template>,
       <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>
-      .
+      <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>
+      <https://discovery.linkedpipes.com/resource/transformer-group/4/label>
+    .
 
 <https://discovery.linkedpipes.com/resource/discovery/4/config> 
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> 
@@ -78,3 +80,9 @@
       <https://discovery.linkedpipes.com/resource/lod/templates/https---ruian.linked.opendata.cz-sparql> , 
       <https://discovery.linkedpipes.com/resource/lod/templates/https---w3id.org-scholarlydata-sparql> , 
       <https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql> .
+      
+<https://discovery.linkedpipes.com/resource/transformer-group/4/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template> 
+    .
