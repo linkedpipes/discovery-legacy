@@ -139,24 +139,32 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount:
     }
 
     private def consolidateFragments(pipelineFragments: Seq[Pipeline], discoveryIteration: Int) : Seq[Pipeline] = {
+
         val (endingWithTransformer, others) = pipelineFragments.partition(p => p.lastComponent.componentInstance.isInstanceOf[SparqlUpdateTransformerInstance])
-        val transformerGroups = endingWithTransformer.groupBy(p => p.lastComponent.componentInstance.asInstanceOf[SparqlUpdateTransformerInstance].transformerGroupIri)
-        val (withTransformerGroup, withoutTransformerGroup) = transformerGroups.partition(tg => tg._1.isDefined)
 
-        val newFragments = withTransformerGroup.map { transformerGroup =>
-            val distinctTransformers = transformerGroup._2.map(_.lastComponent.componentInstance.asInstanceOf[SparqlUpdateTransformerInstance]).distinct
-            val randomPipelineFragment = transformerGroup._2.head
-            val transformer = randomPipelineFragment.lastComponent.componentInstance.asInstanceOf[SparqlUpdateTransformerInstance]
-            val transformersToAttach = distinctTransformers.filter(t => t != transformer)
+        val datasourceGroups = endingWithTransformer.groupBy(p => p.components.map(c => c.componentInstance).filter(c => c.isInstanceOf[DataSourceInstance]))
+        val dsgFragments = datasourceGroups.map { dsg =>
+            val transformerGroups = dsg._2.groupBy(p => p.lastComponent.componentInstance.asInstanceOf[SparqlUpdateTransformerInstance].transformerGroupIri)
+            val (withTransformerGroup, withoutTransformerGroup) = transformerGroups.partition(tg => tg._1.isDefined)
 
-            var fragment = randomPipelineFragment
-            transformersToAttach.foreach { t =>
-                fragment = Await.ready(pipelineBuilder.buildPipeline(t, Seq(PortMatch(t.getInputPorts.head, fragment, None)), discoveryIteration), atMost = Duration(30, SECONDS)).value.get.get
+            val newFragments = withTransformerGroup.map { transformerGroup =>
+                val distinctTransformers = transformerGroup._2.map(_.lastComponent.componentInstance.asInstanceOf[SparqlUpdateTransformerInstance]).distinct
+                val randomPipelineFragment = transformerGroup._2.head
+                val transformer = randomPipelineFragment.lastComponent.componentInstance.asInstanceOf[SparqlUpdateTransformerInstance]
+                val transformersToAttach = distinctTransformers.filter(t => t != transformer)
+
+                var fragment = randomPipelineFragment
+                transformersToAttach.foreach { t =>
+                    fragment = Await.ready(pipelineBuilder.buildPipeline(t, Seq(PortMatch(t.getInputPorts.head, fragment, None)), discoveryIteration), atMost = Duration(30, SECONDS)).value.get.get
+                }
+                fragment
             }
-            fragment
+
+            withoutTransformerGroup.values.flatten ++ newFragments
         }
 
-        others ++ withoutTransformerGroup.values.flatten ++ newFragments
+
+        others ++ dsgFragments.flatten
     }
 
     private def createInitialPipelines(dataSets: Seq[DataSet]): Future[Seq[Pipeline]] = {
