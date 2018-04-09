@@ -144,13 +144,13 @@ class DiscoveryController @Inject()(
         ) ++ pairs.map(p => (s"${p._2}.csv", getDetailedCsv(p._2)))
     }
 
-    private def csv(input: Seq[Any]) : String = {
-        input.map(i => s"\"${i.toString.replace("\"","\"\"")}\"").mkString(",")
+    private def toCsv(input: Seq[Any]) : String = {
+        input.map(i => "\"" + i.toString.replace("\"","\"\"") + "\"").mkString(",")
     }
 
     private def getDataSourceExperimentCsvStats(pairs: Seq[(String, String)]) : String = {
 
-        val heading = csv(Seq(
+        val heading = toCsv(Seq(
             "Discovery ID",
             "Experiment URI",
             "Datasource URI",
@@ -164,7 +164,7 @@ class DiscoveryController @Inject()(
             service.withDiscovery(id) { discovery =>
                 val dataSources = discovery.input.dataSets.map(ds => ds.dataSourceInstance)
                 dataSources.map { d =>
-                    csv(Seq(
+                    toCsv(Seq(
                         id,
                         inputIri,
                         d.iri,
@@ -186,7 +186,7 @@ class DiscoveryController @Inject()(
     }
 
     private def getApplicationExperimentCsvStats(pairs: Seq[(String, String)]) : String = {
-        val heading = csv(Seq(
+        val heading = toCsv(Seq(
             "Discovery ID",
             "Experiment URI",
             "Application URI",
@@ -199,7 +199,7 @@ class DiscoveryController @Inject()(
         val lines = pairs.map { case (inputIri, id) =>
             service.withDiscovery(id) { d =>
                 d.input.applications.map { a =>
-                    csv(Seq(
+                    toCsv(Seq(
                         id,
                         inputIri,
                         a.iri,
@@ -221,7 +221,7 @@ class DiscoveryController @Inject()(
 
     private def getDataSourceApplicationExperimentCsvStats(pairs: Seq[(String, String)]) : String = {
 
-        val heading = csv(Seq(
+        val heading = toCsv(Seq(
             "Discovery ID",
             "Experiment URI",
             "Datasource URI",
@@ -237,7 +237,7 @@ class DiscoveryController @Inject()(
                 discovery.input.applications.flatMap { a =>
                     val dataSources = discovery.input.dataSets.map(ds => ds.dataSourceInstance)
                     dataSources.map { d =>
-                        csv(Seq(
+                        toCsv(Seq(
                             id,
                             inputIri,
                             d.iri,
@@ -261,7 +261,7 @@ class DiscoveryController @Inject()(
 
     private def getGlobalCsvStats(pairs: Seq[(String, String)]) : String = {
 
-        val heading = csv(Seq(
+        val heading = toCsv(Seq(
             "Discovery ID",
             "Experiment URI",
             "Application group count",
@@ -277,7 +277,7 @@ class DiscoveryController @Inject()(
         val lines = pairs.map { case (inputIri, id) =>
             service.withDiscovery(id) { d =>
                 service.getPipelinesOfDiscovery(id).map { pipelineMap => PipelineGrouping.create(pipelineMap) }.map { g =>
-                    csv(Seq(
+                    toCsv(Seq(
                         id,
                         inputIri,
                         g.applicationGroups.size,
@@ -318,7 +318,7 @@ class DiscoveryController @Inject()(
                                 val app = p._2.typedApplications.map(_.label).mkString(",")
                                 val iterationNumber = p._2.lastComponent.discoveryIteration
 
-                                csv(Seq(
+                                toCsv(Seq(
                                     id,
                                     dataSourcesString,
                                     transformersCount,
@@ -335,7 +335,7 @@ class DiscoveryController @Inject()(
             }.mkString("\n")
         }.mkString("\n")
 
-        val header = csv(Seq(
+        val header = toCsv(Seq(
             "discoveryId",
             "appGroup",
             "dataSourcesGroup",
