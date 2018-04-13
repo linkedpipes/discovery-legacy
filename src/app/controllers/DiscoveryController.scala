@@ -136,12 +136,16 @@ class DiscoveryController @Inject()(
     }
 
     private def getCsvStats(pairs: Seq[(String, String)]) : Seq[(String, String)] = {
-        Seq(
-            ("1.csv", getGlobalCsvStats(pairs)),
-            ("2.csv", getDataSourceExperimentCsvStats(pairs)),
-            ("3.csv", getApplicationExperimentCsvStats(pairs)),
-            ("4.csv", getDataSourceApplicationExperimentCsvStats(pairs))
-        ) ++ pairs.map(p => (s"${p._2}.csv", getDetailedCsv(p._2)))
+        val data = Seq(
+            ("1.csv", () => getGlobalCsvStats(pairs)),
+            ("2.csv", () => getDataSourceExperimentCsvStats(pairs)),
+            ("3.csv", () => getApplicationExperimentCsvStats(pairs)),
+            ("4.csv", () => getDataSourceApplicationExperimentCsvStats(pairs))
+        ) ++ pairs.map(p => (s"${p._2}.csv", () => getDetailedCsv(p._2)))
+
+        data.par.map{ case (n, f) => {
+            (n, f())
+        }}.seq
     }
 
     private def toCsv(input: Seq[Any]) : String = {
