@@ -1,0 +1,13 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+<https://discovery.linkedpipes.com/resource/discovery/wikidata-02/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> 
+      <https://discovery.linkedpipes.com/resource/application/timeline-periods/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-birth-date-of-death-to-wikidata-start-time-end-time/template>,
+	  <https://discovery.linkedpipes.com/resource/transformer/wikidata-start-time-end-time-to-schema-startdate-enddate/template>
+    .
+
+<https://discovery.linkedpipes.com/resource/discovery/wikidata-02/config> 
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> 
+      <https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q15883433>,
+	  <https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q1028181> .
