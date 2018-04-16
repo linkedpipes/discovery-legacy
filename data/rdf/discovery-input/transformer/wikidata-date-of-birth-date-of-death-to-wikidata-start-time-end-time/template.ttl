@@ -57,13 +57,13 @@ WHERE {
   """ .
 
 transformer:input a lpd:InputDataPortTemplate ;
-  dcterms:title "Triples with The PROV Ontology startedAtTime predicate" .
+  dcterms:title "Triples with Wikidata date of birth (P569) and date of death (P570)" .
   
 transformer:output a lpd:OutputDataPortTemplate ;
-  dcterms:title "Representation of objects of the input triples expressed as Schema.org triples" .
+  dcterms:title "Triples with Wikidata start date (P580) and end date (P582)" .
   
 transformer:feature a lpd:MandatoryFeature ;
-  dcterms:title "Transforms The PROV Ontology startedAtTime to Schema.org startDate" ;
+  dcterms:title "Transforms Wikidata date of birth (P569) and date of death (P570) to Wikidata start date (P580) and end date (P582)" ;
   lpd:descriptor transformer:descriptor .
   
 transformer:descriptor a lpd:Descriptor ;

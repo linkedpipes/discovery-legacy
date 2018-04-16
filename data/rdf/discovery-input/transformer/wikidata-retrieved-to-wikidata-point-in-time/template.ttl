@@ -3,48 +3,39 @@
 
 @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
 
-@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/wikidata-start-time-end-time-to-schema-startdate-enddate/> .
-@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-start-time-end-time-to-schema-startdate-enddate/configuration/> .
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/wikidata-retrieved-to-wikidata-point-in-time/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-retrieved-to-wikidata-point-in-time/configuration/> .
 
 transformer:template a lpd:TransformerTemplate ;
-  dcterms:title "Wikidata start date (P580) and end date (P582) to Schema.org startdate and enddate"@en;
+  dcterms:title "Wikidata retrieved (P813) to Wikidata point in time (P585)"@en;
   lpd:componentConfigurationTemplate transformer:defaultConfiguration ;
   lpd:inputTemplate transformer:input ;
   lpd:outputTemplate transformer:output ;
   lpd:feature transformer:feature .
   
 configuration-vocabulary:Configuration a rdfs:Class ;
-  rdfs:label "Class of configurations of Wikidata start date (P580) and end date (P582) to Schema.org startdate and enddate"@en;
+  rdfs:label "Class of configurations of Wikidata retrieved (P813) to Wikidata point in time (P585)"@en;
   rdfs:subClassOf lpd:ComponentConfiguration .
   
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   dcterms:title "Default configuration" ;
   lpd:query  """
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX schema: <http://schema.org/>
 
 DELETE {
-  ?s wdt:P580 ?startTime .
- 
-  ?s wdt:P582 ?endTime .
+  ?s wdt:P813 ?startTime .
 }
 INSERT {
-  ?s schema:startDate ?startTime .
- 
-  ?s schema:endDate ?endTime .
+  ?s wdt:P585 ?startTime .
 } 
 WHERE {
-  {
-    ?s wdt:P580 ?startTime .
-  } UNION {
-    ?s wdt:P582 ?endTime .
-  }
+  ?s wdt:P813 ?startTime .
 }
   """ ;
   lpd:configurationQuery """
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
-    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-start-time-end-time-to-schema-startdate-enddate/configuration/>
+    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-retrieved-to-wikidata-point-in-time/configuration/>
     
     CONSTRUCT {
       ?config a configuration-vocabulary:Configuration ;
@@ -58,13 +49,13 @@ WHERE {
   """ .
 
 transformer:input a lpd:InputDataPortTemplate ;
-  dcterms:title "Triples with Wikidata start date (P580) and end date (P582)" .
+  dcterms:title "Triples with Wikidata retrieved (P813)" .
   
 transformer:output a lpd:OutputDataPortTemplate ;
-  dcterms:title "Representation of objects of the input triples expressed as Schema.org triples" .
+  dcterms:title "Triples with Wikidata point in time (P585)" .
   
 transformer:feature a lpd:MandatoryFeature ;
-  dcterms:title "Transforms Wikidata start date (P580) and end date (P582) to Schema.org startdate and enddate" ;
+  dcterms:title "Transforms Wikidata retrieved (P813) to Wikidata point in time (P585)" ;
   lpd:descriptor transformer:descriptor .
   
 transformer:descriptor a lpd:Descriptor ;
@@ -72,11 +63,7 @@ transformer:descriptor a lpd:Descriptor ;
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 
 ASK {
-  {
-    ?s wdt:P580 ?startTime .
-  } UNION {
-    ?s wdt:P582 ?endTime .
-  }
+  ?s wdt:P813 ?startTime .
 }
   """ ;
   lpd:appliesTo transformer:input .
