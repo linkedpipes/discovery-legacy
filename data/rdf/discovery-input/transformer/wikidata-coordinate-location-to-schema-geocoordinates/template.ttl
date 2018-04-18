@@ -30,8 +30,8 @@ INSERT {
   ?s schema:geo ?geo .
 
   ?geo a schema:GeoCoordinates ; 
-           schema:latitude ?lat ;
-           schema:longitude ?long .
+    schema:latitude ?lat ;
+    schema:longitude ?long .
 } 
 WHERE {
   ?s wdt:P625 ?loc .
