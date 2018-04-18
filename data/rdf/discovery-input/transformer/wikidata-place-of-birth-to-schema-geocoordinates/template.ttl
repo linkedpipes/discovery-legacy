@@ -22,6 +22,7 @@ transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   lpd:query  """
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 DELETE {
   ?place wdt:P625 ?loc .
@@ -75,6 +76,7 @@ transformer:feature a lpd:MandatoryFeature ;
 transformer:descriptor a lpd:Descriptor ;
   lpd:query """
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 ASK {
   ?thing wdt:P19 ?place ;
