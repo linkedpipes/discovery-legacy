@@ -52,12 +52,9 @@
 <https://discovery.linkedpipes.com/resource/transformer/wikidata-time-of-spacecraft-orbit-decay-to-wikidata-point-in-time/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/wikidata-work-location-to-schema-geocoordinates/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/wikidata-work-period-start-work-period-end-to-wikidata-start-time-end-time/template> , 
-<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q100023> , 
-<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q1000371> , 
-<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q10007123> , 
-<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q1000809> , 
-<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q1001041> , 
-<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q36233> ;
+<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q931260> ,
+<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q2341389> ,
+<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q11424> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/wikidata/all>
 	
 <https://discovery.linkedpipes.com/resource/transformer-group/wikidata/all> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
