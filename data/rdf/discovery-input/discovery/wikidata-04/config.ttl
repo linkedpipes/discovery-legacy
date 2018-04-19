@@ -6,6 +6,6 @@
       <https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-birth-to-schema-geocoordinates/template>
     .
 
-<https://discovery.linkedpipes.com/resource/discovery/wikidata-03/config> 
+<https://discovery.linkedpipes.com/resource/discovery/wikidata-04/config> 
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> 
       <https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q931260> .

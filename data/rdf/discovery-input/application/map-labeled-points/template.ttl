@@ -44,12 +44,16 @@
      dcterms:title "Checks if default feature of Map Application  with labeled points can be applied." ;
      lpd:query """
 PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 ASK  {
-?geo 
-  schema:name ?name ;
-  schema:latitude ?lat ;
-  schema:longitude ?long .
+  {
+    ?geo schema:name ?name .
+  } UNION {
+    ?geo rdfs:label ?name .
+  }
+  ?geo schema:latitude ?lat ;
+    schema:longitude ?long .
 }
 """ ;
      lpd:appliesTo application:input .
