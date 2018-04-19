@@ -55,7 +55,7 @@
 <https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q931260> ,
 <https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q2341389> ,
 <https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q11424> ;
-    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/wikidata/all>
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/wikidata/all> .
 	
 <https://discovery.linkedpipes.com/resource/transformer-group/wikidata/all> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
@@ -108,4 +108,4 @@
 <https://discovery.linkedpipes.com/resource/transformer-group/schemaorg/startdate-enddate> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
       <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template> , 
-      <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template> , 
+      <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template> .
