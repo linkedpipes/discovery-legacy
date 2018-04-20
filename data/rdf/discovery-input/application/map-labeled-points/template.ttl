@@ -47,12 +47,9 @@ PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 ASK  {
-  {
-    ?geo schema:name ?name .
-  } UNION {
-    ?geo rdfs:label ?name .
-  }
-  ?geo schema:latitude ?lat ;
+  ?geo 
+    rdfs:label ?label ;
+    schema:latitude ?lat ;
     schema:longitude ?long .
 }
 """ ;
