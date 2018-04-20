@@ -441,5 +441,5 @@
  <https://discovery.linkedpipes.com/resource/transformer-group/time> ,
  <https://discovery.linkedpipes.com/resource/transformer-group/time-interval> ,
  <https://discovery.linkedpipes.com/resource/transformer-group/title> ,
- <https://ldcp.opendata.cz/resource/dbpedia/transformer-group/external-location> ,
+ <https://ldcp.opendata.cz/resource/dbpedia/transformer-group/external-location>
  .
