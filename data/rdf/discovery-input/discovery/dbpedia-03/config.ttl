@@ -434,7 +434,7 @@
  <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-supply-to-schema-geocoordinates/template> ,
  <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-touristicSite-to-schema-geocoordinates/template> ,
  <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-westPlace-to-schema-geocoordinates/template> ,
- <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-wilaya-to-schema-geocoordinates/template>
+ <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-wilaya-to-schema-geocoordinates/template> ,
  <https://ldcp.opendata.cz/resource/dbpedia/datasource-templates/Earthquake> ;
 	<https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://ldcp.opendata.cz/resource/dbpedia/transformer-group/external-point-in-time> ,
  <https://ldcp.opendata.cz/resource/dbpedia/transformer-group/external-starttime-endtime> ,
