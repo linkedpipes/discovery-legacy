@@ -9,6 +9,7 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-title-to-rdfs-label/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/wikidata-birthday-date-of-burial-to-wikidata-start-time-end-time/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/wikidata-birthday-date-of-death-to-wikidata-start-time-end-time/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/wikidata-birthday-date-of-disappearance-to-wikidata-start-time-end-time/template> , 
