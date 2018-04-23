@@ -3,47 +3,48 @@
 
 @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
 
-@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/geosparql-aswkt-to-schema-geocoordinates/> .
-@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/geosparql-aswkt-to-schema-geocoordinates/configuration/> .
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/wikidata-start-time-end-time-to-schema-startdate-enddate/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-start-time-end-time-to-schema-startdate-enddate/configuration/> .
 
 transformer:template a lpd:TransformerTemplate ;
-  dcterms:title "GeoSPARQL asWKT to Schema.org Geocoordinates"@en;
+  dcterms:title "Wikidata start date (P580) and end date (P582) to Schema.org startdate and enddate"@en;
   lpd:componentConfigurationTemplate transformer:defaultConfiguration ;
   lpd:inputTemplate transformer:input ;
   lpd:outputTemplate transformer:output ;
   lpd:feature transformer:feature .
   
 configuration-vocabulary:Configuration a rdfs:Class ;
-  rdfs:label "Class of configurations of GeoSPARQL asWKT to Schema.org Geocoordinates"@en;
+  rdfs:label "Class of configurations of Wikidata start date (P580) and end date (P582) to Schema.org startdate and enddate"@en;
   rdfs:subClassOf lpd:ComponentConfiguration .
   
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   dcterms:title "Default configuration" ;
   lpd:query  """
-PREFIX geosparql: <http://www.opengis.net/ont/geosparql#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
 
 DELETE {
-  ?s geosparql:asWKT ?loc .
+  ?s wdt:P580 ?startTime .
+ 
+  ?s wdt:P582 ?endTime .
 }
 INSERT {
-  ?s schema:geo ?geo .
-
-  ?geo a schema:GeoCoordinates ; 
-           schema:latitude ?lat ;
-           schema:longitude ?long .
+  ?s schema:startDate ?startTime .
+ 
+  ?s schema:endDate ?endTime .
 } 
 WHERE {
-  ?s geosparql:asWKT ?loc .
-  BIND(REPLACE(STR(?loc), "Point\\\\((\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\s+(\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\)", "$1") AS ?long)
-  BIND(REPLACE(STR(?loc), "Point\\\\((\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\s+(\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\)", "$3") AS ?lat)
-  BIND(UUID() AS ?geo)
+  {
+    ?s wdt:P580 ?startTime .
+  } UNION {
+    ?s wdt:P582 ?endTime .
+  }
 }
   """ ;
   lpd:configurationQuery """
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
-    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/geosparql-aswkt-to-schema-geocoordinates/configuration/>
+    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-start-time-end-time-to-schema-startdate-enddate/configuration/>
     
     CONSTRUCT {
       ?config a configuration-vocabulary:Configuration ;
@@ -57,21 +58,25 @@ WHERE {
   """ .
 
 transformer:input a lpd:InputDataPortTemplate ;
-  dcterms:title "Triples with GeoSPARQL asWKT predicate" .
+  dcterms:title "Triples with Wikidata start date (P580) and end date (P582)" .
   
 transformer:output a lpd:OutputDataPortTemplate ;
   dcterms:title "Representation of objects of the input triples expressed as Schema.org triples" .
   
 transformer:feature a lpd:MandatoryFeature ;
-  dcterms:title "Transforms GeoSPARQL asWKT to Schema.org Geocoordinates" ;
+  dcterms:title "Transforms Wikidata start date (P580) and end date (P582) to Schema.org startdate and enddate" ;
   lpd:descriptor transformer:descriptor .
   
 transformer:descriptor a lpd:Descriptor ;
   lpd:query """
-PREFIX geosparql: <http://www.opengis.net/ont/geosparql#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 
 ASK {
-  ?s geosparql:asWKT ?loc .
+  {
+    ?s wdt:P580 ?startTime .
+  } UNION {
+    ?s wdt:P582 ?endTime .
+  }
 }
   """ ;
   lpd:appliesTo transformer:input .

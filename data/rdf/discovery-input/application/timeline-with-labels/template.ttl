@@ -1,0 +1,56 @@
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
+ @prefix application:  <https://discovery.linkedpipes.com/resource/application/timeline-with-labels/> .
+ @prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/application/timeline-with-labels/configuration/> .
+ @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+ @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+ application:template a lpd:ApplicationTemplate ;
+     dcterms:title "Labeled timeline Application"@en;
+     dcterms:description "Timeline app vizualizing labeled points of time"@en;
+     lpd:componentConfigurationTemplate application:defaultConfiguration ;
+     lpd:inputTemplate application:input ;
+     lpd:feature application:defaultFeature ;
+     lpd:executor <https://visualisation-apps.netlify.com/timeline-with-labels> .
+
+ configuration-vocabulary:Configuration a rdfs:Class ;
+     rdfs:label "Class of configurations of Labeled timeline Application"@en;
+     rdfs:subClassOf lpd:ComponentConfiguration .
+
+ application:defaultConfiguration a configuration-vocabulary:Configuration ;
+     dcterms:title "Default configuration for Labeled timeline Application"@en ;
+     lpd:configurationQuery """
+         PREFIX dcterms: <http://purl.org/dc/terms/>
+         PREFIX application:  <https://discovery.linkedpipes.com/resource/application/timeline-with-labels/>
+         PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/application/timeline-with-labels/configuration/>
+
+         CONSTRUCT {
+             ?config a configuration-vocabulary:Configuration ;
+                 dcterms:title ?title ;
+         } WHERE {
+             ?config a configuration-vocabulary:Configuration .
+             OPTIONAL { ?config dcterms:title ?title . }
+         }
+     """ .
+
+ application:input a lpd:InputDataPortTemplate ;
+     dcterms:title "Input of Labeled timeline Application" .
+
+ application:defaultFeature a lpd:MandatoryFeature ;
+     dcterms:title "The default feature of Labeled timeline Application" ;
+     lpd:descriptor application:defaultDescriptor .
+
+ application:defaultDescriptor a lpd:Descriptor ;
+     dcterms:title "Checks if default feature of Labeled timeline Application can be applied." ;
+     lpd:query """
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+ASK  {
+  ?thing 
+    rdfs:label ?label ;
+    dct:date ?date .
+}
+""" ;
+     lpd:appliesTo application:input .
+               

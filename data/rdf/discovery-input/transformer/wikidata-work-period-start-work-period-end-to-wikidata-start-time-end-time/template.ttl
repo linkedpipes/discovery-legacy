@@ -3,47 +3,47 @@
 
 @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
 
-@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/wikidata-coordinate-location-to-schema-geocoordinates/> .
-@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-coordinate-location-to-schema-geocoordinates/configuration/> .
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/wikidata-work-period-start-work-period-end-to-wikidata-start-time-end-time/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-work-period-start-work-period-end-to-wikidata-start-time-end-time/configuration/> .
 
 transformer:template a lpd:TransformerTemplate ;
-  dcterms:title "Wikidata coordinate location (P625) to Schema.org Geocoordinates"@en;
+  dcterms:title "Wikidata work period start (P2031) and work period end (P2032) to Wikidata start date (P580) and end date (P582)"@en;
   lpd:componentConfigurationTemplate transformer:defaultConfiguration ;
   lpd:inputTemplate transformer:input ;
   lpd:outputTemplate transformer:output ;
   lpd:feature transformer:feature .
   
 configuration-vocabulary:Configuration a rdfs:Class ;
-  rdfs:label "Class of configurations of Wikidata coordinate location (P625) to Schema.org Geocoordinates"@en;
+  rdfs:label "Class of configurations of Wikidata work period start (P2031) and work period end (P2032) to Wikidata start date (P580) and end date (P582)"@en;
   rdfs:subClassOf lpd:ComponentConfiguration .
   
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   dcterms:title "Default configuration" ;
   lpd:query  """
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX schema: <http://schema.org/>
 
 DELETE {
-  ?s wdt:P625 ?loc .
+  ?s wdt:P2031 ?startTime .
+ 
+  ?s wdt:P2032 ?endTime .
 }
 INSERT {
-  ?s schema:geo ?geo .
-
-  ?geo a schema:GeoCoordinates ; 
-    schema:latitude ?lat ;
-    schema:longitude ?long .
+  ?s wdt:P580 ?startTime .
+ 
+  ?s wdt:P582 ?endTime .
 } 
 WHERE {
-  ?s wdt:P625 ?loc .
-  BIND(REPLACE(STR(?loc), "Point\\\\((\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\s+(\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\)", "$1") AS ?long)
-  BIND(REPLACE(STR(?loc), "Point\\\\((\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\s+(\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\)", "$3") AS ?lat)
-  BIND(UUID() AS ?geo)
+  {
+    ?s wdt:P2031 ?startTime .
+  } UNION {
+    ?s wdt:P2032 ?endTime .
+  }
 }
   """ ;
   lpd:configurationQuery """
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
-    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-coordinate-location-to-schema-geocoordinates/configuration/>
+    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-work-period-start-work-period-end-to-wikidata-start-time-end-time/configuration/>
     
     CONSTRUCT {
       ?config a configuration-vocabulary:Configuration ;
@@ -57,13 +57,13 @@ WHERE {
   """ .
 
 transformer:input a lpd:InputDataPortTemplate ;
-  dcterms:title "Triples with Wikidata coordinate location (P625) predicate" .
+  dcterms:title "Triples with Wikidata work period start (P2031) and work period end (P2032)" .
   
 transformer:output a lpd:OutputDataPortTemplate ;
-  dcterms:title "Representation of objects of the input triples expressed as Schema.org triples" .
+  dcterms:title "Triples with Wikidata start date (P580) and end date (P582)" .
   
 transformer:feature a lpd:MandatoryFeature ;
-  dcterms:title "Transforms Wikidata coordinate location (P625) to Schema.org Geocoordinates" ;
+  dcterms:title "Transforms Wikidata work period start (P2031) and work period end (P2032) to Wikidata start date (P580) and end date (P582)" ;
   lpd:descriptor transformer:descriptor .
   
 transformer:descriptor a lpd:Descriptor ;
@@ -71,7 +71,11 @@ transformer:descriptor a lpd:Descriptor ;
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 
 ASK {
-  ?s wdt:P625 ?loc .
+  {
+    ?s wdt:P2031 ?startTime .
+  } UNION {
+    ?s wdt:P2032 ?endTime .
+  }
 }
   """ ;
   lpd:appliesTo transformer:input .

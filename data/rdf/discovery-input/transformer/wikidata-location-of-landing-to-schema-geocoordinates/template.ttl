@@ -3,47 +3,54 @@
 
 @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
 
-@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/geosparql-aswkt-to-schema-geocoordinates/> .
-@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/geosparql-aswkt-to-schema-geocoordinates/configuration/> .
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/wikidata-location-of-landing-to-schema-geocoordinates/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-location-of-landing-to-schema-geocoordinates/configuration/> .
 
 transformer:template a lpd:TransformerTemplate ;
-  dcterms:title "GeoSPARQL asWKT to Schema.org Geocoordinates"@en;
+  dcterms:title "Wikidata location of landing (P1158) to Schema.org Geocoordinates"@en;
   lpd:componentConfigurationTemplate transformer:defaultConfiguration ;
   lpd:inputTemplate transformer:input ;
   lpd:outputTemplate transformer:output ;
   lpd:feature transformer:feature .
   
 configuration-vocabulary:Configuration a rdfs:Class ;
-  rdfs:label "Class of configurations of GeoSPARQL asWKT to Schema.org Geocoordinates"@en;
+  rdfs:label "Class of configurations of Wikidata location of landing (P1158) to Schema.org Geocoordinates"@en;
   rdfs:subClassOf lpd:ComponentConfiguration .
   
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   dcterms:title "Default configuration" ;
   lpd:query  """
-PREFIX geosparql: <http://www.opengis.net/ont/geosparql#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 DELETE {
-  ?s geosparql:asWKT ?loc .
+  ?place wdt:P625 ?loc .
 }
 INSERT {
-  ?s schema:geo ?geo .
+  ?place schema:geo ?geo .
 
   ?geo a schema:GeoCoordinates ; 
-           schema:latitude ?lat ;
-           schema:longitude ?long .
+    schema:name ?geoLabel ;
+    schema:latitude ?lat ;
+    schema:longitude ?long .
 } 
 WHERE {
-  ?s geosparql:asWKT ?loc .
+  ?thing wdt:P1158 ?place ;
+    rdfs:label ?thingLabel .
+  FILTER (LANG(?thingLabel) = "en")
+  
+  ?place wdt:P625 ?loc .
   BIND(REPLACE(STR(?loc), "Point\\\\((\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\s+(\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\)", "$1") AS ?long)
   BIND(REPLACE(STR(?loc), "Point\\\\((\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\s+(\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\)", "$3") AS ?lat)
   BIND(UUID() AS ?geo)
+  BIND(STRLANG(CONCAT("Location of landing of ", STR(?thingLabel)), "en") AS ?geoLabel)
 }
   """ ;
   lpd:configurationQuery """
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
-    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/geosparql-aswkt-to-schema-geocoordinates/configuration/>
+    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-location-of-landing-to-schema-geocoordinates/configuration/>
     
     CONSTRUCT {
       ?config a configuration-vocabulary:Configuration ;
@@ -57,21 +64,26 @@ WHERE {
   """ .
 
 transformer:input a lpd:InputDataPortTemplate ;
-  dcterms:title "Triples with GeoSPARQL asWKT predicate" .
+  dcterms:title "Triples with Wikidata location of landing (P1158) predicate" .
   
 transformer:output a lpd:OutputDataPortTemplate ;
   dcterms:title "Representation of objects of the input triples expressed as Schema.org triples" .
   
 transformer:feature a lpd:MandatoryFeature ;
-  dcterms:title "Transforms GeoSPARQL asWKT to Schema.org Geocoordinates" ;
+  dcterms:title "Transforms Wikidata location of landing (P1158) to Schema.org Geocoordinates" ;
   lpd:descriptor transformer:descriptor .
   
 transformer:descriptor a lpd:Descriptor ;
   lpd:query """
-PREFIX geosparql: <http://www.opengis.net/ont/geosparql#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 ASK {
-  ?s geosparql:asWKT ?loc .
+  ?thing wdt:P1158 ?place ;
+    rdfs:label ?thingLabel .
+  FILTER (LANG(?thingLabel) = "en")
+  
+  ?place wdt:P625 ?loc .
 }
   """ ;
   lpd:appliesTo transformer:input .
