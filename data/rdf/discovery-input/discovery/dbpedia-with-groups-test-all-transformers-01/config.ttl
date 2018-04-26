@@ -1,4 +1,4 @@
-<https://ldcp.opendata.cz/resource/dbpedia/transformer-group/external-location> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+<https://discovery.linkedpipes.com/resource/discovery/dbpedia-with-groups-test-all-transformers-01/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
 	<https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer> <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-administrativeCenter-to-schema-geocoordinates/template> ,
 <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-announcedFrom-to-schema-geocoordinates/template> ,
 <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-birthPlace-to-schema-geocoordinates/template> ,
