@@ -36,9 +36,9 @@ WHERE {
   
   ?thing dcterms:title ?name .
   
-  ?place s:geo ?geo .
+  ?place schema:geo ?geo .
   
-  ?geo s:latitude ?lat ; s:longitude ?lon .
+  ?geo schema:latitude ?lat ; schema:longitude ?lon .
   
   BIND(STRLANG(CONCAT(\"Point of service of \", STR(?name)), \"en\") AS ?geoLabel)
 }
@@ -72,15 +72,17 @@ transformer:feature a lpd:MandatoryFeature ;
 transformer:descriptor a lpd:Descriptor ;
   lpd:query """
 PREFIX gr: <http://purl.org/goodrelations/v1#>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
 ASK {
   ?thing gr:hasPOS ?place .
   
   ?thing dcterms:title ?name .
   
-  ?place s:geo ?geo .
+  ?place schema:geo ?geo .
   
-  ?geo s:latitude ?lat ; s:longitude ?lon .
+  ?geo schema:latitude ?lat ; schema:longitude ?lon .
 }
   """ ;
   lpd:appliesTo transformer:input .
