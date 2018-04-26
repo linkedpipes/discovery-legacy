@@ -3,40 +3,41 @@
 
 @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
 
-@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/gr-hasPOS-to-schema-hasPOS/> .
-@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/gr-hasPOS-to-schema-hasPOS/configuration/> .
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/schema-legalName-to-dcterms-title/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/schema-legalName-to-dcterms-title/configuration/> .
 
 transformer:template a lpd:TransformerTemplate ;
-  dcterms:title "GoodRelations has point of service to Schema.org has point of service"@en;
+  dcterms:title "Schema.org legalName to Dublin Core terms title"@en;
   lpd:componentConfigurationTemplate transformer:defaultConfiguration ;
   lpd:inputTemplate transformer:input ;
   lpd:outputTemplate transformer:output ;
   lpd:feature transformer:feature .
   
 configuration-vocabulary:Configuration a rdfs:Class ;
-  rdfs:label "Class of configurations of GoodRelations has point of service to Schema.org has point of service"@en;
+  rdfs:label "Class of configurations of Schema.org legalName to Dublin Core terms title"@en;
   rdfs:subClassOf lpd:ComponentConfiguration .
   
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   dcterms:title "Default configuration" ;
   lpd:query  """
-PREFIX s: <http://schema.org/>
-PREFIX gr: <http://purl.org/goodrelations/v1#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX dct: <http://purl.org/dc/terms/>
 
 DELETE {
-  ?s gr:hasPOS ?place .
+  ?s schema:legalName ?legalName .
 }
 INSERT {
-  ?s s:hasPOS ?place .
+  ?s dct:title ?legalName .
 } 
 WHERE {
-  ?s gr:hasPOS ?place .
+  ?s schema:legalName ?legalName .
 }
   """ ;
   lpd:configurationQuery """
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
-    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/gr-hasPOS-to-schema-hasPOS/configuration/>
+    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/schema-legalName-to-dcterms-title/configuration/>
     
     CONSTRUCT {
       ?config a configuration-vocabulary:Configuration ;
@@ -50,21 +51,22 @@ WHERE {
   """ .
 
 transformer:input a lpd:InputDataPortTemplate ;
-  dcterms:title "Triples with GoodRelations has point of service predicate" .
+  dcterms:title "Triples with Schema.org legalName predicate" .
   
 transformer:output a lpd:OutputDataPortTemplate ;
-  dcterms:title "Triples with Schema.org has point of service predicate" .
+  dcterms:title "Representation of objects of the input triples expressed as Dublin Core terms triples" .
   
 transformer:feature a lpd:MandatoryFeature ;
-  dcterms:title "Transforms GoodRelations has point of service to Schema.org has point of service" ;
+  dcterms:title "Transforms Schema.org legalName to Dublin Core terms title" ;
   lpd:descriptor transformer:descriptor .
   
 transformer:descriptor a lpd:Descriptor ;
   lpd:query """
-PREFIX gr: <http://purl.org/goodrelations/v1#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
 
 ASK {
-  ?s gr:hasPOS ?place .
+  ?s schema:legalName ?legalName .
 }
   """ ;
   lpd:appliesTo transformer:input .

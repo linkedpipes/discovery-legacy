@@ -3,40 +3,50 @@
 
 @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
 
-@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/gr-validFrom-to-schema-validFrom/> .
-@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/gr-validFrom-to-schema-validFrom/configuration/> .
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/gr-hasPOS-to-schema-labelled-geocoordinates/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/gr-hasPOS-to-schema-labelled-geocoordinates/configuration/> .
 
 transformer:template a lpd:TransformerTemplate ;
-  dcterms:title "GoodRelations valid from to Schema.org valid from"@en;
+  dcterms:title "GoodRelations hasPOS to Schema.org labelled geocoordinates"@en;
   lpd:componentConfigurationTemplate transformer:defaultConfiguration ;
   lpd:inputTemplate transformer:input ;
   lpd:outputTemplate transformer:output ;
   lpd:feature transformer:feature .
   
 configuration-vocabulary:Configuration a rdfs:Class ;
-  rdfs:label "Class of configurations of GoodRelations valid from to Schema.org valid from"@en;
+  rdfs:label "Class of configurations of GoodRelations hasPOS to Schema.org labelled geocoordinates"@en;
   rdfs:subClassOf lpd:ComponentConfiguration .
   
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   dcterms:title "Default configuration" ;
   lpd:query  """
-PREFIX s: <http://schema.org/>
 PREFIX gr: <http://purl.org/goodrelations/v1#>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
 DELETE {
-  ?s gr:validFrom ?date .
+  ?thing gr:hasPOS ?place .
 }
 INSERT {
-  ?s s:validFrom ?date .
+  ?thing dcterms:spatial ?place .
+  ?geo dcterms:title ?geoLabel .
 } 
 WHERE {
-  ?s gr:validFrom ?date .
+  ?thing gr:hasPOS ?place .
+  
+  ?thing dcterms:title ?name .
+  
+  ?place s:geo ?geo .
+  
+  ?geo s:latitude ?lat ; s:longitude ?lon .
+  
+  BIND(STRLANG(CONCAT(\"Point of service of \", STR(?name)), \"en\") AS ?geoLabel)
 }
   """ ;
   lpd:configurationQuery """
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
-    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/gr-validFrom-to-schema-validFrom/configuration/>
+    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/gr-hasPOS-to-schema-labelled-geocoordinates/configuration/>
     
     CONSTRUCT {
       ?config a configuration-vocabulary:Configuration ;
@@ -50,13 +60,13 @@ WHERE {
   """ .
 
 transformer:input a lpd:InputDataPortTemplate ;
-  dcterms:title "Triples with GoodRelations valid from predicate" .
+  dcterms:title "Triples with GoodRelations hasPOS predicate" .
   
 transformer:output a lpd:OutputDataPortTemplate ;
-  dcterms:title "Triples with Schema.org valid from predicate" .
+  dcterms:title "Representation of objects of the input triples expressed as Schema.org triples" .
   
 transformer:feature a lpd:MandatoryFeature ;
-  dcterms:title "Transforms GoodRelations valid from to Schema.org valid from" ;
+  dcterms:title "Transforms GoodRelations hasPOS to Schema.org labelled geocoordinates" ;
   lpd:descriptor transformer:descriptor .
   
 transformer:descriptor a lpd:Descriptor ;
@@ -64,7 +74,13 @@ transformer:descriptor a lpd:Descriptor ;
 PREFIX gr: <http://purl.org/goodrelations/v1#>
 
 ASK {
-  ?s gr:validFrom ?date .
+  ?thing gr:hasPOS ?place .
+  
+  ?thing dcterms:title ?name .
+  
+  ?place s:geo ?geo .
+  
+  ?geo s:latitude ?lat ; s:longitude ?lon .
 }
   """ ;
   lpd:appliesTo transformer:input .

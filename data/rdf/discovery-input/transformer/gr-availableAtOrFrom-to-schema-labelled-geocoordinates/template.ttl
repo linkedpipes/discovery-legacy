@@ -3,40 +3,50 @@
 
 @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
 
-@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/gr-availableAtOrFrom-to-schema-availableAtOrFrom/> .
-@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/gr-availableAtOrFrom-to-schema-availableAtOrFrom/configuration/> .
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/gr-availableAtOrFrom-to-schema-labelled-geocoordinates/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/gr-availableAtOrFrom-to-schema-labelled-geocoordinates/configuration/> .
 
 transformer:template a lpd:TransformerTemplate ;
-  dcterms:title "GoodRelations available at or from to Schema.org available at or from"@en;
+  dcterms:title "GoodRelations availableAtOrFrom to Schema.org labelled geocoordinates"@en;
   lpd:componentConfigurationTemplate transformer:defaultConfiguration ;
   lpd:inputTemplate transformer:input ;
   lpd:outputTemplate transformer:output ;
   lpd:feature transformer:feature .
   
 configuration-vocabulary:Configuration a rdfs:Class ;
-  rdfs:label "Class of configurations of GoodRelations available at or from to Schema.org available at or from"@en;
+  rdfs:label "Class of configurations of GoodRelations availableAtOrFrom to Schema.org labelled geocoordinates"@en;
   rdfs:subClassOf lpd:ComponentConfiguration .
   
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   dcterms:title "Default configuration" ;
   lpd:query  """
-PREFIX s: <http://schema.org/>
 PREFIX gr: <http://purl.org/goodrelations/v1#>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
 DELETE {
-  ?s gr:availableAtOrFrom ?place .
+  ?thing gr:availableAtOrFrom ?place .
 }
 INSERT {
-  ?s s:availableAtOrFrom ?place .
+  ?thing dcterms:spatial ?place .
+  ?geo dcterms:title ?geoLabel .
 } 
 WHERE {
-  ?s gr:availableAtOrFrom ?place .
+  ?thing gr:availableAtOrFrom ?place .
+  
+  ?thing dcterms:title ?name .
+  
+  ?place s:geo ?geo .
+  
+  ?geo s:latitude ?lat ; s:longitude ?lon .
+  
+  BIND(STRLANG(CONCAT(\"Point of availability of \", STR(?name)), \"en\") AS ?geoLabel)
 }
   """ ;
   lpd:configurationQuery """
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
-    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/gr-availableAtOrFrom-to-schema-availableAtOrFrom/configuration/>
+    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/gr-availableAtOrFrom-to-schema-labelled-geocoordinates/configuration/>
     
     CONSTRUCT {
       ?config a configuration-vocabulary:Configuration ;
@@ -50,13 +60,13 @@ WHERE {
   """ .
 
 transformer:input a lpd:InputDataPortTemplate ;
-  dcterms:title "Triples with GoodRelations available at or from predicate" .
+  dcterms:title "Triples with GoodRelations availableAtOrFrom predicate" .
   
 transformer:output a lpd:OutputDataPortTemplate ;
-  dcterms:title "Triples with Schema.org available at or from predicate" .
+  dcterms:title "Representation of objects of the input triples expressed as Schema.org triples" .
   
 transformer:feature a lpd:MandatoryFeature ;
-  dcterms:title "Transforms GoodRelations available at or from to Schema.org available at or from" ;
+  dcterms:title "Transforms GoodRelations availableAtOrFrom to Schema.org labelled geocoordinates" ;
   lpd:descriptor transformer:descriptor .
   
 transformer:descriptor a lpd:Descriptor ;
@@ -64,7 +74,13 @@ transformer:descriptor a lpd:Descriptor ;
 PREFIX gr: <http://purl.org/goodrelations/v1#>
 
 ASK {
-  ?s gr:availableAtOrFrom ?place .
+  ?thing gr:availableAtOrFrom ?place .
+  
+  ?thing dcterms:title ?name .
+  
+  ?place s:geo ?geo .
+  
+  ?geo s:latitude ?lat ; s:longitude ?lon .
 }
   """ ;
   lpd:appliesTo transformer:input .
