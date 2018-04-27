@@ -392,6 +392,7 @@
 <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-weddingParentsDate-to-dcterms-date/template> ,
 <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-whaDraftYear-to-dcterms-date/template> ,
 <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-wineYear-to-dcterms-date/template> ,
+<https://ldcp.opendata.cz/resource/dbpedia/transformer/rdfs-label-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template> ,
 <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template> ,
 <https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template> ,

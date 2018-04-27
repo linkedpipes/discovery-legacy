@@ -396,7 +396,10 @@
 <https://discovery.linkedpipes.com/resource/transformer/geo-pos-to-schema-geocoordinates/template> ,
 <https://discovery.linkedpipes.com/resource/transformer/geosparql-aswkt-to-schema-geocoordinates/template> ,
 <https://discovery.linkedpipes.com/resource/transformer/gr-availableAtOrFrom-to-schema-labelled-geocoordinates/template> ,
-<https://discovery.linkedpipes.com/resource/transformer/gr-hasPOS-to-schema-labelled-geocoordinates/template> ,
+<https://discovery.linkedpipes.com/resource/transformer/gr-hasPOS-to-schema-labelled-geocoordinates/template> .
+
+<https://discovery.linkedpipes.com/resource/transformer-group/labelled-geo> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+	<https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
 <https://discovery.linkedpipes.com/resource/transformer/labelled-geo-pos-to-schema-geocoordinates/template> .
 
 <https://discovery.linkedpipes.com/resource/transformer-group/time> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
@@ -828,6 +831,7 @@
 <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-weddingParentsDate-to-dcterms-date/template> ,
 <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-whaDraftYear-to-dcterms-date/template> ,
 <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-wineYear-to-dcterms-date/template> ,
+<https://ldcp.opendata.cz/resource/dbpedia/transformer/rdfs-label-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template> ,
 <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template> ,
 <https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template> ,
@@ -868,4 +872,5 @@
       <https://discovery.linkedpipes.com/resource/transformer-group/title>,
       <https://discovery.linkedpipes.com/resource/transformer-group/time-interval>,
       <https://discovery.linkedpipes.com/resource/transformer-group/time> ,
-	  <https://discovery.linkedpipes.com/resource/transformer-group/geo> .
+	  <https://discovery.linkedpipes.com/resource/transformer-group/geo> ,
+	  <https://discovery.linkedpipes.com/resource/transformer-group/labelled-geo> .
