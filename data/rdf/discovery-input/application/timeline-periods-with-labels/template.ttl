@@ -44,11 +44,11 @@
      dcterms:title "Checks if default feature of Timeline with labeled periods of time Application can be applied." ;
      lpd:query """
 PREFIX schema: <http://schema.org/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
 ASK  {
   ?thing 
-    rdfs:label ?label ;
+    dcterms:title ?title ;
     schema:startDate ?startDate ;
 	schema:endDate ?endDate .
 }
