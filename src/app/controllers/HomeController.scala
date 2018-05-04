@@ -30,7 +30,7 @@ class HomeController @Inject()(
         Ok(views.html.experiments())
     }
 
-    def persist = Action(parse.json) { request =>
+    def persist = Action(parse.json(maxLength = 100 * 1024 * 1024)) { request =>
         val data = request.body
         val id = (data \ "discovery" \ "id").get.validate[String].get
         discoveryResultDao.insert(DiscoveryResult(id, data.toString()))
