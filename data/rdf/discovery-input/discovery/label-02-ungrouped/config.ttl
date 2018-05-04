@@ -1,48 +1,13 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 
-<https://discovery.linkedpipes.com/resource/discovery/all/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+<https://discovery.linkedpipes.com/resource/discovery/label-02-ungrouped/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> 
-      <https://discovery.linkedpipes.com/resource/application/timeline/template>,
-      <https://discovery.linkedpipes.com/resource/application/map/template>,
       <https://discovery.linkedpipes.com/resource/application/dcterms/template>,
 
-      <https://discovery.linkedpipes.com/resource/transformer/wikidata-coordinate-location-to-schema-geocoordinates/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/geo-pos-to-schema-geocoordinates/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/geosparql-aswkt-to-schema-geocoordinates/template>,
-	  
       <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
-	  <https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template> .
 	  
-      <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-dateaccepted-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-datecopyrighted-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/prov-attime-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/time-hasbeginning-with-dct-date-to-schema-startdate/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/time-hasend-with-dct-date-to-schema-enddate/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/time-inxsddatetimestamp-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/time-inxsddate-to-dcterms-date/template>
-    ;
-
-    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>
-      <https://discovery.linkedpipes.com/resource/transformer-group/all/time-interval>,
-      <https://discovery.linkedpipes.com/resource/transformer-group/all/date>, 
-      <https://discovery.linkedpipes.com/resource/transformer-group/all/geo>,
-      <https://discovery.linkedpipes.com/resource/transformer-group/all/label>
-    .
-
-<https://discovery.linkedpipes.com/resource/discovery/all/config> 
+<https://discovery.linkedpipes.com/resource/discovery/label-02-ungrouped/config> 
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> 
       <https://discovery.linkedpipes.com/resource/lod/templates/http---202.45.139.84-10035-catalogs-fao-repositories-agrovoc> , 
 	  <https://discovery.linkedpipes.com/resource/lod/templates/http---affymetrix.bio2rdf.org-sparql> , 
@@ -52,7 +17,7 @@
 	  <https://discovery.linkedpipes.com/resource/lod/templates/http---cr.eionet.europa.eu-sparql> , 
 	  <https://discovery.linkedpipes.com/resource/lod/templates/http---crtm.linkeddata.es-sparql> , 
 	  <https://discovery.linkedpipes.com/resource/lod/templates/http---data.aalto.fi-sparql> , 
-	  <https://discovery.linkedpipes.com/resource/lod/templates/http---data.allie.dbcls.jp-sparql> , 
+	  <https://discovery.linkedpipes.com/resource/lod/templates/http---data.label-02-ungroupedie.dbcls.jp-sparql> , 
 	  <https://discovery.linkedpipes.com/resource/lod/templates/http---data.hnm.hu-sparql> , 
 	  <https://discovery.linkedpipes.com/resource/lod/templates/http---data.lenka.no-sparql> , 
 	  <https://discovery.linkedpipes.com/resource/lod/templates/http---data.linkededucation.org-request-ted-sparql> , 
@@ -131,43 +96,3 @@
 	  <https://discovery.linkedpipes.com/resource/lod/templates/https---w3id.org-scholarlydata-sparql> ,
 	  <https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql> .
       
-<https://discovery.linkedpipes.com/resource/transformer-group/all/time-interval> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
-    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/time-hasbeginning-with-dct-date-to-schema-startdate/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/time-hasend-with-dct-date-to-schema-enddate/template>
-    .
-
-<https://discovery.linkedpipes.com/resource/transformer-group/all/date> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
-    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-dateaccepted-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-datecopyrighted-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/prov-attime-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/time-inxsddatetimestamp-to-dcterms-date/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/time-inxsddate-to-dcterms-date/template>
-    .
-
-<https://discovery.linkedpipes.com/resource/transformer-group/all/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
-    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
-	  <https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template> 
-    .
-	
-<https://discovery.linkedpipes.com/resource/transformer-group/all/geo> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
-    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-	  <https://discovery.linkedpipes.com/resource/transformer/wikidata-coordinate-location-to-schema-geocoordinates/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/geo-pos-to-schema-geocoordinates/template>,
-	  <https://discovery.linkedpipes.com/resource/transformer/geosparql-aswkt-to-schema-geocoordinates/template>
-	.

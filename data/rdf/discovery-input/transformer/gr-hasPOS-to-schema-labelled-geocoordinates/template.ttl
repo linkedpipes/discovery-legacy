@@ -3,47 +3,50 @@
 
 @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
 
-@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/labelled-geo-pos-to-schema-geocoordinates/> .
-@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/labelled-geo-pos-to-schema-geocoordinates/configuration/> .
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/gr-hasPOS-to-schema-labelled-geocoordinates/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/gr-hasPOS-to-schema-labelled-geocoordinates/configuration/> .
 
 transformer:template a lpd:TransformerTemplate ;
-  dcterms:title "W3C Geo pos of labelled thing to Schema.org Geocoordinates"@en;
+  dcterms:title "GoodRelations hasPOS to Schema.org labelled geocoordinates"@en;
   lpd:componentConfigurationTemplate transformer:defaultConfiguration ;
   lpd:inputTemplate transformer:input ;
   lpd:outputTemplate transformer:output ;
   lpd:feature transformer:feature .
   
 configuration-vocabulary:Configuration a rdfs:Class ;
-  rdfs:label "Class of configurations of W3C Geo pos of labelled thing to Schema.org Geocoordinates"@en;
+  rdfs:label "Class of configurations of GoodRelations hasPOS to Schema.org labelled geocoordinates"@en;
   rdfs:subClassOf lpd:ComponentConfiguration .
   
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   dcterms:title "Default configuration" ;
   lpd:query  """
-PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX gr: <http://purl.org/goodrelations/v1#>
 PREFIX schema: <http://schema.org/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
 DELETE {
-  ?s geo:lat ?lat ; geo:long ?long .
+  ?thing gr:hasPOS ?place .
 }
 INSERT {
-  ?s schema:geo ?geo .
-
-  ?geo a schema:GeoCoordinates ; 
-    dcterms:title ?title ;
-    schema:latitude ?lat ;
-    schema:longitude ?long .
+  ?thing dcterms:spatial ?place .
+  ?geo dcterms:title ?geoLabel .
 } 
 WHERE {
-  ?s geo:lat ?lat ; geo:long ?long ; dcterms:title ?title .
-  BIND(IRI(CONCAT(STR(?s), "/geo")) as ?geo)
+  ?thing gr:hasPOS ?place .
+  
+  ?thing dcterms:title ?name .
+  
+  ?place schema:geo ?geo .
+  
+  ?geo schema:latitude ?lat ; schema:longitude ?lon .
+  
+  BIND(STRLANG(CONCAT(\"Point of service of \", STR(?name)), \"en\") AS ?geoLabel)
 }
   """ ;
   lpd:configurationQuery """
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
-    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/labelled-geo-pos-to-schema-geocoordinates/configuration/>
+    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/gr-hasPOS-to-schema-labelled-geocoordinates/configuration/>
     
     CONSTRUCT {
       ?config a configuration-vocabulary:Configuration ;
@@ -57,22 +60,29 @@ WHERE {
   """ .
 
 transformer:input a lpd:InputDataPortTemplate ;
-  dcterms:title "Triples with W3C Geo pos of labelled thing predicate" .
+  dcterms:title "Triples with GoodRelations hasPOS predicate" .
   
 transformer:output a lpd:OutputDataPortTemplate ;
   dcterms:title "Representation of objects of the input triples expressed as Schema.org triples" .
   
 transformer:feature a lpd:MandatoryFeature ;
-  dcterms:title "Transforms W3C Geo pos of labelled thing to Schema.org Geocoordinates" ;
+  dcterms:title "Transforms GoodRelations hasPOS to Schema.org labelled geocoordinates" ;
   lpd:descriptor transformer:descriptor .
   
 transformer:descriptor a lpd:Descriptor ;
   lpd:query """
-PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX gr: <http://purl.org/goodrelations/v1#>
+PREFIX schema: <http://schema.org/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
 ASK {
-  ?s geo:lat ?lat ; geo:long ?long ; dcterms:title ?title .
+  ?thing gr:hasPOS ?place .
+  
+  ?thing dcterms:title ?name .
+  
+  ?place schema:geo ?geo .
+  
+  ?geo schema:latitude ?lat ; schema:longitude ?lon .
 }
   """ ;
   lpd:appliesTo transformer:input .

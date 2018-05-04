@@ -3,40 +3,48 @@
 
 @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
 
-@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/> .
-@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/schema-name-to-dcterms-title/configuration/> .
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/gr-validFrom-validThrough-to-schema-startdate-enddate/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/gr-validFrom-validThrough-to-schema-startdate-enddate/configuration/> .
 
 transformer:template a lpd:TransformerTemplate ;
-  dcterms:title "Schema.org name to Dublin Core terms title"@en;
+  dcterms:title "GoodRelations validFrom and validThrough to Schema.org startdate and enddate"@en;
   lpd:componentConfigurationTemplate transformer:defaultConfiguration ;
   lpd:inputTemplate transformer:input ;
   lpd:outputTemplate transformer:output ;
   lpd:feature transformer:feature .
   
 configuration-vocabulary:Configuration a rdfs:Class ;
-  rdfs:label "Class of configurations of Schema.org name to Dublin Core terms title"@en;
+  rdfs:label "Class of configurations of GoodRelations validFrom and validThrough to Schema.org startdate and enddate"@en;
   rdfs:subClassOf lpd:ComponentConfiguration .
   
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   dcterms:title "Default configuration" ;
   lpd:query  """
+PREFIX gr: <http://purl.org/goodrelations/v1#>
 PREFIX schema: <http://schema.org/>
-PREFIX dct: <http://purl.org/dc/terms/>
 
 DELETE {
-  ?s schema:name ?name .
+  ?s gr:validStarts ?startTime .
+ 
+  ?s gr:validEnds ?endTime .
 }
 INSERT {
-  ?s dct:title ?name .
+  ?s schema:startDate ?startTime .
+ 
+  ?s schema:endDate ?endTime .
 } 
 WHERE {
-  ?s schema:name ?name .
+  {
+    ?s gr:validStarts ?startTime .
+  } UNION {
+    ?s gr:validEnds ?endTime .
+  }
 }
   """ ;
   lpd:configurationQuery """
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
-    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/schema-name-to-dcterms-title/configuration/>
+    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/gr-validFrom-validThrough-to-schema-startdate-enddate/configuration/>
     
     CONSTRUCT {
       ?config a configuration-vocabulary:Configuration ;
@@ -50,21 +58,25 @@ WHERE {
   """ .
 
 transformer:input a lpd:InputDataPortTemplate ;
-  dcterms:title "Triples with Schema.org name predicate" .
+  dcterms:title "Triples with GoodRelations validFrom and validThrough" .
   
 transformer:output a lpd:OutputDataPortTemplate ;
-  dcterms:title "Representation of objects of the input triples expressed as Dublin Core terms triples" .
+  dcterms:title "Representation of objects of the input triples expressed as Schema.org triples" .
   
 transformer:feature a lpd:MandatoryFeature ;
-  dcterms:title "Transforms Schema.org name to Dublin Core terms title" ;
+  dcterms:title "Transforms GoodRelations validFrom and validThrough to Schema.org startdate and enddate" ;
   lpd:descriptor transformer:descriptor .
   
 transformer:descriptor a lpd:Descriptor ;
   lpd:query """
-PREFIX schema: <http://schema.org/>
+PREFIX gr: <http://purl.org/goodrelations/v1#>
 
 ASK {
-  ?s schema:name ?name .
+  {
+    ?s gr:validStarts ?startTime .
+  } UNION {
+    ?s gr:validEnds ?endTime .
+  }
 }
   """ ;
   lpd:appliesTo transformer:input .

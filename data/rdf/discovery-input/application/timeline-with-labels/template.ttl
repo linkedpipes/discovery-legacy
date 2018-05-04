@@ -43,13 +43,12 @@
  application:defaultDescriptor a lpd:Descriptor ;
      dcterms:title "Checks if default feature of Labeled timeline Application can be applied." ;
      lpd:query """
-PREFIX dct: <http://purl.org/dc/terms/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
 ASK  {
   ?thing 
-    rdfs:label ?label ;
-    dct:date ?date .
+    dcterms:title ?title ;
+    dcterms:date ?date .
 }
 """ ;
      lpd:appliesTo application:input .
