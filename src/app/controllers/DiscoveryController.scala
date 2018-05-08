@@ -380,7 +380,7 @@ class DiscoveryController @Inject()(
                 val model = service.getService(executionResult, r.host, configuration.get[String]("ldcp.endpointUri"))
                 val outputStream = new ByteArrayOutputStream()
                 RDFDataMgr.write(outputStream, model, Lang.TTL)
-                Ok(outputStream.toString()).as("text/ttl")
+                Ok(outputStream.toString()).as("text/turtle")
             }
             case _ => NotFound
         }
@@ -391,7 +391,7 @@ class DiscoveryController @Inject()(
             val model = service.getDataSampleService(pipelineId, discoveryId, p.dataSample, r.host, configuration.get[String]("ldcp.endpointUri"))
             val outputStream = new ByteArrayOutputStream()
             RDFDataMgr.write(outputStream, model, Lang.TTL)
-            Ok(outputStream.toString()).as("text/ttl")
+            Ok(outputStream.toString()).as("text/turtle")
         }.getOrElse(NotFound))
     }
 
