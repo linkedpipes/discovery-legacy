@@ -42,11 +42,13 @@ class DiscoveryController @Inject()(
         val templateSourceUri = configuration.get[String]("ldcp.templateSourceUri")
         Ok(
             service.listTemplates(templateSourceUri) match {
-                case Some(input) => Json.toJson(input)
-                case _ => Json.toJson(Json.obj("error" -> JsString("Error while downloading template data.")))
+                case Right(input) => Json.toJson(input)
+                case Left(e) => businessError(s"Error while downloading template data: ${e.getMessage}")
             }
         )
     }
+
+    private def businessError(errorMessage: String) = Json.toJson(Json.obj("error" -> Json.obj("message" -> JsString(errorMessage))))
 
     def startExperiment = Action(parse.json) { request =>
         val uris = request.body.as[Seq[String]]

@@ -146,19 +146,15 @@ class DiscoveryService {
         model
     }
 
-    def listTemplates(templateSourceUri: String): Option[DiscoveryInput] = {
+    def listTemplates(templateSourceUri: String): Either[Throwable, DiscoveryInput] = {
         RdfUtils.modelFromIri(templateSourceUri)(discoveryLogger) {
             case Right(model) => {
                 val templates = model.listObjectsOfProperty(LPD.hasTemplate).toList.asScala
                 val templateIris = templates.map(_.asResource().getURI)
-                val templateGroups = model.listSubjectsWithProperty(RDF.`type`, LPD.TransformerGroup).asScala.toList
-                val templateGroupings = templateGroups.map { tg =>
-                    (tg.asResource().getURI, model.listObjectsOfProperty(tg, LPD.hasTransformer).asScala.toList.map(_.asResource().getURI))
-                }
-                val templateModels = templateIris.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get)
-                Some(DiscoveryInput(templateModels, getGroupings(model)))
+                val templateModels = templateIris.par.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get).toList
+                Right(DiscoveryInput(templateModels, getGroupings(model)))
             }
-            case Left(e) => None
+            case Left(e) => Left(e)
         }
     }
 
