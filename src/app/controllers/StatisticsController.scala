@@ -90,7 +90,7 @@ class StatisticsController @Inject()(
 
         val heading = CsvLine(Seq(
             "Discovery ID",
-            "Experiment URI",
+            "Discovery URI",
             "Datasource URI",
             "Datasource template label",
             "Extractor group count",
@@ -124,7 +124,7 @@ class StatisticsController @Inject()(
 
         val heading = CsvLine(Seq(
             "Discovery ID",
-            "Experiment URI",
+            "Discovery URI",
             "Application URI",
             "Application template label",
             "Extractor group count",
@@ -157,7 +157,7 @@ class StatisticsController @Inject()(
 
         val heading = CsvLine(Seq(
             "Discovery ID",
-            "Experiment URI",
+            "Discovery URI",
             "Datasource URI",
             "Application URI",
             "DataSource template label",
@@ -195,7 +195,7 @@ class StatisticsController @Inject()(
 
         val heading = CsvLine(Seq(
             "Discovery ID",
-            "Experiment URI",
+            "Discovery URI",
             "Application group count",
             "Datasource group count",
             "Extractor group count",
