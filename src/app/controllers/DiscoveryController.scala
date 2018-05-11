@@ -2,10 +2,8 @@ package controllers
 
 import java.io._
 import java.util.UUID
-import java.util.zip.{ZipEntry, ZipOutputStream}
 
 import javax.inject._
-import akka.util.ByteString
 import controllers.dto.PipelineGrouping
 import dao.ExecutionResultDao
 import models.ExecutionResult
@@ -14,7 +12,6 @@ import org.apache.jena.riot.{Lang, RDFDataMgr}
 import play.Logger
 import play.api.Configuration
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
-import play.api.http.HttpEntity
 import play.api.libs.json._
 import play.api.mvc._
 import services.DiscoveryService
@@ -24,8 +21,6 @@ import slick.jdbc.JdbcProfile
 
 import scala.concurrent.{ExecutionContext, Future}
 import scalaj.http.{Http, MultiPart}
-
-import scala.collection.mutable
 
 
 @Singleton
