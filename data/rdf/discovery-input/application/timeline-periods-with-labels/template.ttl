@@ -11,7 +11,7 @@
      lpd:componentConfigurationTemplate application:defaultConfiguration ;
      lpd:inputTemplate application:input ;
      lpd:feature application:defaultFeature ;
-     lpd:executor <https://visualisation-apps.netlify.com/timeline> .
+     lpd:executor <https://visualization-apps.netlify.com/timeline> .
 
  configuration-vocabulary:Configuration a rdfs:Class ;
      rdfs:label "Class of configurations of Timeline with labeled periods of time Application"@en;
