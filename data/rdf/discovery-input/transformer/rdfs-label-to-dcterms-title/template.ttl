@@ -61,7 +61,7 @@ transformer:feature a lpd:MandatoryFeature ;
   
 transformer:descriptor a lpd:Descriptor ;
   lpd:query """
-http://www.w3.org/2000/01/rdf-schema#
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
 
 ASK {
   ?s rdfs:label ?title .
