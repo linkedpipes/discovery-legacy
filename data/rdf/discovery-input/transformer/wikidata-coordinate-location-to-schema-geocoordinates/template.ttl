@@ -22,6 +22,7 @@ transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   lpd:query  """
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 DELETE {
   ?s wdt:P625 ?loc .
