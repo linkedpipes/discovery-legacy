@@ -1,16 +1,17 @@
 <https://discovery.linkedpipes.com/resource/discovery/wikidata-07/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
 	<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 <https://discovery.linkedpipes.com/resource/application/map-labeled-points/template> , 
-<https://discovery.linkedpipes.com/resource/application/map/template> , 
-<https://discovery.linkedpipes.com/resource/application/timeline-periods/template> , 
-<https://discovery.linkedpipes.com/resource/application/timeline/template> , 
+#<https://discovery.linkedpipes.com/resource/application/map/template> , 
+#<https://discovery.linkedpipes.com/resource/application/timeline-periods/template> , 
+#<https://discovery.linkedpipes.com/resource/application/timeline/template> , 
 <https://discovery.linkedpipes.com/resource/application/timeline-periods-with-labels/template> , 
 <https://discovery.linkedpipes.com/resource/application/timeline-with-labels/template> , 
 <https://discovery.linkedpipes.com/resource/application/dcterms/template> ,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template> , 
-<https://discovery.linkedpipes.com/resource/transformer/rdfs-label-to-dcterms-title> , 
+<https://discovery.linkedpipes.com/resource/transformer/rdfs-label-to-dcterms-title/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/wikidata-birthday-date-of-burial-to-wikidata-start-time-end-time/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/wikidata-birthday-date-of-death-to-wikidata-start-time-end-time/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/wikidata-birthday-date-of-disappearance-to-wikidata-start-time-end-time/template> , 
@@ -56,9 +57,9 @@
 <https://discovery.linkedpipes.com/resource/transformer/wikidata-time-of-spacecraft-orbit-decay-to-wikidata-point-in-time/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/wikidata-work-location-to-schema-geocoordinates/template> , 
 <https://discovery.linkedpipes.com/resource/transformer/wikidata-work-period-start-work-period-end-to-wikidata-start-time-end-time/template> , 
-<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q931260> ,
-<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q2341389> ,
-<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q11424> ;
+#<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q152081> ;
+#<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q1003207> ;
+<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q5119> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>
 	  <https://discovery.linkedpipes.com/resource/transformer-group/wikidata/internal-start-time-end-time> ,
 	  <https://discovery.linkedpipes.com/resource/transformer-group/wikidata/internal-point-in-time> ,
