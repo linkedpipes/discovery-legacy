@@ -1,0 +1,129 @@
+<https://discovery.linkedpipes.com/resource/discovery/wikidata-07/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+	<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
+<https://discovery.linkedpipes.com/resource/application/map-labeled-points/template> , 
+#<https://discovery.linkedpipes.com/resource/application/map/template> , 
+#<https://discovery.linkedpipes.com/resource/application/timeline-periods/template> , 
+#<https://discovery.linkedpipes.com/resource/application/timeline/template> , 
+<https://discovery.linkedpipes.com/resource/application/timeline-periods-with-labels/template> , 
+<https://discovery.linkedpipes.com/resource/application/timeline-with-labels/template> , 
+<https://discovery.linkedpipes.com/resource/application/dcterms/template> ,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/rdfs-label-to-dcterms-title/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-birthday-date-of-burial-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-birthday-date-of-death-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-birthday-date-of-disappearance-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-coordinate-location-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-depicted-to-wikidata-publication-date/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-baptism-in-early-childhood-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-birth-date-of-burial-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-birth-date-of-death-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-birth-date-of-disappearance-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-first-performance-to-wikidata-start-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-official-opening-date-of-official-closure-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-service-entry-date-of-service-retirement-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-taxon-name-publication-to-wikidata-publication-date/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-discontinued-date-to-wikidata-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-filming-location-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-first-flight-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-floruit-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-inception-discontinued-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-inception-dissolved-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-location-of-discovery-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-location-of-final-assembly-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-location-of-first-performance-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-location-of-formation-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-location-of-landing-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-oath-of-office-date-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-periapsis-date-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-birth-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-burial-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-death-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-detention-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-marriage-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-publication-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-point-in-time-to-dcterms-date/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-public-domain-date-to-wikidata-publication-date/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-publication-date-to-dcterms-issued/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-retrieved-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-site-of-astronomical-discovery-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-start-time-end-time-to-schema-startdate-enddate/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-time-of-discovery-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-time-of-earliest-written-record-to-wikidata-start-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-time-of-spacecraft-docking-undocking-date-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-time-of-spacecraft-launch-of-spacecraft-landing-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-time-of-spacecraft-orbit-decay-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-work-location-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-work-period-start-work-period-end-to-wikidata-start-time-end-time/template> , 
+#<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q152081> ;
+#<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q1003207> ;
+<https://ldcp.opendata.cz/resource/wikidata/datasource-templates/Q5119> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>
+	  <https://discovery.linkedpipes.com/resource/transformer-group/wikidata/internal-start-time-end-time> ,
+	  <https://discovery.linkedpipes.com/resource/transformer-group/wikidata/internal-point-in-time> ,
+	  <https://discovery.linkedpipes.com/resource/transformer-group/wikidata/external-point-in-time> ,
+	  <https://discovery.linkedpipes.com/resource/transformer-group/wikidata/external-location> ,
+      <https://discovery.linkedpipes.com/resource/transformer-group/schemaorg/startdate-enddate> .
+	
+<https://discovery.linkedpipes.com/resource/transformer-group/wikidata/internal-start-time-end-time> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-birthday-date-of-burial-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-birthday-date-of-death-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-birthday-date-of-disappearance-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-birth-date-of-burial-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-birth-date-of-death-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-birth-date-of-disappearance-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-official-opening-date-of-official-closure-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-service-entry-date-of-service-retirement-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-inception-discontinued-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-inception-dissolved-to-wikidata-start-time-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-time-of-spacecraft-launch-of-spacecraft-landing-to-wikidata-start-time-end-time/template> ,
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-work-period-start-work-period-end-to-wikidata-start-time-end-time/template> ,
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-first-performance-to-wikidata-start-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-discontinued-date-to-wikidata-end-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-time-of-earliest-written-record-to-wikidata-start-time/template> .
+
+<https://discovery.linkedpipes.com/resource/transformer-group/wikidata/internal-point-in-time> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-depicted-to-wikidata-publication-date/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-taxon-name-publication-to-wikidata-publication-date/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-public-domain-date-to-wikidata-publication-date/template> ,
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-date-of-baptism-in-early-childhood-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-first-flight-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-floruit-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-oath-of-office-date-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-periapsis-date-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-retrieved-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-time-of-discovery-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-time-of-spacecraft-docking-undocking-date-to-wikidata-point-in-time/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-time-of-spacecraft-orbit-decay-to-wikidata-point-in-time/template> .
+
+<https://discovery.linkedpipes.com/resource/transformer-group/wikidata/external-point-in-time> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-point-in-time-to-dcterms-date/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-publication-date-to-dcterms-issued/template> .
+
+<https://discovery.linkedpipes.com/resource/transformer-group/wikidata/external-location> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-coordinate-location-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-filming-location-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-location-of-discovery-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-location-of-final-assembly-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-location-of-first-performance-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-location-of-formation-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-location-of-landing-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-birth-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-burial-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-death-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-detention-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-marriage-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-place-of-publication-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-site-of-astronomical-discovery-to-schema-geocoordinates/template> , 
+<https://discovery.linkedpipes.com/resource/transformer/wikidata-work-location-to-schema-geocoordinates/template> .
+
+<https://discovery.linkedpipes.com/resource/transformer-group/schemaorg/startdate-enddate> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template> , 
+      <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template> .

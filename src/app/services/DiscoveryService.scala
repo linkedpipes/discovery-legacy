@@ -1,8 +1,9 @@
 package services
 
 import java.util.UUID
+import javax.inject._
 
-import controllers.dto.DiscoveryStatus
+import controllers.dto.{DiscoveryStatus, CsvRequestData}
 import models.ExecutionResult
 import org.apache.jena.rdf.model.{AnonId, Model, ModelFactory, Resource}
 import org.apache.jena.vocabulary.RDF
@@ -15,11 +16,11 @@ import services.vocabulary.{ETL, LPD}
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 
-
+@Singleton
 class DiscoveryService {
 
     private val discoveries = new scala.collection.mutable.HashMap[UUID, Discovery]
-    private val csvRequests = new scala.collection.mutable.HashMap[UUID, Seq[(String, String)]]
+    private val csvRequests = new scala.collection.mutable.HashMap[UUID, Seq[CsvRequestData]]
     private val discoveryLogger = Logger.of("discovery")
 
     def start(input: DiscoveryInput) = {
@@ -29,9 +30,9 @@ class DiscoveryService {
         discovery.id
     }
 
-    def addCsvRequest(data: Seq[(String, String)]) : UUID = {
+    def addCsvRequest(indexes: Seq[CsvRequestData]) : UUID = {
         val id = UUID.randomUUID()
-        csvRequests.put(id, data)
+        csvRequests.put(id, indexes)
         id
     }
 
@@ -146,19 +147,15 @@ class DiscoveryService {
         model
     }
 
-    def listTemplates(templateSourceUri: String): Option[DiscoveryInput] = {
+    def listTemplates(templateSourceUri: String): Either[Throwable, DiscoveryInput] = {
         RdfUtils.modelFromIri(templateSourceUri)(discoveryLogger) {
             case Right(model) => {
                 val templates = model.listObjectsOfProperty(LPD.hasTemplate).toList.asScala
                 val templateIris = templates.map(_.asResource().getURI)
-                val templateGroups = model.listSubjectsWithProperty(RDF.`type`, LPD.TransformerGroup).asScala.toList
-                val templateGroupings = templateGroups.map { tg =>
-                    (tg.asResource().getURI, model.listObjectsOfProperty(tg, LPD.hasTransformer).asScala.toList.map(_.asResource().getURI))
-                }
-                val templateModels = templateIris.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get)
-                Some(DiscoveryInput(templateModels, getGroupings(model)))
+                val templateModels = templateIris.par.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get).toList
+                Right(DiscoveryInput(templateModels, getGroupings(model)))
             }
-            case Left(e) => None
+            case Left(e) => Left(e)
         }
     }
 

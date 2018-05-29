@@ -1,0 +1,57 @@
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
+ @prefix application:  <https://discovery.linkedpipes.com/resource/application/map-labeled-points/> .
+ @prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/application/map-labeled-points/configuration/> .
+ @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+ @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+ application:template a lpd:ApplicationTemplate ;
+     dcterms:title "Map Application with labeled points"@en;
+     dcterms:description "Map app vizualizing points with labels on map"@en;
+     lpd:componentConfigurationTemplate application:defaultConfiguration ;
+     lpd:inputTemplate application:input ;
+     lpd:feature application:defaultFeature ;
+     lpd:executor <https://visualization-apps.netlify.com/map> .
+
+ configuration-vocabulary:Configuration a rdfs:Class ;
+     rdfs:label "Class of configurations of Map Application with labeled points"@en;
+     rdfs:subClassOf lpd:ComponentConfiguration .
+
+ application:defaultConfiguration a configuration-vocabulary:Configuration ;
+     dcterms:title "Default configuration for Map Application with labeled points"@en ;
+     lpd:configurationQuery """
+         PREFIX dcterms: <http://purl.org/dc/terms/>
+         PREFIX application:  <https://discovery.linkedpipes.com/resource/application/map-labeled-points/>
+         PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/application/map-labeled-points/configuration/>
+
+         CONSTRUCT {
+             ?config a configuration-vocabulary:Configuration ;
+                 dcterms:title ?title ;
+         } WHERE {
+             ?config a configuration-vocabulary:Configuration .
+             OPTIONAL { ?config dcterms:title ?title . }
+         }
+     """ .
+
+ application:input a lpd:InputDataPortTemplate ;
+     dcterms:title "Input of Map Application with labeled points" .
+
+ application:defaultFeature a lpd:MandatoryFeature ;
+     dcterms:title "The default feature of Map Application with labeled points" ;
+     lpd:descriptor application:defaultDescriptor .
+
+ application:defaultDescriptor a lpd:Descriptor ;
+     dcterms:title "Checks if default feature of Map Application  with labeled points can be applied." ;
+     lpd:query """
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+ASK  {
+  ?geo 
+    dcterms:title ?title ;
+    schema:latitude ?lat ;
+    schema:longitude ?long .
+}
+""" ;
+     lpd:appliesTo application:input .
+               

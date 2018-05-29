@@ -63,11 +63,10 @@ object Pipeline {
 
     implicit val writes: Writes[Pipeline] = (
         (JsPath \ "descriptor").write[String] and
-            (JsPath \ "name").write[String] and
-            (JsPath \ "dataSample").write[String]
+            (JsPath \ "name").write[String]
         )(unlift(Pipeline.destruct))
 
-    def destruct(arg: Pipeline): Option[(String, String, String)] = {
+    def destruct(arg: Pipeline): Option[(String, String)] = {
         val datasourcesString = arg.typedDatasources.map(_.label).mkString(",")
         val extractorsString = arg.typedExtractors.map(i => s"${i.label} (${i.getClass.getSimpleName})").mkString(",")
         val transformersString = arg.typedProcessors.map(i => s"${i.label} (${i.getClass.getSimpleName})").mkString(",")
@@ -77,6 +76,6 @@ object Pipeline {
 
         val descriptor = s"$datasourcesString;$transformersCount;$extractorsString;$transformersString;$app;$iterationNumber"
 
-        Some((descriptor, arg.name, arg.dataSample))
+        Some((descriptor, arg.name))
     }
 }

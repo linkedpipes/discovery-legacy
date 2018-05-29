@@ -20,7 +20,6 @@ configuration-vocabulary:Configuration a rdfs:Class ;
 transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   dcterms:title "Default configuration" ;
   lpd:query  """
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX schema: <http://schema.org/>
 
@@ -67,7 +66,6 @@ transformer:feature a lpd:MandatoryFeature ;
   
 transformer:descriptor a lpd:Descriptor ;
   lpd:query """
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 
 ASK {

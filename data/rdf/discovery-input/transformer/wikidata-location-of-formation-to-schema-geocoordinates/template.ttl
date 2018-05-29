@@ -1,0 +1,89 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
+
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/wikidata-location-of-formation-to-schema-geocoordinates/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-location-of-formation-to-schema-geocoordinates/configuration/> .
+
+transformer:template a lpd:TransformerTemplate ;
+  dcterms:title "Wikidata location of formation (P740) to Schema.org Geocoordinates"@en;
+  lpd:componentConfigurationTemplate transformer:defaultConfiguration ;
+  lpd:inputTemplate transformer:input ;
+  lpd:outputTemplate transformer:output ;
+  lpd:feature transformer:feature .
+  
+configuration-vocabulary:Configuration a rdfs:Class ;
+  rdfs:label "Class of configurations of Wikidata location of formation (P740) to Schema.org Geocoordinates"@en;
+  rdfs:subClassOf lpd:ComponentConfiguration .
+  
+transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
+  dcterms:title "Default configuration" ;
+  lpd:query  """
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+DELETE {
+  ?place wdt:P625 ?loc .
+}
+INSERT {
+  ?place schema:geo ?geo .
+
+  ?geo a schema:GeoCoordinates ; 
+    schema:name ?geoLabel ;
+    schema:latitude ?lat ;
+    schema:longitude ?long .
+} 
+WHERE {
+  ?thing wdt:P740 ?place ;
+    rdfs:label ?thingLabel .
+  FILTER (LANG(?thingLabel) = "en")
+  
+  ?place wdt:P625 ?loc .
+  BIND(REPLACE(STR(?loc), "Point\\\\((\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\s+(\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\)", "$1") AS ?long)
+  BIND(REPLACE(STR(?loc), "Point\\\\((\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\s+(\\\\-?[0-9]+(\\\\.[0-9]+)?)\\\\)", "$3") AS ?lat)
+  BIND(UUID() AS ?geo)
+  BIND(STRLANG(CONCAT("Location of formation of ", STR(?thingLabel)), "en") AS ?geoLabel)
+}
+  """ ;
+  lpd:configurationQuery """
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
+    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/wikidata-location-of-formation-to-schema-geocoordinates/configuration/>
+    
+    CONSTRUCT {
+      ?config a configuration-vocabulary:Configuration ;
+        lpd:query ?query ;
+        dcterms:title ?title .
+    } WHERE {
+      ?config a configuration-vocabulary:Configuration .
+      OPTIONAL { ?config lpd:query ?query . }
+      OPTIONAL { ?config dcterms:title ?title . }
+    }
+  """ .
+
+transformer:input a lpd:InputDataPortTemplate ;
+  dcterms:title "Triples with Wikidata location of formation (P740) predicate" .
+  
+transformer:output a lpd:OutputDataPortTemplate ;
+  dcterms:title "Representation of objects of the input triples expressed as Schema.org triples" .
+  
+transformer:feature a lpd:MandatoryFeature ;
+  dcterms:title "Transforms Wikidata location of formation (P740) to Schema.org Geocoordinates" ;
+  lpd:descriptor transformer:descriptor .
+  
+transformer:descriptor a lpd:Descriptor ;
+  lpd:query """
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+ASK {
+  ?thing wdt:P740 ?place ;
+    rdfs:label ?thingLabel .
+  FILTER (LANG(?thingLabel) = "en")
+  
+  ?place wdt:P625 ?loc .
+}
+  """ ;
+  lpd:appliesTo transformer:input .
