@@ -58,13 +58,14 @@ object DiscoveryInput {
             val configuration = template.getModel.getRequiredProperty(template, LPD.componentConfigurationTemplate).getObject.asResource()
             val service = configuration.getPropertyResourceValue(LPD.service)
             val endpointUri = service.getPropertyResourceValue(SD.endpoint).getURI
+            val defaultGraph = Option(service.getPropertyResourceValue(SD.defaultGraph)).map(_.getURI)
             val output = template.getRequiredProperty(LPD.outputTemplate).getResource
             val dataSampleUri = Option(output.getRequiredProperty(LPD.outputDataSample).getResource.getURI)
             val label = template.getProperty(DCTerms.title).getString
 
             val extractorQuery = Option(configuration.getProperty(LPD.query)).map(_.getString)
             val extractor = extractorQuery.map(eq => new SparqlConstructExtractor(s"${template.getURI}#extractor", ConstructQuery(eq), s"$label extractor"))
-            DataSet(SparqlEndpoint(template.getURI, endpointUri, descriptorIri = dataSampleUri, label = label), extractor)
+            DataSet(SparqlEndpoint(template.getURI, endpointUri, descriptorIri = dataSampleUri, label = label, defaultGraphIris = defaultGraph.toSeq), extractor)
         }
     }
 
