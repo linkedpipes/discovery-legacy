@@ -131,7 +131,7 @@ class StatisticsController @Inject()(
         "Application URI",
         "Datasource label",
         "Application label",
-        "Group count?",
+        "Data sample group count",
         "Pipeline count"
     ))
 
@@ -217,21 +217,25 @@ class StatisticsController @Inject()(
     // 4.csv
     private def getDataSourceApplicationExperimentCsvStats(csvRequests: Seq[CsvRequestData], pipelineGroupings: Map[String, PipelineGrouping]) : Seq[CsvLine] = {
         Seq(getDataSourceApplicationExperimentCsvHeader) ++ withCsvRequests(csvRequests, pipelineGroupings) { case (csvRequest, discovery, grouping) =>
-            discovery.input.applications.flatMap { a =>
+            discovery.input.applications.flatMap { applicationInstance =>
                 val dataSources = discovery.input.dataSets.map(ds => ds.dataSourceInstance)
-                dataSources.map { d =>
+                dataSources.map { datasourceInstance =>
                     CsvLine(Seq(
                         csvRequest.discoveryId,
                         csvRequest.inputIri,
-                        d.iri,
-                        a.iri,
-                        d.label,
-                        a.label,
+                        datasourceInstance.iri,
+                        applicationInstance.iri,
+                        datasourceInstance.label,
+                        applicationInstance.label,
                         grouping.map { g =>
-                            g.applicationGroups.filter(ag => ag.applicationInstance == a).flatMap(ag => ag.dataSourceGroups).filter(_.dataSourceInstances == d).map(_.extractorGroups.map(_.dataSampleGroups.size).sum).sum
+                            g.applicationGroups.filter(ag => ag.applicationInstance == applicationInstance)
+                              .flatMap(applicationGroup => applicationGroup.dataSourceGroups)
+                              .filter(_.dataSourceInstances.contains(datasourceInstance))
+                              .map(_.extractorGroups.map(_.dataSampleGroups.size).sum)
+                              .sum
                         }.get,
                         service.getPipelinesOfDiscovery(csvRequest.discoveryId).map(pipelines => pipelines.count { p =>
-                            p._2.components.exists(c => c.componentInstance == a) && p._2.components.exists(c => c.componentInstance == d)
+                            p._2.components.exists(c => c.componentInstance == applicationInstance) && p._2.components.exists(c => c.componentInstance == datasourceInstance)
                         }).get
                     ))
                 }
