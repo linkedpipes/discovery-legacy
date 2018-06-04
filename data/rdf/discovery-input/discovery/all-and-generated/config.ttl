@@ -52,6 +52,7 @@
 	  
       # Labels
 	  <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 	  <https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>,
@@ -146,6 +147,7 @@
 
 <https://discovery.linkedpipes.com/resource/transformer-group/all-and-generated/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 	  <https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
