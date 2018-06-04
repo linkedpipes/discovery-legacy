@@ -90,9 +90,9 @@ class StatisticsController @Inject()(
         "Discovery ID",
         "Discovery URI",
         "Datasource URI",
-        "Datasource template label",
+        "Datasource label",
         "Extractor group count",
-        "App count",
+        "Application count",
         "Pipeline count"
     ))
 
@@ -100,7 +100,7 @@ class StatisticsController @Inject()(
         "Discovery ID",
         "Discovery URI",
         "Application URI",
-        "Application template label",
+        "Application label",
         "Extractor group count",
         "Datasource count",
         "Pipeline count"
@@ -111,8 +111,8 @@ class StatisticsController @Inject()(
         "Discovery URI",
         "Datasource URI",
         "Application URI",
-        "DataSource template label",
-        "Application template label",
+        "DataSource label",
+        "Application label",
         "Group count?",
         "Pipeline count"
     ))
@@ -132,18 +132,18 @@ class StatisticsController @Inject()(
     ))
 
     private def getDetailedCsvHeader = CsvLine(Seq(
-        "discoveryId",
-        "appGroup",
-        "dataSourcesGroup",
-        "extractorsGroup",
-        "dataSampleGroup",
-        "dataSources",
-        "transformerCount",
-        "extractors",
-        "transformers",
-        "app",
-        "iterationNumber",
-        "execute URL"
+        "Discovery ID",
+        "Application group",
+        "Datasource group",
+        "Extractor group",
+        "Data sample group",
+        "Datasources",
+        "Transformer count",
+        "Extractors",
+        "Transformers",
+        "Application",
+        "Iteration number",
+        "Execute URL"
     ))
 
     private def getDataSourceExperimentCsvStats(csvRequests: Seq[CsvRequestData], pipelineGroupings: Map[String, PipelineGrouping]) : Seq[CsvLine] = {
