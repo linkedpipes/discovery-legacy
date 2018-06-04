@@ -72,7 +72,7 @@ class StatisticsController @Inject()(
             CsvFile("3.csv", getApplicationExperimentCsvStats(csvRequests, pipelineGroupingsByIdMap)),
             CsvFile("4.csv", getDataSourceApplicationExperimentCsvStats(csvRequests, pipelineGroupingsByIdMap))
         ) ++ csvRequests.map {
-            i => CsvFile(s"${i.inputIri}.csv", getDetailedCsv(i.discoveryId))
+            i => CsvFile(s"${i.discoveryId}.csv", getDetailedCsv(i.discoveryId))
         }
     }
 
