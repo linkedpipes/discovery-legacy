@@ -129,7 +129,7 @@ class StatisticsController @Inject()(
         "Discovery URI",
         "Datasource URI",
         "Application URI",
-        "DataSource label",
+        "Datasource label",
         "Application label",
         "Group count?",
         "Pipeline count"
