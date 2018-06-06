@@ -3,6 +3,7 @@ package services.discovery.model
 import java.io.StringWriter
 import java.util.UUID
 
+import org.apache.jena.rdf.model.Model
 import services.discovery.components.analyzer.EtlSparqlGraphProtocol
 import services.discovery.model.components._
 import play.api.libs.json._
@@ -51,11 +52,7 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
 
     def typedApplications = applications.map(_.componentInstance.asInstanceOf[ApplicationInstance])
 
-    def dataSample = {
-        val s = new StringWriter()
-        lastOutputDataSample.getModel(UUID.randomUUID(), height).write(s, "TTL")
-        s.toString
-    }
+    def dataSample : Model = lastOutputDataSample.getModel(UUID.randomUUID(), height)
 
 }
 
