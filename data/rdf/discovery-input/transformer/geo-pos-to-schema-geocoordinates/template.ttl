@@ -22,6 +22,7 @@ transformer:defaultConfiguration a configuration-vocabulary:Configuration ;
   lpd:query  """
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
 DELETE {
   ?s geo:lat ?lat ; geo:long ?long .
@@ -29,13 +30,18 @@ DELETE {
 INSERT {
   ?s schema:geo ?geo .
 
-  ?geo a schema:GeoCoordinates ; 
-           schema:latitude ?lat ;
-           schema:longitude ?long .
+  ?geo dct:title ?geoTitle ;
+    schema:latitude ?lat ;
+    schema:longitude ?long .
 } 
 WHERE {
   ?s geo:lat ?lat ; geo:long ?long .
   BIND(IRI(CONCAT(STR(?s), "/geo")) as ?geo)
+  OPTIONAL {
+    ?s dcterms:title ?title .
+	FILTER (LANG(?title) = \"en\")
+    BIND(STRLANG(CONCAT(\"Location of <a href=\\\"\", STR(?s), \"\\\">\", STR(?title), \"</a>\"), \"en\") AS ?geoTitle)
+  }
 }
   """ ;
   lpd:configurationQuery """
