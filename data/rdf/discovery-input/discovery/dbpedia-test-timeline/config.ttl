@@ -1,0 +1,5 @@
+<https://discovery.linkedpipes.com/resource/discovery/dbpedia-test-timeline/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+  <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
+  <https://discovery.linkedpipes.com/resource/application/timeline-periods-with-labels/template> ,
+  <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-birthDate-deathDate-to-schema-startdate-enddate/template> ,
+  <https://ldcp.opendata.cz/resource/dbpedia/datasource-templates/Category-20th-century_writers> .
