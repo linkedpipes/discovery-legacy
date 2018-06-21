@@ -30,7 +30,7 @@ DELETE {
 INSERT {
   ?s schema:geo ?geo .
 
-  ?geo dct:title ?geoTitle ;
+  ?geo dcterms:title ?geoTitle ;
     schema:latitude ?lat ;
     schema:longitude ?long .
 } 
