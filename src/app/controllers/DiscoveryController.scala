@@ -21,6 +21,7 @@ import slick.jdbc.JdbcProfile
 
 import scala.concurrent.{ExecutionContext, Future}
 import scalaj.http.{Http, MultiPart}
+import services.discovery.model.etl.EtlPipeline
 
 
 @Singleton
@@ -135,36 +136,50 @@ class DiscoveryController @Inject()(
 
     def execute(id: String, pipelineId: String) = Action.async {
 
+        exportPipelineToEtl(id, pipelineId).map { case (etlPipeline, etlPipelineUri) =>
+
+            val prefix = configuration.get[String]("ldcp.etl.hostname")
+            val pipelineExecutionUrl = s"$prefix/resources/executions?pipeline=$etlPipelineUri"
+            val executionResponse = Http(pipelineExecutionUrl).postForm.asString.body
+            val executionIri = Json.parse(executionResponse) \ "iri"
+
+            executionResultDao.insert(ExecutionResult(UUID.randomUUID().toString, id, pipelineId, etlPipeline.resultGraphIri)).map { _ =>
+                Ok(Json.obj(
+                    "pipelineId" -> pipelineId,
+                    "etlPipelineIri" -> etlPipelineUri,
+                    "etlExecutionIri" -> executionIri.get.asInstanceOf[JsString].value,
+                    "resultGraphIri" -> etlPipeline.resultGraphIri
+                ))
+            }
+        }.flatten.getOrElse(Future.successful(NotFound))
+    }
+
+    def createPipeline(id: String, pipelineId: String) = Action.async {
+        exportPipelineToEtl(id, pipelineId).map { case (etlPipeline, etlPipelineUri) =>
+            Ok(Json.obj(
+                "pipelineId" -> pipelineId,
+                "etlPipelineIri" -> etlPipelineUri,
+                "resultGraphIri" -> etlPipeline.resultGraphIri
+            ))
+        }.flatten.getOrElse(Future.successful(NotFound))
+    }
+
+    private def exportPipelineToEtl(id: String, pipelineId: String) : Option[(EtlPipeline, String)] = {
+
         val prefix = configuration.get[String]("ldcp.etl.hostname")
         val endpointUri = configuration.get[String]("ldcp.endpointUri")
 
-        service.getEtlPipeline(id, pipelineId, endpointUri) match {
-            case Some(etlPipeline) => {
-                val outputStream = new ByteArrayOutputStream()
-                RDFDataMgr.write(outputStream, etlPipeline.dataset, Lang.JSONLD)
+        service.getEtlPipeline(id, pipelineId, endpointUri).map { etlPipeline =>
+            val outputStream = new ByteArrayOutputStream()
+            RDFDataMgr.write(outputStream, etlPipeline.dataset, Lang.JSONLD)
 
-                val response = Http(s"$prefix/resources/pipelines").postMulti(
-                    MultiPart("pipeline", "pipeline.jsonld", "application/ld+json", outputStream.toByteArray)
-                ).asString.body
+            val response = Http(s"$prefix/resources/pipelines").postMulti(
+                MultiPart("pipeline", "pipeline.jsonld", "application/ld+json", outputStream.toByteArray)
+            ).asString.body
 
-                val resultDataset = DatasetFactory.create()
-                RDFDataMgr.read(resultDataset, new StringReader(response), null, Lang.TRIG)
-                val pipelineUri = resultDataset.listNames().next()
-
-                val pipelineExecutionUrl = s"$prefix/resources/executions?pipeline=$pipelineUri"
-                val executionResponse = Http(pipelineExecutionUrl).postForm.asString.body
-                val executionIri = Json.parse(executionResponse) \ "iri"
-
-                executionResultDao.insert(ExecutionResult(UUID.randomUUID().toString, id, pipelineId, etlPipeline.resultGraphIri)).map { _ =>
-                    Ok(Json.obj(
-                        "pipelineId" -> pipelineId,
-                        "etlPipelineIri" -> pipelineUri,
-                        "etlExecutionIri" -> executionIri.get.asInstanceOf[JsString].value,
-                        "resultGraphIri" -> etlPipeline.resultGraphIri
-                    ))
-                }
-            }
-            case _ => Future.successful(NotFound)
+            val resultDataset = DatasetFactory.create()
+            RDFDataMgr.read(resultDataset, new StringReader(response), null, Lang.TRIG)
+            (etlPipeline, resultDataset.listNames().next())
         }
     }
 
