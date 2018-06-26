@@ -167,17 +167,19 @@ class DiscoveryController @Inject()(
                     "resultGraphIri" -> etlPipeline.resultGraphIri
                 ))
             }
-        }.flatten.getOrElse(Future.successful(NotFound))
+        }.getOrElse(Future.successful(NotFound))
     }
 
     def createPipeline(id: String, pipelineId: String) = Action.async {
-        exportPipelineToEtl(id, pipelineId).map { case (etlPipeline, etlPipelineUri) =>
-            Ok(Json.obj(
-                "pipelineId" -> pipelineId,
-                "etlPipelineIri" -> etlPipelineUri,
-                "resultGraphIri" -> etlPipeline.resultGraphIri
-            ))
-        }.flatten.getOrElse(Future.successful(NotFound))
+        Future.successful(
+            exportPipelineToEtl(id, pipelineId).map { case (etlPipeline, etlPipelineUri) =>
+                Ok(Json.obj(
+                    "pipelineId" -> pipelineId,
+                    "etlPipelineIri" -> etlPipelineUri,
+                    "resultGraphIri" -> etlPipeline.resultGraphIri
+                ))
+            }.getOrElse(NotFound)
+        )
     }
 
     private def exportPipelineToEtl(id: String, pipelineId: String) : Option[(EtlPipeline, String)] = {
