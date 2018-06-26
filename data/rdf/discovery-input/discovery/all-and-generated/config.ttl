@@ -52,9 +52,13 @@
 	  
       # Labels
 	  <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 	  <https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>,
+	  
+	  # Intra-FOAF labels
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template>,  
 	  
       # Date instants
 	  <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template>,
@@ -132,6 +136,7 @@
 	# Groups
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>
       <https://discovery.linkedpipes.com/resource/transformer-group/all-and-generated/label> ,
+      <https://discovery.linkedpipes.com/resource/transformer-group/all-and-generated/foaf-label> ,
 #      <https://discovery.linkedpipes.com/resource/transformer-group/all-and-generated/time-interval>,
       <https://discovery.linkedpipes.com/resource/transformer-group/all-and-generated/date-instant>, 
       <https://discovery.linkedpipes.com/resource/transformer-group/all-and-generated/schema.org/date-interval>,
@@ -146,12 +151,18 @@
 
 <https://discovery.linkedpipes.com/resource/transformer-group/all-and-generated/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 	  <https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template> 
     .
-      
+
+<https://discovery.linkedpipes.com/resource/transformer-group/all-and-generated/foaf-label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template>
+    .
+	
 #<https://discovery.linkedpipes.com/resource/transformer-group/all-and-generated/time-interval> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
 #    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
 #      <https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template>,

@@ -1,0 +1,5 @@
+<https://discovery.linkedpipes.com/resource/discovery/dbpedia-test-map/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+  <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
+  <https://discovery.linkedpipes.com/resource/application/map-labeled-points/template> ,
+  <https://ldcp.opendata.cz/resource/dbpedia/transformer/dbpedia-birthPlace-to-schema-geocoordinates/template> ,
+  <https://ldcp.opendata.cz/resource/dbpedia/datasource-templates/Category-20th-century_writers> .

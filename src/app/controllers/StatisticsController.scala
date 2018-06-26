@@ -72,7 +72,7 @@ class StatisticsController @Inject()(
             CsvFile("3.csv", getApplicationExperimentCsvStats(csvRequests, pipelineGroupingsByIdMap)),
             CsvFile("4.csv", getDataSourceApplicationExperimentCsvStats(csvRequests, pipelineGroupingsByIdMap))
         ) ++ csvRequests.map {
-            i => CsvFile(s"${i.inputIri}.csv", getDetailedCsv(i.discoveryId))
+            i => CsvFile(s"${i.discoveryId}.csv", getDetailedCsv(i.discoveryId))
         }
     }
 
@@ -86,19 +86,94 @@ class StatisticsController @Inject()(
         }
     }
 
+    // 1.csv
+    private def getGlobalCsvHeader = CsvLine(Seq(
+        "Discovery ID",
+        "Discovery URI",
+        "Application group count",
+        "Datasource group count",
+        "Extractor group count",
+        "Data sample group count",
+        "Pipeline count",
+        "Discovery duration",
+        "Application count",
+        "Data source count",
+        "Transformer count"
+    ))
+
+    // 2.csv
+    private def getDataSourceExperimentCsvHeader = CsvLine(Seq(
+        "Discovery ID",
+        "Discovery URI",
+        "Datasource URI",
+        "Datasource label",
+        "Extractor group count",
+        "Application count",
+        "Pipeline count"
+    ))
+
+    // 3.csv
+    private def getApplicationExperimentCsvHeader = CsvLine(Seq(
+        "Discovery ID",
+        "Discovery URI",
+        "Application URI",
+        "Application label",
+        "Extractor group count",
+        "Datasource count",
+        "Pipeline count"
+    ))
+
+    // 4.csv
+    private def getDataSourceApplicationExperimentCsvHeader = CsvLine(Seq(
+        "Discovery ID",
+        "Discovery URI",
+        "Datasource URI",
+        "Application URI",
+        "Datasource label",
+        "Application label",
+        "Data sample group count",
+        "Pipeline count"
+    ))
+
+    private def getDetailedCsvHeader = CsvLine(Seq(
+        "Discovery ID",
+        "Application group",
+        "Datasource group",
+        "Extractor group",
+        "Data sample group",
+        "Datasources",
+        "Transformer count",
+        "Extractors",
+        "Transformers",
+        "Application",
+        "Iteration number",
+        "Execute URL"
+    ))
+
+    // 1.csv
+    private def getGlobalCsvStats(csvRequests: Seq[CsvRequestData], pipelineGroupings: Map[String, PipelineGrouping]) : Seq[CsvLine] = {
+        Seq(getGlobalCsvHeader) ++ withCsvRequests(csvRequests, pipelineGroupings) { case (csvRequest, discovery, grouping) =>
+            grouping.map { g =>
+                CsvLine(Seq(
+                    csvRequest.discoveryId,
+                    csvRequest.inputIri,
+                    g.applicationGroups.size,
+                    g.applicationGroups.map(ag => ag.dataSourceGroups.size).sum,
+                    g.applicationGroups.map(ag => ag.dataSourceGroups.map(ds => ds.extractorGroups.size).sum).sum,
+                    g.applicationGroups.map(ag => ag.dataSourceGroups.map(ds => ds.extractorGroups.map(eg => eg.dataSampleGroups.size).sum).sum).sum,
+                    g.pipelines.size,
+                    discovery.duration,
+                    discovery.input.applications.size,
+                    discovery.input.dataSets.size,
+                    discovery.input.processors.size
+                ))
+            }.toSeq
+        }
+    }
+
+    // 2.csv
     private def getDataSourceExperimentCsvStats(csvRequests: Seq[CsvRequestData], pipelineGroupings: Map[String, PipelineGrouping]) : Seq[CsvLine] = {
-
-        val heading = CsvLine(Seq(
-            "Discovery ID",
-            "Discovery URI",
-            "Datasource URI",
-            "Datasource template label",
-            "Extractor group count",
-            "App count",
-            "Pipeline count"
-        ))
-
-        val body = withCsvRequests(csvRequests, pipelineGroupings) { case (csvRequest, discovery, grouping) =>
+        Seq(getDataSourceExperimentCsvHeader) ++ withCsvRequests(csvRequests, pipelineGroupings) { case (csvRequest, discovery, grouping) =>
             val dataSources = discovery.input.dataSets.map(ds => ds.dataSourceInstance)
             dataSources.map { dataSource =>
                 CsvLine(Seq(
@@ -116,23 +191,11 @@ class StatisticsController @Inject()(
                 ))
             }
         }
-
-        Seq(heading) ++ body
     }
 
+    // 3.csv
     private def getApplicationExperimentCsvStats(csvRequests: Seq[CsvRequestData], pipelineGroupings: Map[String, PipelineGrouping]) : Seq[CsvLine] = {
-
-        val heading = CsvLine(Seq(
-            "Discovery ID",
-            "Discovery URI",
-            "Application URI",
-            "Application template label",
-            "Extractor group count",
-            "Datasource count",
-            "Pipeline count"
-        ))
-
-        val body = withCsvRequests(csvRequests, pipelineGroupings) { case (csvRequest, discovery, grouping) =>
+        Seq(getApplicationExperimentCsvHeader) ++ withCsvRequests(csvRequests, pipelineGroupings) { case (csvRequest, discovery, grouping) =>
             discovery.input.applications.map { a =>
                 CsvLine(Seq(
                     csvRequest.discoveryId,
@@ -149,83 +212,35 @@ class StatisticsController @Inject()(
                 ))
             }
         }
-
-        Seq(heading) ++ body
     }
 
+    // 4.csv
     private def getDataSourceApplicationExperimentCsvStats(csvRequests: Seq[CsvRequestData], pipelineGroupings: Map[String, PipelineGrouping]) : Seq[CsvLine] = {
-
-        val heading = CsvLine(Seq(
-            "Discovery ID",
-            "Discovery URI",
-            "Datasource URI",
-            "Application URI",
-            "DataSource template label",
-            "Application template label",
-            "Group count?",
-            "Pipeline count"
-        ))
-
-        val body = withCsvRequests(csvRequests, pipelineGroupings) { case (csvRequest, discovery, grouping) =>
-            discovery.input.applications.flatMap { a =>
+        Seq(getDataSourceApplicationExperimentCsvHeader) ++ withCsvRequests(csvRequests, pipelineGroupings) { case (csvRequest, discovery, grouping) =>
+            discovery.input.applications.flatMap { applicationInstance =>
                 val dataSources = discovery.input.dataSets.map(ds => ds.dataSourceInstance)
-                dataSources.map { d =>
+                dataSources.map { datasourceInstance =>
                     CsvLine(Seq(
                         csvRequest.discoveryId,
                         csvRequest.inputIri,
-                        d.iri,
-                        a.iri,
-                        d.label,
-                        a.label,
+                        datasourceInstance.iri,
+                        applicationInstance.iri,
+                        datasourceInstance.label,
+                        applicationInstance.label,
                         grouping.map { g =>
-                            g.applicationGroups.filter(ag => ag.applicationInstance == a).flatMap(ag => ag.dataSourceGroups).filter(_.dataSourceInstances == d).map(_.extractorGroups.map(_.dataSampleGroups.size).sum).sum
+                            g.applicationGroups.filter(ag => ag.applicationInstance == applicationInstance)
+                              .flatMap(applicationGroup => applicationGroup.dataSourceGroups)
+                              .filter(_.dataSourceInstances.contains(datasourceInstance))
+                              .map(_.extractorGroups.map(_.dataSampleGroups.size).sum)
+                              .sum
                         }.get,
                         service.getPipelinesOfDiscovery(csvRequest.discoveryId).map(pipelines => pipelines.count { p =>
-                            p._2.components.exists(c => c.componentInstance == a) && p._2.components.exists(c => c.componentInstance == d)
+                            p._2.components.exists(c => c.componentInstance == applicationInstance) && p._2.components.exists(c => c.componentInstance == datasourceInstance)
                         }).get
                     ))
                 }
             }
         }
-
-        Seq(heading) ++ body
-    }
-
-    private def getGlobalCsvStats(csvRequests: Seq[CsvRequestData], pipelineGroupings: Map[String, PipelineGrouping]) : Seq[CsvLine] = {
-
-        val heading = CsvLine(Seq(
-            "Discovery ID",
-            "Discovery URI",
-            "Application group count",
-            "Datasource group count",
-            "Extractor group count",
-            "Data sample group count",
-            "Pipeline count",
-            "Discovery duration",
-            "Application count",
-            "Data source count",
-            "Transformer count"
-        ))
-
-        val body = withCsvRequests(csvRequests, pipelineGroupings) { case (csvRequest, discovery, grouping) =>
-            grouping.map { g =>
-                CsvLine(Seq(
-                    csvRequest.discoveryId,
-                    csvRequest.inputIri,
-                    g.applicationGroups.size,
-                    g.applicationGroups.map(ag => ag.dataSourceGroups.size).sum,
-                    g.applicationGroups.map(ag => ag.dataSourceGroups.map(ds => ds.extractorGroups.size).sum).sum,
-                    g.applicationGroups.map(ag => ag.dataSourceGroups.map(ds => ds.extractorGroups.map(eg => eg.dataSampleGroups.size).sum).sum).sum,
-                    g.pipelines.size,
-                    discovery.duration,
-                    discovery.input.applications.size,
-                    discovery.input.dataSets.size,
-                    discovery.input.processors.size
-                ))
-            }.toSeq
-        }
-
-        Seq(heading) ++ body
     }
 
     def csv(id: String) = Action {
@@ -233,22 +248,6 @@ class StatisticsController @Inject()(
     }
 
     private def getDetailedCsv(id: String) : Seq[CsvLine] = {
-
-        val heading = CsvLine(Seq(
-            "discoveryId",
-            "appGroup",
-            "dataSourcesGroup",
-            "extractorsGroup",
-            "dataSampleGroup",
-            "dataSources",
-            "transformerCount",
-            "extractors",
-            "transformers",
-            "app",
-            "iterationNumber",
-            "execute URL"
-        ))
-
         val maybeGrouping = service.getPipelinesOfDiscovery(id).map { pipelineMap => PipelineGrouping.create(pipelineMap) }
         val body = maybeGrouping.map { grouping =>
             grouping.applicationGroups.flatMap { applicationGroup =>
@@ -287,7 +286,7 @@ class StatisticsController @Inject()(
             }
         }.toSeq.flatten
 
-        Seq(heading) ++ body
+        Seq(getDetailedCsvHeader) ++ body
     }
 
 }

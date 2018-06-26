@@ -2,12 +2,13 @@ package controllers
 
 import java.io._
 import java.util.UUID
-
 import javax.inject._
+
 import controllers.dto.PipelineGrouping
 import dao.ExecutionResultDao
 import models.ExecutionResult
 import org.apache.jena.query.DatasetFactory
+import org.apache.jena.rdf.model.Model
 import org.apache.jena.riot.{Lang, RDFDataMgr}
 import play.Logger
 import play.api.Configuration
@@ -33,9 +34,10 @@ class DiscoveryController @Inject()(
 )(implicit executionContext: ExecutionContext) extends InjectedController with HasDatabaseConfigProvider[JdbcProfile] {
 
     val discoveryLogger = Logger.of("discovery")
+    private val ldcpEndpointUri = configuration.get[String]("ldcp.endpointUri")
+    private val templateSourceUri = configuration.get[String]("ldcp.templateSourceUri")
 
     def listComponents = Action {
-        val templateSourceUri = configuration.get[String]("ldcp.templateSourceUri")
         Ok(
             service.listTemplates(templateSourceUri) match {
                 case Right(input) => Json.toJson(input)
@@ -116,10 +118,9 @@ class DiscoveryController @Inject()(
     def getSparqlService(discoveryId: String, pipelineId: String) = Action.async { r =>
         executionResultDao.findByPipelineId(discoveryId, pipelineId).map {
             case Some(executionResult) => {
-                val model = service.getService(executionResult, r.host, configuration.get[String]("ldcp.endpointUri"))
-                val outputStream = new ByteArrayOutputStream()
-                RDFDataMgr.write(outputStream, model, Lang.TTL)
-                Ok(outputStream.toString()).as("text/turtle")
+                TurtleResponse(
+                    service.getService(executionResult, r.host, ldcpEndpointUri)
+                )
             }
             case _ => NotFound
         }
@@ -127,11 +128,26 @@ class DiscoveryController @Inject()(
 
     def getDataSampleSparqlService(discoveryId: String, pipelineId: String) = Action.async { r =>
         Future.successful(service.withPipeline(discoveryId: String, pipelineId: String) { (p,d) =>
-            val model = service.getDataSampleService(pipelineId, discoveryId, p.dataSample, r.host, configuration.get[String]("ldcp.endpointUri"))
-            val outputStream = new ByteArrayOutputStream()
-            RDFDataMgr.write(outputStream, model, Lang.TTL)
-            Ok(outputStream.toString()).as("text/turtle")
+            TurtleResponse(
+                service.getDataSampleService(pipelineId, discoveryId, modelToTtlString(p.dataSample), r.host, ldcpEndpointUri)
+            )
         }.getOrElse(NotFound))
+    }
+
+    def getDataSample(discoveryId: String, pipelineId: String) = Action.async { r =>
+        Future.successful(service.withPipeline(discoveryId: String, pipelineId: String) { (p,_) =>
+            TurtleResponse(p.dataSample)
+        }.getOrElse(NotFound))
+    }
+
+    private def modelToTtlString(model: Model) = {
+        val outputStream = new ByteArrayOutputStream()
+        RDFDataMgr.write(outputStream, model, Lang.TTL)
+        outputStream.toString()
+    }
+
+    private def TurtleResponse(model: Model) = {
+        Ok(modelToTtlString(model)).as("text/turtle")
     }
 
     def execute(id: String, pipelineId: String) = Action.async {

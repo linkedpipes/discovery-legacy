@@ -11,7 +11,7 @@
      lpd:componentConfigurationTemplate application:defaultConfiguration ;
      lpd:inputTemplate application:input ;
      lpd:feature application:defaultFeature ;
-     lpd:executor <https://visualisation-apps.netlify.com/map> .
+     lpd:executor <https://visualization-apps.netlify.com/map> .
 
  configuration-vocabulary:Configuration a rdfs:Class ;
      rdfs:label "Class of configurations of Map Application"@en;

@@ -11,9 +11,12 @@
       <https://discovery.linkedpipes.com/resource/transformer/geosparql-aswkt-to-schema-geocoordinates/template>,
 	  
       <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
-      <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 	  <https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>,
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template>,  
+	  
 	  
       <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template>,
       <https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template>,
@@ -39,7 +42,8 @@
       <https://discovery.linkedpipes.com/resource/transformer-group/all/time-interval>,
       <https://discovery.linkedpipes.com/resource/transformer-group/all/date>, 
       <https://discovery.linkedpipes.com/resource/transformer-group/all/geo>,
-      <https://discovery.linkedpipes.com/resource/transformer-group/all/label>
+      <https://discovery.linkedpipes.com/resource/transformer-group/all/label>,
+      <https://discovery.linkedpipes.com/resource/transformer-group/all/foaf-label>
     .
 
 <https://discovery.linkedpipes.com/resource/discovery/all/config> 
@@ -159,10 +163,16 @@
 
 <https://discovery.linkedpipes.com/resource/transformer-group/all/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 	  <https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template> 
+    .
+	
+<https://discovery.linkedpipes.com/resource/transformer-group/all/foaf-label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template>
     .
 	
 <https://discovery.linkedpipes.com/resource/transformer-group/all/geo> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
