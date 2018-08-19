@@ -21,6 +21,7 @@ GET        /discovery/:id/pipeline-groups                      controllers.Disco
 GET        /discovery/:id/pipelines/:pipelineId                controllers.DiscoveryController.pipeline(id: String, pipelineId: String)
 GET        /discovery/:id/stop                                 controllers.DiscoveryController.stop(id: String)
 GET        /discovery/:id/execute/:pipelineId                  controllers.DiscoveryController.execute(id: String, pipelineId: String)
+GET        /discovery/:id/export/:pipelineId                   controllers.DiscoveryController.createPipeline(id: String, pipelineId: String)
 GET        /discovery/:id/:pipelineId/service                  controllers.DiscoveryController.getSparqlService(id: String, pipelineId: String)
 GET        /discovery/:id/:pipelineId/ods                      controllers.DiscoveryController.getDataSample(id: String, pipelineId: String)
 GET        /discovery/:id/:pipelineId/ods/service              controllers.DiscoveryController.getDataSampleSparqlService(id: String, pipelineId: String)
