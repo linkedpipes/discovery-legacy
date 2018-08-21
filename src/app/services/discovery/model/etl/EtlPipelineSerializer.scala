@@ -14,14 +14,14 @@ case class Config(resource: Resource, model: Model)
 
 case class ConfiguredComponent(resource: Resource, config: Config)
 
-class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String) {
+class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri: Option[String]) {
 
     private lazy val iriGenerator = new EtlIriGenerator
     private lazy val pipelineIri = iriGenerator.pipelineIri
     private lazy val dataModel = PipelineDataModel.create(pipelineIri)
     private lazy val iterations = etlPipeline.components.map(_.discoveryIteration).distinct.sorted
-    lazy val resultGraphIri = GuidGenerator.nextIri
     private val rows = new mutable.HashMap[Int, Int]
+    val resultGraphIri: String = graphIri.getOrElse(GuidGenerator.nextIri)
 
     def serialize: Dataset = {
         addPipeline()
@@ -132,12 +132,8 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String) {
         val namespace = "http://plugins.linkedpipes.com/ontology/l-graphStoreProtocol#"
         val config = createConfig(componentResource, namespace + "Configuration")
         config.resource.addProperty(config.model.createProperty(namespace + "repository"), "BLAZEGRAPH")
-        // config.resource.addProperty(config.model.createProperty(namespace + "replace"), config.model.asInstanceOf[ModelCon].createTypedLiteral(true))
         config.resource.addProperty(config.model.createProperty(namespace + "graph"), resultGraphIri)
         config.resource.addProperty(config.model.createProperty(namespace + "endpoint"), s"$endpointUri/sparql")
-        // config.resource.addProperty(config.model.createProperty(namespace + "password"), "dba")
-        // config.resource.addProperty(config.model.createProperty(namespace + "user"), "dba")
-        // config.resource.addProperty(config.model.createProperty(namespace + "authentification"), config.model.asInstanceOf[ModelCon].createTypedLiteral(true))
         config
     }
 

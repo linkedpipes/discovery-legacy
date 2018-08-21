@@ -2,8 +2,8 @@ package controllers
 
 import java.io._
 import java.util.UUID
-import javax.inject._
 
+import javax.inject._
 import controllers.dto.PipelineGrouping
 import dao.ExecutionResultDao
 import models.ExecutionResult
@@ -15,7 +15,7 @@ import play.api.Configuration
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import play.api.libs.json._
 import play.api.mvc._
-import services.DiscoveryService
+import services.{DiscoveryService, RdfUtils}
 import services.discovery.model.components.DataSourceInstance
 import services.discovery.model.{DataSample, Pipeline}
 import slick.jdbc.JdbcProfile
@@ -23,6 +23,10 @@ import slick.jdbc.JdbcProfile
 import scala.concurrent.{ExecutionContext, Future}
 import scalaj.http.{Http, MultiPart}
 import services.discovery.model.etl.EtlPipeline
+import services.vocabulary.SD
+
+import scala.collection.JavaConverters._
+import scala.collection.mutable
 
 
 @Singleton
@@ -182,12 +186,39 @@ class DiscoveryController @Inject()(
         )
     }
 
+    def exportPipeline(id: String, pipelineId: String) =  Action(parse.json) { request =>
+        val body = request.body.as[Map[String, String]]
+        val sdIri = body("sdIri")
+        exportPipelineToEtl(id, pipelineId, sdIri).map { case (etlPipeline, etlPipelineUri) =>
+            Ok(Json.obj(
+                "pipelineId" -> pipelineId,
+                "etlPipelineIri" -> etlPipelineUri,
+                "sdIri" -> sdIri
+            ))
+        }.getOrElse(NotFound)
+    }
+
     private def exportPipelineToEtl(id: String, pipelineId: String) : Option[(EtlPipeline, String)] = {
 
-        val prefix = configuration.get[String]("ldcp.etl.hostname")
         val endpointUri = configuration.get[String]("ldcp.endpointUri")
+        etlExport(id, pipelineId, endpointUri, None)
+    }
 
-        service.getEtlPipeline(id, pipelineId, endpointUri).map { etlPipeline =>
+    private def exportPipelineToEtl(id: String, pipelineId: String, sdIri: String) : Option[(EtlPipeline, String)] = {
+        RdfUtils.modelFromIri(sdIri)(discoveryLogger) {
+            case Right(model) => {
+                val endpointUri = model.listObjectsOfProperty(SD.endpoint).toList.asScala.head.asResource().getURI
+                val graphIri = model.listObjectsOfProperty(SD.namedGraph).toList.asScala.head.asResource().getPropertyResourceValue(SD.name).asResource().getURI
+                etlExport(id, pipelineId, endpointUri, Some(graphIri))
+            }
+            case _ => None
+        }
+    }
+
+    private def etlExport(id: String, pipelineId: String, endpointUri: String, graphIri: Option[String]) = {
+        val prefix = configuration.get[String]("ldcp.etl.hostname")
+
+        service.getEtlPipeline(id, pipelineId, endpointUri, graphIri).map { etlPipeline =>
             val outputStream = new ByteArrayOutputStream()
             RDFDataMgr.write(outputStream, etlPipeline.dataset, Lang.JSONLD)
 
@@ -203,7 +234,7 @@ class DiscoveryController @Inject()(
 
     def pipeline(id: String, pipelineId: String) = Action {
         val endpointUri = configuration.get[String]("ldcp.endpointUri")
-        service.getEtlPipeline(id, pipelineId, endpointUri) match {
+        service.getEtlPipeline(id, pipelineId, endpointUri, None) match {
             case Some(etlPipeline) => {
                 val outputStream = new ByteArrayOutputStream()
                 RDFDataMgr.write(outputStream, etlPipeline.dataset, Lang.JSONLD)

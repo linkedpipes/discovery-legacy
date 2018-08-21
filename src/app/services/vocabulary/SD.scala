@@ -6,4 +6,6 @@ object SD extends RdfVocabulary {
 
   val endpoint = property("endpoint")
   val defaultGraph = property("defaultGraph")
+  val namedGraph = property("namedGraph")
+  val name = property("name")
 }

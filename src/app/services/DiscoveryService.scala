@@ -107,9 +107,9 @@ class DiscoveryService {
         )
     }
 
-    def getEtlPipeline(id: String, pipelineId: String, endpointUri: String): Option[EtlPipeline] = {
+    def getEtlPipeline(id: String, pipelineId: String, endpointUri: String, graphIri: Option[String]): Option[EtlPipeline] = {
         withPipeline(id, pipelineId) { (p, d) =>
-            EtlPipelineExporter.export(p, endpointUri)
+            EtlPipelineExporter.export(p, endpointUri, graphIri)
         }
     }
 

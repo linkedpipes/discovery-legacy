@@ -58,7 +58,7 @@ object DiscoveryInput {
             val configuration = template.getModel.getRequiredProperty(template, LPD.componentConfigurationTemplate).getObject.asResource()
             val service = configuration.getPropertyResourceValue(LPD.service)
             val endpointUri = service.getPropertyResourceValue(SD.endpoint).getURI
-            val defaultGraph = Option(service.getPropertyResourceValue(SD.defaultGraph)).map(_.getURI)
+            val defaultGraph = Option(service.getPropertyResourceValue(SD.namedGraph)).map(_.getPropertyResourceValue(SD.name).getURI)
             val output = template.getRequiredProperty(LPD.outputTemplate).getResource
             val dataSampleUri = Option(output.getRequiredProperty(LPD.outputDataSample).getResource.getURI)
             val label = template.getProperty(DCTerms.title).getString

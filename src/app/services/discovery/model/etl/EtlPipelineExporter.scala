@@ -4,12 +4,12 @@ import services.discovery.model.Pipeline
 
 object EtlPipelineExporter {
 
-    def export(pipeline: Pipeline, endpointUri: String): EtlPipeline = {
+    def export(pipeline: Pipeline, endpointUri: String, graphIri: Option[String]): EtlPipeline = {
         val etlTransformer = new EtlPipelineTransformer(pipeline)
         val etlPipeline = etlTransformer.transform
-        val etlSerializer = new EtlPipelineSerializer(etlPipeline, endpointUri)
+        val etlSerializer = new EtlPipelineSerializer(etlPipeline, endpointUri, graphIri)
         val dataset = etlSerializer.serialize
-        EtlPipeline(dataset, etlSerializer.resultGraphIri)
+        EtlPipeline(dataset, endpointUri, etlSerializer.resultGraphIri)
     }
 
 }
