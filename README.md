@@ -4,7 +4,7 @@ Demo running at: http://demo.visualization.linkedpipes.com:8080
 
 # How to run
 ```
-docker run -i -p 9000:9000 linkedpipes/discovery docker-play -Dplay.crypto.secret = yourRandomSecret
+docker run -i -p 9000:9000 linkedpipes/discovery sbt run -Dplay.crypto.secret = yourRandomSecret
 ```
 
 ## Expected workflows
