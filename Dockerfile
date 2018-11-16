@@ -1,10 +1,10 @@
-FROM hseeberger/scala-sbt
+FROM openjdk:8-jre-alpine
 
-ENV PROJECT_HOME /usr/src
-RUN mkdir -p $PROJECT_HOME/app
+RUN mkdir -p /opt/app
+WORKDIR /opt/app
 
-ENV PATH $PROJECT_WORKPLACE/build/target/universal/stage/bin:$PATH
-COPY ./src $PROJECT_HOME/app
-WORKDIR $PROJECT_HOME/app
+COPY ./src/run_jar.sh ./src/app-assembly.jar ./
+
 EXPOSE 9000
-RUN sbt run
+
+ENTRYPOINT ["sh", "./run_jar.sh"]
