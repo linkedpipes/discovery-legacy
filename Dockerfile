@@ -1,10 +1,23 @@
-FROM hseeberger/scala-sbt
+# Fix the version?
+FROM hseeberger/scala-sbt as builder
 
-ENV PROJECT_HOME /usr/src
-RUN mkdir -p $PROJECT_HOME/app
+# Copy files
+ADD ./src /app
+WORKDIR /app
 
-ENV PATH $PROJECT_WORKPLACE/build/target/universal/stage/bin:$PATH
-COPY ./src $PROJECT_HOME/app
-WORKDIR $PROJECT_HOME/app
+# Create tarball
+RUN sbt universal:packageZipTarball
+
+FROM openjdk:8-jre-slim
+
+COPY --from=builder /app/target/universal/linkedpipes-discovery-1.0-SNAPSHOT.tgz /tmp
+RUN mkdir -p /app && \
+    tar -C /app -xvzf /tmp/linkedpipes-discovery-1.0-SNAPSHOT.tgz && \
+    chmod +x /app/linkedpipes-discovery-1.0-SNAPSHOT/bin/linkedpipes-discovery
+
+WORKDIR /app/linkedpipes-discovery-1.0-SNAPSHOT/bin
+
+# Expose port 9000
 EXPOSE 9000
-RUN sbt run
+
+ENTRYPOINT ["./linkedpipes-discovery"]
