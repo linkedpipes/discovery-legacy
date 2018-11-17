@@ -4,16 +4,17 @@ Demo running at: http://demo.visualization.linkedpipes.com:8080
 
 # How to run
 
-### Prerequisites
+## Building docker image
 
-Make sure to have `JAVA_HOME` to point to `jdk1.8`. This is due to the fact that `sbt assembly` might not be compatible with higher versions.
-
-### Building docker image
+The following commands are used for building and running the image of the Discovery service:
 
 ```
-$ ./dockerize.sh {Your docker tag}
-$ docker run -i -p 9000:9000 {Your docker tag} -Dplay.crypto.secret=yourRandomSecret
+$ docker build -t <image_tag> .
+$ docker run -p <port>:9000 <image_tag> -Dplay.http.secret.key=<yourApplicationSecret>
 ```
+
+For generating application secrets, you can take a look at: https://www.playframework.com/documentation/2.6.x/ApplicationSecret
+
 
 ## Expected workflows
 
