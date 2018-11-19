@@ -4,7 +4,7 @@ import java.util.UUID
 
 class EtlIriGenerator {
 
-  private val prefix = "http://demo.etl.linkedpipes.com/resources/pipelines/"
+  private val prefix = "http://localhost:8080/resources/pipelines/"
 
   val pipelineIri = prefix + GuidGenerator.next
 
