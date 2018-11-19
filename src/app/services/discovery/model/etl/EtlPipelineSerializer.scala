@@ -131,7 +131,10 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri
     private def createGraphStoreConfig(componentResource: Resource, etlSparqlGraphProtocol: EtlSparqlGraphProtocol): Config = {
         val namespace = "http://plugins.linkedpipes.com/ontology/l-graphStoreProtocol#"
         val config = createConfig(componentResource, namespace + "Configuration")
-        config.resource.addProperty(config.model.createProperty(namespace + "repository"), "BLAZEGRAPH")
+        config.resource.addProperty(config.model.createProperty(namespace + "repository"), "VIRTUOSO")
+        config.resource.addProperty(config.model.createProperty(namespace + "authentification"), "true")
+        config.resource.addProperty(config.model.createProperty(namespace + "user"), "dba")
+        config.resource.addProperty(config.model.createProperty(namespace + "password"), "dba")
         config.resource.addProperty(config.model.createProperty(namespace + "graph"), resultGraphIri)
         config.resource.addProperty(config.model.createProperty(namespace + "endpoint"), s"$endpointUri/sparql")
         config
