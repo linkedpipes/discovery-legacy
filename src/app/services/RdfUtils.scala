@@ -25,7 +25,7 @@ object RdfUtils {
     discoveryLogger.debug(s"Downloading data from $uri.")
     val result = try {
       val model = ModelFactory.createDefaultModel()
-      model.read(uri)
+      model.read(uri, null,"TTL")
       Right(model)
     } catch {
       case e: RiotException => Left(new Exception(s"The data at $uri caused the following error: ${e.getMessage}."))
