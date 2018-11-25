@@ -1,5 +1,6 @@
 package services.discovery.model.etl
 
+import controllers.dto.SparqlEndpointGraph
 import org.apache.jena.query.Dataset
 import org.apache.jena.rdf.model._
 import org.apache.jena.vocabulary.RDF
@@ -14,14 +15,13 @@ case class Config(resource: Resource, model: Model)
 
 case class ConfiguredComponent(resource: Resource, config: Config)
 
-class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri: Option[String]) {
+class EtlPipelineSerializer(etlPipeline: Pipeline, resultGraph: SparqlEndpointGraph) {
 
     private lazy val iriGenerator = new EtlIriGenerator
     private lazy val pipelineIri = iriGenerator.pipelineIri
     private lazy val dataModel = PipelineDataModel.create(pipelineIri)
     private lazy val iterations = etlPipeline.components.map(_.discoveryIteration).distinct.sorted
     private val rows = new mutable.HashMap[Int, Int]
-    val resultGraphIri: String = graphIri.getOrElse(GuidGenerator.nextIri)
 
     def serialize: Dataset = {
         addPipeline()
@@ -131,9 +131,9 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri
     private def createGraphStoreConfig(componentResource: Resource, etlSparqlGraphProtocol: EtlSparqlGraphProtocol): Config = {
         val namespace = "http://plugins.linkedpipes.com/ontology/l-graphStoreProtocol#"
         val config = createConfig(componentResource, namespace + "Configuration")
-        config.resource.addProperty(config.model.createProperty(namespace + "repository"), "BLAZEGRAPH")
-        config.resource.addProperty(config.model.createProperty(namespace + "graph"), resultGraphIri)
-        config.resource.addProperty(config.model.createProperty(namespace + "endpoint"), s"$endpointUri/sparql")
+        config.resource.addProperty(config.model.createProperty(namespace + "repository"), resultGraph.endpoint.repository)
+        config.resource.addProperty(config.model.createProperty(namespace + "graph"), resultGraph.iri)
+        config.resource.addProperty(config.model.createProperty(namespace + "endpoint"), s"${resultGraph.endpoint.endpointUri}/sparql")
         config
     }
 
@@ -142,7 +142,7 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri
         val config = createConfig(componentResource, namespace + "Configuration")
         config.resource.addProperty(config.model.createProperty(namespace + "fileName"), "data.ttl")
         config.resource.addProperty(config.model.createProperty(namespace + "fileType"), "text/turtle")
-        config.resource.addProperty(config.model.createProperty(namespace + "graphUri"), resultGraphIri)
+        config.resource.addProperty(config.model.createProperty(namespace + "graphUri"), resultGraph.iri)
         config
     }
 

@@ -1,8 +1,9 @@
 package dao
 
+import controllers.dto.PipelineKey
+
 import scala.concurrent.{ExecutionContext, Future}
 import javax.inject.Inject
-
 import models.ExecutionResult
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.db.slick.HasDatabaseConfigProvider
@@ -18,8 +19,8 @@ class ExecutionResultDao @Inject() (
 
     def all(): Future[Seq[ExecutionResult]] = db.run(ExecutionResults.result)
 
-    def findByPipelineId(disoveryId: String, pipelineId: String) : Future[Option[ExecutionResult]] = {
-        db.run(ExecutionResults.filter(r => r.pipelineId === pipelineId && r.discoveryId === disoveryId).take(1).result.headOption)
+    def findByPipelineKey(pipelineKey: PipelineKey) : Future[Option[ExecutionResult]] = {
+        db.run(ExecutionResults.filter(r => r.pipelineId === pipelineKey.pipelineId && r.discoveryId === pipelineKey.discoveryId).take(1).result.headOption)
     }
 
     def insert(executionResult: ExecutionResult): Future[Unit] = db.run(ExecutionResults += executionResult).map { _ => () }
