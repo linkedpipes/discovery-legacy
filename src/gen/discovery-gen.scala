@@ -50,7 +50,7 @@ def getDiscoveryDefs(name: String, transformers: Seq[String], groups: Map[String
     val transformerGroups = {
         nonEmptyGroups.map { case (prefix, trans) =>
             s"<https://discovery.linkedpipes.com/resource/transformer-group/$name-$prefix/label>"
-        }.mkString("", ",\n", ";")
+        }
     }
 
     val transformerGroupsContent = {
@@ -68,12 +68,11 @@ def getDiscoveryDefs(name: String, transformers: Seq[String], groups: Map[String
     s"""
        |   <https://discovery.linkedpipes.com/resource/discovery/$name/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
        |
-       |   <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
        |     #Transformers
-       |     ${transformers.mkString("", ",\n", ";")}
+       |     ${transformers.mkString("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> ", ",\n", ";")}
        |
-       |   <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>
-       |    $transformerGroups
+       |     #Transformer groups
+       |     ${transformerGroups.mkString("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> ", ",\n", ";")}
        |
        |
        |     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>

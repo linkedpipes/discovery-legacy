@@ -1,12 +1,11 @@
 
    <https://discovery.linkedpipes.com/resource/discovery/001-labels-external-no-groups-001/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
 
-   <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
      #Transformers
-     <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>;
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>;
 
-   <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>
-    ;
+     #Transformer groups
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> ;
 
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>

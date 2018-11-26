@@ -1,9 +1,8 @@
 
    <https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-007/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
 
-   <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
      #Transformers
-     <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
@@ -11,8 +10,8 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>;
 
-   <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>
-    <https://discovery.linkedpipes.com/resource/transformer-group/003-labels-external-source-voc-groups-007-skos/label>,
+     #Transformer groups
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/003-labels-external-source-voc-groups-007-skos/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/003-labels-external-source-voc-groups-007-foaf/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/003-labels-external-source-voc-groups-007-schema/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/003-labels-external-source-voc-groups-007-dce/label>;
