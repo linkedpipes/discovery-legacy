@@ -1,12 +1,15 @@
 
-   <https://discovery.linkedpipes.com/resource/discovery/001-labels-external-no-groups-001/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+   <https://discovery.linkedpipes.com/resource/discovery/002-labels-external-target-voc-groups-004/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
 
    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
      #Transformers
-     <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>;
+     <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>;
 
    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>
-    ;
+    <https://discovery.linkedpipes.com/resource/transformer-group/002-labels-external-target-voc-groups-004-dcterms/label>;
 
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
@@ -22,7 +25,7 @@
 
 
      #Datasources
- <https://discovery.linkedpipes.com/resource/discovery/001-labels-external-no-groups-001/config>
+ <https://discovery.linkedpipes.com/resource/discovery/002-labels-external-target-voc-groups-004/config>
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
       <https://discovery.linkedpipes.com/resource/lod/templates/http---202.45.139.84-10035-catalogs-fao-repositories-agrovoc> ,
 	  <https://discovery.linkedpipes.com/resource/lod/templates/http---affymetrix.bio2rdf.org-sparql> ,
@@ -112,4 +115,12 @@
 	  <https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql> .
 
    
+<https://discovery.linkedpipes.com/resource/transformer-group/002-labels-external-target-voc-groups-004-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>
+    .
+            
     

@@ -1,0 +1,12 @@
+
+<https://discovery.linkedpipes.com/resource/experiment/002-labels-external-target-voc-groups/config> a <https://discovery.linkedpipes.com/vocabulary/experiment/Experiment> ;
+    <https://discovery.linkedpipes.com/vocabulary/experiment/hasDiscovery>
+    (
+        <https://discovery.linkedpipes.com/resource/discovery/002-labels-external-target-voc-groups-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/002-labels-external-target-voc-groups-001/config>
+<https://discovery.linkedpipes.com/resource/discovery/002-labels-external-target-voc-groups-002/config>
+<https://discovery.linkedpipes.com/resource/discovery/002-labels-external-target-voc-groups-003/config>
+<https://discovery.linkedpipes.com/resource/discovery/002-labels-external-target-voc-groups-004/config>
+<https://discovery.linkedpipes.com/resource/discovery/002-labels-external-target-voc-groups-005/config>
+    ).
+    

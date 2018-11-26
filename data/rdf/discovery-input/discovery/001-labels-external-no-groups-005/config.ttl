@@ -1,5 +1,18 @@
 
    <https://discovery.linkedpipes.com/resource/discovery/001-labels-external-no-groups-005/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+
+   <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
+     #Transformers
+     <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>;
+
+   <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>
+    ;
+
+
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 
      #Apps
@@ -9,14 +22,8 @@
 	    <https://discovery.linkedpipes.com/resource/application/timeline-periods-with-labels/template>,
      <https://discovery.linkedpipes.com/resource/application/map/template>,
      <https://discovery.linkedpipes.com/resource/application/map-labeled-points/template>,
-     <https://discovery.linkedpipes.com/resource/application/dcterms/template>,
+     <https://discovery.linkedpipes.com/resource/application/dcterms/template> .
 
-     #Transformers
-     <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>.
 
      #Datasources
  <https://discovery.linkedpipes.com/resource/discovery/001-labels-external-no-groups-005/config>
@@ -107,3 +114,6 @@
 	  <https://discovery.linkedpipes.com/resource/lod/templates/https---ruian.linked.opendata.cz-sparql> ,
 	  <https://discovery.linkedpipes.com/resource/lod/templates/https---w3id.org-scholarlydata-sparql> ,
 	  <https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql> .
+
+   
+    
