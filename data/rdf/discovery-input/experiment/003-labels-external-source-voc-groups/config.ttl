@@ -1,0 +1,21 @@
+
+<https://discovery.linkedpipes.com/resource/experiment/003-labels-external-source-voc-groups/config> a <https://discovery.linkedpipes.com/vocabulary/experiment/Experiment> ;
+    <https://discovery.linkedpipes.com/vocabulary/experiment/hasDiscovery>
+    (
+        <https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-001/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-002/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-003/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-004/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-005/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-006/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-007/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-008/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-009/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-010/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-011/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-012/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-013/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-014/config>
+    ).
+    

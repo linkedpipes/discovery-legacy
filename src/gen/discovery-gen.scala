@@ -19,7 +19,9 @@ val lov = Seq(
     "time",
     "event",
     "void",
-    "org"
+    "org",
+    "geosparql", //?
+    "wikidata" //?
 )
 
 def topLOV(n: Int) = {
@@ -48,7 +50,7 @@ def getDiscoveryDefs(name: String, transformers: Seq[String], groups: Map[String
     val transformerGroups = {
         nonEmptyGroups.map { case (prefix, trans) =>
             s"<https://discovery.linkedpipes.com/resource/transformer-group/$name-$prefix/label>"
-        }.mkString("", ",", ";")
+        }.mkString("", ",\n", ";")
     }
 
     val transformerGroupsContent = {
@@ -208,7 +210,10 @@ private def getSortedLovLabels = {
         transformerUris.sortBy(t => lov.indexOf(lov.find(prefix => t.contains(s"/$prefix-")).head))
     }
 
-    val usedTransformers = (transformers \ "labels" \ "external").as[Seq[String]]
+    val usedTransformers = (transformers \ "labels" \ "external").as[Seq[String]] ++ (
+        (transformers \ "date-instants" \ "external").as[Seq[String]] ++
+            (transformers \ "geo" \ "external").as[Seq[String]]
+    )
     sortByLov(usedTransformers)
 }
 
@@ -236,15 +241,19 @@ def experimentLabelsLovGroupBy(experimentName: String, groupByFunc: Seq[String] 
     (experimentName, experimentDef, discoveryDefs)
 }
 
-def groupByTargetVocabulary(transformers: Seq[String]) : Map[String, Seq[String]] = {
+def groupByVocabulary(transformers: Seq[String], patternGetter: String => String) : Map[String, Seq[String]] = {
     lov.map { prefix =>
-        (prefix, transformers.filter { t => t.contains(s"-to-$prefix") })
+        (prefix, transformers.filter { t => t.contains(patternGetter(prefix)) })
     }.toMap
 }
 
+def groupByTargetVocabulary(transformers: Seq[String]) = groupByVocabulary(transformers, prefix => s"-to-$prefix")
+def groupBySourceVocabulary(transformers: Seq[String]) = groupByVocabulary(transformers, prefix => s"/$prefix-")
+
 val experimentDefs = Seq(
-    experimentLabelsLovGroupBy("001-labels-external-no-groups", (_) => Map()),
-    experimentLabelsLovGroupBy("002-labels-external-target-voc-groups", groupByTargetVocabulary)
+    experimentLabelsLovGroupBy("001-labels-external-no-groups", _ => Map()),
+    experimentLabelsLovGroupBy("002-labels-external-target-voc-groups", groupByTargetVocabulary),
+    experimentLabelsLovGroupBy("003-labels-external-source-voc-groups", groupBySourceVocabulary)
 )
 
 val basePath = "/Users/jirihelmich/dev/mff/discovery/data/rdf/discovery-input"
