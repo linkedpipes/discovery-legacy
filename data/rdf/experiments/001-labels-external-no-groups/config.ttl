@@ -1,0 +1,11 @@
+
+<https://discovery.linkedpipes.com/resource/experiment/001-labels-external-no-groups/config> a <https://discovery.linkedpipes.com/vocabulary/experiment/Experiment> ;
+    <https://discovery.linkedpipes.com/vocabulary/experiment/hasDiscovery>
+    (
+        <https://discovery.linkedpipes.com/resource/discovery/001-labels-external-no-groups-001/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-labels-external-no-groups-002/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-labels-external-no-groups-003/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-labels-external-no-groups-004/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-labels-external-no-groups-005/config>
+    ).
+    

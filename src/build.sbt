@@ -23,7 +23,8 @@ libraryDependencies ++= Seq(
     "com.h2database" % "h2" % "1.4.192",
     "com.typesafe.play" %% "play-slick" % "3.0.1",
     "com.typesafe.play" %% "play-slick-evolutions" % "3.0.1",
-    "com.typesafe.play" %% "play-json" % "2.6.0"
+    "com.typesafe.play" %% "play-json" % "2.6.0",
+    "com.github.pathikrit" %% "better-files" % "3.6.0"
 )
 
 
