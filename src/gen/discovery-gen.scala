@@ -148,7 +148,7 @@ def getDiscoveryDefs(name: String, transformers: Seq[String]) = s"""
   |	  <https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql> .
 """.stripMargin
 
-val transformersData = Source.fromFile("transformers.json").getLines().mkString("\n")
+val transformersData = Source.fromFile("gen/transformers.json").getLines().mkString("\n")
 val transformers = Json.parse(transformersData)
 
 def fact(n: Int) : Int = (1 to n).product
@@ -181,13 +181,13 @@ def experimentLabelsLov() = {
     def getDiscoveryName(i: Int) = s"$experimentName-${"%03d".format(i)}"
 
     val discoveryDefs = for {
-        len <- 1 to sortedTransformers.size
+        len <- 0 to sortedTransformers.size
     } yield {
         val discoveryName = getDiscoveryName(len)
         (discoveryName, getDiscoveryDefs(discoveryName, sortedTransformers.take(len)))
     }
 
-    val experimentDef = getExperimentDef(experimentName, 1.to(sortedTransformers.size).map(i => getDiscoveryName(i)))
+    val experimentDef = getExperimentDef(experimentName, 0.to(sortedTransformers.size).map(i => getDiscoveryName(i)))
     (experimentName, experimentDef, discoveryDefs)
 }
 
