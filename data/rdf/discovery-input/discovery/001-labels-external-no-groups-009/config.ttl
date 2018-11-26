@@ -13,8 +13,7 @@
 <https://discovery.linkedpipes.com/resource/transformer/geo-pos-to-schema-geocoordinates/template>;
 
      #Transformer groups
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> ;
-
+     
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 

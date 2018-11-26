@@ -11,8 +11,7 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>;
 
      #Transformer groups
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> ;
-
+     
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 

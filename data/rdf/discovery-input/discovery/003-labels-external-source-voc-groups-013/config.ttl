@@ -27,7 +27,6 @@
 <https://discovery.linkedpipes.com/resource/transformer-group/003-labels-external-source-voc-groups-013-time/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/003-labels-external-source-voc-groups-013-geosparql/label>;
 
-
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 
      #Apps

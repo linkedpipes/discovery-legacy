@@ -25,7 +25,6 @@
 <https://discovery.linkedpipes.com/resource/transformer-group/003-labels-external-source-voc-groups-012-dce/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/003-labels-external-source-voc-groups-012-time/label>;
 
-
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 
      #Apps

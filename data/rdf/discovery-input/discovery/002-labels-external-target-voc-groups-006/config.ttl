@@ -12,7 +12,6 @@
      #Transformer groups
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/002-labels-external-target-voc-groups-006-dcterms/label>;
 
-
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 
      #Apps

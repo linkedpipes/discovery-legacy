@@ -17,7 +17,6 @@
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/002-labels-external-target-voc-groups-010-dcterms/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/002-labels-external-target-voc-groups-010-schema/label>;
 
-
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 
      #Apps

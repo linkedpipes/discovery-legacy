@@ -2,11 +2,10 @@
    <https://discovery.linkedpipes.com/resource/discovery/003-labels-external-source-voc-groups-000/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
 
      #Transformers
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> ;
+     
 
      #Transformer groups
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> ;
-
+     
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 

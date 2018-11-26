@@ -17,8 +17,7 @@
 <https://discovery.linkedpipes.com/resource/transformer/geosparql-aswkt-to-schema-geocoordinates/template>;
 
      #Transformer groups
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> ;
-
+     
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 

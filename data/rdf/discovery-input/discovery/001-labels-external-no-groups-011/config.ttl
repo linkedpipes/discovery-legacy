@@ -15,8 +15,7 @@
 <https://discovery.linkedpipes.com/resource/transformer/time-inxsddatetimestamp-to-dcterms-date/template>;
 
      #Transformer groups
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> ;
-
+     
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 

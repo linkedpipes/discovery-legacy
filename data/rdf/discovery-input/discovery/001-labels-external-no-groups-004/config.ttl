@@ -8,8 +8,7 @@
 <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>;
 
      #Transformer groups
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> ;
-
+     
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 

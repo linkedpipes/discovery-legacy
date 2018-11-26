@@ -65,15 +65,23 @@ def getDiscoveryDefs(name: String, transformers: Seq[String], groups: Map[String
         }.mkString("\n")
     }
 
+    def printIfNonEmpty(uri: String, list: Iterable[String]): String =
+    {
+        if (list.isEmpty) {
+            ""
+        } else {
+            list.mkString(s"$uri ", ",\n", ";")
+        }
+    }
+
     s"""
        |   <https://discovery.linkedpipes.com/resource/discovery/$name/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
        |
        |     #Transformers
-       |     ${transformers.mkString("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> ", ",\n", ";")}
+       |     ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>", transformers)}
        |
        |     #Transformer groups
-       |     ${transformerGroups.mkString("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> ", ",\n", ";")}
-       |
+       |     ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>", transformerGroups)}
        |
        |     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
        |

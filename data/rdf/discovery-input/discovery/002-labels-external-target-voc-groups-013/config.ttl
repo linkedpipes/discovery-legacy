@@ -20,7 +20,6 @@
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/002-labels-external-target-voc-groups-013-dcterms/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/002-labels-external-target-voc-groups-013-schema/label>;
 
-
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 
      #Apps

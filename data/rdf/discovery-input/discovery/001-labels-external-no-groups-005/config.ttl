@@ -9,8 +9,7 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>;
 
      #Transformer groups
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> ;
-
+     
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 
