@@ -43,12 +43,11 @@ class DiscoveryService @Inject()(
     }
 
     def startExperimentFromIri(experimentIri: String) : Unit = {
-        val expId = UUID.randomUUID()
         val discoveryInputIris = getDiscoveryInputIrisFromExperimentIri(experimentIri)
-        startNextDiscovery(0, discoveryInputIris, expId)
+        startNextDiscovery(0, discoveryInputIris, experimentIri.split("/").last)
     }
 
-    def startNextDiscovery(i: Int, discoveryInputIris: Seq[String], expId: UUID): Unit = {
+    def startNextDiscovery(i: Int, discoveryInputIris: Seq[String], expId: String): Unit = {
         val nextIri = discoveryInputIris(i)
         val discovery = startFromInputIri(nextIri)
         discovery.onStop += { d =>
