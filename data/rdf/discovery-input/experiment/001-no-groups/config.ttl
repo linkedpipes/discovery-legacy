@@ -1,0 +1,54 @@
+
+<https://discovery.linkedpipes.com/resource/experiment/001-no-groups/config> a <https://discovery.linkedpipes.com/vocabulary/experiment/Experiment> ;
+    <https://discovery.linkedpipes.com/vocabulary/experiment/hasDiscovery>
+    (
+        <https://discovery.linkedpipes.com/resource/discovery/001-no-groups-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-001/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-002/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-003/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-004/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-005/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-006/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-007/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-008/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-009/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-010/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-011/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-012/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-013/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-014/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-015/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-016/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-017/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-018/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-019/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-020/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-021/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-022/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-023/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-024/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-025/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-026/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-027/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-028/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-029/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-030/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-031/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-032/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-033/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-034/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-035/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-036/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-037/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-038/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-039/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-040/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-041/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-042/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-043/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-044/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-045/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-046/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-047/config>
+    ).
+    

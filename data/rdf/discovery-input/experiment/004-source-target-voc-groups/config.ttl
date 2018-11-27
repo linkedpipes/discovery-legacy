@@ -1,0 +1,54 @@
+
+<https://discovery.linkedpipes.com/resource/experiment/004-source-target-voc-groups/config> a <https://discovery.linkedpipes.com/vocabulary/experiment/Experiment> ;
+    <https://discovery.linkedpipes.com/vocabulary/experiment/hasDiscovery>
+    (
+        <https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-001/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-002/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-003/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-004/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-005/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-006/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-007/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-008/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-009/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-010/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-011/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-012/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-013/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-014/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-015/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-016/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-017/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-018/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-019/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-020/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-021/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-022/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-023/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-024/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-025/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-026/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-027/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-028/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-029/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-030/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-031/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-032/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-033/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-034/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-035/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-036/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-037/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-038/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-039/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-040/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-041/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-042/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-043/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-044/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-045/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-046/config>
+<https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-047/config>
+    ).
+    

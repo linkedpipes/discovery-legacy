@@ -1,0 +1,54 @@
+
+<https://discovery.linkedpipes.com/resource/experiment/007-target-prop-groups/config> a <https://discovery.linkedpipes.com/vocabulary/experiment/Experiment> ;
+    <https://discovery.linkedpipes.com/vocabulary/experiment/hasDiscovery>
+    (
+        <https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-001/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-002/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-003/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-004/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-005/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-006/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-007/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-008/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-009/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-010/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-011/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-012/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-013/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-014/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-015/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-016/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-017/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-018/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-019/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-020/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-021/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-022/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-023/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-024/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-025/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-026/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-027/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-028/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-029/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-030/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-031/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-032/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-033/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-034/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-035/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-036/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-037/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-038/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-039/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-040/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-041/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-042/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-043/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-044/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-045/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-046/config>
+<https://discovery.linkedpipes.com/resource/discovery/007-target-prop-groups-047/config>
+    ).
+    

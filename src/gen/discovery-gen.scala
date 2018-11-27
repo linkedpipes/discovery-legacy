@@ -251,19 +251,60 @@ def experimentLabelsLovGroupBy(experimentName: String, groupByFunc: Seq[String] 
     (experimentName, experimentDef, discoveryDefs)
 }
 
-def groupByVocabulary(transformers: Seq[String], patternGetter: String => String) : Map[String, Seq[String]] = {
+def groupByVocabulary(transformers: Seq[String], patternGetter: String => Seq[String]) : Map[String, Seq[String]] = {
     lov.map { prefix =>
-        (prefix, transformers.filter { t => t.contains(patternGetter(prefix)) })
+        (prefix, transformers.filter { t => patternGetter(prefix).forall(p => t.contains(p)) })
     }.toMap
 }
 
-def groupByTargetVocabulary(transformers: Seq[String]) = groupByVocabulary(transformers, prefix => s"-to-$prefix")
-def groupBySourceVocabulary(transformers: Seq[String]) = groupByVocabulary(transformers, prefix => s"/$prefix-")
+def groupByTargetVocabulary(transformers: Seq[String]) = groupByVocabulary(transformers, prefix => Seq(s"-to-$prefix"))
+def groupBySourceVocabulary(transformers: Seq[String]) = groupByVocabulary(transformers, prefix => Seq(s"/$prefix-"))
+
+def groupBySourceAndTargetVocabulary(transformers: Seq[String]): Map[String, Seq[String]] = {
+    transformers.map { t =>
+        val part = t.split("/").dropRight(1).last
+        val fromto = part.split("-to-")
+        s"${fromto(0).split("-").head}-${fromto(1).split("-").head}" -> t
+    }.groupBy(_._1).mapValues(_.map(_._2))
+}
+
+def groupByDomainAndVocabulary(transformers: Seq[String], direction: String, f: Seq[String] => Map[String, Seq[String]]): Map[String, Seq[String]] = {
+    val domainGrouping = transformers.groupBy {
+        case t1 if t1.contains("schema-geocoordinates") => "geo"
+        case t2 if t2.contains("dcterms-title") => "labels"
+        case _ => "datetime"
+    }
+    val deepGrouping = domainGrouping.map { case (key, group) => key -> f(group) }
+
+    deepGrouping.flatMap { case (domain, domainGroup) =>
+        domainGroup.map { case (prefix, prefixGroup) =>
+            s"$domain-$direction-$prefix" -> prefixGroup
+        }
+    }
+}
+
+def groupByDomainAndSourceVocabulary(transformers: Seq[String]): Map[String, Seq[String]] = {
+    groupByDomainAndVocabulary(transformers, "source", groupBySourceVocabulary)
+}
+
+def groupByDomainAndTargetVocabulary(transformers: Seq[String]): Map[String, Seq[String]] = {
+    groupByDomainAndVocabulary(transformers, "target", groupByTargetVocabulary)
+}
+
+def groupByTargetProperty(transformers: Seq[String]): Map[String, Seq[String]] = {
+    transformers.groupBy { t =>
+        t.split("-to-").last.replace("/template>", "")
+    }
+}
 
 val experimentDefs = Seq(
-    experimentLabelsLovGroupBy("001-labels-external-no-groups", _ => Map()),
-    experimentLabelsLovGroupBy("002-labels-external-target-voc-groups", groupByTargetVocabulary),
-    experimentLabelsLovGroupBy("003-labels-external-source-voc-groups", groupBySourceVocabulary)
+    experimentLabelsLovGroupBy("001-no-groups", _ => Map()),
+    experimentLabelsLovGroupBy("002-target-voc-groups", groupByTargetVocabulary),
+    experimentLabelsLovGroupBy("003-source-voc-groups", groupBySourceVocabulary),
+    experimentLabelsLovGroupBy("004-source-target-voc-groups", groupBySourceAndTargetVocabulary),
+    experimentLabelsLovGroupBy("005-domain-source-voc-groups", groupByDomainAndSourceVocabulary),
+    experimentLabelsLovGroupBy("006-domain-target-voc-groups", groupByDomainAndTargetVocabulary),
+    experimentLabelsLovGroupBy("007-target-prop-groups", groupByTargetProperty)
 )
 
 val basePath = "/Users/jirihelmich/dev/mff/discovery/data/rdf/discovery-input"
