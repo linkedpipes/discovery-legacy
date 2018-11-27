@@ -217,10 +217,13 @@ private def getSortedLovLabels = {
         transformerUris.sortBy(t => lov.indexOf(lov.find(prefix => t.contains(s"/$prefix-")).head))
     }
 
-    val usedTransformers = (transformers \ "labels" \ "external").as[Seq[String]] ++ (
-        (transformers \ "date-instants" \ "external").as[Seq[String]] ++
-            (transformers \ "geo" \ "external").as[Seq[String]]
-    )
+    val usedTransformers = Seq(
+        transformers \ "labels" \ "external",
+        transformers \ "date-instants" \ "external",
+        transformers \ "time-instants" \ "external",
+        transformers \ "geo" \ "external"
+    ).flatMap(l => l.as[Seq[String]])
+
     sortByLov(usedTransformers)
 }
 

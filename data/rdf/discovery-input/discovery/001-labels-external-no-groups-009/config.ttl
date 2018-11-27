@@ -9,8 +9,8 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
-<https://discovery.linkedpipes.com/resource/transformer/prov-attime-to-dcterms-date/template>,
-<https://discovery.linkedpipes.com/resource/transformer/geo-pos-to-schema-geocoordinates/template>;
+<https://ldcp.opendata.cz/resource/schema/transformer/schema-bookingTime-to-time-inXSDDateTimeStamp/template>,
+<https://ldcp.opendata.cz/resource/schema/transformer/schema-commentTime-to-time-inXSDDateTimeStamp/template>;
 
      #Transformer groups
      
