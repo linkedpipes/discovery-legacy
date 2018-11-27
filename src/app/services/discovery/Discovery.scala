@@ -24,6 +24,8 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount:
 
     var isFinished = false
 
+    val onStop : mutable.ArrayBuffer[Discovery => Unit] = new mutable.ArrayBuffer[Discovery => Unit]()
+
     private val discoveryLogger = Logger.of("discovery")
 
     private val startTime = System.nanoTime()
@@ -65,13 +67,16 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount:
             discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Next iteration: ${!stop}.")
 
             stop match {
-                case true => {
-                    endTime = System.nanoTime()
-                    Future.successful(nextIterationData.completedPipelines)
-                }
+                case true => finalize(nextIterationData)
                 case false => iterate(nextIterationData)
             }
         }
+    }
+
+    private def finalize(iterationData: IterationData): Future[Seq[Pipeline]] = {
+        endTime = System.nanoTime()
+        onStop.foreach(f => f(this))
+        Future.successful(iterationData.completedPipelines)
     }
 
     private def endsWithLargeDataset(pipeline: Pipeline): Boolean = {

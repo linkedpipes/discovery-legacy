@@ -22,6 +22,7 @@ import slick.jdbc.JdbcProfile
 
 import scala.concurrent.{ExecutionContext, Future}
 import scalaj.http.{Http, MultiPart}
+import services.discovery.Discovery
 import services.discovery.model.etl.EtlPipeline
 
 
@@ -46,27 +47,32 @@ class DiscoveryController @Inject()(
         )
     }
 
-    def startExperiment: Action[JsValue] = Action(parse.json) { request =>
+    def start: Action[JsValue] = Action(parse.json) { request =>
         val uris = request.body.as[Seq[String]]
-        discoveryStarted(service.runExperiment(uris))
+        discoveryStarted(service.start(uris))
     }
 
-    def startExperimentFromInputIri(iri: String) = Action {
-        discoveryStarted(service.runExperimentFromInputIri(iri))
+    def startFromInputIri(iri: String) = Action {
+        discoveryStarted(service.startFromInputIri(iri))
     }
 
-    def getExperimentsInputIrisFromIri(iri: String) = Action {
-        inputsExtracted(service.getExperimentsInputIrisFromIri(iri))
+    def startExperimentFromIri(experiemntIri: String) = Action {
+        service.startExperimentFromIri(experiemntIri)
+        Ok("running")
     }
 
-    def getExperimentsInputIris = Action { request: Request[AnyContent] =>
+    def getDiscoveryInputIrisFromExperimentIri(iri: String) = Action {
+        inputsExtracted(service.getDiscoveryInputIrisFromExperimentIri(iri))
+    }
+
+    def starFromInput = Action { request: Request[AnyContent] =>
         val body: AnyContent = request.body
-        inputsExtracted(service.getExperimentsInputIris(body.asText.getOrElse("")))
+        discoveryStarted(service.startFromInput(body.asText.getOrElse("")))
     }
 
-    def startExperimentFromInput = Action { request: Request[AnyContent] =>
+    def getDiscoveryInputIrisFromExperiment = Action { request: Request[AnyContent] =>
         val body: AnyContent = request.body
-        discoveryStarted(service.runExperimentFromInput(body.asText.getOrElse("")))
+        inputsExtracted(service.getDiscoveryInputIrisFromExperiment(body.asText.getOrElse("")))
     }
 
     def status(id: String) = Action {
@@ -137,8 +143,8 @@ class DiscoveryController @Inject()(
         Ok(RdfUtils.modelToTtl(model)).as("text/turtle")
     }
 
-    private def discoveryStarted(discoveryId: UUID) = {
-        Ok(Json.obj("id" -> Json.toJson(discoveryId)))
+    private def discoveryStarted(discovery: Discovery) = {
+        Ok(Json.obj("id" -> Json.toJson(discovery.id)))
     }
 
     private def inputsExtracted(inputIris: Seq[String]) = {

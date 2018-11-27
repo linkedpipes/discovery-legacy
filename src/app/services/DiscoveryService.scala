@@ -16,61 +16,79 @@ import services.vocabulary.{ETL, LPD}
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 
+import better.files._
+import java.io.{File => JFile}
+
 @Singleton
-class DiscoveryService {
+class DiscoveryService @Inject()(
+    statisticsService: StatisticsService
+){
 
     private val discoveries = new scala.collection.mutable.HashMap[UUID, Discovery]
-    private val csvRequests = new scala.collection.mutable.HashMap[UUID, Seq[CsvRequestData]]
     private val discoveryLogger = Logger.of("discovery")
 
-    def start(input: DiscoveryInput) = {
+    def start(input: DiscoveryInput) : Discovery = {
         val discovery = Discovery.create(input)
         discoveries.put(discovery.id, discovery)
         discovery.start
-        discovery.id
+        discovery
     }
-
-    def addCsvRequest(indexes: Seq[CsvRequestData]) : UUID = {
-        val id = UUID.randomUUID()
-        csvRequests.put(id, indexes)
-        id
-    }
-
-    def getCsvRequest(id: UUID) = csvRequests.get(id)
 
     def stop(id: String) = {}
 
-    def runExperiment(templateUris: Seq[String], templateGrouping: Map[String, List[String]] = Map()): UUID = {
+    def start(templateUris: Seq[String], templateGrouping: Map[String, List[String]] = Map()): Discovery = {
         val templates = templateUris.par.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get).seq
         val discoveryInput = DiscoveryInput(templates, templateGrouping)
         start(discoveryInput)
+    }
+
+    def startExperimentFromIri(experimentIri: String) : Unit = {
+        val expId = UUID.randomUUID()
+        val discoveryInputIris = getDiscoveryInputIrisFromExperimentIri(experimentIri)
+        startNextDiscovery(0, discoveryInputIris, expId)
+    }
+
+    def startNextDiscovery(i: Int, discoveryInputIris: Seq[String], expId: UUID): Unit = {
+        val nextIri = discoveryInputIris(i)
+        val discovery = startFromInputIri(nextIri)
+        discovery.onStop += { d =>
+            println(s"========= Running discovery #$i has finished.")
+
+            val zip = statisticsService.getZip(Seq(CsvRequestData(nextIri, d.id.toString)), this)
+            s"D:\\mff-experiments\\exp-${expId.toString}\\dis-${"%03d".format(i)}-${discovery.id}.results.zip".toFile.createFileIfNotExists(createParents = true).writeByteArray(zip.toByteArray)
+
+            discoveries.clear()
+            if (i+1 < discoveryInputIris.size) {
+                startNextDiscovery(i+1, discoveryInputIris, expId)
+            }
+        }
     }
 
     def getPipelinesOfDiscovery(discoveryId: String): Option[mutable.HashMap[UUID, Pipeline]] = withDiscovery(discoveryId) { discovery =>
         discovery.results
     }
 
-    def runExperimentFromInputIri(inputIri: String) : UUID = {
+    def startFromInputIri(inputIri: String) : Discovery = {
         RdfUtils.modelFromIri(inputIri)(discoveryLogger) {
-            case Right(model) => runExperiment(extractTemplates(model), getGroupings(model))
-            case _ => runExperiment(Seq(), Map())
+            case Right(model) => start(extractTemplates(model), getGroupings(model))
+            case _ => start(Seq(), Map())
         }
     }
 
-    def getExperimentsInputIrisFromIri(iri: String) : Seq[String] = {
+    def getDiscoveryInputIrisFromExperimentIri(iri: String) : Seq[String] = {
         RdfUtils.modelFromIri(iri)(discoveryLogger) {
-            case Right(model) => extractExperiments(model)
+            case Right(model) => extractDiscoveryInputs(model)
             case _ => Seq()
         }
     }
 
-    def getExperimentsInputIris(ttlData: String) : Seq[String] = {
-        extractExperiments(RdfUtils.modelFromTtl(ttlData))
+    def getDiscoveryInputIrisFromExperiment(ttlData: String) : Seq[String] = {
+        extractDiscoveryInputs(RdfUtils.modelFromTtl(ttlData))
     }
 
-    def runExperimentFromInput(ttlData: String) : UUID = {
+    def startFromInput(ttlData: String) : Discovery = {
         val model = RdfUtils.modelFromTtl(ttlData)
-        runExperiment(extractTemplates(model), getGroupings(model))
+        start(extractTemplates(model), getGroupings(model))
     }
 
     def extractTemplates(model: Model) : Seq[String] = {
@@ -78,7 +96,7 @@ class DiscoveryService {
         templates.map(_.asResource().getURI)
     }
 
-    def extractExperiments(model: Model) : Seq[String] = {
+    def extractDiscoveryInputs(model: Model) : Seq[String] = {
         val list = model.listObjectsOfProperty(LPD.hasDiscovery).toList.asScala
         val head = Option(list.head.asResource())
         head match {
