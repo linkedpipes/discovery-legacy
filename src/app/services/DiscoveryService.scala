@@ -53,8 +53,12 @@ class DiscoveryService @Inject()(
         discovery.onStop += { d =>
             println(s"========= Running discovery #$i has finished.")
 
-            val zip = statisticsService.getZip(Seq(CsvRequestData(nextIri, d.id.toString)), this)
-            s"D:\\mff-experiments\\exp-${expId.toString}\\dis-${"%03d".format(i)}-${discovery.id}.results.zip".toFile.createFileIfNotExists(createParents = true).writeByteArray(zip.toByteArray)
+            val csvFiles = statisticsService.getCsvFiles(Seq(CsvRequestData(nextIri, d.id.toString)), this)
+            csvFiles.foreach { csvFile =>
+                s"D:\\mff-experiments\\exp-${expId.toString}\\dis-${"%03d".format(i)}\\${csvFile.name}"
+                    .toFile.createFileIfNotExists(createParents = true)
+                    .writeByteArray(csvFile.content.getBytes("UTF-8"))
+            }
 
             discoveries.clear()
             if (i+1 < discoveryInputIris.size) {

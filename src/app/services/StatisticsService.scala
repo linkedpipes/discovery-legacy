@@ -36,7 +36,7 @@ class StatisticsService {
         outputByteStream
     }
 
-    private def getCsvFiles(csvRequests: Seq[CsvRequestData], discoveryService: DiscoveryService) : Seq[CsvFile] = {
+    def getCsvFiles(csvRequests: Seq[CsvRequestData], discoveryService: DiscoveryService) : Seq[CsvFile] = {
 
         val pipelineGroupingsById = new mutable.HashMap[String, PipelineGrouping]()
         csvRequests.foreach { i => pipelineGroupingsById.put(i.discoveryId, discoveryService.getPipelinesOfDiscovery(i.discoveryId).map(PipelineGrouping.create).get) }
