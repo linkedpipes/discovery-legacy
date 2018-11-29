@@ -2,39 +2,45 @@
    <https://discovery.linkedpipes.com/resource/discovery/003-source-voc-groups-027/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
 
      #Transformers
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template>,
-<https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-bookingTime-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-commentTime-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-datasetTimeInterval-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateIssued-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateModified-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-datePosted-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-datePublished-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateRead-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateReceived-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateSent-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateVehicleFirstRegistered-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dissolutionDate-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-doorTime-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dropoffTime-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-foundingDate-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-lastReviewed-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-modifiedTime-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-orderDate-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-paymentDue-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-paymentDueDate-to-time-inXSDDateTimeStamp/template>;
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template,
+https://discovery.linkedpipes.com/resource/transformer/dce-date-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template,
+https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template,
+https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template,
+https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template,
+https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template,
+https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template,
+https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template,
+https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-dateDeleted-to-schema-startdate-enddate/template,
+https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-expires-to-schema-startdate-enddate/template,
+https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template,
+https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template,
+https://discovery.linkedpipes.com/resource/transformer/geo-pos-to-schema-geocoordinates/template,
+https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template,
+https://discovery.linkedpipes.com/resource/transformer/time-inxsddatetimestamp-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/time-inxsddatetimestamp-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/geosparql-aswkt-to-schema-geocoordinates/template;
 
      #Transformer groups
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-skos/label>,
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-prov/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-geo/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-dcterms/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-gr/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-skos/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-foaf/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-schema/label>,
-<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-dce/label>;
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-dce/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-time/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-geosparql/label>;
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 
@@ -139,50 +145,80 @@
 	  <https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql> .
 
    
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-prov/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template,true)
+    .
+            
+
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-geo/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/geo-pos-to-schema-geocoordinates/template,true)
+    .
+            
+
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template,true)
+    .
+            
+
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-gr/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template,true)
+    .
+            
+
 <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-skos/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>
+      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template,true)
     .
             
 
 <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-foaf/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>
+      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template,true)
     .
             
 
 <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-schema/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-bookingTime-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-commentTime-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-datasetTimeInterval-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateIssued-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateModified-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-datePosted-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-datePublished-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateRead-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateReceived-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateSent-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateVehicleFirstRegistered-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dissolutionDate-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-doorTime-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dropoffTime-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-foundingDate-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-lastReviewed-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-modifiedTime-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-orderDate-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-paymentDue-to-time-inXSDDateTimeStamp/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-paymentDueDate-to-time-inXSDDateTimeStamp/template>
+      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template,true),
+TransformerDef(https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template,true),
+TransformerDef(https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-dateDeleted-to-schema-startdate-enddate/template,true),
+TransformerDef(https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-expires-to-schema-startdate-enddate/template,true)
     .
             
 
 <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-dce/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template>
+      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dce-date-to-dcterms-date/template,true)
+    .
+            
+
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-time/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/time-inxsddatetimestamp-to-dcterms-date/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/time-inxsddatetimestamp-to-dcterms-date/template,true)
+    .
+            
+
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-027-geosparql/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/geosparql-aswkt-to-schema-geocoordinates/template,true)
     .
             
     

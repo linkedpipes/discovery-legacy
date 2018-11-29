@@ -24,19 +24,71 @@ val lov = Seq(
     "wikidata" //?
 )
 
-case class TransformerDef(iri: String, isDirect: Boolean = false, predecessors : Seq[String] = Seq())
+case class TransformerDef(iri: String, isDirect: Boolean = false)
+{
+    def name = iri.split("/").dropRight(1).last
+    def sourceVocabulary = name.split("-").head
+    def targetVocabulary = name.split("-").dropRight(1).last
+    def targetProperty = name.split("-to-").last
+    def sourceProperty = name.split("-to-").head
+
+    def predecessors(possiblePredecessors: Seq[TransformerDef]) = {
+        possiblePredecessors.filter(p => p.targetProperty.toLowerCase == sourceProperty.toLowerCase)
+    }
+
+    def successors(possibleSuccessors: Seq[TransformerDef]) = {
+        possibleSuccessors.filter(p => p.sourceProperty.toLowerCase == targetProperty.toLowerCase)
+    }
+
+    def isLeaf(transformers: Seq[TransformerDef]) = predecessors(transformers).isEmpty
+    def isRoot(transformers: Seq[TransformerDef]) = successors(transformers).isEmpty
+}
 
 val allTransformerDefs = Seq(
     TransformerDef(
-        iri = "https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template",
+        iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template",
         isDirect = true
     ),
     TransformerDef(
-        iri = "https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template",
+        iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template",
+        isDirect = true
+    ),
+    TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-dateaccepted-to-dcterms-date/template"
+    ),
+    TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-datecopyrighted-to-dcterms-date/template"
+    ),
+    TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template",
+        isDirect = true
+    ),
+    TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template",
+        isDirect = true
+    ),
+    TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template",
+        isDirect = true
+    ),
+    TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template",
+        isDirect = true
+    ),
+    TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template",
+        isDirect = true
+    ),
+    TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/dce-date-to-dcterms-date/template",
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template",
+        isDirect = true
+    ),
+    TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template",
         isDirect = true
     ),
     TransformerDef(
@@ -155,7 +207,150 @@ val allTransformerDefs = Seq(
         iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-webCheckinTime-to-time-inXSDDateTimeStamp/template"
     ),
     TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-arrivalTime-departureTime-to-schema-startdate-enddate/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-availabilityStarts-availabilityEnds-to-schema-startdate-enddate/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-availableFrom-availableThrough-to-schema-startdate-enddate/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template",
+        isDirect = true
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-checkinTime-checkoutTime-to-schema-startdate-enddate/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-coverageEndTime-coverageStartTime-to-schema-startdate-enddate/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-dateDeleted-to-schema-startdate-enddate/template",
+        isDirect = true
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-expires-to-schema-startdate-enddate/template",
+        isDirect = true
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-expectedArrivalFrom-expectedArrivalUntil-to-schema-startdate-enddate/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-ownedFrom-ownedThrough-to-schema-startdate-enddate/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-startTime-endTime-to-schema-startdate-enddate/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-validFrom-validThrough-to-schema-startdate-enddate/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-validFrom-validUntil-to-schema-startdate-enddate/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-area-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-areaServed-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-availableAtOrFrom-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-birthPlace-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-containedIn-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-containedInPlace-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-containsPlace-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-contentLocation-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-course-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-deathPlace-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dropoffLocation-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-eligibleRegion-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-exerciseCourse-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-foodEstablishment-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-foundingLocation-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-fromLocation-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-gameLocation-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-hasPOS-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-homeLocation-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-ineligibleRegion-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-jobLocation-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-location-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-locationCreated-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-pickupLocation-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-regionsAllowed-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-serviceArea-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-serviceLocation-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-spatial-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-spatialCoverage-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-toLocation-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-workLocation-to-schema-labelled-geocoordinates/template"
+    ),
+    TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/prov-attime-to-dcterms-date/template"
+    ),
+    TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template",
+        isDirect = true
+    ),
+    TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template",
+        isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/geo-pos-to-schema-geocoordinates/template",
@@ -173,13 +368,25 @@ val allTransformerDefs = Seq(
         iri = "https://discovery.linkedpipes.com/resource/transformer/time-inxsddate-to-dcterms-date/template"
     ),
     TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/time-hasbeginning-with-dct-date-to-schema-startdate/template"
+    ),
+    TransformerDef(
+        iri = "https://discovery.linkedpipes.com/resource/transformer/time-hasend-with-dct-date-to-schema-enddate/template"
+    ),
+    TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/geosparql-aswkt-to-schema-geocoordinates/template",
         isDirect = true
     ),
     TransformerDef(
-        iri = "https://discovery.linkedpipes.com/resource/transformer/wikidata-coordinate-location-to-schema-geocoordinates/template"
+        iri = "https://discovery.linkedpipes.com/resource/transformer/wikidata-coordinate-location-to-schema-geocoordinates/templat"
     )
 )
+
+val roots = allTransformerDefs.filter(_.isRoot(allTransformerDefs)).groupBy(_.targetProperty)
+val nonLeafs = allTransformerDefs.filterNot(_.isLeaf(allTransformerDefs))
+val leafs = allTransformerDefs.filter(_.isLeaf(allTransformerDefs))
+val directs = allTransformerDefs.filter(_.isDirect)
+
 
 def topLOV(n: Int) = {
     lov.take(n.max(lov.size-1))
@@ -200,7 +407,7 @@ def getExperimentDef(name: String, discoveries: Seq[String]) = {
     """.stripMargin
 }
 
-def getDiscoveryDefs(name: String, transformers: Seq[String], groups: Map[String, Seq[String]] = Map()) = {
+def getDiscoveryDefs(name: String, transformers: Seq[TransformerDef], groups: Map[String, Seq[TransformerDef]] = Map()) = {
 
     val nonEmptyGroups = groups.filterNot(g => g._2.isEmpty)
 
@@ -235,7 +442,7 @@ def getDiscoveryDefs(name: String, transformers: Seq[String], groups: Map[String
        |   <https://discovery.linkedpipes.com/resource/discovery/$name/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
        |
        |     #Transformers
-       |     ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>", transformers)}
+       |     ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>", transformers.map(_.iri))}
        |
        |     #Transformer groups
        |     ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>", transformerGroups)}
@@ -346,51 +553,20 @@ def getDiscoveryDefs(name: String, transformers: Seq[String], groups: Map[String
     """.stripMargin
 }
 
-def fact(n: Int) : Int = (1 to n).product
-def combs(n: Int, k: Int) = fact(n)/(fact(k)*fact(n-k))
-
-
-/*
-def experiment1 = {
-    val usedTransformers = (transformers \ "labels" \ "external").as[Seq[String]]
-
-
-    for {
-        len <- 1 to usedTransformers.size
-        combinations <- usedTransformers combinations len
-    } yield {
-        combinations
-        //getDiscoveryDefs("01-labels-external", combinations)
-    }
-}*/
-
-val transformersData = Source.fromFile("gen/transformers.json").getLines().mkString("\n")
-val transformers = Json.parse(transformersData)
-
 private def getDiscoveryName(experimentName: String, i: Int) = s"$experimentName-${"%03d".format(i)}"
 
-private def getSortedLovLabels = {
-    def sortByLov(transformerUris: Seq[String]) = {
-        transformerUris.sortBy(t => lov.indexOf(lov.find(prefix => t.contains(s"/$prefix-")).head))
+private def getSortedByLov = {
+    def sortByLov(transformerUris: Seq[TransformerDef]) = {
+        transformerUris.sortBy(t => lov.indexOf(t.sourceVocabulary))
     }
 
-    val allTransformers = Seq(
-        transformers \ "labels" \ "external",
-        transformers \ "labels" \ "internal",
-        transformers \ "date-instants" \ "external",
-        transformers \ "date-instants" \ "internal",
-        transformers \ "time-instants" \ "external",
-        transformers \ "time-intervals" \ "external",
-        transformers \ "time-intervals" \ "internal",
-        transformers \ "geo" \ "external",
-        transformers \ "geo" \ "internal"
-    ).flatMap(l => l.as[Seq[String]])
+    val usedTransformers = nonLeafs ++ directs
 
-    sortByLov(allTransformers)
+    sortByLov(usedTransformers)
 }
 
-def experimentLovGroupBy(experimentName: String, groupByFunc: Seq[String] => Map[String, Seq[String]]) = {
-    val sortedTransformers = getSortedLovLabels
+def experimentLovGroupBy(experimentName: String, groupByFunc: Seq[TransformerDef] => Map[String, Seq[TransformerDef]]) = {
+    val sortedTransformers = getSortedByLov
 
     val start = 0
 
@@ -413,27 +589,14 @@ def experimentLovGroupBy(experimentName: String, groupByFunc: Seq[String] => Map
     (experimentName, experimentDef, discoveryDefs)
 }
 
-def groupByVocabulary(transformers: Seq[String], patternGetter: String => Seq[String]) : Map[String, Seq[String]] = {
-    lov.map { prefix =>
-        (prefix, transformers.filter { t => patternGetter(prefix).forall(p => t.contains(p)) })
-    }.toMap
-}
+def groupByTargetVocabulary(transformers: Seq[TransformerDef]) = transformers.groupBy(t => t.targetVocabulary)
+def groupBySourceVocabulary(transformers: Seq[TransformerDef]) = transformers.groupBy(t => t.sourceVocabulary)
+def groupBySourceAndTargetVocabulary(transformers: Seq[TransformerDef]): Map[String, Seq[TransformerDef]] = transformers.groupBy(t => s"${t.sourceVocabulary}-${t.targetVocabulary}")
 
-def groupByTargetVocabulary(transformers: Seq[String]) = groupByVocabulary(transformers, prefix => Seq(s"-to-$prefix"))
-def groupBySourceVocabulary(transformers: Seq[String]) = groupByVocabulary(transformers, prefix => Seq(s"/$prefix-"))
-
-def groupBySourceAndTargetVocabulary(transformers: Seq[String]): Map[String, Seq[String]] = {
-    transformers.map { t =>
-        val part = t.split("/").dropRight(1).last
-        val fromto = part.split("-to-")
-        s"${fromto(0).split("-").head}-${fromto(1).split("-").head}" -> t
-    }.groupBy(_._1).mapValues(_.map(_._2))
-}
-
-def groupByDomainAndVocabulary(transformers: Seq[String], direction: String, f: Seq[String] => Map[String, Seq[String]]): Map[String, Seq[String]] = {
+def groupByDomainAndVocabulary(transformers: Seq[TransformerDef], direction: String, f: Seq[TransformerDef] => Map[String, Seq[TransformerDef]]): Map[String, Seq[TransformerDef]] = {
     val domainGrouping = transformers.groupBy {
-        case t1 if t1.contains("schema-geocoordinates") => "geo"
-        case t2 if t2.contains("dcterms-title") => "labels"
+        case t1 if t1.iri.contains("schema-geocoordinates") => "geo"
+        case t2 if t2.iri.contains("dcterms-title") => "labels"
         case _ => "datetime"
     }
     val deepGrouping = domainGrouping.map { case (key, group) => key -> f(group) }
@@ -445,28 +608,26 @@ def groupByDomainAndVocabulary(transformers: Seq[String], direction: String, f: 
     }
 }
 
-def groupByDomainAndSourceVocabulary(transformers: Seq[String]): Map[String, Seq[String]] = {
+def groupByDomainAndSourceVocabulary(transformers: Seq[TransformerDef]): Map[String, Seq[TransformerDef]] = {
     groupByDomainAndVocabulary(transformers, "source", groupBySourceVocabulary)
 }
 
-def groupByDomainAndTargetVocabulary(transformers: Seq[String]): Map[String, Seq[String]] = {
+def groupByDomainAndTargetVocabulary(transformers: Seq[TransformerDef]): Map[String, Seq[TransformerDef]] = {
     groupByDomainAndVocabulary(transformers, "target", groupByTargetVocabulary)
 }
 
-def groupByTargetProperty(transformers: Seq[String]): Map[String, Seq[String]] = {
-    transformers.groupBy { t =>
-        t.split("-to-").last.replace("/template>", "")
-    }
+def groupByTargetProperty(transformers: Seq[TransformerDef]): Map[String, Seq[TransformerDef]] = {
+    transformers.groupBy { t => t.targetProperty }
 }
 
 val experimentDefs = Seq(
-    experimentLovGroupBy("001-no-groups", _ => Map())
-    //experimentLovGroupBy("002-target-voc-groups", groupByTargetVocabulary),
-    //experimentLovGroupBy("003-source-voc-groups", groupBySourceVocabulary),
-    //experimentLovGroupBy("004-source-target-voc-groups", groupBySourceAndTargetVocabulary),
-    //experimentLovGroupBy("005-domain-source-voc-groups", groupByDomainAndSourceVocabulary),
-    //experimentLovGroupBy("006-domain-target-voc-groups", groupByDomainAndTargetVocabulary),
-    //experimentLovGroupBy("007-target-prop-groups", groupByTargetProperty)
+    experimentLovGroupBy("001-no-groups", _ => Map()),
+    experimentLovGroupBy("002-target-voc-groups", groupByTargetVocabulary),
+    experimentLovGroupBy("003-source-voc-groups", groupBySourceVocabulary),
+    experimentLovGroupBy("004-source-target-voc-groups", groupBySourceAndTargetVocabulary),
+    experimentLovGroupBy("005-domain-source-voc-groups", groupByDomainAndSourceVocabulary),
+    experimentLovGroupBy("006-domain-target-voc-groups", groupByDomainAndTargetVocabulary),
+    experimentLovGroupBy("007-target-prop-groups", groupByTargetProperty)
 )
 
 val basePath = "/Users/jirihelmich/dev/mff/discovery/data/rdf/discovery-input"

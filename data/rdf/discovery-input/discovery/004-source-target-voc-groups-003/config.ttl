@@ -2,13 +2,12 @@
    <https://discovery.linkedpipes.com/resource/discovery/004-source-target-voc-groups-003/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
 
      #Transformers
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template>,
-<https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>;
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template,
+https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template;
 
      #Transformer groups
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/004-source-target-voc-groups-003-foaf-dcterms/label>,
-<https://discovery.linkedpipes.com/resource/transformer-group/004-source-target-voc-groups-003-dce-dcterms/label>;
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/004-source-target-voc-groups-003-dcterms-dcterms/label>;
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
 
@@ -113,16 +112,11 @@
 	  <https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql> .
 
    
-<https://discovery.linkedpipes.com/resource/transformer-group/004-source-target-voc-groups-003-foaf-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+<https://discovery.linkedpipes.com/resource/transformer-group/004-source-target-voc-groups-003-dcterms-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>
-    .
-            
-
-<https://discovery.linkedpipes.com/resource/transformer-group/004-source-target-voc-groups-003-dce-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
-    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/template>
+      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template,true),
+TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template,true)
     .
             
     

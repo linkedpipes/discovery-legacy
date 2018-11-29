@@ -2,6 +2,33 @@
 <https://discovery.linkedpipes.com/resource/experiment/001-no-groups/config> a <https://discovery.linkedpipes.com/vocabulary/experiment/Experiment> ;
     <https://discovery.linkedpipes.com/vocabulary/experiment/hasDiscovery>
     (
-<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-104/config>
+        <https://discovery.linkedpipes.com/resource/discovery/001-no-groups-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-001/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-002/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-003/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-004/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-005/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-006/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-007/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-008/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-009/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-010/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-011/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-012/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-013/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-014/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-015/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-016/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-017/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-018/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-019/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-020/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-021/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-022/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-023/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-024/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-025/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-026/config>
+<https://discovery.linkedpipes.com/resource/discovery/001-no-groups-027/config>
     ).
     
