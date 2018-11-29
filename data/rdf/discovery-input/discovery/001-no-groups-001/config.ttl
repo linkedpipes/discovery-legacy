@@ -2,7 +2,7 @@
    <https://discovery.linkedpipes.com/resource/discovery/001-no-groups-001/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
 
      #Transformers
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>;
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template>;
 
      #Transformer groups
      
