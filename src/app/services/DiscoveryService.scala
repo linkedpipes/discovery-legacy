@@ -55,7 +55,7 @@ class DiscoveryService @Inject()(
 
             val csvFiles = statisticsService.getCsvFiles(Seq(CsvRequestData(nextIri, d.id.toString)), this)
             csvFiles.foreach { csvFile =>
-                s"D:\\mff-experiments\\exp-${expId.toString}\\dis-${"%03d".format(i)}\\${csvFile.name}"
+                s"/tmp/mff-experiments/exp-${expId.toString}/dis-${"%03d".format(i)}/${csvFile.name}"
                     .toFile.createFileIfNotExists(createParents = true)
                     .writeByteArray(csvFile.content.getBytes("UTF-8"))
             }
