@@ -15,7 +15,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 
 
-class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount: Int = 1)
+class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount: Int = 2)
                (portMatcher: DiscoveryPortMatcher, pipelineBuilder: PipelineBuilder)
                (implicit executor: ExecutionContext)
 {
