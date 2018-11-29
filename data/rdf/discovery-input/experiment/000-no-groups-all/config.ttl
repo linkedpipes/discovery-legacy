@@ -1,0 +1,7 @@
+
+<https://discovery.linkedpipes.com/resource/experiment/000-no-groups-all/config> a <https://discovery.linkedpipes.com/vocabulary/experiment/Experiment> ;
+    <https://discovery.linkedpipes.com/vocabulary/experiment/hasDiscovery>
+    (
+<https://discovery.linkedpipes.com/resource/discovery/000-no-groups-all-047/config>
+    ).
+    

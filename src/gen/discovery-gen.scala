@@ -192,6 +192,18 @@ def getDiscoveryDefs(name: String, transformers: Seq[String], groups: Map[String
 val transformersData = Source.fromFile("gen/transformers.json").getLines().mkString("\n")
 val transformers = Json.parse(transformersData)
 
+val allTransformers = Seq(
+    transformers \ "labels" \ "external",
+    transformers \ "labels" \ "internal",
+    transformers \ "date-instants" \ "external",
+    transformers \ "date-instants" \ "internal",
+    transformers \ "time-instants" \ "external",
+    transformers \ "time-intervals" \ "external",
+    transformers \ "time-intervals" \ "internal",
+    transformers \ "geo" \ "external",
+    transformers \ "geo" \ "internal"
+).flatMap(l => l.as[Seq[String]])
+
 def fact(n: Int) : Int = (1 to n).product
 def combs(n: Int, k: Int) = fact(n)/(fact(k)*fact(n-k))
 
@@ -298,6 +310,7 @@ def groupByTargetProperty(transformers: Seq[String]): Map[String, Seq[String]] =
 }
 
 val experimentDefs = Seq(
+    experimentLabelsLovGroupBy("000-no-groups-all", _ => Map()),
     experimentLabelsLovGroupBy("001-no-groups", _ => Map()),
     experimentLabelsLovGroupBy("002-target-voc-groups", groupByTargetVocabulary),
     experimentLabelsLovGroupBy("003-source-voc-groups", groupBySourceVocabulary),

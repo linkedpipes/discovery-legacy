@@ -44,7 +44,7 @@ class DiscoveryService @Inject()(
 
     def startExperimentFromIri(experimentIri: String) : Unit = {
         val discoveryInputIris = getDiscoveryInputIrisFromExperimentIri(experimentIri)
-        startNextDiscovery(0, discoveryInputIris, experimentIri.split("/").last)
+        startNextDiscovery(0, discoveryInputIris, experimentIri.split("/").dropRight(1).last)
     }
 
     def startNextDiscovery(i: Int, discoveryInputIris: Seq[String], expId: String): Unit = {
@@ -63,6 +63,8 @@ class DiscoveryService @Inject()(
             discoveries.clear()
             if (i+1 < discoveryInputIris.size) {
                 startNextDiscovery(i+1, discoveryInputIris, expId)
+            } else {
+                println(s"========= Running experiment #$expId has finished.")
             }
         }
     }
