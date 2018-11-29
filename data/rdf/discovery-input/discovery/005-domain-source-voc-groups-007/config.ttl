@@ -2,13 +2,13 @@
    <https://discovery.linkedpipes.com/resource/discovery/005-domain-source-voc-groups-007/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
 
      #Transformers
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template,
-https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template,
-https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template,
-https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template,
-https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template,
-https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template,
-https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template;
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template>;
 
      #Transformer groups
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/005-domain-source-voc-groups-007-datetime-source-dcterms/label>,
@@ -119,18 +119,18 @@ https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-titl
    
 <https://discovery.linkedpipes.com/resource/transformer-group/005-domain-source-voc-groups-007-datetime-source-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template,true),
-TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template,true),
-TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template,true),
-TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template,true),
-TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template,true),
-TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template,true)
+      <https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template>
     .
             
 
 <https://discovery.linkedpipes.com/resource/transformer-group/005-domain-source-voc-groups-007-labels-source-dce/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      TransformerDef(https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template,true)
+      <https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template>
     .
             
     

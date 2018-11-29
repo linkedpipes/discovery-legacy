@@ -42,6 +42,8 @@ case class TransformerDef(iri: String, isDirect: Boolean = false)
 
     def isLeaf(transformers: Seq[TransformerDef]) = predecessors(transformers).isEmpty
     def isRoot(transformers: Seq[TransformerDef]) = successors(transformers).isEmpty
+
+    def ttlIri = s"<$iri>"
 }
 
 val allTransformerDefs = Seq(
@@ -423,7 +425,7 @@ def getDiscoveryDefs(name: String, transformers: Seq[TransformerDef], groups: Ma
             s"""
               |<https://discovery.linkedpipes.com/resource/transformer-group/$name-$prefix/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
               |    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-              |      ${trans.mkString(",\n")}
+              |      ${trans.map(_.ttlIri).mkString(",\n")}
               |    .
             """.stripMargin
         }.mkString("\n")
@@ -442,7 +444,7 @@ def getDiscoveryDefs(name: String, transformers: Seq[TransformerDef], groups: Ma
        |   <https://discovery.linkedpipes.com/resource/discovery/$name/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
        |
        |     #Transformers
-       |     ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>", transformers.map(_.iri))}
+       |     ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>", transformers.map(_.ttlIri))}
        |
        |     #Transformer groups
        |     ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>", transformerGroups)}
