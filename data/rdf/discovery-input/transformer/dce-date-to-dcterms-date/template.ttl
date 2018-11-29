@@ -3,8 +3,8 @@
 
 @prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
 
-@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-date/> .
-@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/dce-to-dcterms-date/configuration/> .
+@prefix transformer:  <https://discovery.linkedpipes.com/resource/transformer/dce-date-to-dcterms-date/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/transformer/dce-date-to-dcterms-date/configuration/> .
 
 transformer:template a lpd:TransformerTemplate ;
   dcterms:title "Dublin Core elements date to Dublin Core terms date"@en;
@@ -36,7 +36,7 @@ WHERE {
   lpd:configurationQuery """
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
-    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/dce-to-dcterms-date/configuration/>
+    PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/transformer/dce-date-to-dcterms-date/configuration/>
     
     CONSTRUCT {
       ?config a configuration-vocabulary:Configuration ;
