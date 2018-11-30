@@ -131,7 +131,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount:
             }
 
             val nextIterationCompletePipelines = iterationData.completedPipelines ++ completePipelines
-            val nextIterationGivenPipelines = (iterationData.givenPipelines ++ consolidatedFragments).distinct
+            val nextIterationGivenPipelines = (consolidatedFragments).distinct // (iterationData.givenPipelines ++ consolidatedFragments).distinct
 
             IterationData(
                 iterationData.id,
