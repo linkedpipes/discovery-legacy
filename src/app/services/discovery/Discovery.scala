@@ -119,8 +119,8 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount:
         eventualPipelines.map { rawPipelines =>
 
             val newPipelines = rawPipelines.flatten
-            //val fresh = newPipelines.filter(containsBindingToIteration(iterationData.iterationNumber - 1))
-            val (completePipelines, pipelineFragments) = newPipelines.partition(_.isComplete)
+            val fresh = newPipelines.filter(containsBindingToIteration(iterationData.iterationNumber - 1))
+            val (completePipelines, pipelineFragments) = fresh.partition(_.isComplete)
 
             discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Found ${newPipelines.size} pipelines in the last iteration.")
             discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] ${completePipelines.size} complete pipelines, ${pipelineFragments.size} pipeline fragments.")
@@ -132,7 +132,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount:
             }
 
             val nextIterationCompletePipelines = iterationData.completedPipelines ++ completePipelines
-            val nextIterationGivenPipelines = consolidatedFragments.distinct // (iterationData.givenPipelines ++ consolidatedFragments).distinct
+            val nextIterationGivenPipelines = (iterationData.givenPipelines ++ consolidatedFragments).distinct
 
             IterationData(
                 iterationData.id,
