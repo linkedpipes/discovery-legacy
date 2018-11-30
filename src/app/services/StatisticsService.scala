@@ -223,7 +223,7 @@ class StatisticsService {
 
                                 val dataSourcesString = p._2.typedDatasources.map(_.label).mkString(",")
                                 val extractorsString = p._2.typedExtractors.map(_.getClass.getSimpleName).mkString(",")
-                                val transformersString = p._2.typedProcessors.map(_.label).mkString(",")
+                                val transformersString = p._2.typedProcessors.map(_.iri).mkString(",")
                                 val transformersCount = p._2.typedProcessors.size
                                 val app = p._2.typedApplications.map(_.label).mkString(",")
                                 val iterationNumber = p._2.lastComponent.discoveryIteration
