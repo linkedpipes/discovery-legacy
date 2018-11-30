@@ -97,7 +97,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount:
         val eventualPipelines = Future.sequence(Seq(
             (extractorCandidatePipelines, extractors),
             (otherPipelines, otherComponents)
-        ).par.flatMap {
+        ).flatMap {
             case (pipelines, components) => {
 
                 components.par.map { component =>
@@ -125,7 +125,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount:
             discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Found ${newPipelines.size} pipelines in the last iteration.")
             discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] ${completePipelines.size} complete pipelines, ${pipelineFragments.size} pipeline fragments.")
 
-            val consolidatedFragments = consolidateFragments(pipelineFragments, iterationData.iterationNumber)
+            val consolidatedFragments = consolidateFragments(pipelineFragments.par, iterationData.iterationNumber)
 
             completePipelines.foreach{ p =>
                 results.put(UUID.randomUUID(), p)
@@ -175,7 +175,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount:
 
     private def createInitialPipelines(dataSets: Seq[DataSet]): Future[Seq[Pipeline]] = {
         discoveryLogger.trace(s"[$id] Initial pipelines built from $dataSets.")
-        Future.sequence(dataSets.par.map(pipelineBuilder.buildInitialPipeline))
+        Future.sequence(dataSets.map(pipelineBuilder.buildInitialPipeline))
     }
 
     private def containsBindingToIteration(iterationNumber: Int)(pipeline: Pipeline): Boolean = pipeline.bindings.exists(
