@@ -127,7 +127,7 @@ class DiscoveryService @Inject()(
         DiscoveryStatus(
             discovery.results.size,
             discovery.isFinished,
-            discovery.duration
+            discovery.timer.duration.get
         )
     }
 

@@ -129,7 +129,7 @@ class StatisticsService {
                     g.applicationGroups.map(ag => ag.dataSourceGroups.map(ds => ds.extractorGroups.size).sum).sum,
                     g.applicationGroups.map(ag => ag.dataSourceGroups.map(ds => ds.extractorGroups.map(eg => eg.dataSampleGroups.size).sum).sum).sum,
                     g.pipelines.size,
-                    discovery.duration,
+                    discovery.timer.duration.get,
                     discovery.input.applications.size,
                     discovery.input.dataSets.size,
                     discovery.input.processors.size

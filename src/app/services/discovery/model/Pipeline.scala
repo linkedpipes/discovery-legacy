@@ -9,6 +9,8 @@ import services.discovery.model.components._
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
 
+import scala.reflect.ClassTag
+
 case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBinding], lastComponent: PipelineComponent, lastOutputDataSample: DataSample) {
     def isComplete: Boolean = lastComponent.componentInstance.isInstanceOf[ApplicationInstance]
 
@@ -61,16 +63,28 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
         components.count(_.componentInstance == componentInstance) > 0
     }
 
-    def containsInstanceOfType[T] = {
-        components.exists(_.componentInstance.isInstanceOf[T])
+    def containsLinksetBasedUnion = {
+        components.exists(_.componentInstance.isInstanceOf[LinksetBasedUnion])
     }
 
-    def endsWith[T] = {
-        lastComponent.componentInstance.isInstanceOf[T]
+    def endsWithDataSourceInstance = {
+        lastComponent.componentInstance.isInstanceOf[DataSourceInstance]
+    }
+
+    def endsWithSparqlUpdateTransformerInstance = {
+        lastComponent.componentInstance.isInstanceOf[SparqlUpdateTransformerInstance]
     }
 
     def endsWith(componentInstance: ComponentInstanceWithInputs): Boolean = {
         lastComponent.componentInstance == componentInstance
+    }
+
+    def endingTransformer = {
+        lastComponent.componentInstance.asInstanceOf[SparqlUpdateTransformerInstance]
+    }
+
+    def endingTransformerGroupIri = {
+        endingTransformer.transformerGroupIri
     }
 
 }

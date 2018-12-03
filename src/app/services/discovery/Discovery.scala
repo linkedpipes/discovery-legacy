@@ -10,7 +10,7 @@ import services.discovery.model.components.{ComponentInstanceWithInputs, DataSou
 import services.discovery.model.internal.DiscoveryIteration
 
 import scala.collection.mutable
-import scala.collection.parallel.ParSeq
+import scala.collection.parallel.{ParMap, ParSeq}
 import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
@@ -29,7 +29,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
 
     private val discoveryLogger = Logger.of("discovery")
 
-    private val timer = new Timer
+    val timer = new Timer
 
     def start: Future[Seq[Pipeline]] = {
         timer.start
@@ -108,33 +108,32 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
         }
     }
 
-    private def consolidateFragments(pipelineFragments: ParSeq[Pipeline], discoveryIteration: Int) : ParSeq[Pipeline] = {
-
-        val (endingWithTransformer, others) = pipelineFragments.partition(p => p.endsWith[SparqlUpdateTransformerInstance])
-
+    private def consolidateFragments(fragments: ParSeq[Pipeline], iterationNumber: Int) : ParSeq[Pipeline] = {
+        val (endingWithTransformer, others) = fragments.partition(p => p.endsWithSparqlUpdateTransformerInstance)
         val datasourceGroups = endingWithTransformer.groupBy(p => p.typedDatasources)
-        val dsgFragments = datasourceGroups.map { dsg =>
-            val transformerGroups = dsg._2.groupBy(p => p.lastComponent.componentInstance.asInstanceOf[SparqlUpdateTransformerInstance].transformerGroupIri) // What if it ends with something else?!
+        val newDatasourceGroupFragments = datasourceGroups.map { case (_, datasourceGroupFragments) =>
+            val transformerGroups = datasourceGroupFragments.groupBy(p => p.endingTransformerGroupIri)
             val (withTransformerGroup, withoutTransformerGroup) = transformerGroups.partition(tg => tg._1.isDefined)
-
-            val newFragments = withTransformerGroup.map { transformerGroup =>
-                val distinctTransformers = transformerGroup._2.map(_.lastComponent.componentInstance.asInstanceOf[SparqlUpdateTransformerInstance]).distinct
-                val randomPipelineFragment = transformerGroup._2.head
-                val transformer = randomPipelineFragment.lastComponent.componentInstance.asInstanceOf[SparqlUpdateTransformerInstance]
-                val transformersToAttach = distinctTransformers.filter(t => t != transformer)
-
-                var fragment = randomPipelineFragment
-                transformersToAttach.foreach { t =>
-                    fragment = Await.ready(pipelineBuilder.buildPipeline(t, Seq(PortMatch(t.getInputPorts.head, fragment, None)), discoveryIteration), atMost = Duration(30, SECONDS)).value.get.get
-                }
-                fragment
-            }
-
+            val newFragments = applyTransformerGroup(withTransformerGroup, iterationNumber)
             withoutTransformerGroup.values.flatten ++ newFragments
         }
 
+        others ++ newDatasourceGroupFragments.flatten
+    }
 
-        others ++ dsgFragments.flatten
+    private def applyTransformerGroup(fragmentMap: ParMap[Option[String], ParSeq[Pipeline]], iterationNumber: Int) = {
+        fragmentMap.map { case (_, fragments) =>
+            val basePipelineFragment = fragments.head
+            val distinctTransformers = fragments.drop(1).map(_.endingTransformer).distinct
+
+            var fragment = basePipelineFragment
+            distinctTransformers.foreach { t =>
+                fragment = Await.ready(
+                    pipelineBuilder.buildPipeline(t, Seq(PortMatch(t.getInputPorts.head, fragment, None)), iterationNumber), atMost = Duration(30, SECONDS)
+                ).value.get.get
+            }
+            fragment
+        }
     }
 
     private def finalize(iterationData: DiscoveryIteration): Future[Seq[Pipeline]] = {
@@ -155,8 +154,8 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
     private def getRelevantFragments(component: ComponentInstanceWithInputs, fragments: Seq[Pipeline]) : Seq[Pipeline] = {
         component match {
             case c if c.isInstanceOf[LinksetBasedUnion] => fragments.filterNot(p => p.containsInstance(c) || p.endsWithLargeDataset)
-            case c if c.isInstanceOf[FusionTransformer] => fragments.filter(_.containsInstanceOfType[LinksetBasedUnion])
-            case e if e.isInstanceOf[ExtractorInstance] => fragments.filter(_.endsWith[DataSourceInstance])
+            case c if c.isInstanceOf[FusionTransformer] => fragments.filter(_.containsLinksetBasedUnion)
+            case e if e.isInstanceOf[ExtractorInstance] => fragments.filter(_.endsWithDataSourceInstance)
             case _ => fragments
         }
     }
