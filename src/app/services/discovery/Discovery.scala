@@ -6,8 +6,8 @@ import play.Logger
 import services.discovery.components.analyzer.LinksetBasedUnion
 import services.discovery.components.transformer.FusionTransformer
 import services.discovery.model._
-import services.discovery.model.components.{DataSourceInstance, ExtractorInstance, SparqlUpdateTransformerInstance}
-import services.discovery.model.internal.IterationData
+import services.discovery.model.components.{ComponentInstanceWithInputs, DataSourceInstance, ExtractorInstance, SparqlUpdateTransformerInstance}
+import services.discovery.model.internal.DiscoveryIteration
 
 import scala.collection.mutable
 import scala.collection.parallel.ParSeq
@@ -16,9 +16,9 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 
 
-class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount: Int = 10)
-               (portMatcher: DiscoveryPortMatcher, pipelineBuilder: PipelineBuilder)
-               (implicit executor: ExecutionContext)
+class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10)
+   (portMatcher: DiscoveryPortMatcher, pipelineBuilder: PipelineBuilder)
+   (implicit executor: ExecutionContext)
 {
 
     val results = new mutable.HashMap[UUID, Pipeline]
@@ -29,25 +29,22 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount:
 
     private val discoveryLogger = Logger.of("discovery")
 
-    private val startTime = System.nanoTime()
-
-    private var endTime : Long = 0
-
-    def duration: Long = {
-        (endTime - startTime) / (1000 * 1000) // ns -> ms
-    }
+    private val timer = new Timer
 
     def start: Future[Seq[Pipeline]] = {
+        timer.start
         discoveryLogger.info(s"[$id] Starting with ${input.dataSets.size} data sets, ${input.processors.size} processors and ${input.applications.size} applications.")
-        val pipelines = createInitialPipelines(input.dataSets).flatMap { initialPipelines =>
-            val data = IterationData(
+
+        val initialFragments = createInitialPipelineFragments(input.dataSets)
+        val pipelines = initialFragments.flatMap { fragments =>
+            val iteration = DiscoveryIteration(
                 id = id,
-                givenPipelines = initialPipelines,
-                completedPipelines = Seq(),
-                availableComponents = input,
-                iterationNumber = 1
+                fragments = fragments,
+                pipelines = Seq(),
+                input = input,
+                number = 1
             )
-            iterate(data)
+            iterate(iteration)
         }
 
         pipelines.onComplete(_ => isFinished = true)
@@ -57,100 +54,67 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount:
         pipelines
     }
 
-    private def iterate(iterationData: IterationData): Future[Seq[Pipeline]] = {
-        iterationBody(iterationData).flatMap { nextIterationData =>
+    private def iterate(iteration: DiscoveryIteration): Future[Seq[Pipeline]] = {
+        iterationBody(iteration).flatMap { nextIteration =>
 
-            val discoveredNewPipeline = nextIterationData.givenPipelines.lengthCompare(iterationData.givenPipelines.size) > 0
-            val stop = !discoveredNewPipeline || iterationData.iterationNumber == maximalIterationsCount
+            val discoveredNewPipeline = nextIteration.discoveredNewPipeline(iteration)
+            val stop = !discoveredNewPipeline || iteration.number == maxIterations
 
-            discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Iteration finished.")
-            discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Discovered any new pipelines: $discoveredNewPipeline.")
-            discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Next iteration: ${!stop}.")
+            discoveryLogger.debug(s"[$id][${iteration.number}] Iteration finished.")
+            discoveryLogger.debug(s"[$id][${iteration.number}] Discovered any new pipelines: $discoveredNewPipeline.")
+            discoveryLogger.debug(s"[$id][${iteration.number}] Next iteration: ${!stop}.")
 
             stop match {
-                case true => finalize(nextIterationData)
-                case false => iterate(nextIterationData)
+                case true => finalize(nextIteration)
+                case false => iterate(nextIteration)
             }
         }
     }
 
-    private def finalize(iterationData: IterationData): Future[Seq[Pipeline]] = {
-        endTime = System.nanoTime()
-        onStop.foreach(f => f(this))
-        Future.successful(iterationData.completedPipelines)
-    }
+    private def iterationBody(iteration: DiscoveryIteration): Future[DiscoveryIteration] = {
+        discoveryLogger.debug(s"[$id][${iteration.number}] Starting iteration.")
 
-    private def endsWithLargeDataset(pipeline: Pipeline): Boolean = {
-        pipeline.lastComponent.componentInstance match {
-            case ci: DataSourceInstance => ci.isLarge
-            case _ => false
-        }
-    }
-
-    private def iterationBody(iterationData: IterationData): Future[IterationData] = {
-        discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Starting iteration.")
-
-        val (extractorCandidatePipelines, otherPipelines) = iterationData.givenPipelines.par.partition(endsWithLargeDataset)
-        val extractors = iterationData.availableComponents.extractors
-        val otherComponents = iterationData.availableComponents.processors ++ iterationData.availableComponents.applications
-
-        val eventualPipelines = Future.sequence(Seq(
-            (extractorCandidatePipelines, extractors),
-            (otherPipelines, otherComponents)
-        ).flatMap {
-            case (pipelines, components) => {
-
-                components.par.map { component =>
-
-                    val filteredPipelines = component match {
-                        case c if c.isInstanceOf[LinksetBasedUnion] => pipelines.filterNot(_.components.count(_.componentInstance == c) > 0)
-                          .filterNot(p => p.components.lengthCompare(1) == 0 && p.lastComponent.componentInstance.isInstanceOf[DataSourceInstance] &&
-                            p.lastComponent.componentInstance.asInstanceOf[DataSourceInstance].isLarge)
-                        case c if c.isInstanceOf[FusionTransformer] => pipelines.filter(_.components.exists(_.componentInstance.isInstanceOf[LinksetBasedUnion]))
-                        case e if e.isInstanceOf[ExtractorInstance] => pipelines.filter(_.lastComponent.componentInstance.isInstanceOf[DataSourceInstance])
-                        case _ => pipelines
-                    }
-
-                    portMatcher.tryMatchPorts(component, filteredPipelines.seq, iterationData.iterationNumber)
+        val eventualPipelines = Future.sequence(
+            getCombinatorInput(iteration).flatMap { ci =>
+                ci.components.map { component =>
+                    val relevantFragments = getRelevantFragments(component, ci.fragments)
+                    portMatcher.tryMatchPorts(component, relevantFragments, iteration.number)
                 }
             }
-        })
+        )
 
         eventualPipelines.map { rawPipelines =>
 
             val newPipelines = rawPipelines.flatten
-            val fresh = newPipelines.filter(containsBindingToIteration(iterationData.iterationNumber - 1))
+            val fresh = newPipelines//newPipelines.filter(containsBindingToIteration(iteration.number - 1))
             val (completePipelines, pipelineFragments) = fresh.partition(_.isComplete)
 
-            discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] Found ${newPipelines.size} pipelines in the last iteration.")
-            discoveryLogger.debug(s"[$id][${iterationData.iterationNumber}] ${completePipelines.size} complete pipelines, ${pipelineFragments.size} pipeline fragments.")
+            discoveryLogger.debug(s"[$id][${iteration.number}] Found ${newPipelines.size} pipelines in the last iteration, ${fresh.size} new.")
+            discoveryLogger.debug(s"[$id][${iteration.number}] ${completePipelines.size} complete pipelines, ${pipelineFragments.size} pipeline fragments.")
 
-            val consolidatedFragments = consolidateFragments(pipelineFragments.par, iterationData.iterationNumber)
+            val consolidatedFragments = pipelineFragments//consolidateFragments(pipelineFragments.par, iteration.number)
 
             completePipelines.foreach{ p =>
                 results.put(UUID.randomUUID(), p)
             }
 
-            val nextIterationCompletePipelines = iterationData.completedPipelines ++ completePipelines
-            val nextIterationGivenPipelines = (iterationData.givenPipelines ++ consolidatedFragments).distinct
-
-            IterationData(
-                iterationData.id,
-                nextIterationGivenPipelines.seq,
-                nextIterationCompletePipelines,
-                iterationData.availableComponents,
-                iterationData.iterationNumber + 1
+            DiscoveryIteration(
+                id = iteration.id,
+                fragments = (/*iteration.fragments ++ */consolidatedFragments).distinct.seq,
+                pipelines = iteration.pipelines ++ completePipelines,
+                input = iteration.input,
+                number = iteration.number + 1
             )
         }
     }
 
     private def consolidateFragments(pipelineFragments: ParSeq[Pipeline], discoveryIteration: Int) : ParSeq[Pipeline] = {
 
-        val (endingWithTransformer, others) = pipelineFragments.partition(p => p.lastComponent.componentInstance.isInstanceOf[SparqlUpdateTransformerInstance])
+        val (endingWithTransformer, others) = pipelineFragments.partition(p => p.endsWith[SparqlUpdateTransformerInstance])
 
-        val datasourceGroups = endingWithTransformer.groupBy(p => p.components.map(c => c.componentInstance).filter(c => c.isInstanceOf[DataSourceInstance]))
+        val datasourceGroups = endingWithTransformer.groupBy(p => p.typedDatasources)
         val dsgFragments = datasourceGroups.map { dsg =>
-            val transformerGroups = dsg._2.groupBy(p => p.lastComponent.componentInstance.asInstanceOf[SparqlUpdateTransformerInstance].transformerGroupIri)
+            val transformerGroups = dsg._2.groupBy(p => p.lastComponent.componentInstance.asInstanceOf[SparqlUpdateTransformerInstance].transformerGroupIri) // What if it ends with something else?!
             val (withTransformerGroup, withoutTransformerGroup) = transformerGroups.partition(tg => tg._1.isDefined)
 
             val newFragments = withTransformerGroup.map { transformerGroup =>
@@ -173,14 +137,40 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maximalIterationsCount:
         others ++ dsgFragments.flatten
     }
 
-    private def createInitialPipelines(dataSets: Seq[DataSet]): Future[Seq[Pipeline]] = {
+    private def finalize(iterationData: DiscoveryIteration): Future[Seq[Pipeline]] = {
+        timer.stop
+        onStop.foreach(f => f(this))
+        Future.successful(iterationData.pipelines)
+    }
+
+    private def getCombinatorInput(iteration: DiscoveryIteration) : Seq[CombinatorInput] = {
+        val (extractorCandidatePipelines, otherPipelines) = iteration.fragments.partition(_.endsWithLargeDataset)
+
+        Seq(
+            CombinatorInput(extractorCandidatePipelines, iteration.input.extractors),
+            CombinatorInput(otherPipelines, iteration.input.processors ++ iteration.input.applications)
+        )
+    }
+
+    private def getRelevantFragments(component: ComponentInstanceWithInputs, fragments: Seq[Pipeline]) : Seq[Pipeline] = {
+        component match {
+            case c if c.isInstanceOf[LinksetBasedUnion] => fragments.filterNot(p => p.containsInstance(c) || p.endsWithLargeDataset)
+            case c if c.isInstanceOf[FusionTransformer] => fragments.filter(_.containsInstanceOfType[LinksetBasedUnion])
+            case e if e.isInstanceOf[ExtractorInstance] => fragments.filter(_.endsWith[DataSourceInstance])
+            case _ => fragments
+        }
+    }
+
+    private def createInitialPipelineFragments(dataSets: Seq[DataSet]): Future[Seq[Pipeline]] = {
         discoveryLogger.trace(s"[$id] Initial pipelines built from $dataSets.")
         Future.sequence(dataSets.map(pipelineBuilder.buildInitialPipeline))
     }
 
-    private def containsBindingToIteration(iterationNumber: Int)(pipeline: Pipeline): Boolean = pipeline.bindings.exists(
-        binding => binding.startComponent.discoveryIteration == iterationNumber
-    )
+    private def containsBindingToIteration(iterationNumber: Int)(pipeline: Pipeline): Boolean = {
+        pipeline.bindings.exists(
+            binding => binding.startComponent.discoveryIteration == iterationNumber
+        )
+    }
 }
 
 object Discovery {

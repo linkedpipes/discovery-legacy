@@ -4,7 +4,7 @@ import java.io.StringWriter
 import java.util.UUID
 
 import org.apache.jena.rdf.model.Model
-import services.discovery.components.analyzer.EtlSparqlGraphProtocol
+import services.discovery.components.analyzer.{EtlSparqlGraphProtocol, LinksetBasedUnion}
 import services.discovery.model.components._
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
@@ -15,10 +15,6 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
     def prettyFormat(offset: String = ""): String = {
         val formattedBindings = bindings.map(_.prettyFormat).mkString(", ")
         s"${offset}Pipeline(\n$offset  bindings=$formattedBindings\n$offset  lastComponent=${lastComponent.componentInstance}\n$offset)"
-    }
-
-    def endsWith(componentInstance: ComponentInstanceWithInputs): Boolean = {
-        lastComponent.componentInstance == componentInstance
     }
 
     def dataSourceNames = components.filter(_.componentInstance.isInstanceOf[DataSourceInstance]).map(_.componentInstance.asInstanceOf[DataSourceInstance].label).mkString("[", ",", "]")
@@ -53,6 +49,29 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
     def typedApplications = applications.map(_.componentInstance.asInstanceOf[ApplicationInstance])
 
     def dataSample : Model = lastOutputDataSample.getModel(UUID.randomUUID(), height)
+
+    def endsWithLargeDataset = {
+        lastComponent.componentInstance match {
+            case ci: DataSourceInstance => ci.isLarge
+            case _ => false
+        }
+    }
+
+    def containsInstance(componentInstance: ComponentInstance) : Boolean = {
+        components.count(_.componentInstance == componentInstance) > 0
+    }
+
+    def containsInstanceOfType[T] = {
+        components.exists(_.componentInstance.isInstanceOf[T])
+    }
+
+    def endsWith[T] = {
+        lastComponent.componentInstance.isInstanceOf[T]
+    }
+
+    def endsWith(componentInstance: ComponentInstanceWithInputs): Boolean = {
+        lastComponent.componentInstance == componentInstance
+    }
 
 }
 

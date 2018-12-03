@@ -13,7 +13,7 @@ GET        /discovery/components                               controllers.Disco
 POST       /discovery/start                                    controllers.DiscoveryController.start()
 GET        /discovery/startFromInputIri                        controllers.DiscoveryController.startFromInputIri(iri: String)
 POST       /discovery/startFromInput                           controllers.DiscoveryController.starFromInput()
-GET        /experiment/startFromIri                            controllers.DiscoveryController.startExperimentFromIri(experiemntIri: String)
+GET        /experiment/startFromIri                            controllers.DiscoveryController.startExperimentFromIri(experimentIri: String)
 
 GET        /discovery/getExperimentsInputIrisFromIri           controllers.DiscoveryController.getDiscoveryInputIrisFromExperimentIri(iri: String)
 POST       /discovery/getExperimentsInputIris                  controllers.DiscoveryController.getDiscoveryInputIrisFromExperiment()

@@ -42,12 +42,12 @@ class DiscoveryService @Inject()(
         start(discoveryInput)
     }
 
-    def startExperimentFromIri(experimentIri: String) : Unit = {
+    def startExperimentFromIri(experimentIri: String, experimentsDumpPath: String) : Unit = {
         val discoveryInputIris = getDiscoveryInputIrisFromExperimentIri(experimentIri)
-        startNextDiscovery(0, discoveryInputIris, experimentIri.split("/").dropRight(1).last)
+        startNextDiscovery(0, discoveryInputIris, experimentIri.split("/").dropRight(1).last, experimentsDumpPath)
     }
 
-    def startNextDiscovery(i: Int, discoveryInputIris: Seq[String], expId: String): Unit = {
+    def startNextDiscovery(i: Int, discoveryInputIris: Seq[String], expId: String, experimentsDumpPath: String): Unit = {
         val nextIri = discoveryInputIris(i)
         val discovery = startFromInputIri(nextIri)
         discovery.onStop += { d =>
@@ -55,14 +55,15 @@ class DiscoveryService @Inject()(
 
             val csvFiles = statisticsService.getCsvFiles(Seq(CsvRequestData(nextIri, d.id.toString)), this)
             csvFiles.foreach { csvFile =>
-                s"/tmp/mff-experiments/exp-${expId.toString}/dis-${"%03d".format(i)}/${csvFile.name}"
+                val sep = JFile.separator
+                s"${experimentsDumpPath}${sep}exp-${expId.toString}${sep}dis-${"%03d".format(i)}${sep}${csvFile.name}"
                     .toFile.createFileIfNotExists(createParents = true)
                     .writeByteArray(csvFile.content.getBytes("UTF-8"))
             }
 
             discoveries.clear()
             if (i+1 < discoveryInputIris.size) {
-                startNextDiscovery(i+1, discoveryInputIris, expId)
+                startNextDiscovery(i+1, discoveryInputIris, expId, experimentsDumpPath)
             } else {
                 println(s"========= Running experiment #$expId has finished.")
             }

@@ -37,6 +37,7 @@ class DiscoveryController @Inject()(
     private val discoveryLogger = Logger.of("discovery")
     private val ldcpEndpoint = configuration.get[SparqlEndpointDefinition]("ldcp.sparqlEndpoint")
     private val templateSourceUri = configuration.get[String]("ldcp.templateSourceUri")
+    private val experimentsDumpPath = configuration.get[String]("ldcp.experimentsDumpPath")
 
     def listComponents = Action {
         Ok(
@@ -56,8 +57,8 @@ class DiscoveryController @Inject()(
         discoveryStarted(service.startFromInputIri(iri))
     }
 
-    def startExperimentFromIri(experiemntIri: String) = Action {
-        service.startExperimentFromIri(experiemntIri)
+    def startExperimentFromIri(experimentIri: String) = Action {
+        service.startExperimentFromIri(experimentIri, experimentsDumpPath)
         Ok("running")
     }
 
