@@ -100,7 +100,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
 
             DiscoveryIteration(
                 id = iteration.id,
-                fragments = (/*iteration.fragments ++ */consolidatedFragments).distinct.seq,
+                fragments = pipelineFragments, //(/*iteration.fragments ++ */consolidatedFragments).distinct.seq,
                 pipelines = iteration.pipelines ++ completePipelines,
                 input = iteration.input,
                 number = iteration.number + 1
