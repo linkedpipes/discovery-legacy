@@ -54,7 +54,7 @@ object DataSample {
         endpoint match {
             case e if e.descriptorIri.isEmpty => SparqlEndpointDataSample(e)
             case e if e.descriptorIri.isDefined => {
-                val data = Source.fromURL(e.descriptorIri.get)
+                val data = Source.fromURL(e.descriptorIri.get)("UTF-8")
                 DataSample(data.mkString)
             }
         }
