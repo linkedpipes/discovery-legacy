@@ -1,6 +1,5 @@
 package services.discovery.model
 
-import java.io.StringWriter
 import java.util.UUID
 
 import org.apache.jena.rdf.model.Model
@@ -8,8 +7,6 @@ import services.discovery.components.analyzer.{EtlSparqlGraphProtocol, LinksetBa
 import services.discovery.model.components._
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
-
-import scala.reflect.ClassTag
 
 case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBinding], lastComponent: PipelineComponent, lastOutputDataSample: DataSample) {
     def isComplete: Boolean = lastComponent.componentInstance.isInstanceOf[ApplicationInstance]

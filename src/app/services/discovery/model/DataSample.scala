@@ -7,6 +7,7 @@ import org.apache.jena.query._
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.update.UpdateAction
 import play.Logger
+import services.RdfUtils
 import services.discovery.JenaUtil
 import services.discovery.components.datasource.SparqlEndpoint
 import services.discovery.model.components._
@@ -15,6 +16,8 @@ import scala.collection.JavaConversions._
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 import scala.io.Source
+import better.files._
+import java.io.{File => JFile}
 
 trait DataSample {
 
@@ -66,11 +69,17 @@ object DataSample {
 case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends DataSample {
     private val discoveryLogger = Logger.of("discovery")
 
-    override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean] = withLogger(descriptor, e => e.execAsk, discoveryId, iterationNumber)
+    override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean] = {
+        withLogger(descriptor, e => e.execAsk, discoveryId, iterationNumber)
+    }
 
-    override def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int): Future[ResultSet] = withLogger(descriptor, e => e.execSelect, discoveryId, iterationNumber)
+    override def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int): Future[ResultSet] = {
+        withLogger(descriptor, e => e.execSelect, discoveryId, iterationNumber)
+    }
 
-    override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = withLogger(descriptor, e => e.execConstruct, discoveryId, iterationNumber)
+    override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = {
+        withLogger(descriptor, e => e.execConstruct, discoveryId, iterationNumber)
+    }
 
     override def getModel(discoveryId: UUID, iterationNumber: Int): Model = {
         sparqlEndpoint.isLarge match {
@@ -92,18 +101,22 @@ case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends Data
     }
 }
 
-case class ModelDataSample(model: Model) extends DataSample {
+case class ModelDataSample(f: File) extends DataSample {
     override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean] = executeQuery(descriptor, qe => qe.execAsk())
 
     override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = executeQuery(descriptor, qe => qe.execConstruct())
 
     override def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int): Future[ResultSet] = executeQuery(descriptor, qe => qe.execSelect())
 
-    override def getModel(discoveryId: UUID, iterationNumber: Int): Model = model
+    override def getModel(discoveryId: UUID, iterationNumber: Int): Model = _model
+
+    private def _model : Model = {
+        RdfUtils.modelFromTtl(Source.fromFile(f.toJava, "UTF-8").getLines().mkString("\n"))
+    }
 
     private def executeQuery[R](descriptor: SparqlQuery, executionCommand: QueryExecution => R): Future[R] = {
         Future.successful {
-            val result = executionCommand(QueryExecutionFactory.create(createQuery(descriptor.query), model))
+            val result = executionCommand(QueryExecutionFactory.create(createQuery(descriptor.query), _model))
             result
         }
     }
@@ -111,4 +124,14 @@ case class ModelDataSample(model: Model) extends DataSample {
 
 object ModelDataSample {
     def Empty = ModelDataSample(ModelFactory.createDefaultModel())
+
+    def apply(model: Model) : ModelDataSample = {
+        val ttl = RdfUtils.modelToTtl(model)
+
+        val f = File.newTemporaryFile()
+        f.deleteOnExit()
+        f.writeText(ttl)
+
+        ModelDataSample(f)
+    }
 }

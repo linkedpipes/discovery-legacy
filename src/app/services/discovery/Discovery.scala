@@ -6,7 +6,7 @@ import play.Logger
 import services.discovery.components.analyzer.LinksetBasedUnion
 import services.discovery.components.transformer.FusionTransformer
 import services.discovery.model._
-import services.discovery.model.components.{ComponentInstanceWithInputs, DataSourceInstance, ExtractorInstance, SparqlUpdateTransformerInstance}
+import services.discovery.model.components.{ComponentInstanceWithInputs, ExtractorInstance}
 import services.discovery.model.internal.DiscoveryIteration
 
 import scala.collection.mutable
