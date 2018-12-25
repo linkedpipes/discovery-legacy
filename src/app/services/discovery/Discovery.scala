@@ -65,7 +65,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
             discoveryLogger.debug(s"[$id][${iteration.number}] Next iteration: ${!stop}.")
 
             val lengths = nextIteration.fragments.map(f => f.components.size).distinct
-            discoveryLogger.debug(s"[$id][${iteration.number}] Distinct fragment lengths: ${lengths.mkString(",")}.")
+            discoveryLogger.info(s"[$id][${iteration.number}] Distinct fragment lengths: ${lengths.mkString(",")}.")
 
             stop match {
                 case true => finalize(nextIteration)
