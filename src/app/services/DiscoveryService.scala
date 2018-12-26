@@ -52,7 +52,7 @@ class DiscoveryService @Inject()(
         val discovery = startFromInputIri(nextIri)
         discovery.onStop += { d =>
             println(s"========= Running discovery #$i has finished.")
-
+/*
             val csvFiles = statisticsService.getCsvFiles(Seq(CsvRequestData(nextIri, d.id.toString)), this)
             csvFiles.foreach { csvFile =>
                 val sep = JFile.separator
@@ -66,7 +66,8 @@ class DiscoveryService @Inject()(
                 startNextDiscovery(i+1, discoveryInputIris, expId, experimentsDumpPath)
             } else {
                 println(s"========= Running experiment #$expId has finished.")
-            }
+            }*/
+            discoveries.clear()
         }
     }
 

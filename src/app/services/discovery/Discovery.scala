@@ -164,9 +164,9 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
 
     private def getRelevantFragments(component: ComponentInstanceWithInputs, fragments: Seq[Pipeline]) : Seq[Pipeline] = {
         component match {
-            case c if c.isInstanceOf[LinksetBasedUnion] => fragments.filterNot(p => p.containsInstance(c) || p.endsWithLargeDataset)
-            case c if c.isInstanceOf[FusionTransformer] => fragments.filter(_.containsLinksetBasedUnion)
-            case e if e.isInstanceOf[ExtractorInstance] => fragments.filter(_.endsWithDataSourceInstance)
+            case c if c.isInstanceOf[LinksetBasedUnion] => fragments.par.filterNot(p => p.containsInstance(c) || p.endsWithLargeDataset).seq
+            case c if c.isInstanceOf[FusionTransformer] => fragments.par.filter(_.containsLinksetBasedUnion).seq
+            case e if e.isInstanceOf[ExtractorInstance] => fragments.par.filter(_.endsWithDataSourceInstance).seq
             case _ => fragments
         }
     }
