@@ -7,7 +7,7 @@ import services.discovery.components.analyzer.LinksetBasedUnion
 import services.discovery.components.transformer.FusionTransformer
 import services.discovery.model._
 import services.discovery.model.components.{ComponentInstanceWithInputs, ExtractorInstance}
-import services.discovery.model.internal.DiscoveryIteration
+import services.discovery.model.internal.{DiscoveryIteration, FragmentList}
 
 import scala.collection.mutable
 import scala.collection.parallel.{ParMap, ParSeq}
@@ -16,7 +16,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 
 
-class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10)
+class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10, preserveFragments : Boolean = false)
    (portMatcher: DiscoveryPortMatcher, pipelineBuilder: PipelineBuilder)
    (implicit executor: ExecutionContext)
 {
@@ -27,9 +27,9 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
 
     val onStop : mutable.ArrayBuffer[Discovery => Unit] = new mutable.ArrayBuffer[Discovery => Unit]()
 
-    private val discoveryLogger = Logger.of("discovery")
-
     val timer = new Timer
+
+    private val discoveryLogger = Logger.of("discovery")
 
     def start: Future[Seq[Pipeline]] = {
         timer.start
@@ -57,15 +57,12 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
     private def iterate(iteration: DiscoveryIteration): Future[Seq[Pipeline]] = {
         iterationBody(iteration).flatMap { nextIteration =>
 
-            val discoveredNewPipeline = nextIteration.discoveredNewPipeline(iteration)
+            val discoveredNewPipeline = nextIteration.fragments.fresh.nonEmpty
             val stop = !discoveredNewPipeline || iteration.number == maxIterations
 
             discoveryLogger.debug(s"[$id][${iteration.number}] Iteration finished.")
             discoveryLogger.debug(s"[$id][${iteration.number}] Discovered any new pipelines: $discoveredNewPipeline.")
             discoveryLogger.debug(s"[$id][${iteration.number}] Next iteration: ${!stop}.")
-
-            val lengths = nextIteration.fragments.map(f => f.components.size).distinct
-            discoveryLogger.info(s"[$id][${iteration.number}] Distinct fragment lengths: ${lengths.mkString(",")}.")
 
             stop match {
                 case true => finalize(nextIteration)
@@ -89,7 +86,10 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
         eventualPipelines.map { rawPipelines =>
 
             val newPipelines = rawPipelines.flatten
-            val fresh = newPipelines.filter(containsBindingToIteration(iteration.number - 1))
+            val fresh = preserveFragments match {
+                case true => newPipelines.filter(containsBindingToIteration(iteration.number - 1))
+                case false => newPipelines
+            }
             val (completePipelines, pipelineFragments) = fresh.partition(_.isComplete)
 
             discoveryLogger.debug(s"[$id][${iteration.number}] Found ${newPipelines.size} pipelines in the last iteration, ${fresh.size} new.")
@@ -101,9 +101,14 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
                 results.put(UUID.randomUUID(), p)
             }
 
+            val nextFragmentList = preserveFragments match {
+                case true => FragmentList(iteration.fragments.ordinary, consolidatedFragments.diff(iteration.fragments.ordinary).seq, Seq())
+                case false => FragmentList(Seq(), consolidatedFragments.seq, Seq())
+            }
+
             DiscoveryIteration(
                 id = iteration.id,
-                fragments = (iteration.fragments ++ consolidatedFragments).distinct.seq,
+                fragments = nextFragmentList,
                 pipelines = iteration.pipelines ++ completePipelines,
                 input = iteration.input,
                 number = iteration.number + 1
@@ -146,12 +151,15 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
     }
 
     private def getCombinatorInput(iteration: DiscoveryIteration) : Seq[CombinatorInput] = {
-        val (extractorCandidatePipelines, otherPipelines) = iteration.fragments.partition(_.endsWithLargeDataset)
-
-        Seq(
-            CombinatorInput(extractorCandidatePipelines, iteration.input.extractors),
-            CombinatorInput(otherPipelines, iteration.input.processors ++ iteration.input.applications)
-        )
+        iteration.fragments.largeDatasets.isEmpty match {
+            case true => Seq(
+                CombinatorInput(iteration.fragments.ordinary, iteration.input.processors ++ iteration.input.applications)
+            )
+            case false => Seq(
+                CombinatorInput(iteration.fragments.largeDatasets, iteration.input.extractors),
+                CombinatorInput(iteration.fragments.ordinary, iteration.input.processors ++ iteration.input.applications)
+            )
+        }
     }
 
     private def getRelevantFragments(component: ComponentInstanceWithInputs, fragments: Seq[Pipeline]) : Seq[Pipeline] = {
@@ -163,9 +171,13 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
         }
     }
 
-    private def createInitialPipelineFragments(dataSets: Seq[DataSet]): Future[Seq[Pipeline]] = {
+    private def createInitialPipelineFragments(dataSets: Seq[DataSet]): Future[FragmentList] = {
         discoveryLogger.trace(s"[$id] Initial pipelines built from $dataSets.")
-        Future.sequence(dataSets.map(pipelineBuilder.buildInitialPipeline))
+        val pipelines = Future.sequence(dataSets.map(pipelineBuilder.buildInitialPipeline))
+        pipelines.map { p =>
+            val (l, f) = p.partition(_.endsWithLargeDataset)
+            FragmentList(Seq(), f, l)
+        }
     }
 
     private def containsBindingToIteration(iterationNumber: Int)(pipeline: Pipeline): Boolean = {

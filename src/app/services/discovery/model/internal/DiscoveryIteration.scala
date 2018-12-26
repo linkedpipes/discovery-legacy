@@ -4,14 +4,14 @@ import java.util.UUID
 
 import services.discovery.model.{DiscoveryInput, Pipeline}
 
-case class DiscoveryIteration(
-                                 id: UUID,
-                                 fragments: Seq[Pipeline],
-                                 pipelines: Seq[Pipeline],
-                                 input: DiscoveryInput,
-                                 number: Int
-) {
-    def discoveredNewPipeline(previous: DiscoveryIteration) : Boolean = {
-        fragments.lengthCompare(previous.fragments.size) > 0
-    }
+case class FragmentList(base: Seq[Pipeline], fresh: Seq[Pipeline], largeDatasets: Seq[Pipeline]) {
+    def ordinary = base ++ fresh
 }
+
+case class DiscoveryIteration(
+    id: UUID,
+    fragments: FragmentList,
+    pipelines: Seq[Pipeline],
+    input: DiscoveryInput,
+    number: Int
+)

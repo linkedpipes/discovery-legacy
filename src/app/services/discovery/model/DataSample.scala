@@ -18,6 +18,7 @@ import scala.concurrent.{Await, Future}
 import scala.io.Source
 import better.files._
 import java.io.{File => JFile}
+import java.nio.file.Path
 
 trait DataSample {
 
@@ -101,7 +102,7 @@ case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends Data
     }
 }
 
-case class ModelDataSample(f: File) extends DataSample {
+case class ModelDataSample(p: Path) extends DataSample {
     override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean] = executeQuery(descriptor, qe => qe.execAsk())
 
     override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = executeQuery(descriptor, qe => qe.execConstruct())
@@ -111,7 +112,7 @@ case class ModelDataSample(f: File) extends DataSample {
     override def getModel(discoveryId: UUID, iterationNumber: Int): Model = _model
 
     private def _model : Model = {
-        RdfUtils.modelFromTtl(Source.fromFile(f.toJava, "UTF-8").getLines().mkString("\n"))
+        RdfUtils.modelFromTtl(Source.fromFile(File(p).toJava, "UTF-8").getLines().mkString("\n"))
     }
 
     private def executeQuery[R](descriptor: SparqlQuery, executionCommand: QueryExecution => R): Future[R] = {
@@ -132,6 +133,6 @@ object ModelDataSample {
         f.deleteOnExit()
         f.writeText(ttl)
 
-        ModelDataSample(f)
+        ModelDataSample(f.path)
     }
 }
