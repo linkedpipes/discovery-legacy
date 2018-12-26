@@ -60,14 +60,14 @@ class DiscoveryService @Inject()(
                     .toFile.createFileIfNotExists(createParents = true)
                     .writeByteArray(csvFile.content.getBytes("UTF-8"))
             }
+            */
 
             discoveries.clear()
             if (i+1 < discoveryInputIris.size) {
                 startNextDiscovery(i+1, discoveryInputIris, expId, experimentsDumpPath)
             } else {
                 println(s"========= Running experiment #$expId has finished.")
-            }*/
-            discoveries.clear()
+            }
         }
     }
 
