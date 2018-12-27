@@ -17,8 +17,6 @@ import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 import scala.io.Source
 import better.files._
-import java.io.{File => JFile}
-import java.nio.file.Path
 
 trait DataSample {
 
@@ -128,8 +126,12 @@ object ModelDataSample {
 
     def apply(model: Model) : ModelDataSample = {
         val ttl = RdfUtils.modelToTtl(model)
+        
+        val dir = File(s"/data/tmp/discovery").createDirectoryIfNotExists(true)
+        dir.deleteOnExit()
+        dir.toTemporary
 
-        val f = File.newTemporaryFile()
+        val f = File.newTemporaryFile(parent = Some(dir))
         f.deleteOnExit()
         f.writeText(ttl)
 

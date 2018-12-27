@@ -16,9 +16,6 @@ import services.vocabulary.{ETL, LPD}
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 
-import better.files._
-import java.io.{File => JFile}
-
 @Singleton
 class DiscoveryService @Inject()(
     statisticsService: StatisticsService
