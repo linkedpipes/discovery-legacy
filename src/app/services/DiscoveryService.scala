@@ -51,7 +51,7 @@ class DiscoveryService @Inject()(
         val nextIri = discoveryInputIris(i)
         val discovery = startFromInputIri(nextIri)
         discovery.onStop += { d =>
-            println(s"========= Running discovery #$i has finished.")
+            discoveryLogger.info(s"Running discovery #$i has finished.")
 /*
             val csvFiles = statisticsService.getCsvFiles(Seq(CsvRequestData(nextIri, d.id.toString)), this)
             csvFiles.foreach { csvFile =>
@@ -66,7 +66,7 @@ class DiscoveryService @Inject()(
             if (i+1 < discoveryInputIris.size) {
                 startNextDiscovery(i+1, discoveryInputIris, expId, experimentsDumpPath)
             } else {
-                println(s"========= Running experiment #$expId has finished.")
+                discoveryLogger.info(s"Running experiment #$expId has finished.")
             }
         }
     }
