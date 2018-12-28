@@ -60,7 +60,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
             val discoveredNewPipeline = nextIteration.fragments.fresh.nonEmpty
             val stop = !discoveredNewPipeline || iteration.number == maxIterations
 
-            discoveryLogger.debug(s"[$id][${iteration.number}] Iteration finished.")
+            discoveryLogger.info(s"[$id][${iteration.number}] Iteration finished.")
             discoveryLogger.debug(s"[$id][${iteration.number}] Discovered any new pipelines: $discoveredNewPipeline.")
             discoveryLogger.debug(s"[$id][${iteration.number}] Next iteration: ${!stop}.")
 
@@ -72,7 +72,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
     }
 
     private def iterationBody(iteration: DiscoveryIteration): Future[DiscoveryIteration] = {
-        discoveryLogger.debug(s"[$id][${iteration.number}] Starting iteration.")
+        discoveryLogger.info(s"[$id][${iteration.number}] Starting iteration.")
 
         val eventualPipelines = Future.sequence(
             getCombinatorInput(iteration).flatMap { ci =>
@@ -92,8 +92,8 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
             }
             val (completePipelines, pipelineFragments) = fresh.partition(_.isComplete)
 
-            discoveryLogger.debug(s"[$id][${iteration.number}] Found ${newPipelines.size} pipelines in the last iteration, ${fresh.size} new.")
-            discoveryLogger.debug(s"[$id][${iteration.number}] ${completePipelines.size} complete pipelines, ${pipelineFragments.size} pipeline fragments.")
+            discoveryLogger.info(s"[$id][${iteration.number}] Found ${newPipelines.size} pipelines in the last iteration, ${fresh.size} new.")
+            discoveryLogger.info(s"[$id][${iteration.number}] ${completePipelines.size} complete pipelines, ${pipelineFragments.size} pipeline fragments.")
 
             val consolidatedFragments = consolidateFragments(pipelineFragments.par, iteration.number)
 

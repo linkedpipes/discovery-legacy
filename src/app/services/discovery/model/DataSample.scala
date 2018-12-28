@@ -110,7 +110,8 @@ case class ModelDataSample(f: File) extends DataSample {
     override def getModel(discoveryId: UUID, iterationNumber: Int): Model = _model
 
     private def _model : Model = {
-        RdfUtils.modelFromTtl(Source.fromFile(f.toJava, "UTF-8").getLines().mkString("\n"))
+        val data = Source.fromFile(f.toJava, "UTF-8")
+        RdfUtils.modelFromTtl(data.getLines().mkString("\n"))
     }
 
     private def executeQuery[R](descriptor: SparqlQuery, executionCommand: QueryExecution => R): Future[R] = {
@@ -126,15 +127,22 @@ object ModelDataSample {
 
     def apply(model: Model) : ModelDataSample = {
         val ttl = RdfUtils.modelToTtl(model)
-        
-        val dir = File(s"/data/tmp/discovery").createDirectoryIfNotExists(true)
-        dir.deleteOnExit()
-        dir.toTemporary
 
-        val f = File.newTemporaryFile(parent = Some(dir))
+        val f = File.newTemporaryFile(parent = Some(createFolder.get()))
         f.deleteOnExit()
         f.writeText(ttl)
 
         ModelDataSample(f)
+    }
+
+    private def createFolder = {
+        val uuid = UUID.randomUUID().toString
+
+        val first6 = uuid.substring(0,5)
+        val fragments = first6.mkString("/")
+
+        val dir = File(s"/data/tmp/discovery/$fragments").createDirectoryIfNotExists(true)
+        dir.deleteOnExit()
+        dir.toTemporary
     }
 }
