@@ -128,7 +128,8 @@ object ModelDataSample {
     def apply(model: Model) : ModelDataSample = {
         val ttl = RdfUtils.modelToTtl(model)
 
-        val f = File.newTemporaryFile(parent = Some(createFolder.get()))
+        val dir = createFolder
+        val f = File.newTemporaryFile(parent = Some(dir))
         f.deleteOnExit()
         f.writeText(ttl)
 
@@ -144,5 +145,6 @@ object ModelDataSample {
         val dir = File(s"/data/tmp/discovery/$fragments").createDirectoryIfNotExists(true)
         dir.deleteOnExit()
         dir.toTemporary
+        dir
     }
 }
