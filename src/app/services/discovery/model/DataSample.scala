@@ -101,6 +101,9 @@ case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends Data
 }
 
 case class ModelDataSample(f: File) extends DataSample {
+
+    private val discoveryLogger = Logger.of("discovery")
+
     override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean] = executeQuery(descriptor, qe => qe.execAsk())
 
     override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = executeQuery(descriptor, qe => qe.execConstruct())
@@ -110,8 +113,16 @@ case class ModelDataSample(f: File) extends DataSample {
     override def getModel(discoveryId: UUID, iterationNumber: Int): Model = _model
 
     private def _model : Model = {
-        val data = Source.fromFile(f.toJava, "UTF-8")
-        RdfUtils.modelFromTtl(data.getLines().mkString("\n"))
+        try
+        {
+            val data = Source.fromFile(f.toJava, "UTF-8")
+            RdfUtils.modelFromTtl(data.getLines().mkString("\n"))
+        } catch {
+            case e: Exception => {
+                discoveryLogger.error(s"Unable to read from ${f.path} (${f.name}): ${e.getMessage} (${e.getCause.getMessage}).")
+                throw e
+            }
+        }
     }
 
     private def executeQuery[R](descriptor: SparqlQuery, executionCommand: QueryExecution => R): Future[R] = {
