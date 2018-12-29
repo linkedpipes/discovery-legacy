@@ -87,7 +87,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
 
             val newPipelines = rawPipelines.flatten
             val fresh = preserveFragments match {
-                case true => newPipelines.filter(containsBindingToIteration(iteration.number - 1))
+                case true => newPipelines.par.filter(containsBindingToIteration(iteration.number - 1))
                 case false => newPipelines
             }
             val (completePipelines, pipelineFragments) = fresh.partition(_.isComplete)

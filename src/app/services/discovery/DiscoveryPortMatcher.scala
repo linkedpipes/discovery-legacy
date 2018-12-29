@@ -29,7 +29,7 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
     ): Future[Seq[Pipeline]] = {
         remainingPorts match {
             case Nil =>
-                portMatches.values.forall(_.nonEmpty) match {
+                portMatches.values.par.forall(_.nonEmpty) match {
                     case true => {
                         discoveryLogger.trace(s"[$discoveryId][$iterationNumber][matcher] Matching completed, building possible pipelines.")
                         buildPipelines(componentInstance, portMatches, iterationNumber)
@@ -39,7 +39,7 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
                     }
                 }
             case headPort :: tail =>
-                val linksets = portMatches.flatMap {
+                val linksets = portMatches.par.flatMap {
                     pm => pm._2.flatMap {
                         m => m.startPipeline.components.map(_.componentInstance).filter {
                             case c: DataSourceInstance => c.isLinkset
@@ -60,6 +60,7 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
         lastStates: Seq[Option[ComponentState]],
         componentInstance: ComponentInstanceWithInputs,
         iterationNumber: Int): Future[Seq[PortMatch]] = {
+        
         val eventualMaybeMatches = Future.sequence {
             for {
                 pipeline <- givenPipelines if !pipeline.endsWith(componentInstance)
@@ -80,7 +81,7 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
         val allCombinations = combine(portMatches.values)
         discoveryLogger.trace(s"[$discoveryId][$iteration][matcher] ${allCombinations.size} combinations are being processed by PipelineBuilder.")
         Future.sequence(
-            allCombinations.map { portSolutions => pipelineBuilder.buildPipeline(componentInstance, portSolutions, iteration) }
+            allCombinations.par.map { portSolutions => pipelineBuilder.buildPipeline(componentInstance, portSolutions, iteration) }.seq
         )
     }
 

@@ -1,19 +1,33 @@
 package services.discovery.model.components
 
-import org.apache.jena.query.QueryFactory
-import org.apache.jena.rdf.model.ModelFactory
-import org.topbraid.spin.arq.{ARQ2SPIN, ARQFactory}
-import org.topbraid.spin.model._
-import org.topbraid.spin.model.update.Modify
+import org.apache.jena.query.{Query, QueryFactory}
 
 trait SparqlQuery {
-    def query: String
+    def query: Query
 
-    def descriptor: AskQuery = {
-        val q = QueryFactory.create(query)
+    lazy val descriptor: AskQuery = toDescriptor
+
+    private def toDescriptor: AskQuery = {
+        val q = query.cloneQuery()
         q.setQueryAskType()
-        AskQuery(q.serialize())
+        AskQuery(q)
     }
+}
+
+object ConstructQuery {
+    def apply(query: String) : ConstructQuery = ConstructQuery(QueryFactory.create(query))
+}
+
+object AskQuery {
+    def apply(query: String) : AskQuery = AskQuery(QueryFactory.create(query))
+}
+
+object SelectQuery {
+    def apply(query: String) : SelectQuery = SelectQuery(QueryFactory.create(query))
+}
+
+object UpdateQuery {
+    def apply(query: String) : UpdateQuery = UpdateQuery(QueryFactory.create(query))
 }
 
 abstract class PlainSparqlQuery extends SparqlQuery
@@ -26,10 +40,10 @@ trait SparqlConstructQuery extends SparqlQuery
 
 trait SparqlSelectQuery extends SparqlQuery
 
-case class AskQuery(query: String) extends PlainSparqlQuery with SparqlAskQuery
+case class AskQuery(query: Query) extends PlainSparqlQuery with SparqlAskQuery
 
-case class SelectQuery(query: String) extends PlainSparqlQuery with SparqlSelectQuery
+case class SelectQuery(query: Query) extends PlainSparqlQuery with SparqlSelectQuery
 
-case class UpdateQuery(query: String) extends PlainSparqlQuery with SparqlUpdateQuery
+case class UpdateQuery(query: Query) extends PlainSparqlQuery with SparqlUpdateQuery
 
-case class ConstructQuery(query: String) extends PlainSparqlQuery with SparqlConstructQuery
+case class ConstructQuery(query: Query) extends PlainSparqlQuery with SparqlConstructQuery

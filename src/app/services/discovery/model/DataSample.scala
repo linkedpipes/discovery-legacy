@@ -20,8 +20,6 @@ import better.files._
 
 trait DataSample {
 
-    private val discoveryLogger = Logger.of("discovery")
-
     def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean]
 
     def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int): Future[ResultSet]
@@ -33,20 +31,8 @@ trait DataSample {
     def transform(query: SparqlUpdateQuery, discoveryId: UUID, iterationNumber: Int): Model = {
         val resultModel = ModelFactory.createDefaultModel()
         resultModel.add(getModel(discoveryId, iterationNumber))
-        UpdateAction.parseExecute(query.query, resultModel)
+        UpdateAction.parseExecute(query.query.serialize(), resultModel) //TODO: serialize + parse Jena Query :-(
         resultModel
-    }
-
-    protected def createQuery(sparqlQuery: String): Query = {
-        try {
-            discoveryLogger.debug(s"Creating a query from $sparqlQuery.")
-            QueryFactory.create(sparqlQuery)
-        } catch {
-            case e: Exception => {
-                discoveryLogger.error(e.getMessage)
-                throw e
-            }
-        }
     }
 }
 
@@ -90,7 +76,7 @@ case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends Data
     private def withLogger[T](descriptor: SparqlQuery, execCommand: QueryExecution => T, discoveryId: UUID, iterationNumber: Int): Future[T] = {
         Future.successful {
             val queryId = UUID.randomUUID()
-            discoveryLogger.trace(s"[$discoveryId][$iterationNumber][datasample][$queryId] Querying ${sparqlEndpoint.url}: ${descriptor.query.replaceAll("[\r\n]", "")}.")
+            discoveryLogger.trace(s"[$discoveryId][$iterationNumber][datasample][$queryId] Querying ${sparqlEndpoint.url}: ${descriptor.query.serialize().replaceAll("[\r\n]", "")}.")
             val q = QueryFactory.create(descriptor.query)
             val execution = QueryExecutionFactory.sparqlService(sparqlEndpoint.url, q, sparqlEndpoint.defaultGraphIris, sparqlEndpoint.defaultGraphIris)
             val result = execCommand(execution)
@@ -127,7 +113,7 @@ case class ModelDataSample(f: File) extends DataSample {
 
     private def executeQuery[R](descriptor: SparqlQuery, executionCommand: QueryExecution => R): Future[R] = {
         Future.successful {
-            val result = executionCommand(QueryExecutionFactory.create(createQuery(descriptor.query), _model))
+            val result = executionCommand(QueryExecutionFactory.create(descriptor.query, _model))
             result
         }
     }
@@ -141,7 +127,6 @@ object ModelDataSample {
 
         val dir = createFolder
         val f = File.newTemporaryFile(parent = Some(dir))
-        f.deleteOnExit()
         f.writeText(ttl)
 
         ModelDataSample(f)
@@ -153,9 +138,6 @@ object ModelDataSample {
         val first6 = uuid.substring(0,5)
         val fragments = first6.mkString("/")
 
-        val dir = File(s"/data/tmp/discovery/$fragments").createDirectoryIfNotExists(true)
-        dir.deleteOnExit()
-        dir.toTemporary
-        dir
+        File(s"/data/tmp/discovery/$fragments").createDirectoryIfNotExists(true)
     }
 }
