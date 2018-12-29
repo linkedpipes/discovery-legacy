@@ -28,10 +28,10 @@ trait DataSample {
 
     def getModel(discoveryId: UUID, iterationNumber: Int): Model
 
-    def transform(query: SparqlUpdateQuery, discoveryId: UUID, iterationNumber: Int): Model = {
+    def transform(query: UpdateQuery, discoveryId: UUID, iterationNumber: Int): Model = {
         val resultModel = ModelFactory.createDefaultModel()
         resultModel.add(getModel(discoveryId, iterationNumber))
-        UpdateAction.parseExecute(query.query.serialize(), resultModel) //TODO: serialize + parse Jena Query :-(
+        UpdateAction.execute(query.updateRequest, resultModel)
         resultModel
     }
 }
@@ -73,12 +73,11 @@ case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends Data
         }
     }
 
-    private def withLogger[T](descriptor: SparqlQuery, execCommand: QueryExecution => T, discoveryId: UUID, iterationNumber: Int): Future[T] = {
+    private def withLogger[T](descriptor: BasicSparqlQuery, execCommand: QueryExecution => T, discoveryId: UUID, iterationNumber: Int): Future[T] = {
         Future.successful {
             val queryId = UUID.randomUUID()
             discoveryLogger.trace(s"[$discoveryId][$iterationNumber][datasample][$queryId] Querying ${sparqlEndpoint.url}: ${descriptor.query.serialize().replaceAll("[\r\n]", "")}.")
-            val q = QueryFactory.create(descriptor.query)
-            val execution = QueryExecutionFactory.sparqlService(sparqlEndpoint.url, q, sparqlEndpoint.defaultGraphIris, sparqlEndpoint.defaultGraphIris)
+            val execution = QueryExecutionFactory.sparqlService(sparqlEndpoint.url, descriptor.query, sparqlEndpoint.defaultGraphIris, sparqlEndpoint.defaultGraphIris)
             val result = execCommand(execution)
             discoveryLogger.trace(s"[$discoveryId][$iterationNumber][datasample][$queryId] Query result: $result.")
             result
@@ -111,7 +110,7 @@ case class ModelDataSample(f: File) extends DataSample {
         }
     }
 
-    private def executeQuery[R](descriptor: SparqlQuery, executionCommand: QueryExecution => R): Future[R] = {
+    private def executeQuery[R](descriptor: BasicSparqlQuery, executionCommand: QueryExecution => R): Future[R] = {
         Future.successful {
             val result = executionCommand(QueryExecutionFactory.create(descriptor.query, _model))
             result

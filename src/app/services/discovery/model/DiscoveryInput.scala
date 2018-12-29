@@ -2,6 +2,7 @@ package services.discovery.model
 
 import org.apache.jena.rdf.model.{Model, Resource}
 import org.apache.jena.vocabulary.{DCTerms, RDF}
+import play.Logger
 import play.api.libs.functional.syntax.unlift
 import play.api.libs.json.{JsPath, Writes}
 import services.discovery.components.application.Application
@@ -30,6 +31,7 @@ case class Descriptor(query: AskQuery, port: Resource)
 case class DataSet(dataSourceInstance: DataSourceInstance, extractorInstance: Option[ExtractorInstance])
 
 object DiscoveryInput {
+    private val discoveryLogger = Logger.of("discovery")
 
     implicit val writes: Writes[DiscoveryInput] = (
         (JsPath \ "datasets").write[Map[String, DataSourceInstance]] and
@@ -73,6 +75,7 @@ object DiscoveryInput {
         getTemplatesOfType(models, LPD.TransformerTemplate).map { template =>
             val label = template.getProperty(DCTerms.title).getString
             val configuration = template.getRequiredProperty(LPD.componentConfigurationTemplate).getObject.asResource()
+            discoveryLogger.debug(s"Reading ${template.getURI}.")
             val updateQuery = UpdateQuery(configuration.getRequiredProperty(LPD.query).getString)
             val groupIri = templateGroupings.find(tg => tg._2.contains(template.getURI)).map(_._1)
             new SparqlUpdateTransformer(template.getURI, updateQuery, getFeatures(template), label, groupIri)

@@ -53,15 +53,15 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, resultGraph: SparqlEndpointGr
 
         val componentResource = addComponent(pipelineComponent.componentInstance.label, "http://localhost:8080/resources/components/t-sparqlUpdate", pipelineComponent.discoveryIteration)
         val config = createConfig(componentResource, "http://plugins.linkedpipes.com/ontology/t-sparqlUpdate#Configuration")
-        val query = sparqlTransformerInstance.getQueryByPort(sparqlTransformerInstance.getInputPorts.head).query
-        config.resource.addProperty(config.model.createProperty("http://plugins.linkedpipes.com/ontology/t-sparqlUpdate#query"), query.serialize())
+        val query = sparqlTransformerInstance.getQueryByPort(sparqlTransformerInstance.getInputPorts.head).queryString
+        config.resource.addProperty(config.model.createProperty("http://plugins.linkedpipes.com/ontology/t-sparqlUpdate#query"), query)
         (pipelineComponent, ConfiguredComponent(componentResource, config))
     }
 
     private def addSparqlEndpoint(pipelineComponent: PipelineComponent, sparqlEndpoint: SparqlEndpointInstance): (PipelineComponent, ConfiguredComponent) = {
         val componentResource = addComponent(sparqlEndpoint.label, "http://localhost:8080/resources/components/e-sparqlEndpoint", pipelineComponent.discoveryIteration)
         val query = sparqlEndpoint match {
-            case e: EtlSparqlEndpoint => e.query.query.serialize()
+            case e: EtlSparqlEndpoint => e.query.queryString
             case _ => "CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o . }"
         }
         val config = createSparqlEndpointConfig(componentResource, sparqlEndpoint, query)

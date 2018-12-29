@@ -54,5 +54,5 @@ abstract class SimpleSparqlUpdateTransformer extends SparqlUpdateTransformerInst
         }
     }
 
-    override def getQueryByPort(port: Port): SparqlQuery = query
+    override def getQueryByPort(port: Port): UpdateQuery = query
 }

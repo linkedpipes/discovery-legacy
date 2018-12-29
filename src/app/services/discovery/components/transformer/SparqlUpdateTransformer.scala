@@ -29,5 +29,5 @@ class SparqlUpdateTransformer(override val iri: String, query: UpdateQuery, feat
         }
     }
 
-    override def getQueryByPort(port: Port): SparqlQuery = query
+    override def getQueryByPort(port: Port): UpdateQuery = query
 }

@@ -60,7 +60,7 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
         lastStates: Seq[Option[ComponentState]],
         componentInstance: ComponentInstanceWithInputs,
         iterationNumber: Int): Future[Seq[PortMatch]] = {
-        
+
         val eventualMaybeMatches = Future.sequence {
             for {
                 pipeline <- givenPipelines if !pipeline.endsWith(componentInstance)
