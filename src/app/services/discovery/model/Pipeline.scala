@@ -8,6 +8,8 @@ import services.discovery.model.components._
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
 
+import scala.concurrent.{ExecutionContext, Future}
+
 case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBinding], lastComponent: PipelineComponent, lastOutputDataSample: DataSample) {
     def isComplete: Boolean = lastComponent.componentInstance.isInstanceOf[ApplicationInstance]
 
@@ -47,7 +49,7 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
 
     def typedApplications = applications.map(_.componentInstance.asInstanceOf[ApplicationInstance])
 
-    def dataSample : Model = lastOutputDataSample.getModel(UUID.randomUUID(), height)
+    def dataSample(implicit executionContext: ExecutionContext) : Future[Model] = lastOutputDataSample.getModel(UUID.randomUUID(), height)
 
     def endsWithLargeDataset = {
         lastComponent.componentInstance match {

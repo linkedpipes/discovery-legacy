@@ -15,11 +15,12 @@ import services.vocabulary.{ETL, LPD}
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable
+import scala.concurrent.ExecutionContext
 
 @Singleton
 class DiscoveryService @Inject()(
     statisticsService: StatisticsService
-){
+)(implicit executionContext: ExecutionContext){
 
     private val discoveries = new scala.collection.mutable.HashMap[UUID, Discovery]
     private val discoveryLogger = Logger.of("discovery")

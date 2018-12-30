@@ -14,6 +14,7 @@ import play.api.libs.functional.syntax._
 import services.vocabulary.{LPD, SD}
 
 import scala.collection.JavaConverters._
+import scala.concurrent.ExecutionContext
 
 case class DiscoveryInput(
     dataSets: Seq[DataSet],
@@ -47,7 +48,7 @@ object DiscoveryInput {
         ))
     }
 
-    def apply(templateModels: Seq[Model], templateGroupings: Map[String, List[String]]): DiscoveryInput = {
+    def apply(templateModels: Seq[Model], templateGroupings: Map[String, List[String]])(implicit executionContext: ExecutionContext): DiscoveryInput = {
         val dataSets = getDataSets(templateModels)
         val processors = getProcessors(templateModels, templateGroupings)
         val applications = getApplications(templateModels)
@@ -71,7 +72,7 @@ object DiscoveryInput {
         }
     }
 
-    private def getProcessors(models: Seq[Model], templateGroupings: Map[String, List[String]]): Seq[ProcessorInstance] = {
+    private def getProcessors(models: Seq[Model], templateGroupings: Map[String, List[String]])(implicit executionContext: ExecutionContext): Seq[ProcessorInstance] = {
         getTemplatesOfType(models, LPD.TransformerTemplate).map { template =>
             val label = template.getProperty(DCTerms.title).getString
             val configuration = template.getRequiredProperty(LPD.componentConfigurationTemplate).getObject.asResource()

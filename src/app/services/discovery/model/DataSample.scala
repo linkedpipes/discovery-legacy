@@ -1,7 +1,6 @@
 package services.discovery.model
 
 import java.util.UUID
-import java.util.concurrent.TimeUnit
 
 import org.apache.jena.query._
 import org.apache.jena.rdf.model.{Model, ModelFactory}
@@ -13,26 +12,29 @@ import services.discovery.components.datasource.SparqlEndpoint
 import services.discovery.model.components._
 
 import scala.collection.JavaConversions._
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, Future}
+import scala.concurrent.{ExecutionContext, Future}
 import scala.io.Source
 import better.files._
 
 trait DataSample {
 
-    def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean]
+    def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Boolean]
 
-    def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int): Future[ResultSet]
+    def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[ResultSet]
 
-    def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model]
+    def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Model]
 
-    def getModel(discoveryId: UUID, iterationNumber: Int): Model
+    def getModel(discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext):Future[Model]
 
-    def transform(query: UpdateQuery, discoveryId: UUID, iterationNumber: Int): Model = {
-        val resultModel = ModelFactory.createDefaultModel()
-        resultModel.add(getModel(discoveryId, iterationNumber))
-        UpdateAction.execute(query.updateRequest, resultModel)
-        resultModel
+    def transform(query: UpdateQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Model] = {
+        Future {
+            val resultModel = ModelFactory.createDefaultModel()
+            getModel(discoveryId, iterationNumber).map { m =>
+                resultModel.add(m)
+                UpdateAction.execute(query.updateRequest, resultModel)
+            }
+            resultModel
+        }
     }
 }
 
@@ -54,27 +56,27 @@ object DataSample {
 case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends DataSample {
     private val discoveryLogger = Logger.of("discovery")
 
-    override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean] = {
+    override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Boolean] = {
         withLogger(descriptor, e => e.execAsk, discoveryId, iterationNumber)
     }
 
-    override def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int): Future[ResultSet] = {
+    override def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[ResultSet] = {
         withLogger(descriptor, e => e.execSelect, discoveryId, iterationNumber)
     }
 
-    override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = {
+    override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Model] = {
         withLogger(descriptor, e => e.execConstruct, discoveryId, iterationNumber)
     }
 
-    override def getModel(discoveryId: UUID, iterationNumber: Int): Model = {
+    override def getModel(discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Model] = {
         sparqlEndpoint.isLarge match {
-            case true => ModelFactory.createDefaultModel()
-            case false => Await.result(executeConstruct(ConstructQuery("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }"), discoveryId, iterationNumber), Duration(30, TimeUnit.MINUTES))
+            case true => Future.successful(ModelFactory.createDefaultModel())
+            case false => executeConstruct(ConstructQuery("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }"), discoveryId, iterationNumber)
         }
     }
 
-    private def withLogger[T](descriptor: BasicSparqlQuery, execCommand: QueryExecution => T, discoveryId: UUID, iterationNumber: Int): Future[T] = {
-        Future.successful {
+    private def withLogger[T](descriptor: BasicSparqlQuery, execCommand: QueryExecution => T, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[T] = {
+        Future {
             val queryId = UUID.randomUUID()
             discoveryLogger.trace(s"[$discoveryId][$iterationNumber][datasample][$queryId] Querying ${sparqlEndpoint.url}: ${descriptor.query.serialize().replaceAll("[\r\n]", "")}.")
             val execution = QueryExecutionFactory.sparqlService(sparqlEndpoint.url, descriptor.query, sparqlEndpoint.defaultGraphIris, sparqlEndpoint.defaultGraphIris)
@@ -89,31 +91,32 @@ case class ModelDataSample(f: File) extends DataSample {
 
     private val discoveryLogger = Logger.of("discovery")
 
-    override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int): Future[Boolean] = executeQuery(descriptor, qe => qe.execAsk())
+    override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Boolean] = executeQuery(descriptor, qe => qe.execAsk())
 
-    override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int): Future[Model] = executeQuery(descriptor, qe => qe.execConstruct())
+    override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Model] = executeQuery(descriptor, qe => qe.execConstruct())
 
-    override def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int): Future[ResultSet] = executeQuery(descriptor, qe => qe.execSelect())
+    override def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[ResultSet] = executeQuery(descriptor, qe => qe.execSelect())
 
-    override def getModel(discoveryId: UUID, iterationNumber: Int): Model = _model
+    override def getModel(discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Model] = _model
 
-    private def _model : Model = {
-        try
-        {
-            val data = Source.fromFile(f.toJava, "UTF-8")
-            RdfUtils.modelFromTtl(data.getLines().mkString("\n"))
-        } catch {
-            case e: Exception => {
-                discoveryLogger.error(s"Unable to read from ${f.path} (${f.name}): ${e.getMessage} (${e.getCause.getMessage}).")
-                throw e
+    private def _model(implicit executionContext: ExecutionContext) : Future[Model] = {
+        Future {
+            try
+            {
+                RdfUtils.modelFromTtl(f)
+            } catch {
+                case e: Exception => {
+                    discoveryLogger.error("Exception: " + e.getClass.getCanonicalName)
+                    discoveryLogger.error(s"Unable to read from ${f.path} (${f.name}): ${e.getMessage} (${e.getCause.getMessage}).")
+                    throw e
+                }
             }
         }
     }
 
-    private def executeQuery[R](descriptor: BasicSparqlQuery, executionCommand: QueryExecution => R): Future[R] = {
-        Future.successful {
-            val result = executionCommand(QueryExecutionFactory.create(descriptor.query, _model))
-            result
+    private def executeQuery[R](descriptor: BasicSparqlQuery, executionCommand: QueryExecution => R)(implicit executionContext: ExecutionContext): Future[R] = {
+        _model.map { m =>
+            executionCommand(QueryExecutionFactory.create(descriptor.query, m))
         }
     }
 }
@@ -137,6 +140,6 @@ object ModelDataSample {
         val first6 = uuid.substring(0,5)
         val fragments = first6.mkString("/")
 
-        File(s"/data/tmp/discovery/$fragments").createDirectoryIfNotExists(true)
+        File(s"/tmp/data/tmp/discovery/$fragments").createDirectoryIfNotExists(true)
     }
 }

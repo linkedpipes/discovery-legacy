@@ -6,10 +6,10 @@ import org.apache.jena.rdf.model.Model
 import services.discovery.model._
 import services.discovery.model.components.DataSourceInstance
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 class JenaDataSource(override val iri: String, model: Model, val label: String = "", val isLarge: Boolean = false, val isLinkset: Boolean = false) extends DataSourceInstance {
-  override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Future[DataSample] = {
+  override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[DataSample] = {
     Future.successful(ModelDataSample(model))
   }
 

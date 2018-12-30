@@ -116,22 +116,18 @@ class DiscoveryController @Inject()(
     }
 
     def getDataSampleSparqlService(discoveryId: String, pipelineId: String) = Action.async { r =>
-        Future.successful(service.withPipeline(PipelineKey(discoveryId, pipelineId)) { (p,_) =>
-            val graph = service.storeDataSample(p.dataSample, ldcpEndpoint, discoveryId, pipelineId)
-            RdfAsTurtle(service.getDataSampleService(r.host, graph, discoveryId, pipelineId))
-        }.getOrElse(NotFound))
+        service.withPipeline(PipelineKey(discoveryId, pipelineId)) { (p,_) =>
+            p.dataSample.map {s =>
+                val graph = service.storeDataSample(s, ldcpEndpoint, discoveryId, pipelineId)
+                RdfAsTurtle(service.getDataSampleService(r.host, graph, discoveryId, pipelineId))
+            }
+        }.getOrElse(Future.successful(NotFound))
     }
 
     def getDataSample(discoveryId: String, pipelineId: String) = Action.async { r =>
-        Future.successful(service.withPipeline(PipelineKey(discoveryId, pipelineId)) { (p,_) =>
-            RdfAsTurtle(p.dataSample)
-        }.getOrElse(NotFound))
-    }
-
-    private def sampleEquals(ds1: DataSample, ds2: DataSample): Boolean = {
-        val uuid = UUID.randomUUID()
-        val d = ds1.getModel(uuid, 0).difference(ds2.getModel(uuid, 0))
-        d.isEmpty
+        service.withPipeline(PipelineKey(discoveryId, pipelineId)) { (p,_) =>
+            p.dataSample.map(s => RdfAsTurtle(s))
+        }.getOrElse(Future.successful(NotFound))
     }
 
     private def minIteration(pipelines: Seq[Pipeline]): Int = {

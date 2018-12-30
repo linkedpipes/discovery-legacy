@@ -1,6 +1,7 @@
 package controllers.dto
 
 import java.util.UUID
+import java.util.concurrent.TimeUnit
 
 import controllers.dto.PipelineGrouping.PipelineGroup
 import play.api.libs.json.{Json, Writes}
@@ -8,6 +9,8 @@ import services.discovery.model.{DataSample, Pipeline}
 import services.discovery.model.components.ExtractorInstance
 
 import scala.collection.mutable
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, ExecutionContext, Future}
 
 case class PipelineExtractorGroup(extractorInstances: Set[ExtractorInstance], dataSampleGroups: Seq[PipelineDataSampleGroup])
 
@@ -16,7 +19,7 @@ object PipelineExtractorGroup {
 
     implicit val writes : Writes[PipelineExtractorGroup] = Json.writes[PipelineExtractorGroup]
 
-    def create(pipelineGroup: PipelineGroup[Set[ExtractorInstance]]): PipelineExtractorGroup = {
+    def create(pipelineGroup: PipelineGroup[Set[ExtractorInstance]])(implicit executionContext: ExecutionContext): PipelineExtractorGroup = {
 
         pipelineGroup match {
             case (extractorInstances, pipelines) => {
@@ -25,14 +28,14 @@ object PipelineExtractorGroup {
         }
     }
 
-    def groupPipelinesByDataSample(pipelines: mutable.HashMap[UUID, Pipeline]) : IndexedSeq[PipelineDataSampleGroup] = {
+    def groupPipelinesByDataSample(pipelines: mutable.HashMap[UUID, Pipeline])(implicit executionContext: ExecutionContext) : IndexedSeq[PipelineDataSampleGroup] = {
         var sortedPipelines = pipelines.toIndexedSeq.sortBy(p => p._2.lastComponent.discoveryIteration)
 
         val groups = new mutable.ArrayBuffer[PipelineDataSampleGroup]
         while (sortedPipelines.nonEmpty) {
             val basePipeline = sortedPipelines.head
             val similarPipelines = for {
-                pCandid <- sortedPipelines.drop(1) if sampleEquals(basePipeline._2.lastOutputDataSample, pCandid._2.lastOutputDataSample)
+                pCandid <- sortedPipelines.drop(1) if Await.result(sampleEquals(basePipeline._2.lastOutputDataSample, pCandid._2.lastOutputDataSample), Duration(30, TimeUnit.MINUTES))
             } yield pCandid
 
             val group = Seq(basePipeline) ++ similarPipelines
@@ -45,10 +48,12 @@ object PipelineExtractorGroup {
         groups
     }
 
-    def sampleEquals(ds1: DataSample, ds2: DataSample): Boolean = {
+    private def sampleEquals(ds1: DataSample, ds2: DataSample)(implicit executionContext: ExecutionContext): Future[Boolean] = {
         val uuid = UUID.randomUUID()
-        val d = ds1.getModel(uuid, 0).difference(ds2.getModel(uuid, 0))
-        d.isEmpty
+        for {
+            m1 <- ds1.getModel(uuid, 0)
+            m2 <- ds2.getModel(uuid, 0)
+        } yield m1.difference(m2).isEmpty
     }
 
     def minIteration(pipelines: Seq[Pipeline]): Int = {

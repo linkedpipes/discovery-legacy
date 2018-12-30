@@ -6,13 +6,13 @@ import services.discovery.components.DescriptorChecker
 import services.discovery.model._
 import services.discovery.model.components.{AnalyzerInstance, AskQuery}
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 class RuianGeocoderAnalyzer extends AnalyzerInstance with DescriptorChecker {
   val linkPortName: String = "PORT_LINK"
   val geoPortName: String = "PORT_GEO"
 
-  override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Future[DataSample] = {
+  override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[DataSample] = {
     Future.successful(DataSample.apply(
       """
         | PREFIX s: <http://schema.org/>

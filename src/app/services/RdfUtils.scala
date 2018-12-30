@@ -3,6 +3,7 @@ package services
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
 import java.net.URLEncoder
 
+import better.files.File
 import controllers.dto.{SparqlEndpointDefinition, SparqlEndpointGraph}
 import org.apache.jena.atlas.web.HttpException
 import org.apache.jena.query.Dataset
@@ -16,9 +17,17 @@ import scala.collection.JavaConverters._
 
 object RdfUtils {
 
-    def modelFromTtl(ttlData: String) = {
+    def modelFromTtl(ttlData: String): Model = {
         val model = ModelFactory.createDefaultModel()
         model.read(new ByteArrayInputStream(ttlData.getBytes("UTF-8")), null, "TTL")
+    }
+
+    def modelFromTtl(f: File) : Model = {
+        val model = ModelFactory.createDefaultModel()
+        val reader = f.newFileReader
+        model.read(reader, null, "TTL")
+        reader.close()
+        model
     }
 
     def modelToTtl(model: Model) = {
