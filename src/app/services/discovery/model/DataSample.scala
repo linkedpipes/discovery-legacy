@@ -122,16 +122,25 @@ case class ModelDataSample(f: File) extends DataSample {
 }
 
 object ModelDataSample {
+    private val discoveryLogger = Logger.of("discovery")
+
     def Empty = ModelDataSample(ModelFactory.createDefaultModel())
 
     def apply(model: Model) : ModelDataSample = {
-        val ttl = RdfUtils.modelToTtl(model)
-
-        val dir = createFolder
-        val f = File.newTemporaryFile(parent = Some(dir))
-        f.writeText(ttl)
-
-        ModelDataSample(f)
+        try
+        {
+            val ttl = RdfUtils.modelToTtl(model)
+            val dir = createFolder
+            val f = File.newTemporaryFile(parent = Some(dir))
+            f.writeText(ttl)
+            ModelDataSample(f)
+        } catch {
+            case e: Exception => {
+                discoveryLogger.error("Exception: " + e.getClass.getCanonicalName)
+                discoveryLogger.error(s"Unable to write TTL into a file.")
+                throw e
+            }
+        }
     }
 
     private def createFolder = {

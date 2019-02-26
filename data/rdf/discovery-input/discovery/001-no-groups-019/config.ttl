@@ -19,8 +19,8 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-dateDeleted-to-schema-startdate-enddate/template>;
+<https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template>,
+<https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template>;
 
      #Transformer groups
      

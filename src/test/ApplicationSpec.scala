@@ -1,6 +1,8 @@
+import org.apache.jena.rdf.model.Model
 import org.scalatestplus.play._
 import play.api.test._
 import play.api.test.Helpers._
+import services.RdfUtils
 
 /**
  * Add your spec here.
@@ -8,6 +10,24 @@ import play.api.test.Helpers._
  * For more information, consult the wiki.
  */
 class ApplicationSpec extends PlaySpec with OneAppPerTest {
+
+  "Jena" should {
+    "diff graphs" in {
+
+      val data = """
+        | <http://helmich.cz> <http://helmich.cz/relation/fake> [
+        |   a <http://helmich.cz/resource/Person>
+        | ] .
+      """.stripMargin
+
+      val g1 = RdfUtils.modelFromTtl(data)
+      val g2 = RdfUtils.modelFromTtl(data)
+
+      //g1.difference(g2).isEmpty mustBe true FALSE
+
+      g2.isIsomorphicWith(g1) mustBe true
+    }
+  }
 
   "Routes" should {
 

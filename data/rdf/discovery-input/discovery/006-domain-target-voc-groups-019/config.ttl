@@ -19,12 +19,12 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-dateDeleted-to-schema-startdate-enddate/template>;
+<https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template>,
+<https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template>;
 
      #Transformer groups
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/006-domain-target-voc-groups-019-datetime-target-dcterms/label>,
-<https://discovery.linkedpipes.com/resource/transformer-group/006-domain-target-voc-groups-019-datetime-target-startdate/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/006-domain-target-voc-groups-019-datetime-target-schema/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/006-domain-target-voc-groups-019-datetime-target-foaf/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/006-domain-target-voc-groups-019-labels-target-dcterms/label>;
 
@@ -147,10 +147,10 @@
     .
             
 
-<https://discovery.linkedpipes.com/resource/transformer-group/006-domain-target-voc-groups-019-datetime-target-startdate/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+<https://discovery.linkedpipes.com/resource/transformer-group/006-domain-target-voc-groups-019-datetime-target-schema/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-dateDeleted-to-schema-startdate-enddate/template>
+      <https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template>,
+<https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template>
     .
             
 

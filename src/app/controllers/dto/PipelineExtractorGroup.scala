@@ -53,7 +53,7 @@ object PipelineExtractorGroup {
         for {
             m1 <- ds1.getModel(uuid, 0)
             m2 <- ds2.getModel(uuid, 0)
-        } yield m1.difference(m2).isEmpty
+        } yield m1.isIsomorphicWith(m2)
     }
 
     def minIteration(pipelines: Seq[Pipeline]): Int = {

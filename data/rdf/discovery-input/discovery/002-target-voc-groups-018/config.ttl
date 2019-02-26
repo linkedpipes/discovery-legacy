@@ -19,11 +19,11 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template>;
+<https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template>;
 
      #Transformer groups
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/002-target-voc-groups-018-dcterms/label>,
-<https://discovery.linkedpipes.com/resource/transformer-group/002-target-voc-groups-018-startdate/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/002-target-voc-groups-018-schema/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/002-target-voc-groups-018-foaf/label>;
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
@@ -150,9 +150,9 @@
     .
             
 
-<https://discovery.linkedpipes.com/resource/transformer-group/002-target-voc-groups-018-startdate/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+<https://discovery.linkedpipes.com/resource/transformer-group/002-target-voc-groups-018-schema/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template>
+      <https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template>
     .
             
 

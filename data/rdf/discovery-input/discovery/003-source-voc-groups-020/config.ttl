@@ -19,12 +19,14 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-dateDeleted-to-schema-startdate-enddate/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-expires-to-schema-startdate-enddate/template>;
+<https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template>,
+<https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template>,
+<https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>;
 
      #Transformer groups
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-020-dcterms/label>,
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-020-prov/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-020-dcterms/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-020-gr/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-020-skos/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-020-foaf/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-020-schema/label>,
@@ -133,6 +135,13 @@
 	  <https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql> .
 
    
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-020-prov/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template>,
+<https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template>
+    .
+            
+
 <https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-020-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
       <https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template>,
@@ -141,6 +150,12 @@
 <https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template>
+    .
+            
+
+<https://discovery.linkedpipes.com/resource/transformer-group/003-source-voc-groups-020-gr/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>
     .
             
 
@@ -164,10 +179,7 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-dateDeleted-to-schema-startdate-enddate/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-expires-to-schema-startdate-enddate/template>
+<https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>
     .
             
 

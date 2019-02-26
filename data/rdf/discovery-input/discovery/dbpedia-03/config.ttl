@@ -1,8 +1,0 @@
-<https://discovery.linkedpipes.com/resource/discovery/dbpedia-03/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
-	<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> 
-	  <https://discovery.linkedpipes.com/resource/application/map-labeled-points/template> , 
-      <https://discovery.linkedpipes.com/resource/application/map/template> , 
-      <https://discovery.linkedpipes.com/resource/application/timeline-periods/template> , 
-      <https://discovery.linkedpipes.com/resource/application/timeline/template> ,
-      <https://discovery.linkedpipes.com/resource/transformer/geo-pos-to-schema-geocoordinates/template> ,
-      <https://ldcp.opendata.cz/resource/dbpedia/datasource-templates/Earthquake> .

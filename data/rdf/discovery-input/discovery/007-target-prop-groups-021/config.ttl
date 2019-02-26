@@ -19,16 +19,16 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-dateDeleted-to-schema-startdate-enddate/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-expires-to-schema-startdate-enddate/template>,
-<https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template>;
+<https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template>,
+<https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template>,
+<https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/time-inxsddatetimestamp-to-dcterms-date/template>;
 
      #Transformer groups
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/007-target-prop-groups-021-schema-enddate/label>,
-<https://discovery.linkedpipes.com/resource/transformer-group/007-target-prop-groups-021-schema-startdate-enddate/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/007-target-prop-groups-021-dcterms-date/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/007-target-prop-groups-021-dcterms-title/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/007-target-prop-groups-021-schema-startdate/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/007-target-prop-groups-021-foaf-name/label>;
 
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>
@@ -140,14 +140,6 @@
     .
             
 
-<https://discovery.linkedpipes.com/resource/transformer-group/007-target-prop-groups-021-schema-startdate-enddate/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
-    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-dateDeleted-to-schema-startdate-enddate/template>,
-<https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-expires-to-schema-startdate-enddate/template>
-    .
-            
-
 <https://discovery.linkedpipes.com/resource/transformer-group/007-target-prop-groups-021-dcterms-date/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
       <https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template>,
@@ -160,7 +152,8 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>
+<https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/time-inxsddatetimestamp-to-dcterms-date/template>
     .
             
 
@@ -170,7 +163,14 @@
 <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>
+<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>
+    .
+            
+
+<https://discovery.linkedpipes.com/resource/transformer-group/007-target-prop-groups-021-schema-startdate/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template>
     .
             
 

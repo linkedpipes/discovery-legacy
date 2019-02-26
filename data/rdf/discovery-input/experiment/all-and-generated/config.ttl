@@ -1,5 +1,0 @@
-<https://discovery.linkedpipes.com/resource/experiment/all-and-generated/config> a <https://discovery.linkedpipes.com/vocabulary/experiment/Experiment> ;
-    <https://discovery.linkedpipes.com/vocabulary/experiment/hasDiscovery>
-    (
-        <https://discovery.linkedpipes.com/resource/discovery/all-and-generated/config>
-    ).

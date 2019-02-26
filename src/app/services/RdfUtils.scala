@@ -1,7 +1,7 @@
 package services
 
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
-import java.net.URLEncoder
+import java.net.{URI, URLEncoder}
 
 import better.files.File
 import controllers.dto.{SparqlEndpointDefinition, SparqlEndpointGraph}

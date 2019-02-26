@@ -24,7 +24,12 @@ val lov = Seq(
     "wikidata" //?
 )
 
-case class TransformerDef(iri: String, isDirect: Boolean = false)
+object TransformerDomain extends Enumeration {
+    type Domain = Value
+    val Geo, Time, Label, TimeInterval = Value
+}
+
+case class TransformerDef(iri: String, domain: TransformerDomain.Domain, isDirect: Boolean = false)
 {
     def name = iri.split("/").dropRight(1).last
     def sourceVocabulary = name.split("-").head
@@ -40,6 +45,7 @@ case class TransformerDef(iri: String, isDirect: Boolean = false)
         possibleSuccessors.filter(p => p.sourceProperty.toLowerCase == targetProperty.toLowerCase)
     }
 
+    def isInternal = sourceVocabulary == targetVocabulary
     def isLeaf(transformers: Seq[TransformerDef]) = predecessors(transformers).isEmpty
     def isRoot(transformers: Seq[TransformerDef]) = successors(transformers).isEmpty
 
@@ -49,338 +55,442 @@ case class TransformerDef(iri: String, isDirect: Boolean = false)
 val allTransformerDefs = Seq(
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template",
+        domain = TransformerDomain.Time,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template",
+        domain = TransformerDomain.Time,
         isDirect = true
     ),
     TransformerDef(
-        iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-dateaccepted-to-dcterms-date/template"
+        iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-dateaccepted-to-dcterms-date/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-datecopyrighted-to-dcterms-date/template"
+        iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-datecopyrighted-to-dcterms-date/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template",
+        domain = TransformerDomain.Time,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template",
+        domain = TransformerDomain.Time,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template",
+        domain = TransformerDomain.Time,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template",
+        domain = TransformerDomain.Time,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template",
+        domain = TransformerDomain.Label,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/dce-date-to-dcterms-date/template",
+        domain = TransformerDomain.Time,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template",
+        domain = TransformerDomain.Label,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template",
+        domain = TransformerDomain.Label,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template",
+        domain = TransformerDomain.Label,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template",
+        domain = TransformerDomain.Label,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template",
+        domain = TransformerDomain.Label,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template",
+        domain = TransformerDomain.Time,
         isDirect = true
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-bookingTime-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-bookingTime-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-commentTime-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-commentTime-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-datasetTimeInterval-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-datasetTimeInterval-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.TimeInterval
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateIssued-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateIssued-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateModified-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateModified-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-datePosted-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-datePosted-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-datePublished-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-datePublished-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateRead-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateRead-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateReceived-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateReceived-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateSent-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateSent-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateVehicleFirstRegistered-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateVehicleFirstRegistered-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dissolutionDate-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dissolutionDate-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-doorTime-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-doorTime-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dropoffTime-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dropoffTime-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-foundingDate-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-foundingDate-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-lastReviewed-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-lastReviewed-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-modifiedTime-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-modifiedTime-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-orderDate-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-orderDate-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-paymentDue-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-paymentDue-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-paymentDueDate-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-paymentDueDate-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-pickupTime-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-pickupTime-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-previousStartDate-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-previousStartDate-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-priceValidUntil-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-priceValidUntil-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-productionDate-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-productionDate-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-purchaseDate-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-purchaseDate-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-releaseDate-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-releaseDate-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-scheduledPaymentDate-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-scheduledPaymentDate-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-scheduledTime-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-scheduledTime-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-temporal-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-temporal-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-temporalCoverage-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-temporalCoverage-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-uploadDate-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-uploadDate-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-vehicleModelDate-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-vehicleModelDate-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-webCheckinTime-to-time-inXSDDateTimeStamp/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-webCheckinTime-to-time-inXSDDateTimeStamp/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-arrivalTime-departureTime-to-schema-startdate-enddate/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-arrivalTime-departureTime-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-availabilityStarts-availabilityEnds-to-schema-startdate-enddate/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-availabilityStarts-availabilityEnds-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-availableFrom-availableThrough-to-schema-startdate-enddate/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-availableFrom-availableThrough-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval
     ),
     TransformerDef(
         iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-birthDate-deathDate-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval,
         isDirect = true
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-checkinTime-checkoutTime-to-schema-startdate-enddate/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-checkinTime-checkoutTime-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-coverageEndTime-coverageStartTime-to-schema-startdate-enddate/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-coverageEndTime-coverageStartTime-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval
     ),
     TransformerDef(
         iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-dateDeleted-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dateCreated-expires-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval,
         isDirect = true
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-expectedArrivalFrom-expectedArrivalUntil-to-schema-startdate-enddate/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-expectedArrivalFrom-expectedArrivalUntil-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-ownedFrom-ownedThrough-to-schema-startdate-enddate/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-ownedFrom-ownedThrough-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-startTime-endTime-to-schema-startdate-enddate/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-startTime-endTime-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-validFrom-validThrough-to-schema-startdate-enddate/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-validFrom-validThrough-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-validFrom-validUntil-to-schema-startdate-enddate/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-validFrom-validUntil-to-schema-startdate-enddate/template",
+        domain = TransformerDomain.TimeInterval
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-area-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-area-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-areaServed-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-areaServed-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-availableAtOrFrom-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-availableAtOrFrom-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-birthPlace-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-birthPlace-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-containedIn-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-containedIn-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-containedInPlace-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-containedInPlace-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-containsPlace-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-containsPlace-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-contentLocation-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-contentLocation-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-course-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-course-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-deathPlace-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-deathPlace-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dropoffLocation-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-dropoffLocation-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-eligibleRegion-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-eligibleRegion-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-exerciseCourse-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-exerciseCourse-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-foodEstablishment-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-foodEstablishment-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-foundingLocation-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-foundingLocation-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-fromLocation-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-fromLocation-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-gameLocation-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-gameLocation-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-hasPOS-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-hasPOS-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-homeLocation-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-homeLocation-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-ineligibleRegion-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-ineligibleRegion-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-jobLocation-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-jobLocation-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-location-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-location-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-locationCreated-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-locationCreated-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-pickupLocation-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-pickupLocation-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-regionsAllowed-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-regionsAllowed-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-serviceArea-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-serviceArea-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-serviceLocation-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-serviceLocation-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-spatial-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-spatial-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-spatialCoverage-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-spatialCoverage-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-toLocation-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-toLocation-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-workLocation-to-schema-labelled-geocoordinates/template"
+        iri = "https://ldcp.opendata.cz/resource/schema/transformer/schema-workLocation-to-schema-labelled-geocoordinates/template",
+        domain = TransformerDomain.Geo
     ),
     TransformerDef(
-        iri = "https://discovery.linkedpipes.com/resource/transformer/prov-attime-to-dcterms-date/template"
+        iri = "https://discovery.linkedpipes.com/resource/transformer/prov-attime-to-dcterms-date/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/prov-endedattime-to-schema-enddate/template",
+        domain = TransformerDomain.Time,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/prov-startedattime-to-schema-startdate/template",
+        domain = TransformerDomain.Time,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/geo-pos-to-schema-geocoordinates/template",
+        domain = TransformerDomain.Geo,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template",
+        domain = TransformerDomain.Label,
         isDirect = true
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/time-inxsddatetimestamp-to-dcterms-date/template",
+        domain = TransformerDomain.Time,
         isDirect = true
     ),
     TransformerDef(
-        iri = "https://discovery.linkedpipes.com/resource/transformer/time-inxsddate-to-dcterms-date/template"
+        iri = "https://discovery.linkedpipes.com/resource/transformer/time-inxsddate-to-dcterms-date/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://discovery.linkedpipes.com/resource/transformer/time-hasbeginning-with-dct-date-to-schema-startdate/template"
+        iri = "https://discovery.linkedpipes.com/resource/transformer/time-hasbeginning-with-dct-date-to-schema-startdate/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
-        iri = "https://discovery.linkedpipes.com/resource/transformer/time-hasend-with-dct-date-to-schema-enddate/template"
+        iri = "https://discovery.linkedpipes.com/resource/transformer/time-hasend-with-dct-date-to-schema-enddate/template",
+        domain = TransformerDomain.Time
     ),
     TransformerDef(
         iri = "https://discovery.linkedpipes.com/resource/transformer/geosparql-aswkt-to-schema-geocoordinates/template",
+        domain = TransformerDomain.Geo,
         isDirect = true
     ),
     TransformerDef(
-        iri = "https://discovery.linkedpipes.com/resource/transformer/wikidata-coordinate-location-to-schema-geocoordinates/templat"
+        iri = "https://discovery.linkedpipes.com/resource/transformer/wikidata-coordinate-location-to-schema-geocoordinates/template",
+        domain = TransformerDomain.Geo
     )
 )
 
@@ -557,18 +667,21 @@ def getDiscoveryDefs(name: String, transformers: Seq[TransformerDef], groups: Ma
 
 private def getDiscoveryName(experimentName: String, i: Int) = s"$experimentName-${"%03d".format(i)}"
 
-private def getSortedByLov = {
+private def getSortedByLov(domainWhiteList: Seq[TransformerDomain.Domain]) = {
     def sortByLov(transformerUris: Seq[TransformerDef]) = {
         transformerUris.sortBy(t => lov.indexOf(t.sourceVocabulary))
     }
 
-    val usedTransformers = nonLeafs ++ directs
+    val usedTransformers = domainWhiteList.isEmpty match {
+        case true => nonLeafs ++ directs
+        case false => (nonLeafs ++ directs).filter(t => domainWhiteList.contains(t.domain))
+    }
 
     sortByLov(usedTransformers)
 }
 
 def experimentLovGroupBy(experimentName: String, groupByFunc: Seq[TransformerDef] => Map[String, Seq[TransformerDef]]) = {
-    val sortedTransformers = getSortedByLov
+    val sortedTransformers = getSortedByLov(Seq(TransformerDomain.Time, TransformerDomain.Label))
 
     val start = 0
 
