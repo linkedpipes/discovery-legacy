@@ -1,0 +1,17 @@
+
+   <https://discovery.linkedpipes.com/resource/discovery/001-no-groups-001-032/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+
+     #Transformers
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template>;
+
+     #Apps
+	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/timeline/template>;
+
+     #Datasources
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/http---extbi.lab.aau.dk-sparql->;
+
+     #Transformer groups
+      .
+
+     
+        

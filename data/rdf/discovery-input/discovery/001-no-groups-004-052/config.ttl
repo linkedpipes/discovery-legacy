@@ -1,0 +1,20 @@
+
+   <https://discovery.linkedpipes.com/resource/discovery/001-no-groups-004-052/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+
+     #Transformers
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template>;
+
+     #Apps
+	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/timeline/template>;
+
+     #Datasources
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/http---lsr.bio2rdf.org-sparql>;
+
+     #Transformer groups
+      .
+
+     
+        

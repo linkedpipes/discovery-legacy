@@ -1,0 +1,17 @@
+
+   <https://discovery.linkedpipes.com/resource/discovery/001-no-groups-000-016/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+
+     #Transformers
+     
+
+     #Apps
+	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/timeline/template>;
+
+     #Datasources
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/http---data.lenka.no-sparql>;
+
+     #Transformer groups
+      .
+
+     
+        
