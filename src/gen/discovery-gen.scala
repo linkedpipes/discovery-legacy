@@ -510,8 +510,8 @@ val apps = Seq(
 )
 
 val dataSources = Seq(
-    //DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/application/personal-profiles/template"),
-    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/dataset/dblp/template")/*,
+    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/application/personal-profiles/template"),
+    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/dataset/dblp/template"),
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/dataset/deusto.es/template"),
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/dataset/nkod-dcterms/template"),
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/dataset/nkod/template"),
@@ -603,7 +603,7 @@ val dataSources = Seq(
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---nkod.opendata.cz-sparql"),
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---ruian.linked.opendata.cz-sparql"),
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---w3id.org-scholarlydata-sparql"),
-    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql")*/
+    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql")
 )
 
 val roots = allTransformerDefs.filter(_.isRoot(allTransformerDefs)).groupBy(_.targetProperty)
