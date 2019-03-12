@@ -49,10 +49,9 @@ object PipelineExtractorGroup {
     }
 
     private def sampleEquals(ds1: DataSample, ds2: DataSample)(implicit executionContext: ExecutionContext): Future[Boolean] = {
-        val uuid = UUID.randomUUID()
         for {
-            m1 <- ds1.getModel(uuid, 0)
-            m2 <- ds2.getModel(uuid, 0)
+            m1 <- ds1.getModel
+            m2 <- ds2.getModel
         } yield m1.isIsomorphicWith(m2)
     }
 

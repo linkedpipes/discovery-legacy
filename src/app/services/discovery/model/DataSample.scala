@@ -18,18 +18,18 @@ import better.files._
 
 trait DataSample {
 
-    def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Boolean]
+    def executeAsk(descriptor: AskQuery)(implicit executionContext: ExecutionContext): Future[Boolean]
 
-    def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[ResultSet]
+    def executeSelect(descriptor: SelectQuery)(implicit executionContext: ExecutionContext): Future[ResultSet]
 
-    def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Model]
+    def executeConstruct(descriptor: ConstructQuery)(implicit executionContext: ExecutionContext): Future[Model]
 
-    def getModel(discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext):Future[Model]
+    def getModel(implicit executionContext: ExecutionContext):Future[Model]
 
     def transform(query: UpdateQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Model] = {
         Future {
             val resultModel = ModelFactory.createDefaultModel()
-            getModel(discoveryId, iterationNumber).map { m =>
+            getModel.map { m =>
                 resultModel.add(m)
                 UpdateAction.execute(query.updateRequest, resultModel)
             }
@@ -56,32 +56,32 @@ object DataSample {
 case class SparqlEndpointDataSample(sparqlEndpoint: SparqlEndpoint) extends DataSample {
     private val discoveryLogger = Logger.of("discovery")
 
-    override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Boolean] = {
-        withLogger(descriptor, e => e.execAsk, discoveryId, iterationNumber)
+    override def executeAsk(descriptor: AskQuery)(implicit executionContext: ExecutionContext): Future[Boolean] = {
+        withLogger(descriptor, e => e.execAsk)
     }
 
-    override def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[ResultSet] = {
-        withLogger(descriptor, e => e.execSelect, discoveryId, iterationNumber)
+    override def executeSelect(descriptor: SelectQuery)(implicit executionContext: ExecutionContext): Future[ResultSet] = {
+        withLogger(descriptor, e => e.execSelect)
     }
 
-    override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Model] = {
-        withLogger(descriptor, e => e.execConstruct, discoveryId, iterationNumber)
+    override def executeConstruct(descriptor: ConstructQuery)(implicit executionContext: ExecutionContext): Future[Model] = {
+        withLogger(descriptor, e => e.execConstruct)
     }
 
-    override def getModel(discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Model] = {
+    override def getModel(implicit executionContext: ExecutionContext): Future[Model] = {
         sparqlEndpoint.isLarge match {
             case true => Future.successful(ModelFactory.createDefaultModel())
-            case false => executeConstruct(ConstructQuery("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }"), discoveryId, iterationNumber)
+            case false => executeConstruct(ConstructQuery("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }"))
         }
     }
 
-    private def withLogger[T](descriptor: BasicSparqlQuery, execCommand: QueryExecution => T, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[T] = {
+    private def withLogger[T](descriptor: BasicSparqlQuery, execCommand: QueryExecution => T)(implicit executionContext: ExecutionContext): Future[T] = {
         Future {
             val queryId = UUID.randomUUID()
-            discoveryLogger.trace(s"[$discoveryId][$iterationNumber][datasample][$queryId] Querying ${sparqlEndpoint.url}: ${descriptor.query.serialize().replaceAll("[\r\n]", "")}.")
+            discoveryLogger.trace(s"[datasample][$queryId] Querying ${sparqlEndpoint.url}: ${descriptor.query.serialize().replaceAll("[\r\n]", "")}.")
             val execution = QueryExecutionFactory.sparqlService(sparqlEndpoint.url, descriptor.query, sparqlEndpoint.defaultGraphIris, sparqlEndpoint.defaultGraphIris)
             val result = execCommand(execution)
-            discoveryLogger.trace(s"[$discoveryId][$iterationNumber][datasample][$queryId] Query result: $result.")
+            discoveryLogger.trace(s"[datasample][$queryId] Query result: $result.")
             result
         }
     }
@@ -91,13 +91,13 @@ case class ModelDataSample(f: File) extends DataSample {
 
     private val discoveryLogger = Logger.of("discovery")
 
-    override def executeAsk(descriptor: AskQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Boolean] = executeQuery(descriptor, qe => qe.execAsk())
+    override def executeAsk(descriptor: AskQuery)(implicit executionContext: ExecutionContext): Future[Boolean] = executeQuery(descriptor, qe => qe.execAsk())
 
-    override def executeConstruct(descriptor: ConstructQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Model] = executeQuery(descriptor, qe => qe.execConstruct())
+    override def executeConstruct(descriptor: ConstructQuery)(implicit executionContext: ExecutionContext): Future[Model] = executeQuery(descriptor, qe => qe.execConstruct())
 
-    override def executeSelect(descriptor: SelectQuery, discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[ResultSet] = executeQuery(descriptor, qe => qe.execSelect())
+    override def executeSelect(descriptor: SelectQuery)(implicit executionContext: ExecutionContext): Future[ResultSet] = executeQuery(descriptor, qe => qe.execSelect())
 
-    override def getModel(discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[Model] = _model
+    override def getModel(implicit executionContext: ExecutionContext): Future[Model] = _model
 
     private def _model(implicit executionContext: ExecutionContext) : Future[Model] = {
         Future {

@@ -1,6 +1,7 @@
 package services
 
 import java.util.UUID
+import java.util.concurrent.TimeUnit
 
 import javax.inject._
 import controllers.dto._
@@ -10,12 +11,17 @@ import org.apache.jena.vocabulary.RDF
 import play.Logger
 import services.discovery.Discovery
 import services.discovery.model.etl.{EtlPipeline, EtlPipelineExporter}
-import services.discovery.model.{DiscoveryInput, Pipeline}
+import services.discovery.model.{DataSample, DiscoveryInput, Pipeline}
 import services.vocabulary.{ETL, LPD}
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable
-import scala.concurrent.ExecutionContext
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, ExecutionContext}
+
+import better.files._
+import File._
+import java.io.{File => JFile}
 
 @Singleton
 class DiscoveryService @Inject()(
@@ -45,11 +51,35 @@ class DiscoveryService @Inject()(
         startNextDiscovery(0, discoveryInputIris, experimentIri.split("/").dropRight(1).last, experimentsDumpPath)
     }
 
+    private def distinctDataSamples(datasamples: Seq[DataSample]) : Seq[DataSample] = {
+        datasamples.filter { d1 =>
+            val m1 = Await.result(d1.getModel, Duration(30, TimeUnit.SECONDS))
+
+            !datasamples.filter(d => d != d1).exists { d2 =>
+                val m2 = Await.result(d2.getModel, Duration(30, TimeUnit.SECONDS))
+                m1.isIsomorphicWith(m2)
+            }
+        }
+    }
+
     def startNextDiscovery(i: Int, discoveryInputIris: Seq[String], expId: String, experimentsDumpPath: String): Unit = {
         val nextIri = discoveryInputIris(i)
         val discovery = startFromInputIri(nextIri)
         discovery.onStop += { d =>
             discoveryLogger.info(s"Running discovery #$i has finished.")
+
+            val dsIri = d.input.dataSets.head.dataSourceInstance.iri
+            val appIri = d.input.applications.head.iri
+            val tCount = d.input.processors.size
+            val sampleCount = distinctDataSamples(discovery.results.values.map(_.lastOutputDataSample).toSeq).size
+            val pipelineCount = discovery.results.size
+
+            val content = s"$dsIri,$appIri,$tCount,$sampleCount,$pipelineCount"
+
+            val sep = JFile.separator
+            s"$experimentsDumpPath${sep}master.csv"
+                .toFile.createFileIfNotExists(createParents = true)
+                .writeByteArray(content.getBytes("UTF-8"))
 /*
             val csvFiles = statisticsService.getCsvFiles(Seq(CsvRequestData(nextIri, d.id.toString)), this)
             csvFiles.foreach { csvFile =>

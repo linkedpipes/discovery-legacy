@@ -49,7 +49,7 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
 
     def typedApplications = applications.map(_.componentInstance.asInstanceOf[ApplicationInstance])
 
-    def dataSample(implicit executionContext: ExecutionContext) : Future[Model] = lastOutputDataSample.getModel(UUID.randomUUID(), height)
+    def dataSample(implicit executionContext: ExecutionContext) : Future[Model] = lastOutputDataSample.getModel
 
     def endsWithLargeDataset = {
         lastComponent.componentInstance match {

@@ -15,9 +15,10 @@ trait DescriptorChecker {
   protected def checkStatelessDescriptors(dataSample: DataSample, discoveryId: UUID, iterationNumber: Int, descriptors: SparqlQuery*): Future[PortCheckResult] = {
 
     val eventuallyDescriptorChecks = Future.sequence(descriptors.map {
-      case d: AskQuery => dataSample.executeAsk(d, discoveryId, iterationNumber)
+      case d: AskQuery => dataSample.executeAsk(d)
       case some => throw new RuntimeException("Unsupported type of descriptor: " + some)
     })
+
 
     val eventuallyPortCheckResult: Future[PortCheckResult] = eventuallyDescriptorChecks.map { descriptorCheckResults =>
       PortCheckResult(

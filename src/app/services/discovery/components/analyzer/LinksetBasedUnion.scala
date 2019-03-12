@@ -57,7 +57,7 @@ class LinksetBasedUnion extends UnionInstance {
     }
 
     def checkLinks(state: Option[ComponentState], outputDataSample: DataSample, discoveryId: UUID, iterationNumber: Int): Future[PortCheckResult] = state match {
-        case None => outputDataSample.executeSelect(linksDescriptor, discoveryId, iterationNumber).map { resultSet =>
+        case None => outputDataSample.executeSelect(linksDescriptor).map { resultSet =>
             resultSet.hasNext match {
                 case false => PortCheckResult(PortCheckResult.Status.Failure)
                 case true => {
@@ -77,14 +77,14 @@ class LinksetBasedUnion extends UnionInstance {
         case None => Future.successful(PortCheckResult(PortCheckResult.Status.Failure, state))
         case Some(s) => {
             val classUri = classUriSelector(s.asInstanceOf[LinksetBasedUnionState])
-            outputDataSample.executeAsk(classDescriptor(classUri), discoveryId, iterationNumber).map { bool =>
+            outputDataSample.executeAsk(classDescriptor(classUri)).map { bool =>
                 PortCheckResult(bool, state)
             }
         }
     }
 
     private def getSampleInstance(dataSample: DataSample, linkClassUri: String, discoveryId: UUID, iterationNumber: Int): Future[Resource] = {
-        dataSample.executeSelect(SelectQuery(s"""SELECT ?x WHERE { ?x a <$linkClassUri> }""".stripMargin), discoveryId, iterationNumber).map { rs =>
+        dataSample.executeSelect(SelectQuery(s"""SELECT ?x WHERE { ?x a <$linkClassUri> }""".stripMargin)).map { rs =>
             rs.hasNext match {
                 case true => rs.next().getResource("x")
                 case _ => throw new Exception
@@ -129,14 +129,12 @@ class LinksetBasedUnion extends UnionInstance {
                    |   [] void:linkPredicate ?p .
                    | }
                    | """.stripMargin
-            ),
-            discoveryId,
-            iterationNumber
+            )
         )
     }
 
     private def unionSamples(dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Model = {
-        val models = dataSamples.values.map(_.getModel(discoveryId, iterationNumber)).toSeq
+        val models = dataSamples.values.map(_.getModel).toSeq
         val result = ModelFactory.createDefaultModel()
         Future.sequence(models).map(_.foreach(m => result.add(m)))
         result
