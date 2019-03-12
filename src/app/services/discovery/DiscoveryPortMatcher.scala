@@ -81,7 +81,7 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
         val allCombinations = combine(portMatches.values)
         discoveryLogger.trace(s"[$discoveryId][$iteration][matcher] ${allCombinations.size} combinations are being processed by PipelineBuilder.")
         Future.sequence(
-            allCombinations.par.map { portSolutions => pipelineBuilder.buildPipeline(componentInstance, portSolutions, iteration) }.seq
+            allCombinations.map { portSolutions => pipelineBuilder.buildPipeline(componentInstance, portSolutions, iteration) }.seq
         )
     }
 
