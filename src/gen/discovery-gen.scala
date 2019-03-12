@@ -506,12 +506,12 @@ val apps = Seq(
     AppDef(iri = "https://discovery.linkedpipes.com/resource/application/timeline-periods-with-labels/template"),
     AppDef(iri = "https://discovery.linkedpipes.com/resource/application/map/template"),
     AppDef(iri = "https://discovery.linkedpipes.com/resource/application/map-labeled-points/template"),
+    AppDef(iri = "https://discovery.linkedpipes.com/resource/application/personal-profiles/template"),
     AppDef(iri = "https://discovery.linkedpipes.com/resource/application/dcterms/template")*/
 )
 
 val dataSources = Seq(
-    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/application/personal-profiles/template"),
-    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/dataset/dblp/template"),
+    /*DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/dataset/dblp/template"),
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/dataset/deusto.es/template"),
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/dataset/nkod-dcterms/template"),
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/dataset/nkod/template"),
@@ -598,12 +598,12 @@ val dataSources = Seq(
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql"),
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/http---zbw.eu-beta-sparql-stw-query"),
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---data.cssz.cz-sparql"),
-    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---data.gov.cz-sparql"),
-    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---linked.opendata.cz-sparql"),
+    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---data.gov.cz-sparql"),*/
+    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---linked.opendata.cz-sparql")/*,
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---nkod.opendata.cz-sparql"),
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---ruian.linked.opendata.cz-sparql"),
     DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---w3id.org-scholarlydata-sparql"),
-    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql")
+    DataSourceDef(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql")*/
 )
 
 val roots = allTransformerDefs.filter(_.isRoot(allTransformerDefs)).groupBy(_.targetProperty)
