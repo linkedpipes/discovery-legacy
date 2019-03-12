@@ -670,7 +670,7 @@ def getDiscoveryDefs(experimentName: String, transformers: Seq[Transformer], gro
 
         val iri = s"https://discovery.linkedpipes.com/resource/discovery/$name/config"
         val config = s"""
-           |   <> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+           |   <$iri> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
            |
            |     #Transformers
            |     ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>", transformers.map(_.ttlIri))}
