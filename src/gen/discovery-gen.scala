@@ -702,7 +702,7 @@ private def getSortedByLov(domainWhiteList: Seq[DataDomain.Domain]) = {
         case false => (nonLeafs ++ directs).filter(t => domainWhiteList.contains(t.domain))
     }
 
-    sortByLov(usedTransformers)
+    sortByLov(usedTransformers.distinct)
 }
 
 def experimentLovGroupBy(experimentName: String, groupByFunc: Seq[Transformer] => Map[String, Seq[Transformer]], transformers: Seq[Transformer]) = {
