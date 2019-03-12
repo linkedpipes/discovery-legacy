@@ -79,7 +79,7 @@ class DiscoveryService @Inject()(
             val sep = JFile.separator
             s"$experimentsDumpPath${sep}master.csv"
                 .toFile.createFileIfNotExists(createParents = true)
-                .writeByteArray(content.getBytes("UTF-8"))
+                .append(content + "\n")
 /*
             val csvFiles = statisticsService.getCsvFiles(Seq(CsvRequestData(nextIri, d.id.toString)), this)
             csvFiles.foreach { csvFile =>
