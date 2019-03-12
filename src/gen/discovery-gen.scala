@@ -502,14 +502,14 @@ val allTransformerDefs = Seq(
 )
 
 val apps = Seq(
-    Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline/template")/*,
+    /*Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline/template"),
     Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline-with-labels/template"),
     Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline-periods/template"),
     Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline-periods-with-labels/template"),
     Application(iri = "https://discovery.linkedpipes.com/resource/application/map/template"),
     Application(iri = "https://discovery.linkedpipes.com/resource/application/map-labeled-points/template"),
-    Application(iri = "https://discovery.linkedpipes.com/resource/application/personal-profiles/template"),
-    Application(iri = "https://discovery.linkedpipes.com/resource/application/dcterms/template")*/
+    Application(iri = "https://discovery.linkedpipes.com/resource/application/personal-profiles/template"),*/
+    Application(iri = "https://discovery.linkedpipes.com/resource/application/dcterms/template")
 )
 
 val dataSources = Seq(

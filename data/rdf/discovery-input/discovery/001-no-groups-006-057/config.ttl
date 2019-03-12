@@ -10,7 +10,7 @@
 <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>;
 
      #Apps
-	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/timeline/template>;
+	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/dcterms/template>;
 
      #Datasources
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/http---omim.bio2rdf.org-sparql>;

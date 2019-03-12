@@ -9,7 +9,7 @@
 <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>;
 
      #Apps
-	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/timeline/template>;
+	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/dcterms/template>;
 
      #Datasources
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/http---cedropendata.mfcr.cz-c3lod-cedr-sparql>;
