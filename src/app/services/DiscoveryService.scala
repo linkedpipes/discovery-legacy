@@ -47,16 +47,17 @@ class DiscoveryService @Inject()(
         val templates = templateUris.par.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get).seq
         val discoveryInput = DiscoveryInput(templates, templateGrouping)
 
-        val sep = JFile.separator
-        s"$experimentsDumpPath${sep}master.csv"
-            .toFile.createFileIfNotExists(createParents = true)
-            .append("\n\n ======== Discovery start ========\n\n")
-
         start(discoveryInput)
     }
 
     def startExperimentFromIri(experimentIri: String) : Unit = {
         val discoveryInputIris = getDiscoveryInputIrisFromExperimentIri(experimentIri)
+
+        val sep = JFile.separator
+        s"$experimentsDumpPath${sep}master.csv"
+            .toFile.createFileIfNotExists(createParents = true)
+            .append("\n\n ======== Experiment start ========\n\n")
+        
         startNextDiscovery(0, discoveryInputIris, experimentIri.split("/").dropRight(1).last, experimentsDumpPath)
     }
 
