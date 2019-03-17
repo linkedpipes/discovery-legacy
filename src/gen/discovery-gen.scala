@@ -510,7 +510,7 @@ val appMapLabels = Application(iri = "https://discovery.linkedpipes.com/resource
 val appProfiles = Application(iri = "https://discovery.linkedpipes.com/resource/application/personal-profiles/template")
 val appLabels = Application(iri = "https://discovery.linkedpipes.com/resource/application/dcterms/template")
 
-val apps = Seq(
+val allApps = Seq(
     appTimeline,
     appTimelineLabels,
     appTimelinePeriods,
@@ -642,7 +642,7 @@ def getExperimentDef(name: String, discoveries: Seq[String]) = {
     """.stripMargin
 }
 
-def getDiscoveryDefs(experimentName: String, transformers: Seq[Transformer], groups: Map[String, Seq[Transformer]] = Map()) : Seq[Discovery] = {
+def getDiscoveryDefs(experimentName: String, transformers: Seq[Transformer], groups: Map[String, Seq[Transformer]] = Map(), apps: Seq[Application]) : Seq[Discovery] = {
 
     var i = 0
     dataSources.map { d =>
@@ -720,7 +720,7 @@ def experimentLovGroupBy(experimentName: String, groupByFunc: Seq[Transformer] =
     val discoveryDefs = (start to transformers.size).flatMap { len =>
         val relevantTransformers = transformers.take(len)
         val transformerGroups = groupByFunc(relevantTransformers)
-        getDiscoveryDefs(experimentName, relevantTransformers, transformerGroups)
+        getDiscoveryDefs(experimentName, relevantTransformers, transformerGroups, apps)
     }
 
     val experimentDef = getExperimentDef(

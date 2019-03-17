@@ -57,7 +57,7 @@ class DiscoveryService @Inject()(
         s"$experimentsDumpPath${sep}master.csv"
             .toFile.createFileIfNotExists(createParents = true)
             .append("\n\n ======== Experiment start ========\n\n")
-        
+
         startNextDiscovery(0, discoveryInputIris, experimentIri.split("/").dropRight(1).last, experimentsDumpPath)
     }
 
