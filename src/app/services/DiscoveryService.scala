@@ -18,18 +18,21 @@ import scala.collection.JavaConverters._
 import scala.collection.mutable
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContext}
-
 import better.files._
 import File._
 import java.io.{File => JFile}
 
+import play.api.Configuration
+
 @Singleton
 class DiscoveryService @Inject()(
-    statisticsService: StatisticsService
+    statisticsService: StatisticsService,
+    configuration: Configuration
 )(implicit executionContext: ExecutionContext){
 
     private val discoveries = new scala.collection.mutable.HashMap[UUID, Discovery]
     private val discoveryLogger = Logger.of("discovery")
+    private val experimentsDumpPath = configuration.get[String]("ldcp.experimentsDumpPath")
 
     def start(input: DiscoveryInput) : Discovery = {
         val discovery = Discovery.create(input)
@@ -43,10 +46,16 @@ class DiscoveryService @Inject()(
     def start(templateUris: Seq[String], templateGrouping: Map[String, List[String]] = Map()): Discovery = {
         val templates = templateUris.par.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get).seq
         val discoveryInput = DiscoveryInput(templates, templateGrouping)
+
+        val sep = JFile.separator
+        s"$experimentsDumpPath${sep}master.csv"
+            .toFile.createFileIfNotExists(createParents = true)
+            .append("\n\n ======== Discovery start ========\n\n")
+
         start(discoveryInput)
     }
 
-    def startExperimentFromIri(experimentIri: String, experimentsDumpPath: String) : Unit = {
+    def startExperimentFromIri(experimentIri: String) : Unit = {
         val discoveryInputIris = getDiscoveryInputIrisFromExperimentIri(experimentIri)
         startNextDiscovery(0, discoveryInputIris, experimentIri.split("/").dropRight(1).last, experimentsDumpPath)
     }

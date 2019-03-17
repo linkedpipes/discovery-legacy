@@ -501,15 +501,24 @@ val allTransformerDefs = Seq(
     )
 )
 
+val appTimeline = Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline/template")
+val appTimelineLabels = Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline-with-labels/template")
+val appTimelinePeriods = Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline-periods/template")
+val appTimelinePeriodsLabels = Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline-periods-with-labels/template")
+val appMap = Application(iri = "https://discovery.linkedpipes.com/resource/application/map/template")
+val appMapLabels = Application(iri = "https://discovery.linkedpipes.com/resource/application/map-labeled-points/template")
+val appProfiles = Application(iri = "https://discovery.linkedpipes.com/resource/application/personal-profiles/template")
+val appLabels = Application(iri = "https://discovery.linkedpipes.com/resource/application/dcterms/template")
+
 val apps = Seq(
-    /*Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline/template"),
-    Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline-with-labels/template"),
-    Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline-periods/template"),
-    Application(iri = "https://discovery.linkedpipes.com/resource/application/timeline-periods-with-labels/template"),
-    Application(iri = "https://discovery.linkedpipes.com/resource/application/map/template"),
-    Application(iri = "https://discovery.linkedpipes.com/resource/application/map-labeled-points/template"),
-    Application(iri = "https://discovery.linkedpipes.com/resource/application/personal-profiles/template"),*/
-    Application(iri = "https://discovery.linkedpipes.com/resource/application/dcterms/template")
+    appTimeline,
+    appTimelineLabels,
+    appTimelinePeriods,
+    appTimelinePeriodsLabels,
+    appMap,
+    appMapLabels,
+    appProfiles,
+    appLabels
 )
 
 val dataSources = Seq(
@@ -705,7 +714,7 @@ private def getSortedByLov(domainWhiteList: Seq[DataDomain.Domain]) = {
     sortByLov(usedTransformers.distinct)
 }
 
-def experimentLovGroupBy(experimentName: String, groupByFunc: Seq[Transformer] => Map[String, Seq[Transformer]], transformers: Seq[Transformer]) = {
+def experimentLovGroupBy(experimentName: String, groupByFunc: Seq[Transformer] => Map[String, Seq[Transformer]], transformers: Seq[Transformer], apps: Seq[Application]) = {
     val start = 0
 
     val discoveryDefs = (start to transformers.size).flatMap { len =>
@@ -753,7 +762,8 @@ def groupByTargetProperty(transformers: Seq[Transformer]): Map[String, Seq[Trans
 }
 
 val experimentDefs = Seq(
-    experimentLovGroupBy("001-no-groups", _ => Map(), transformers = getSortedByLov(Seq(DataDomain.Label)))
+    experimentLovGroupBy("001-no-groups-labels", _ => Map(), transformers = getSortedByLov(Seq(DataDomain.Label)), apps = Seq(appLabels)),
+    experimentLovGroupBy("002-no-groups-time", _ => Map(), transformers = getSortedByLov(Seq(DataDomain.Time)), apps = Seq(appTimeline))
     /*experimentLovGroupBy("002-target-voc-groups", groupByTargetVocabulary),
     experimentLovGroupBy("003-source-voc-groups", groupBySourceVocabulary),
     experimentLovGroupBy("004-source-target-voc-groups", groupBySourceAndTargetVocabulary),
