@@ -1,0 +1,24 @@
+
+   <https://discovery.linkedpipes.com/resource/discovery/002-no-groups-time-000-048/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+
+     #Transformers
+     
+
+     #Apps
+	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/timeline/template>,
+<https://discovery.linkedpipes.com/resource/application/timeline-with-labels/template>,
+<https://discovery.linkedpipes.com/resource/application/timeline-periods/template>,
+<https://discovery.linkedpipes.com/resource/application/timeline-periods-with-labels/template>,
+<https://discovery.linkedpipes.com/resource/application/map/template>,
+<https://discovery.linkedpipes.com/resource/application/map-labeled-points/template>,
+<https://discovery.linkedpipes.com/resource/application/personal-profiles/template>,
+<https://discovery.linkedpipes.com/resource/application/dcterms/template>;
+
+     #Datasources
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/http---linkedspending.aksw.org-sparql>;
+
+     #Transformer groups
+      .
+
+     
+        

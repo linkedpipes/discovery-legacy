@@ -1,0 +1,31 @@
+
+   <https://discovery.linkedpipes.com/resource/discovery/002-no-groups-time-008-087/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+
+     #Transformers
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dcterms-available-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-created-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-datesubmitted-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-issued-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-modified-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dcterms-valid-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/dce-date-to-dcterms-date/template>,
+<https://discovery.linkedpipes.com/resource/transformer/schema-startdate-to-dcterms-date/template>;
+
+     #Apps
+	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/timeline/template>,
+<https://discovery.linkedpipes.com/resource/application/timeline-with-labels/template>,
+<https://discovery.linkedpipes.com/resource/application/timeline-periods/template>,
+<https://discovery.linkedpipes.com/resource/application/timeline-periods-with-labels/template>,
+<https://discovery.linkedpipes.com/resource/application/map/template>,
+<https://discovery.linkedpipes.com/resource/application/map-labeled-points/template>,
+<https://discovery.linkedpipes.com/resource/application/personal-profiles/template>,
+<https://discovery.linkedpipes.com/resource/application/dcterms/template>;
+
+     #Datasources
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/https---data.gov.cz-sparql>;
+
+     #Transformer groups
+      .
+
+     
+        
