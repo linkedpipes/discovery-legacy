@@ -789,6 +789,10 @@ def groupByTargetProperty(transformers: Seq[Transformer]): Map[String, Seq[Trans
     transformers.groupBy { t => t.targetProperty }
 }
 
+def getDs(string: String) = {
+    string.split("\n").toSeq.map(_.trim).filterNot(_.isEmpty).map(u => DataSource(u))
+}
+
 val experimentDefs = Seq(
     experimentLovGroupBy(
         experimentName = "001-no-groups-labels",
@@ -809,7 +813,7 @@ val experimentDefs = Seq(
         groupByFunc = _ => Map(),
         transformers = getSortedByLov(Seq(DataDomain.Time)),
         apps = Seq(appTimeline),
-        dataSources = Seq(timeDs03.split("\n").toSeq.map(u => DataSource(u)))
+        dataSources = Seq(getDs(timeDs03))
     )
     /*experimentLovGroupBy("002-target-voc-groups", groupByTargetVocabulary),
     experimentLovGroupBy("003-source-voc-groups", groupBySourceVocabulary),

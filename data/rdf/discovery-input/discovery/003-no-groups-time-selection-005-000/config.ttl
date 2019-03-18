@@ -12,8 +12,7 @@
 	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/timeline/template>;
 
      #Datasources
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <>,
-<https://discovery.linkedpipes.com/resource/lod/templates/http---data.aalto.fi-sparql>,
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/http---data.aalto.fi-sparql>,
 <https://discovery.linkedpipes.com/resource/lod/templates/http---data.linkededucation.org-request-ted-sparql>,
 <https://discovery.linkedpipes.com/resource/lod/templates/http---data.open.ac.uk-query>,
 <https://discovery.linkedpipes.com/resource/lod/templates/http---data.utpl.edu.ec-ecuadorresearch-lod-sparql>,
@@ -25,8 +24,7 @@
 <https://discovery.linkedpipes.com/resource/lod/templates/http---sparql.odw.tw>,
 <https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql>,
 <https://discovery.linkedpipes.com/resource/lod/templates/https---linked.opendata.cz-sparql>,
-<https://discovery.linkedpipes.com/resource/lod/templates/http---dati.isprambiente.it-sparql>,
-<    >;
+<https://discovery.linkedpipes.com/resource/lod/templates/http---dati.isprambiente.it-sparql>;
 
      #Transformer groups
       .
