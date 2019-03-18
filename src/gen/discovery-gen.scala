@@ -617,6 +617,23 @@ val dataSources = Seq(
     DataSource(iri = "https://discovery.linkedpipes.com/resource/lod/templates/https---www.europeandataportal.eu-sparql")
 )
 
+val timeDs03 =
+    """
+      |https://discovery.linkedpipes.com/resource/lod/templates/http---data.aalto.fi-sparql
+      |https://discovery.linkedpipes.com/resource/lod/templates/http---data.linkededucation.org-request-ted-sparql
+      |https://discovery.linkedpipes.com/resource/lod/templates/http---data.open.ac.uk-query
+      |https://discovery.linkedpipes.com/resource/lod/templates/http---data.utpl.edu.ec-ecuadorresearch-lod-sparql
+      |https://discovery.linkedpipes.com/resource/lod/templates/http---linked.opendata.cz-sparql
+      |https://discovery.linkedpipes.com/resource/lod/templates/http---linkedspending.aksw.org-sparql
+      |https://discovery.linkedpipes.com/resource/lod/templates/http---lod.euscreen.eu-sparql
+      |https://discovery.linkedpipes.com/resource/lod/templates/http---rdf.disgenet.org-sparql-
+      |https://discovery.linkedpipes.com/resource/lod/templates/http---serendipity.utpl.edu.ec-lod-sparql
+      |https://discovery.linkedpipes.com/resource/lod/templates/http---sparql.odw.tw
+      |https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql
+      |https://discovery.linkedpipes.com/resource/lod/templates/https---linked.opendata.cz-sparql
+      |https://discovery.linkedpipes.com/resource/lod/templates/http---dati.isprambiente.it-sparql
+    """.stripMargin
+
 val roots = allTransformerDefs.filter(_.isRoot(allTransformerDefs)).groupBy(_.targetProperty)
 val nonLeafs = allTransformerDefs.filterNot(_.isLeaf(allTransformerDefs))
 val leafs = allTransformerDefs.filter(_.isLeaf(allTransformerDefs))
@@ -642,7 +659,12 @@ def getExperimentDef(name: String, discoveries: Seq[String]) = {
     """.stripMargin
 }
 
-def getDiscoveryDefs(experimentName: String, transformers: Seq[Transformer], groups: Map[String, Seq[Transformer]] = Map(), apps: Seq[Application]) : Seq[Discovery] = {
+def getDiscoveryDefs(
+    experimentName: String,
+    transformers: Seq[Transformer],
+    groups: Map[String, Seq[Transformer]] = Map(),
+    apps: Seq[Application], dataSources: Seq[Seq[DataSource]]
+) : Seq[Discovery] = {
 
     var i = 0
     dataSources.map { d =>
@@ -688,7 +710,7 @@ def getDiscoveryDefs(experimentName: String, transformers: Seq[Transformer], gro
            |	 ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>", apps.map(_.ttlIri))}
            |
            |     #Datasources
-           |     ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>", Seq(d).map(_.ttlIri))}
+           |     ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate>", d.map(_.ttlIri))}
            |
            |     #Transformer groups
            |     ${printIfNonEmpty("<https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>", transformerGroups)} .
@@ -714,13 +736,19 @@ private def getSortedByLov(domainWhiteList: Seq[DataDomain.Domain]) = {
     sortByLov(usedTransformers.distinct)
 }
 
-def experimentLovGroupBy(experimentName: String, groupByFunc: Seq[Transformer] => Map[String, Seq[Transformer]], transformers: Seq[Transformer], apps: Seq[Application]) = {
+def experimentLovGroupBy(
+    experimentName: String,
+    groupByFunc: Seq[Transformer] => Map[String, Seq[Transformer]],
+    transformers: Seq[Transformer],
+    apps: Seq[Application],
+    dataSources: Seq[Seq[DataSource]]
+) = {
     val start = 0
 
     val discoveryDefs = (start to transformers.size).flatMap { len =>
         val relevantTransformers = transformers.take(len)
         val transformerGroups = groupByFunc(relevantTransformers)
-        getDiscoveryDefs(experimentName, relevantTransformers, transformerGroups, apps)
+        getDiscoveryDefs(experimentName, relevantTransformers, transformerGroups, apps, dataSources)
     }
 
     val experimentDef = getExperimentDef(
@@ -762,8 +790,27 @@ def groupByTargetProperty(transformers: Seq[Transformer]): Map[String, Seq[Trans
 }
 
 val experimentDefs = Seq(
-    experimentLovGroupBy("001-no-groups-labels", _ => Map(), transformers = getSortedByLov(Seq(DataDomain.Label)), apps = Seq(appLabels)),
-    experimentLovGroupBy("002-no-groups-time", _ => Map(), transformers = getSortedByLov(Seq(DataDomain.Time)), apps = Seq(appTimeline))
+    experimentLovGroupBy(
+        experimentName = "001-no-groups-labels",
+        groupByFunc = _ => Map(),
+        transformers = getSortedByLov(Seq(DataDomain.Label)),
+        apps = Seq(appLabels),
+        dataSources = dataSources.map(d => Seq(d))
+    ),
+    experimentLovGroupBy(
+        experimentName = "002-no-groups-time",
+        groupByFunc = _ => Map(),
+        transformers = getSortedByLov(Seq(DataDomain.Time)),
+        apps = Seq(appTimeline),
+        dataSources = dataSources.map(d => Seq(d))
+    ),
+    experimentLovGroupBy(
+        experimentName = "003-no-groups-time-selection",
+        groupByFunc = _ => Map(),
+        transformers = getSortedByLov(Seq(DataDomain.Time)),
+        apps = Seq(appTimeline),
+        dataSources = Seq(timeDs03.split("\n").toSeq.map(u => DataSource(u)))
+    )
     /*experimentLovGroupBy("002-target-voc-groups", groupByTargetVocabulary),
     experimentLovGroupBy("003-source-voc-groups", groupBySourceVocabulary),
     experimentLovGroupBy("004-source-target-voc-groups", groupBySourceAndTargetVocabulary),

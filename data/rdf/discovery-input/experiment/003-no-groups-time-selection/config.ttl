@@ -1,0 +1,18 @@
+
+<https://discovery.linkedpipes.com/resource/experiment/003-no-groups-time-selection/config> a <https://discovery.linkedpipes.com/vocabulary/experiment/Experiment> ;
+    <https://discovery.linkedpipes.com/vocabulary/experiment/hasDiscovery>
+    (
+        <https://discovery.linkedpipes.com/resource/discovery/003-no-groups-time-selection-000-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-no-groups-time-selection-001-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-no-groups-time-selection-002-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-no-groups-time-selection-003-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-no-groups-time-selection-004-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-no-groups-time-selection-005-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-no-groups-time-selection-006-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-no-groups-time-selection-007-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-no-groups-time-selection-008-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-no-groups-time-selection-009-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-no-groups-time-selection-010-000/config>
+<https://discovery.linkedpipes.com/resource/discovery/003-no-groups-time-selection-011-000/config>
+    ).
+    
