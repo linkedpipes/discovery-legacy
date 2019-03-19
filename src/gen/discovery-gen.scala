@@ -813,7 +813,7 @@ val experimentDefs = Seq(
         groupByFunc = _ => Map(),
         transformers = getSortedByLov(Seq(DataDomain.Time)),
         apps = Seq(appTimeline),
-        dataSources = Seq(getDs(timeDs03))
+        dataSources = (1 to 10).map(_ => getDs(timeDs03))
     )
     /*experimentLovGroupBy("002-target-voc-groups", groupByTargetVocabulary),
     experimentLovGroupBy("003-source-voc-groups", groupBySourceVocabulary),
