@@ -10,7 +10,6 @@ import services.discovery.model.components.{ComponentInstanceWithInputs, Extract
 import services.discovery.model.internal.{DiscoveryIteration, FragmentList}
 
 import scala.collection.mutable
-import scala.collection.parallel.{ParMap, ParSeq}
 import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
@@ -97,7 +96,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
             discoveryLogger.info(s"[$id][${iteration.number}] Found ${newPipelines.size} pipelines in the last iteration, ${fresh.size} new.")
             discoveryLogger.info(s"[$id][${iteration.number}] ${completePipelines.size} complete pipelines, ${pipelineFragments.size} pipeline fragments.")
 
-            val consolidatedFragments = consolidateFragments(pipelineFragments.par, iteration.number)
+            val consolidatedFragments = consolidateFragments(pipelineFragments, iteration.number)
 
             completePipelines.foreach{ p =>
                 results.put(UUID.randomUUID(), p)
@@ -105,7 +104,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
 
             val nextFragmentList = preserveFragments match {
                 case true => FragmentList(iteration.fragments.ordinary, consolidatedFragments.diff(iteration.fragments.ordinary).seq, Seq())
-                case false => FragmentList(Seq(), consolidatedFragments.seq, Seq())
+                case false => FragmentList(Seq(), consolidatedFragments, Seq())
             }
 
             DiscoveryIteration(
@@ -118,7 +117,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
         }
     }
 
-    private def consolidateFragments(fragments: ParSeq[Pipeline], iterationNumber: Int) : ParSeq[Pipeline] = {
+    private def consolidateFragments(fragments: Seq[Pipeline], iterationNumber: Int) : Seq[Pipeline] = {
         val (endingWithTransformer, others) = fragments.partition(p => p.endsWithSparqlUpdateTransformerInstance)
         val datasourceGroups = endingWithTransformer.groupBy(p => p.typedDatasources)
         val newDatasourceGroupFragments = datasourceGroups.map { case (_, datasourceGroupFragments) =>
@@ -131,7 +130,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
         others ++ newDatasourceGroupFragments.flatten
     }
 
-    private def applyTransformerGroup(fragmentMap: ParMap[Option[String], ParSeq[Pipeline]], iterationNumber: Int) = {
+    private def applyTransformerGroup(fragmentMap: Map[Option[String], Seq[Pipeline]], iterationNumber: Int) = {
         fragmentMap.map { case (_, fragments) =>
             val basePipelineFragment = fragments.head
             val distinctTransformers = fragments.drop(1).map(_.endingTransformer).distinct
