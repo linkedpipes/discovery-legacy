@@ -44,7 +44,7 @@ class DiscoveryService @Inject()(
     def stop(id: String) = {}
 
     def start(templateUris: Seq[String], templateGrouping: Map[String, List[String]] = Map()): Discovery = {
-        val templates = templateUris.par.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get).seq
+        val templates = templateUris.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get).seq
         val discoveryInput = DiscoveryInput(templates, templateGrouping)
 
         start(discoveryInput)
@@ -225,7 +225,7 @@ class DiscoveryService @Inject()(
             case Right(model) => {
                 val templates = model.listObjectsOfProperty(LPD.hasTemplate).toList.asScala
                 val templateIris = templates.map(_.asResource().getURI)
-                val templateModels = templateIris.par.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get).toList
+                val templateModels = templateIris.map { u => RdfUtils.modelFromIri(u)(discoveryLogger) { e => e } }.filter(_.isRight).map(_.right.get).toList
                 Right(DiscoveryInput(templateModels, getGroupings(model)))
             }
             case Left(e) => Left(e)

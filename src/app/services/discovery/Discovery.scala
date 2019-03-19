@@ -89,7 +89,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
 
             val newPipelines = rawPipelines.flatten
             val fresh = preserveFragments match {
-                case true => newPipelines.par.filter(containsBindingToIteration(iteration.number - 1))
+                case true => newPipelines.filter(containsBindingToIteration(iteration.number - 1))
                 case false => newPipelines
             }
             val (completePipelines, pipelineFragments) = fresh.partition(_.isComplete)
@@ -166,9 +166,9 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
 
     private def getRelevantFragments(component: ComponentInstanceWithInputs, fragments: Seq[Pipeline]) : Seq[Pipeline] = {
         component match {
-            case c if c.isInstanceOf[LinksetBasedUnion] => fragments.par.filterNot(p => p.containsInstance(c) || p.endsWithLargeDataset).seq
-            case c if c.isInstanceOf[FusionTransformer] => fragments.par.filter(_.containsLinksetBasedUnion).seq
-            case e if e.isInstanceOf[ExtractorInstance] => fragments.par.filter(_.endsWithDataSourceInstance).seq
+            case c if c.isInstanceOf[LinksetBasedUnion] => fragments.filterNot(p => p.containsInstance(c) || p.endsWithLargeDataset).seq
+            case c if c.isInstanceOf[FusionTransformer] => fragments.filter(_.containsLinksetBasedUnion).seq
+            case e if e.isInstanceOf[ExtractorInstance] => fragments.filter(_.endsWithDataSourceInstance).seq
             case _ => fragments
         }
     }

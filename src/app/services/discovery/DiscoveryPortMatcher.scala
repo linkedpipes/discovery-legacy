@@ -29,7 +29,7 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
     ): Future[Seq[Pipeline]] = {
         remainingPorts match {
             case Nil =>
-                portMatches.values.par.forall(_.nonEmpty) match {
+                portMatches.values.forall(_.nonEmpty) match {
                     case true => {
                         discoveryLogger.trace(s"[$discoveryId][$iterationNumber][matcher] Matching completed, building possible pipelines.")
                         buildPipelines(componentInstance, portMatches, iterationNumber)
@@ -39,14 +39,14 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
                     }
                 }
             case headPort :: tail =>
-                val linksets = portMatches.par.flatMap {
+                /*val linksets = portMatches.flatMap {
                     pm => pm._2.flatMap {
                         m => m.startPipeline.components.map(_.componentInstance).filter {
                             case c: DataSourceInstance => c.isLinkset
                             case _ => false
                         }
                     }
-                }.toSeq.distinct
+                }.toSeq.distinct*/
 
                 tryMatchGivenPipelinesWithPort(headPort, givenPipelines, lastStates, componentInstance, iterationNumber).flatMap { matches =>
                     tryMatchPorts(tail, givenPipelines, portMatches + (headPort -> matches), matches.map(_.maybeState), iterationNumber, componentInstance)
