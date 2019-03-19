@@ -5,15 +5,14 @@ import java.util.UUID
 import java.util.zip.{ZipEntry, ZipOutputStream}
 
 import controllers.dto.{CsvFile, CsvLine, CsvRequestData, PipelineGrouping}
-import javax.inject.{Inject, Singleton}
+import javax.inject.Singleton
 import services.discovery.Discovery
 
 import scala.collection.mutable
-import scala.concurrent.ExecutionContext
 
 
 @Singleton
-class StatisticsService @Inject()(implicit executionContext: ExecutionContext) {
+class StatisticsService {
     private val csvRequests = new scala.collection.mutable.HashMap[UUID, Seq[CsvRequestData]]
 
     def addCsvRequest(indexes: Seq[CsvRequestData]) : UUID = {

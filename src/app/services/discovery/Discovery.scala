@@ -84,8 +84,6 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
 
         eventualPipelines.map { rawPipelines =>
 
-            discoveryLogger.info(s"[$id][${iteration.number}] Matches found.")
-
             val newPipelines = rawPipelines.flatten
             val fresh = preserveFragments match {
                 case true => newPipelines.filter(containsBindingToIteration(iteration.number - 1))

@@ -7,7 +7,7 @@ import services.discovery.model._
 import services.discovery.model.components._
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 
 class SparqlConstructExtractor(override val iri: String, query: ConstructQuery, override val label: String) extends SparqlConstructExtractorInstance with DescriptorChecker {
 
@@ -15,7 +15,7 @@ class SparqlConstructExtractor(override val iri: String, query: ConstructQuery, 
 
     val port = Port(portName, 0)
 
-    override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[DataSample] = {
+    override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Future[DataSample] = {
         dataSamples(port).executeConstruct(query).map(m => ModelDataSample(m))
     }
 

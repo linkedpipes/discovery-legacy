@@ -6,9 +6,9 @@ import services.discovery.components.DescriptorChecker
 import services.discovery.model._
 import services.discovery.model.components._
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 
-class SparqlUpdateTransformer(override val iri: String, query: UpdateQuery, features: Seq[Feature], override val label: String, override val transformerGroupIri: Option[String])(implicit executionContext: ExecutionContext) extends SparqlUpdateTransformerInstance with DescriptorChecker {
+class SparqlUpdateTransformer(override val iri: String, query: UpdateQuery, features: Seq[Feature], override val label: String, override val transformerGroupIri: Option[String]) extends SparqlUpdateTransformerInstance with DescriptorChecker {
 
     val ports = features.flatMap(_.descriptors.map(_.port.getURI)).distinct.map(pUri => Port(pUri, 0))
 
@@ -18,10 +18,10 @@ class SparqlUpdateTransformer(override val iri: String, query: UpdateQuery, feat
 
     override def getInputPorts: Seq[Port] = ports.headOption.toSeq
 
-    override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[DataSample] = {
+    override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Future[DataSample] = {
         try {
             val newSample = dataSamples(ports.head).transform(query, discoveryId, iterationNumber)
-            newSample.map(s => ModelDataSample(s))
+            Future.successful(ModelDataSample(newSample))
         } catch {
             case e: Throwable => {
                 throw e

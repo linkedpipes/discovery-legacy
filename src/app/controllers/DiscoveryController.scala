@@ -115,18 +115,20 @@ class DiscoveryController @Inject()(
     }
 
     def getDataSampleSparqlService(discoveryId: String, pipelineId: String) = Action.async { r =>
-        service.withPipeline(PipelineKey(discoveryId, pipelineId)) { (p,_) =>
-            p.dataSample.map {s =>
-                val graph = service.storeDataSample(s, ldcpEndpoint, discoveryId, pipelineId)
-                RdfAsTurtle(service.getDataSampleService(r.host, graph, discoveryId, pipelineId))
-            }
-        }.getOrElse(Future.successful(NotFound))
+        Future.successful(service.withPipeline(PipelineKey(discoveryId, pipelineId)) { (p,_) =>
+            val graph = service.storeDataSample(p.dataSample, ldcpEndpoint, discoveryId, pipelineId)
+            RdfAsTurtle(service.getDataSampleService(r.host, graph, discoveryId, pipelineId))
+        }.getOrElse(NotFound))
     }
 
     def getDataSample(discoveryId: String, pipelineId: String) = Action.async { r =>
-        service.withPipeline(PipelineKey(discoveryId, pipelineId)) { (p,_) =>
-            p.dataSample.map(s => RdfAsTurtle(s))
-        }.getOrElse(Future.successful(NotFound))
+        Future.successful(service.withPipeline(PipelineKey(discoveryId, pipelineId)) { (p,_) =>
+            RdfAsTurtle(p.dataSample)
+        }.getOrElse(NotFound))
+    }
+
+    private def sampleEquals(ds1: DataSample, ds2: DataSample): Boolean = {
+        ds1.getModel.isIsomorphicWith(ds2.getModel)
     }
 
     private def minIteration(pipelines: Seq[Pipeline]): Int = {

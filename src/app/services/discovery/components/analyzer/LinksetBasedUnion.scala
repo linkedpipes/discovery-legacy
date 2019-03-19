@@ -7,7 +7,7 @@ import services.discovery.model._
 import services.discovery.model.components._
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 
 class LinksetBasedUnion extends UnionInstance {
 
@@ -92,7 +92,7 @@ class LinksetBasedUnion extends UnionInstance {
         }
     }
 
-    override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[DataSample] = {
+    override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Future[DataSample] = {
         state match {
             case None => Future.failed(new Exception)
             case Some(s) => generateOutputDataSample(s, dataSamples, discoveryId, iterationNumber)
@@ -136,7 +136,7 @@ class LinksetBasedUnion extends UnionInstance {
     private def unionSamples(dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Model = {
         val models = dataSamples.values.map(_.getModel).toSeq
         val result = ModelFactory.createDefaultModel()
-        Future.sequence(models).map(_.foreach(m => result.add(m)))
+        models.foreach(result.add)
         result
     }
 

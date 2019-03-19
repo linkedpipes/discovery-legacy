@@ -6,7 +6,7 @@ import services.discovery.components.DescriptorChecker
 import services.discovery.model._
 import services.discovery.model.components._
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 
 abstract class SimpleSparqlUpdateTransformer extends SparqlUpdateTransformerInstance with DescriptorChecker {
     val portName = "INPUT"
@@ -43,10 +43,10 @@ abstract class SimpleSparqlUpdateTransformer extends SparqlUpdateTransformerInst
 
     override def getInputPorts: Seq[Port] = Seq(port)
 
-    override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int)(implicit executionContext: ExecutionContext): Future[DataSample] = {
+    override def getOutputDataSample(state: Option[ComponentState], dataSamples: Map[Port, DataSample], discoveryId: UUID, iterationNumber: Int): Future[DataSample] = {
         try {
             val newSample = dataSamples(port).transform(query, discoveryId, iterationNumber)
-            newSample.map(s => ModelDataSample(s))
+            Future.successful(ModelDataSample(newSample))
         } catch {
             case e: Throwable => {
                 throw e

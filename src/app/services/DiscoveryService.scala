@@ -28,7 +28,7 @@ import play.api.Configuration
 class DiscoveryService @Inject()(
     statisticsService: StatisticsService,
     configuration: Configuration
-)(implicit executionContext: ExecutionContext){
+){
 
     private val discoveries = new scala.collection.mutable.HashMap[UUID, Discovery]
     private val discoveryLogger = Logger.of("discovery")
@@ -63,11 +63,10 @@ class DiscoveryService @Inject()(
 
     private def distinctDataSamples(datasamples: Seq[DataSample]) : Seq[DataSample] = {
         datasamples.filter { d1 =>
-            val m1 = Await.result(d1.getModel, Duration(30, TimeUnit.SECONDS))
+            val m1 = d1.getModel
 
             !datasamples.filter(d => d != d1).exists { d2 =>
-                val m2 = Await.result(d2.getModel, Duration(30, TimeUnit.SECONDS))
-                m1.isIsomorphicWith(m2)
+                m1.isIsomorphicWith(d2.getModel)
             }
         }
     }

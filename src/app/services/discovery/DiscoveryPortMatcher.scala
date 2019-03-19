@@ -15,7 +15,7 @@ class DiscoveryPortMatcher(discoveryId: UUID, pipelineBuilder: PipelineBuilder)(
 
     def tryMatchPorts(componentInstance: ComponentInstanceWithInputs, givenPipelines: Seq[Pipeline], iteration: Int): Future[Seq[Pipeline]] = {
         val ports = componentInstance.getInputPorts.sortBy(_.priority)
-        discoveryLogger.debug(s"[$discoveryId][$iteration][matcher] Matching ${ports.size} ports against ${givenPipelines.size} pipelines.")
+        discoveryLogger.trace(s"[$discoveryId][$iteration][matcher] Matching ${ports.size} ports against ${givenPipelines.size} pipelines.")
         tryMatchPorts(ports.toList, givenPipelines, portMatches = Map(), lastStates = Seq(None), iteration, componentInstance)
     }
 
