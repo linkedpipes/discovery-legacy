@@ -1,0 +1,42 @@
+
+   <https://discovery.linkedpipes.com/resource/discovery/001-groupByDomainAndTargetVocabulary-labels-005-029/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+
+     #Transformers
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template>,
+<https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>;
+
+     #Apps
+	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/dcterms/template>;
+
+     #Datasources
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/http---es.dbpedia.org-sparql>;
+
+     #Transformer groups
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-005-029-datetime-target-dcterms/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-005-029-datetime-target-foaf/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-005-029-labels-target-dcterms/label>; .
+
+     
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-005-029-datetime-target-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>
+    .
+                
+
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-005-029-datetime-target-foaf/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template>
+    .
+                
+
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-005-029-labels-target-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>
+    .
+                
+        

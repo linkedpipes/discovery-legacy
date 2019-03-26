@@ -809,11 +809,46 @@ val experimentDefs = Seq(
         dataSources = dataSources.map(d => Seq(d))
     ),
     experimentLovGroupBy(
-        experimentName = "003-no-groups-time-selection",
-        groupByFunc = _ => Map(),
-        transformers = getSortedByLov(Seq(DataDomain.Time)),
-        apps = Seq(appTimeline),
-        dataSources = Seq(getDs(timeDs03))
+        experimentName = "001-groupByTargetVocabulary-labels",
+        groupByFunc = groupByTargetVocabulary,
+        transformers = getSortedByLov(Seq(DataDomain.Label)),
+        apps = Seq(appLabels),
+        dataSources = dataSources.map(d => Seq(d))
+    ),
+    experimentLovGroupBy(
+        experimentName = "001-groupBySourceVocabulary-labels",
+        groupByFunc = groupBySourceVocabulary,
+        transformers = getSortedByLov(Seq(DataDomain.Label)),
+        apps = Seq(appLabels),
+        dataSources = dataSources.map(d => Seq(d))
+    ),
+    experimentLovGroupBy(
+        experimentName = "001-groupBySourceAndTargetVocabulary-labels",
+        groupByFunc = groupBySourceAndTargetVocabulary,
+        transformers = getSortedByLov(Seq(DataDomain.Label)),
+        apps = Seq(appLabels),
+        dataSources = dataSources.map(d => Seq(d))
+    ),
+    experimentLovGroupBy(
+        experimentName = "001-groupByDomainAndSourceVocabulary-labels",
+        groupByFunc = groupByDomainAndSourceVocabulary,
+        transformers = getSortedByLov(Seq(DataDomain.Label)),
+        apps = Seq(appLabels),
+        dataSources = dataSources.map(d => Seq(d))
+    ),
+    experimentLovGroupBy(
+        experimentName = "001-groupByDomainAndTargetVocabulary-labels",
+        groupByFunc = groupByDomainAndTargetVocabulary,
+        transformers = getSortedByLov(Seq(DataDomain.Label)),
+        apps = Seq(appLabels),
+        dataSources = dataSources.map(d => Seq(d))
+    ),
+    experimentLovGroupBy(
+        experimentName = "001-groupByTargetProperty-labels",
+        groupByFunc = groupByTargetProperty,
+        transformers = getSortedByLov(Seq(DataDomain.Label)),
+        apps = Seq(appLabels),
+        dataSources = dataSources.map(d => Seq(d))
     )
     /*experimentLovGroupBy("002-target-voc-groups", groupByTargetVocabulary),
     experimentLovGroupBy("003-source-voc-groups", groupBySourceVocabulary),

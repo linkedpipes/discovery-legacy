@@ -1,0 +1,30 @@
+
+   <https://discovery.linkedpipes.com/resource/discovery/001-groupBySourceVocabulary-labels-002-073/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+
+     #Transformers
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>;
+
+     #Apps
+	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/dcterms/template>;
+
+     #Datasources
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/http---sparql.uniprot.org>;
+
+     #Transformer groups
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/001-groupBySourceVocabulary-labels-002-073-foaf/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupBySourceVocabulary-labels-002-073-dce/label>; .
+
+     
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupBySourceVocabulary-labels-002-073-foaf/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>
+    .
+                
+
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupBySourceVocabulary-labels-002-073-dce/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template>
+    .
+                
+        

@@ -1,0 +1,22 @@
+
+   <https://discovery.linkedpipes.com/resource/discovery/001-groupByTargetVocabulary-labels-001-032/config> a <https://discovery.linkedpipes.com/vocabulary/discovery/Input> ;
+
+     #Transformers
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template>;
+
+     #Apps
+	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/dcterms/template>;
+
+     #Datasources
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/http---extbi.lab.aau.dk-sparql->;
+
+     #Transformer groups
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/001-groupByTargetVocabulary-labels-001-032-dcterms/label>; .
+
+     
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByTargetVocabulary-labels-001-032-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template>
+    .
+                
+        
