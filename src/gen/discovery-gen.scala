@@ -851,8 +851,8 @@ val experimentDefs = Seq(
         dataSources = dataSources.map(d => Seq(d))
     ),
     experimentLovGroupBy(
-        experimentName = "001-groupByTargetProperty-labels-decline",
-        groupByFunc = groupByTargetProperty,
+        experimentName = "001-groupByDomainAndSourceVocabulary-labels-decline",
+        groupByFunc = groupByDomainAndSourceVocabulary,
         transformers = getSortedByLov(Seq(DataDomain.Label)),
         apps = Seq(appLabels),
         dataSources = Seq(Seq(DataSource("https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql")))
