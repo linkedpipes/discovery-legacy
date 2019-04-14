@@ -52,13 +52,13 @@ class DiscoveryService @Inject()(
 
     def startExperimentFromIri(experimentIri: String) : Unit = {
         val discoveryInputIris = getDiscoveryInputIrisFromExperimentIri(experimentIri)
+        val id = UUID.randomUUID().toString
 
         val sep = JFile.separator
-        s"$experimentsDumpPath${sep}master.csv"
+        s"$experimentsDumpPath$sep$id.csv"
             .toFile.createFileIfNotExists(createParents = true)
-            .append("\n\n ======== Experiment start ========\n\n")
 
-        startNextDiscovery(0, discoveryInputIris, experimentIri.split("/").dropRight(1).last, experimentsDumpPath)
+        startNextDiscovery(0, discoveryInputIris, experimentIri.split("/").dropRight(1).last, experimentsDumpPath, id)
     }
 
     private def distinctDataSamples(datasamples: Seq[DataSample]) : Seq[DataSample] = {
@@ -71,7 +71,7 @@ class DiscoveryService @Inject()(
         }
     }
 
-    def startNextDiscovery(i: Int, discoveryInputIris: Seq[String], expId: String, experimentsDumpPath: String): Unit = {
+    def startNextDiscovery(i: Int, discoveryInputIris: Seq[String], expId: String, experimentsDumpPath: String, id: String): Unit = {
         val nextIri = discoveryInputIris(i)
         val discovery = startFromInputIri(nextIri)
         discovery.onStop += { d =>
@@ -86,8 +86,9 @@ class DiscoveryService @Inject()(
             val content = s"$dsIri,$appIri,$tCount,$sampleCount,$pipelineCount"
 
             val sep = JFile.separator
-            s"$experimentsDumpPath${sep}master.csv"
+            s"$experimentsDumpPath$sep$id.csv"
                 .toFile.createFileIfNotExists(createParents = true)
+                .append("DS,APP,TCount,DSCount,PCount")
                 .append(content + "\n")
 /*
             val csvFiles = statisticsService.getCsvFiles(Seq(CsvRequestData(nextIri, d.id.toString)), this)
