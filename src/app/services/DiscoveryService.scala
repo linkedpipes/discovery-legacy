@@ -102,7 +102,7 @@ class DiscoveryService @Inject()(
 
             discoveries.clear()
             if (i+1 < discoveryInputIris.size) {
-                startNextDiscovery(i+1, discoveryInputIris, expId, experimentsDumpPath)
+                startNextDiscovery(i+1, discoveryInputIris, expId, experimentsDumpPath, id)
             } else {
                 discoveryLogger.info(s"Running experiment #$expId has finished.")
             }
