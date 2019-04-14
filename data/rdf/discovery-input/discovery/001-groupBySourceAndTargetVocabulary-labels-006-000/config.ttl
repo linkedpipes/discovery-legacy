@@ -6,8 +6,8 @@
 <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template>,
 <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>;
+<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>;
 
      #Apps
 	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/dcterms/template>;
@@ -19,6 +19,7 @@
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/001-groupBySourceAndTargetVocabulary-labels-006-000-foaf-dcterms/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/001-groupBySourceAndTargetVocabulary-labels-006-000-foaf-foaf/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/001-groupBySourceAndTargetVocabulary-labels-006-000-schema-dcterms/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupBySourceAndTargetVocabulary-labels-006-000-gr-dcterms/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/001-groupBySourceAndTargetVocabulary-labels-006-000-skos-dcterms/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/001-groupBySourceAndTargetVocabulary-labels-006-000-dce-dcterms/label>; .
 
@@ -37,8 +38,13 @@
 
 <https://discovery.linkedpipes.com/resource/transformer-group/001-groupBySourceAndTargetVocabulary-labels-006-000-schema-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>
+      <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>
+    .
+                
+
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupBySourceAndTargetVocabulary-labels-006-000-gr-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>
     .
                 
 

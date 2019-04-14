@@ -6,8 +6,8 @@
 <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template>,
 <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>,
-<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>;
+<https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
+<https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>;
 
      #Apps
 	 <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/application/dcterms/template>;
@@ -17,22 +17,16 @@
 
      #Transformer groups
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndSourceVocabulary-labels-006-075-labels-source-skos/label>,
-<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndSourceVocabulary-labels-006-075-datetime-source-schema/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndSourceVocabulary-labels-006-075-labels-source-foaf/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndSourceVocabulary-labels-006-075-datetime-source-foaf/label>,
 <https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndSourceVocabulary-labels-006-075-labels-source-dce/label>,
-<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndSourceVocabulary-labels-006-075-labels-source-schema/label>; .
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndSourceVocabulary-labels-006-075-labels-source-schema/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndSourceVocabulary-labels-006-075-labels-source-gr/label>; .
 
      
 <https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndSourceVocabulary-labels-006-075-labels-source-skos/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
       <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>
-    .
-                
-
-<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndSourceVocabulary-labels-006-075-datetime-source-schema/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
-    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template>
     .
                 
 
@@ -57,6 +51,12 @@
 <https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndSourceVocabulary-labels-006-075-labels-source-schema/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
       <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>
+    .
+                
+
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndSourceVocabulary-labels-006-075-labels-source-gr/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>
     .
                 
         

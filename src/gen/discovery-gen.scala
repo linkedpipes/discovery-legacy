@@ -130,7 +130,7 @@ val allTransformerDefs = Seq(
     ),
     Transformer(
         iri = "https://discovery.linkedpipes.com/resource/transformer/schema-enddate-to-dcterms-date/template",
-        domain = DataDomain.Label,
+        domain = DataDomain.Time,
         isDirect = true
     ),
     Transformer(
@@ -849,6 +849,13 @@ val experimentDefs = Seq(
         transformers = getSortedByLov(Seq(DataDomain.Label)),
         apps = Seq(appLabels),
         dataSources = dataSources.map(d => Seq(d))
+    ),
+    experimentLovGroupBy(
+        experimentName = "001-groupByTargetProperty-labels-decline",
+        groupByFunc = groupByTargetProperty,
+        transformers = getSortedByLov(Seq(DataDomain.Label)),
+        apps = Seq(appLabels),
+        dataSources = Seq(Seq(DataSource("https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql")))
     )
     /*experimentLovGroupBy("002-target-voc-groups", groupByTargetVocabulary),
     experimentLovGroupBy("003-source-voc-groups", groupBySourceVocabulary),
