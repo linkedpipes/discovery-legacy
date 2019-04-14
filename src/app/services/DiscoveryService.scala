@@ -57,6 +57,7 @@ class DiscoveryService @Inject()(
         val sep = JFile.separator
         s"$experimentsDumpPath$sep$id.csv"
             .toFile.createFileIfNotExists(createParents = true)
+            .append("DS,APP,TCount,DSCount,PCount\n")
 
         startNextDiscovery(0, discoveryInputIris, experimentIri.split("/").dropRight(1).last, experimentsDumpPath, id)
     }
@@ -88,7 +89,6 @@ class DiscoveryService @Inject()(
             val sep = JFile.separator
             s"$experimentsDumpPath$sep$id.csv"
                 .toFile.createFileIfNotExists(createParents = true)
-                .append("DS,APP,TCount,DSCount,PCount")
                 .append(content + "\n")
 /*
             val csvFiles = statisticsService.getCsvFiles(Seq(CsvRequestData(nextIri, d.id.toString)), this)
