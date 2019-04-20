@@ -14,7 +14,7 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
     def uglyFormat : String = {
         components.map(c =>
             c.componentInstance.iri
-                .replace("https://discovery.linkedpipes.com/resource/transformer/", "")
+                .replace("https://discovery.linkedpipes.com/resource/", "")
                 .replace("/template","")
         ).mkString(" --> ")
     }
