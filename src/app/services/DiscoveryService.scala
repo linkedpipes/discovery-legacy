@@ -93,7 +93,7 @@ class DiscoveryService @Inject()(
 
             s"$experimentsDumpPath$sep$id.pipelines.txt"
                 .toFile.createFileIfNotExists(createParents = true)
-                .append(discovery.results.map(p => p._2.prettyFormat()).mkString("\n") + "\n\n\n\n\n\n\n\n\n\n\n\n")
+                .append(discovery.results.map(p => p._2.uglyFormat).mkString("\n") + "\n\n\n\n\n\n\n\n\n\n\n\n")
 /*
             val csvFiles = statisticsService.getCsvFiles(Seq(CsvRequestData(nextIri, d.id.toString)), this)
             csvFiles.foreach { csvFile =>

@@ -1,0 +1,690 @@
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@52224f5d,0) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@291ff3de
+)
+
+
+
+
+
+
+
+
+
+
+
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@372593e3,0) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@59f52490
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@372593e3,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@1ba29f20,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@59f52490
+)
+
+
+
+
+
+
+
+
+
+
+
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@411e63be,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@3c95c663,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6290b9f7
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@411e63be,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@5830b7d9,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC7,services.discovery.components.transformer.SparqlUpdateTransformer@3c95c663,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6290b9f7
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@411e63be,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@3c95c663,1) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@5830b7d9,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6290b9f7
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@411e63be,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@5830b7d9,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6290b9f7
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@411e63be,0) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6290b9f7
+)
+
+
+
+
+
+
+
+
+
+
+
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@154358e5,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@759a5bf2,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@69711799
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@154358e5,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@759a5bf2,1) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC7,services.discovery.components.transformer.SparqlUpdateTransformer@4278a400,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC16,services.discovery.components.transformer.SparqlUpdateTransformer@4278a400,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@69711799
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@154358e5,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@759a5bf2,1) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC7,services.discovery.components.transformer.SparqlUpdateTransformer@4278a400,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC16,services.discovery.components.transformer.SparqlUpdateTransformer@4278a400,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC20,services.discovery.components.transformer.SparqlUpdateTransformer@77b312c9,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC25,services.discovery.components.transformer.SparqlUpdateTransformer@77b312c9,3) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@69711799
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@154358e5,0) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@69711799
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@154358e5,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC5,services.discovery.components.transformer.SparqlUpdateTransformer@77b312c9,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@69711799
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@154358e5,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@4278a400,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC10,services.discovery.components.transformer.SparqlUpdateTransformer@77b312c9,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC18,services.discovery.components.transformer.SparqlUpdateTransformer@77b312c9,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC19,services.discovery.components.transformer.SparqlUpdateTransformer@759a5bf2,3) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@69711799
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@154358e5,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@4278a400,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC10,services.discovery.components.transformer.SparqlUpdateTransformer@77b312c9,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC18,services.discovery.components.transformer.SparqlUpdateTransformer@77b312c9,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@69711799
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@154358e5,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@4278a400,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@69711799
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@154358e5,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@4278a400,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC10,services.discovery.components.transformer.SparqlUpdateTransformer@77b312c9,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC18,services.discovery.components.transformer.SparqlUpdateTransformer@77b312c9,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC19,services.discovery.components.transformer.SparqlUpdateTransformer@759a5bf2,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC26,services.discovery.components.transformer.SparqlUpdateTransformer@77b312c9,4) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@69711799
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@154358e5,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@4278a400,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC8,services.discovery.components.transformer.SparqlUpdateTransformer@759a5bf2,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC17,services.discovery.components.transformer.SparqlUpdateTransformer@759a5bf2,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@69711799
+)
+
+
+
+
+
+
+
+
+
+
+
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,1) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC8,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,2) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC26,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC30,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,3) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC41,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC47,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,4) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC55,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,4) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC5,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC13,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC27,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC16,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC33,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC43,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,3) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,1) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC10,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC25,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC16,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC33,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC43,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC49,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,4) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC16,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,2) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC28,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,3) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC42,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,3) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,1) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC8,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,2) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC26,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC30,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,3) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC41,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,3) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,1) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC8,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,2) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC26,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC30,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,3) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC41,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC47,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,4) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC55,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,4) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC59,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,5) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC13,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC27,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC35,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,3) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC44,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,4) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC54,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,4) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC13,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC27,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC35,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,3) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC44,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,4) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC54,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,4) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC58,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,5) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC16,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,1) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC8,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,2) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC26,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC13,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC27,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC35,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,3) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC46,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,4) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC13,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC27,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC35,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,3) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@2c1cc6af,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC16,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC33,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC43,services.discovery.components.transformer.SparqlUpdateTransformer@1d3d09d7,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC49,services.discovery.components.transformer.SparqlUpdateTransformer@5732c1de,4) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC56,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,5) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC64,services.discovery.components.transformer.SparqlUpdateTransformer@83ad3c,5) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@3a6ebf38,0) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@310d97ca
+)
+
+
+
+
+
+
+
+
+
+
+
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC5,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,1) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC10,services.discovery.components.transformer.SparqlUpdateTransformer@62ef8fbe,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC26,services.discovery.components.transformer.SparqlUpdateTransformer@62ef8fbe,2) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC28,services.discovery.components.transformer.SparqlUpdateTransformer@3e86657e,3) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC40,services.discovery.components.transformer.SparqlUpdateTransformer@3e86657e,3) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@3e86657e,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC14,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC33,services.discovery.components.transformer.SparqlUpdateTransformer@530d4fe0,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC42,services.discovery.components.transformer.SparqlUpdateTransformer@530d4fe0,3) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@62ef8fbe,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC5,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC16,services.discovery.components.transformer.SparqlUpdateTransformer@530d4fe0,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC27,services.discovery.components.transformer.SparqlUpdateTransformer@530d4fe0,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC5,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,1) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC8,services.discovery.components.transformer.SparqlUpdateTransformer@3e86657e,2) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC25,services.discovery.components.transformer.SparqlUpdateTransformer@3e86657e,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@3e86657e,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC14,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC30,services.discovery.components.transformer.SparqlUpdateTransformer@62ef8fbe,3) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC41,services.discovery.components.transformer.SparqlUpdateTransformer@62ef8fbe,3) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@3e86657e,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC14,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC5,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,1) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC10,services.discovery.components.transformer.SparqlUpdateTransformer@62ef8fbe,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC26,services.discovery.components.transformer.SparqlUpdateTransformer@62ef8fbe,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@3e86657e,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC14,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC33,services.discovery.components.transformer.SparqlUpdateTransformer@530d4fe0,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC42,services.discovery.components.transformer.SparqlUpdateTransformer@530d4fe0,3) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC43,services.discovery.components.transformer.SparqlUpdateTransformer@62ef8fbe,4) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC5,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@530d4fe0,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@3e86657e,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@70209692,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC5,services.discovery.components.transformer.SparqlUpdateTransformer@26aeced5,1) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC10,services.discovery.components.transformer.SparqlUpdateTransformer@62ef8fbe,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC26,services.discovery.components.transformer.SparqlUpdateTransformer@62ef8fbe,2) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC28,services.discovery.components.transformer.SparqlUpdateTransformer@3e86657e,3) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC40,services.discovery.components.transformer.SparqlUpdateTransformer@3e86657e,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC44,services.discovery.components.transformer.SparqlUpdateTransformer@530d4fe0,4) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC49,services.discovery.components.transformer.SparqlUpdateTransformer@530d4fe0,4) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@7abb1436
+)
+
+
+
+
+
+
+
+
+
+
+
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,1) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC10,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC25,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC14,services.discovery.components.transformer.SparqlUpdateTransformer@55dad852,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC27,services.discovery.components.transformer.SparqlUpdateTransformer@55dad852,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,1) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC8,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,2) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC30,services.discovery.components.transformer.SparqlUpdateTransformer@55dad852,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC42,services.discovery.components.transformer.SparqlUpdateTransformer@55dad852,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC44,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,4) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC5,services.discovery.components.transformer.SparqlUpdateTransformer@55dad852,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC6,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,1) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC8,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,2) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC16,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC26,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,2) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC16,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC26,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC28,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,3) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC40,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC43,services.discovery.components.transformer.SparqlUpdateTransformer@55dad852,4) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC49,services.discovery.components.transformer.SparqlUpdateTransformer@55dad852,4) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC50,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,5) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC16,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC26,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC28,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,3) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC40,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC43,services.discovery.components.transformer.SparqlUpdateTransformer@55dad852,4) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC49,services.discovery.components.transformer.SparqlUpdateTransformer@55dad852,4) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,1) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC16,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC26,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,2) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC28,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,3) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC40,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,3) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,1) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC8,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,2) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC30,services.discovery.components.transformer.SparqlUpdateTransformer@55dad852,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC42,services.discovery.components.transformer.SparqlUpdateTransformer@55dad852,3) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC4,services.discovery.components.transformer.SparqlUpdateTransformer@c699167,1) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC8,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,2) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC24,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,2) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC32,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,3) --https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC41,services.discovery.components.transformer.SparqlUpdateTransformer@581af93d,3) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+Pipeline(
+  bindings=
+PipelineComponent(PC1,SparqlEndpoint(https://discovery.linkedpipes.com/resource/lod/templates/http---www.rechercheisidore.fr-sparql,http://www.rechercheisidore.fr/sparql,List(),http://www.rechercheisidore.fr/sparql template,Some(https://discovery.linkedpipes.com/resource/lod/samples/http---www.rechercheisidore.fr-sparql.ttl),false,false),0) --INPUT_PORT-> SparqlConstructExtractor, 
+PipelineComponent(PC2,services.discovery.components.extractor.SparqlConstructExtractor@54d1b89,0) --https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/input-> SparqlUpdateTransformer, 
+PipelineComponent(PC3,services.discovery.components.transformer.SparqlUpdateTransformer@160fcbe5,1) --https://discovery.linkedpipes.com/resource/application/dcterms/input-> Application
+  lastComponent=services.discovery.components.application.Application@6ee6047
+)
+
+
+
+
+
+
+
+
+
+
+
