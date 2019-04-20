@@ -12,7 +12,11 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
     def isComplete: Boolean = lastComponent.componentInstance.isInstanceOf[ApplicationInstance]
 
     def uglyFormat : String = {
-        components.map(_.componentInstance.iri).mkString(" --> ")
+        components.map(c =>
+            c.componentInstance.iri
+                .replace("https://discovery.linkedpipes.com/resource/transformer/", "")
+                .replace("/template","")
+        ).mkString(" --> ")
     }
 
     def prettyFormat(offset: String = ""): String = {
