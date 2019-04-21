@@ -15,8 +15,9 @@ case class Pipeline(components: Seq[PipelineComponent], bindings: Seq[PortBindin
         components.map(c =>
             c.componentInstance.iri
                 .replace("https://discovery.linkedpipes.com/resource/", "")
+                .replace("transformer/", "")
                 .replace("/template","")
-        ).mkString(" --> ")
+        ).mkString(" -> ")
     }
 
     def prettyFormat(offset: String = ""): String = {

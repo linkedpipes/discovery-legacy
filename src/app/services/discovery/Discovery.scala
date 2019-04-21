@@ -131,7 +131,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
     private def applyTransformerGroup(fragmentMap: Map[Option[String], Seq[Pipeline]], iterationNumber: Int) = {
         fragmentMap.map { case (_, fragments) =>
             val basePipelineFragment = fragments.head
-            val distinctTransformers = fragments.drop(1).map(_.endingTransformer).distinct
+            val distinctTransformers = fragments.drop(1).map(_.endingTransformer).distinct.filterNot(t => t == basePipelineFragment.endingTransformer)
 
             var fragment = basePipelineFragment
             distinctTransformers.foreach { t =>
