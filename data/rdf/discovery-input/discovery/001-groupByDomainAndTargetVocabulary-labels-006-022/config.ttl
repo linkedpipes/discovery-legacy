@@ -16,23 +16,23 @@
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/http---data.utpl.edu.ec-ecuadorresearch-lod-sparql>;
 
      #Transformer groups
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-006-022-Label-target-dcterms/label>,
-<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-006-022-Label-target-foaf/label>; .
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-006-022-datetime-target-foaf/label>,
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-006-022-labels-target-dcterms/label>; .
 
      
-<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-006-022-Label-target-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-006-022-datetime-target-foaf/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
+      <https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template>
+    .
+                
+
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-006-022-labels-target-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
       <https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/foaf-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template>,
 <https://discovery.linkedpipes.com/resource/transformer/gr-name-to-dcterms-title/template>
-    .
-                
-
-<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-006-022-Label-target-foaf/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
-    <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
-      <https://discovery.linkedpipes.com/resource/transformer/foaf-givenname-familyname-to-foaf-name/template>
     .
                 
         
