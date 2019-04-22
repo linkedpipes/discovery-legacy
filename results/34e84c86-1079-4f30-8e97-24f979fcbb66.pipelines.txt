@@ -1,0 +1,144 @@
+-> application/dcterms
+
+
+
+
+
+
+
+
+
+
+
+-> dce-title-to-dcterms-title -> application/dcterms
+-> application/dcterms
+
+
+
+
+
+
+
+
+
+
+
+-> foaf-name-to-dcterms-title -> dce-title-to-dcterms-title -> application/dcterms
+-> application/dcterms
+-> foaf-name-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> foaf-name-to-dcterms-title -> application/dcterms
+
+
+
+
+
+
+
+
+
+
+
+-> foaf-givenname-familyname-to-foaf-name -> dce-title-to-dcterms-title -> foaf-name-to-dcterms-title -> application/dcterms
+-> foaf-givenname-familyname-to-foaf-name -> dce-title-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> application/dcterms
+-> foaf-name-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> foaf-name-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> foaf-name-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> application/dcterms
+-> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+-> dce-title-to-dcterms-title -> foaf-name-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+-> dce-title-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+-> application/dcterms
+
+
+
+
+
+
+
+
+
+
+
+-> foaf-name-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> skos-preflabel-to-dcterms-title -> dce-title-to-dcterms-title -> application/dcterms
+-> foaf-name-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> skos-preflabel-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> application/dcterms
+-> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+-> foaf-name-to-dcterms-title -> skos-preflabel-to-dcterms-title -> application/dcterms
+-> foaf-name-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> foaf-name-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> foaf-name-to-dcterms-title -> application/dcterms
+-> foaf-name-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> dce-title-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> foaf-name-to-dcterms-title -> skos-preflabel-to-dcterms-title -> application/dcterms
+-> foaf-name-to-dcterms-title -> skos-preflabel-to-dcterms-title -> dce-title-to-dcterms-title -> application/dcterms
+-> foaf-name-to-dcterms-title -> dce-title-to-dcterms-title -> application/dcterms
+-> foaf-name-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+-> dce-title-to-dcterms-title -> foaf-name-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+-> application/dcterms
+-> foaf-name-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> foaf-name-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> skos-preflabel-to-dcterms-title -> application/dcterms
+-> foaf-name-to-dcterms-title -> skos-preflabel-to-dcterms-title -> dce-title-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> application/dcterms
+-> foaf-name-to-dcterms-title -> skos-preflabel-to-dcterms-title -> dce-title-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> application/dcterms
+
+
+
+
+
+
+
+
+
+
+
+-> foaf-givenname-familyname-to-foaf-name -> dce-title-to-dcterms-title -> skos-preflabel-to-dcterms-title -> foaf-name-to-dcterms-title -> application/dcterms
+-> foaf-givenname-familyname-to-foaf-name -> dce-title-to-dcterms-title -> application/dcterms
+-> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> application/dcterms
+-> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+-> foaf-name-to-dcterms-title -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> dce-title-to-dcterms-title -> application/dcterms
+-> foaf-givenname-familyname-to-foaf-name -> dce-title-to-dcterms-title -> skos-preflabel-to-dcterms-title -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> application/dcterms
+-> application/dcterms
+-> foaf-givenname-familyname-to-foaf-name -> skos-preflabel-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> dce-title-to-dcterms-title -> application/dcterms
+
+
+
+
+
+
+
+
+
+
+
+-> dce-title-to-dcterms-title -> skos-preflabel-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> application/dcterms
+-> foaf-name-to-dcterms-title -> application/dcterms
+-> application/dcterms
+-> dce-title-to-dcterms-title -> skos-preflabel-to-dcterms-title -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> foaf-name-to-dcterms-title -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> foaf-name-to-dcterms-title -> dce-title-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+-> dce-title-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> skos-preflabel-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> foaf-name-to-dcterms-title -> dce-title-to-dcterms-title -> foaf-givenname-familyname-to-foaf-name -> foaf-name-to-dcterms-title -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> foaf-name-to-dcterms-title -> dce-title-to-dcterms-title -> application/dcterms
+-> dce-title-to-dcterms-title -> skos-preflabel-to-dcterms-title -> foaf-name-to-dcterms-title -> application/dcterms
+-> skos-preflabel-to-dcterms-title -> dce-title-to-dcterms-title -> application/dcterms
+-> foaf-givenname-familyname-to-foaf-name -> application/dcterms
+
+
+
+
+
+
+
+
+
+
+

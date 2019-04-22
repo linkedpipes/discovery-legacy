@@ -11,10 +11,10 @@
      <https://discovery.linkedpipes.com/vocabulary/discovery/hasTemplate> <https://discovery.linkedpipes.com/resource/lod/templates/http---ruian.linked.opendata.cz-sparql>;
 
      #Transformer groups
-     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-001-067-labels-target-dcterms/label>; .
+     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup> <https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-001-067-Label-target-dcterms/label>; .
 
      
-<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-001-067-labels-target-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
+<https://discovery.linkedpipes.com/resource/transformer-group/001-groupByDomainAndTargetVocabulary-labels-001-067-Label-target-dcterms/label> a <https://discovery.linkedpipes.com/vocabulary/discovery/TransformerGroup> ;
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformer>
       <https://discovery.linkedpipes.com/resource/transformer/dce-title-to-dcterms-title/template>
     .
