@@ -4,7 +4,7 @@ import java.util.UUID
 
 import play.Logger
 import services.discovery.components.analyzer.LinksetBasedUnion
-import services.discovery.components.transformer.FusionTransformer
+import services.discovery.components.transformer.{FusionTransformer, SparqlUpdateTransformer}
 import services.discovery.model._
 import services.discovery.model.components.{ComponentInstanceWithInputs, ExtractorInstance}
 import services.discovery.model.internal.{DiscoveryIteration, FragmentList}
@@ -116,16 +116,21 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
     }
 
     private def consolidateFragments(fragments: Seq[Pipeline], iterationNumber: Int) : Seq[Pipeline] = {
+        discoveryLogger.trace(s"[$id] Consolidate got ${fragments.size} fragments.")
         val (endingWithTransformer, others) = fragments.partition(p => p.endsWithSparqlUpdateTransformerInstance)
-        val datasourceGroups = endingWithTransformer.groupBy(p => p.typedDatasources)
-        val newDatasourceGroupFragments = datasourceGroups.map { case (_, datasourceGroupFragments) =>
-            val transformerGroups = datasourceGroupFragments.groupBy(p => p.endingTransformerGroupIri)
+
+        val precedingFragmentGroups = endingWithTransformer.groupBy(p => p.components.map(c => c.componentInstance.iri).filterNot(i => i == p.lastComponent.componentInstance.iri))
+        val newFragments = precedingFragmentGroups.map { case (_, pathFragments) =>
+            val transformerGroups = pathFragments.groupBy(p => p.endingTransformerGroupIri)
             val (withTransformerGroup, withoutTransformerGroup) = transformerGroups.partition(tg => tg._1.isDefined)
             val newFragments = applyTransformerGroup(withTransformerGroup, iterationNumber)
             withoutTransformerGroup.values.flatten ++ newFragments
         }
 
-        others ++ newDatasourceGroupFragments.flatten
+        val result = others ++ newFragments.flatten
+        discoveryLogger.trace(s"[$id] Consolidate returns ${result.size} fragments.")
+        discoveryLogger.trace(s"[$id] Fragments: \n${result.map(_.uglyFormat).mkString("\n")}")
+        result
     }
 
     private def applyTransformerGroup(fragmentMap: Map[Option[String], Seq[Pipeline]], iterationNumber: Int) = {
@@ -165,6 +170,7 @@ class Discovery(val id: UUID, val input: DiscoveryInput, maxIterations: Int = 10
         component match {
             case c if c.isInstanceOf[LinksetBasedUnion] => fragments.filterNot(p => p.containsInstance(c) || p.endsWithLargeDataset).seq
             case c if c.isInstanceOf[FusionTransformer] => fragments.filter(_.containsLinksetBasedUnion).seq
+            case c if c.isInstanceOf[SparqlUpdateTransformer] => fragments.filterNot(p => p.containsInstance(c))
             case e if e.isInstanceOf[ExtractorInstance] => fragments.filter(_.endsWithDataSourceInstance).seq
             case _ => fragments
         }
