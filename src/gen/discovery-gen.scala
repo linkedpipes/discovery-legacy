@@ -763,14 +763,7 @@ def groupBySourceVocabulary(transformers: Seq[Transformer]) = transformers.group
 def groupBySourceAndTargetVocabulary(transformers: Seq[Transformer]): Map[String, Seq[Transformer]] = transformers.groupBy(t => s"${t.sourceVocabulary}-${t.targetVocabulary}")
 
 def groupByDomainAndVocabulary(transformers: Seq[Transformer], direction: String, f: Seq[Transformer] => Map[String, Seq[Transformer]]): Map[String, Seq[Transformer]] = {
-    val domainGrouping = transformers.groupBy {
-        case t1 if t1.iri.contains("schema-geocoordinates") => "geo"
-        case t2 if t2.iri.contains("dcterms-title") => "labels"
-        case _ => "datetime"
-    }
-    val deepGrouping = domainGrouping.map { case (key, group) => key -> f(group) }
-
-    // val deepGrouping = transformers.groupBy(_.domain).map { case (key, group) => key.toString -> f(group) }
+    val deepGrouping = transformers.groupBy(_.domain).map { case (key, group) => key.toString -> f(group) }
 
     deepGrouping.flatMap { case (domain, domainGroup) =>
         domainGroup.map { case (prefix, prefixGroup) =>
