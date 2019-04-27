@@ -3,7 +3,7 @@ package services.discovery.model.etl
 import org.apache.jena.query.Dataset
 import org.apache.jena.rdf.model._
 import org.apache.jena.vocabulary.RDF
-import services.discovery.components.analyzer.{EtlRdf2File, EtlSparqlGraphProtocol}
+import services.discovery.components.analyzer.{EtlRdf2File, EtlSparqlGraphProtocol, FilesToLocal, Virtuoso}
 import services.discovery.components.datasource.{EtlSparqlEndpoint, SparqlEndpoint}
 import services.discovery.model._
 import services.discovery.model.components.{SparqlEndpointInstance, SparqlUpdateTransformerInstance}
@@ -42,8 +42,8 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri
                 case se: SparqlEndpoint => addSparqlEndpoint(c, se)
                 case ese: EtlSparqlEndpoint => addSparqlEndpoint(c, ese)
                 case t: SparqlUpdateTransformerInstance => addSparqlTransformer(c, t)
-                case f: EtlRdf2File => addRdf2File(c, f)
-                case gp: EtlSparqlGraphProtocol => addOutput(c, gp)
+                case ftl: FilesToLocal => addFilesToLocal(c, ftl)
+                case virt: Virtuoso=> addVirtuoso(c, virt)
                 case _ => (null, null)
             }
         }.toMap
@@ -121,11 +121,44 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri
         (pipelineComponent, ConfiguredComponent(rdfToFile, rdf2FileConfig))
     }
 
+    private def addFilesToLocal(pipelineComponent: PipelineComponent, etlFiles2Local: FilesToLocal): (PipelineComponent, ConfiguredComponent) = {
+        val filesToLocal = addComponent("Files to Local", "http://localhost:8080/resources/components/l-filesToLocal", pipelineComponent.discoveryIteration)
+        val filesToLocalConfig = createFilesToLocalConfig(filesToLocal)
+        dataModel.dataset.addNamedModel(filesToLocalConfig.resource.getURI, filesToLocalConfig.model)
+        (pipelineComponent, ConfiguredComponent(filesToLocal, filesToLocalConfig))
+    }
+
+    private def addVirtuoso(pipelineComponent: PipelineComponent, virtuoso: Virtuoso): (PipelineComponent, ConfiguredComponent) = {
+        val virtuosoComponent = addComponent("Virtuoso", "http://localhost:8080/resources/components/x-virtuoso", pipelineComponent.discoveryIteration)
+        val virtuosoConfig = createVirtuosoConfig(virtuosoComponent, virtuoso)
+        dataModel.dataset.addNamedModel(virtuosoConfig.resource.getURI, virtuosoConfig.model)
+        (pipelineComponent, ConfiguredComponent(virtuosoComponent, virtuosoConfig))
+    }
+
     private def addOutput(pipelineComponent: PipelineComponent, etlSparqlGraphProtocol: EtlSparqlGraphProtocol): (PipelineComponent, ConfiguredComponent) = {
         val graphStore = addComponent("Graph store protocol", "http://localhost:8080/resources/components/l-graphStoreProtocol", pipelineComponent.discoveryIteration)
         val graphStoreConfig = createGraphStoreConfig(graphStore, etlSparqlGraphProtocol)
         dataModel.dataset.addNamedModel(graphStoreConfig.resource.getURI, graphStoreConfig.model)
         (pipelineComponent, ConfiguredComponent(graphStore, graphStoreConfig))
+    }
+
+    private def createVirtuosoConfig(componentResource: Resource, virtuosoComponent: Virtuoso): Config = {
+        val namespace = "http://plugins.linkedpipes.com/ontology/x-virtuoso#"
+        val config = createConfig(componentResource, namespace + "Configuration")
+        config.resource.addProperty(config.model.createProperty(namespace + "directory"), "/appdata/upload")
+        config.resource.addProperty(config.model.createProperty(namespace + "fileName"), "data.ttl")
+        config.resource.addProperty(config.model.createProperty(namespace + "username"), "dba")
+        config.resource.addProperty(config.model.createProperty(namespace + "password"), "dba")
+        config.resource.addProperty(config.model.createProperty(namespace + "graph"), resultGraphIri)
+        config.resource.addProperty(config.model.createProperty(namespace + "clearGraph"), "true")
+        config
+    }
+
+    private def createFilesToLocalConfig(componentResource: Resource): Config = {
+        val namespace = "http://plugins.linkedpipes.com/ontology/l-filesToLocal#"
+        val config = createConfig(componentResource, namespace + "Configuration")
+        config.resource.addProperty(config.model.createProperty(namespace + "path"), "/appdata/upload")
+        config
     }
 
     private def createGraphStoreConfig(componentResource: Resource, etlSparqlGraphProtocol: EtlSparqlGraphProtocol): Config = {

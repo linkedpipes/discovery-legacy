@@ -1,9 +1,9 @@
 package services.discovery.model.etl
 
-import services.discovery.components.analyzer.{EtlRdf2File, EtlSparqlGraphProtocol}
+import services.discovery.components.analyzer.{EtlRdf2File, EtlSparqlGraphProtocol, FilesToLocal, Virtuoso}
 import services.discovery.components.datasource.{EtlSparqlEndpoint, JenaDataSource, SparqlEndpoint}
-import services.discovery.model.components.{SparqlEndpointInstance, SparqlConstructExtractorInstance, UnionInstance, ApplicationInstance}
-import services.discovery.model.{Pipeline, PipelineComponent, PortBinding, GuidGenerator}
+import services.discovery.model.components.{ApplicationInstance, SparqlConstructExtractorInstance, SparqlEndpointInstance, UnionInstance}
+import services.discovery.model.{GuidGenerator, Pipeline, PipelineComponent, PortBinding}
 
 class EtlPipelineTransformer(pipeline: Pipeline) {
 
@@ -73,20 +73,20 @@ class EtlPipelineTransformer(pipeline: Pipeline) {
     ),
     (p, b) => {
       val iteration = b.head.endComponent.discoveryIteration
-      val lpRdf2File = EtlRdf2File()
-      val rdf2File = PipelineComponent("rdf2file", lpRdf2File, iteration)
-      val lpSparqlGraphStore = EtlSparqlGraphProtocol(b.head.endComponent.componentInstance.label)
-      val sparqlGraphStore = PipelineComponent("sparqlGraphStore", lpSparqlGraphStore, iteration)
+      val lpFilesToLocal = FilesToLocal()
+      val filesToLocal= PipelineComponent("files2local", lpFilesToLocal, iteration)
+      val lpVirtuoso = Virtuoso(b.head.endComponent.componentInstance.label)
+      val virtuoso = PipelineComponent("virtuoso", lpVirtuoso, iteration)
 
       val bindingsToAdd = Seq(
-        PortBinding(b.head.startComponent, lpRdf2File.port, rdf2File),
-        PortBinding(rdf2File, lpSparqlGraphStore.port, sparqlGraphStore)
+        PortBinding(b.head.startComponent, lpFilesToLocal.port, filesToLocal),
+        PortBinding(filesToLocal, lpVirtuoso.port, virtuoso)
       )
 
-      val newC = newComponents(p.components, b.map(_.endComponent), Seq(rdf2File, sparqlGraphStore))
+      val newC = newComponents(p.components, b.map(_.endComponent), Seq(filesToLocal, virtuoso))
       val newB = newBindings(p.bindings, b, bindingsToAdd)
 
-      p.copy(bindings = newB, components = newC, lastComponent = sparqlGraphStore)
+      p.copy(bindings = newB, components = newC, lastComponent = virtuoso)
     }
   )
 
