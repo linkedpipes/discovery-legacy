@@ -191,11 +191,13 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri
 
             val outputName = b.startComponent.componentInstance match {
                 case r: EtlRdf2File => lpOutputFilesName
+                case g: FilesToLocal => lpOutputFilesName
                 case _ => lpOutputName
             }
 
             val inputName = b.endComponent.componentInstance match {
-                case g: FilesToLocal => lpInputFilesName
+                case g: FilesToLocal => "FilesInput"
+                case v: Virtuoso => lpInputFilesName
                 case _ => lpInputName
             }
 
