@@ -66,7 +66,32 @@ class EtlPipelineTransformer(pipeline: Pipeline) {
     }
   )
 
-  private val visualizerRule = TransformationRule(
+  private val visualizerRuleGraphStore = TransformationRule(
+    "Application",
+    new PipelineFragmentMatcher(
+      b => Seq(b.filter(_.endComponent.componentInstance.isInstanceOf[ApplicationInstance]))
+    ),
+    (p, b) => {
+      val iteration = b.head.endComponent.discoveryIteration
+      val lpRdf2File = EtlRdf2File()
+      val rdf2File = PipelineComponent("rdf2file", lpRdf2File, iteration)
+      val lpSparqlGraphStore = EtlSparqlGraphProtocol(b.head.endComponent.componentInstance.label)
+      val sparqlGraphStore = PipelineComponent("sparqlGraphStore", lpSparqlGraphStore, iteration)
+
+      val bindingsToAdd = Seq(
+        PortBinding(b.head.startComponent, lpRdf2File.port, rdf2File),
+        PortBinding(rdf2File, lpSparqlGraphStore.port, sparqlGraphStore)
+      )
+
+      val newC = newComponents(p.components, b.map(_.endComponent), Seq(rdf2File, sparqlGraphStore))
+      val newB = newBindings(p.bindings, b, bindingsToAdd)
+
+      p.copy(bindings = newB, components = newC, lastComponent = sparqlGraphStore)
+    }
+  )
+
+
+  private val visualizerRuleOptimizedVirtuoso = TransformationRule(
     "Application",
     new PipelineFragmentMatcher(
       b => Seq(b.filter(_.endComponent.componentInstance.isInstanceOf[ApplicationInstance]))
@@ -125,7 +150,7 @@ class EtlPipelineTransformer(pipeline: Pipeline) {
     jenaDataSourceRule,
     extractorRule,
     unionRule,
-    visualizerRule
+    visualizerRuleOptimizedVirtuoso
   )
 
   private def applyRule(pipeline: Pipeline, transformationRule: TransformationRule): Pipeline = {

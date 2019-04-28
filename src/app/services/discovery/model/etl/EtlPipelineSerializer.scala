@@ -44,6 +44,7 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri
                 case t: SparqlUpdateTransformerInstance => addSparqlTransformer(c, t)
                 case f: EtlRdf2File => addRdf2File(c, f)
                 case ftl: FilesToLocal => addFilesToLocal(c, ftl)
+                case gp: EtlSparqlGraphProtocol => addOutput(c, gp)
                 case virt: Virtuoso=> addVirtuoso(c, virt)
                 case _ => (null, null)
             }
@@ -196,7 +197,8 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri
             }
 
             val inputName = b.endComponent.componentInstance match {
-                case g: FilesToLocal => "FilesInput"
+                case g: EtlSparqlGraphProtocol => lpInputFilesName
+                case ftl: FilesToLocal => lpFtLInputFilesName
                 case v: Virtuoso => lpInputFilesName
                 case _ => lpInputName
             }
@@ -218,6 +220,7 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri
     val lpInputName = "InputRdf"
     val lpOutputFilesName = "OutputFile"
     val lpInputFilesName = "InputFiles"
+    val lpFtLInputFilesName = "FilesInput"
 
     val prefLabel = ResourceFactory.createProperty("http://www.w3.org/2004/02/skos/core#prefLabel")
     val lpComponentResource = ResourceFactory.createResource("http://linkedpipes.com/ontology/Component")
