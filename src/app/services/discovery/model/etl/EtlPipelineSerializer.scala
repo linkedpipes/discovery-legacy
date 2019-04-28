@@ -42,6 +42,7 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri
                 case se: SparqlEndpoint => addSparqlEndpoint(c, se)
                 case ese: EtlSparqlEndpoint => addSparqlEndpoint(c, ese)
                 case t: SparqlUpdateTransformerInstance => addSparqlTransformer(c, t)
+                case f: EtlRdf2File => addRdf2File(c, f)
                 case ftl: FilesToLocal => addFilesToLocal(c, ftl)
                 case virt: Virtuoso=> addVirtuoso(c, virt)
                 case _ => (null, null)
@@ -151,6 +152,7 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri
         config.resource.addProperty(config.model.createProperty(namespace + "password"), "dba")
         config.resource.addProperty(config.model.createProperty(namespace + "graph"), resultGraphIri)
         config.resource.addProperty(config.model.createProperty(namespace + "clearGraph"), "true")
+        config.resource.addProperty(config.model.createProperty(namespace + "uri"), "jdbc:virtuoso://lpa-virtuoso:1111/charset=UTF-8/")
         config
     }
 
@@ -193,7 +195,7 @@ class EtlPipelineSerializer(etlPipeline: Pipeline, endpointUri: String, graphIri
             }
 
             val inputName = b.endComponent.componentInstance match {
-                case g: EtlSparqlGraphProtocol => lpInputFilesName
+                case g: FilesToLocal => lpInputFilesName
                 case _ => lpInputName
             }
 

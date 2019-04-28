@@ -73,17 +73,23 @@ class EtlPipelineTransformer(pipeline: Pipeline) {
     ),
     (p, b) => {
       val iteration = b.head.endComponent.discoveryIteration
+
+      val lpRdf2File = EtlRdf2File()
+      val rdf2File = PipelineComponent("rdf2file", lpRdf2File, iteration)
+    
       val lpFilesToLocal = FilesToLocal()
       val filesToLocal= PipelineComponent("files2local", lpFilesToLocal, iteration)
+      
       val lpVirtuoso = Virtuoso(b.head.endComponent.componentInstance.label)
       val virtuoso = PipelineComponent("virtuoso", lpVirtuoso, iteration)
 
       val bindingsToAdd = Seq(
-        PortBinding(b.head.startComponent, lpFilesToLocal.port, filesToLocal),
+        PortBinding(b.head.startComponent, lpRdf2File.port, rdf2File),
+        PortBinding(rdf2File, lpFilesToLocal.port, filesToLocal),
         PortBinding(filesToLocal, lpVirtuoso.port, virtuoso)
       )
 
-      val newC = newComponents(p.components, b.map(_.endComponent), Seq(filesToLocal, virtuoso))
+      val newC = newComponents(p.components, b.map(_.endComponent), Seq(rdf2File, filesToLocal, virtuoso))
       val newB = newBindings(p.bindings, b, bindingsToAdd)
 
       p.copy(bindings = newB, components = newC, lastComponent = virtuoso)
