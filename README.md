@@ -1,6 +1,6 @@
 # Visualization discovery service
 
-Demo running at: http://demo.visualization.linkedpipes.com:8080
+Demo no longer running
 
 # How to run
 
